@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/ModulesFree/Logger">
+        <file>ALogger.js</file>
+    </qresource>
+</RCC>
