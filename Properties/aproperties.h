@@ -18,25 +18,55 @@
 
 // System includes
 #include <QObject>
+#include <QString>
+#include <QStandardPaths>
 
 // Application includes
+#include <adir.h>
 
 // Constants and definitions
 
 // Namespace
+namespace ARB {
 
 // Class definitions
 class AProperties : public QObject {
 
 	Q_OBJECT
 
-public:
+	public:
 
-	explicit AProperties(QObject *parent = nullptr);
-	virtual ~AProperties(void);
+		static AProperties& mInstance(void);
+		void mInit(void);
 
-signals:
+		void mSetNameOrganisation(QString inName);
+		QString mGetNameOrganisation(void);
+		void mSetNameDomain(QString inName);
+		QString mGetNameDomain(void);
+		void mSetNameApplication(QString inName);
+		QString mGetNameApplication(void);
 
+		QString mGetPathDataApplication(void);
+		QString mGetPathDataConfig(void);
+		QString mGetPathDataCache(void);
+
+	private:
+
+		QString pNameOrganisation = "NoNameOrganisation";
+		QString pNameDomain = "NoNameDomain";
+		QString pNameApplication = "NoNameApplication";
+
+		QString pPathDataApplication = "NoPathDataApplication";
+		QString pPathDataConfig = "NoPathDataConfig";
+		QString pPathDataCache = "NoPathDataCache";
+
+		explicit AProperties(QObject *parent = nullptr);
+		virtual ~AProperties(void);
+		Q_DISABLE_COPY(AProperties)
+
+		void mInitPaths(void);
 };
+
+} // namespace ARB
 
 #endif // APROPERTIES_H
