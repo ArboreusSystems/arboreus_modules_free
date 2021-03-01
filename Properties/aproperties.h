@@ -23,6 +23,7 @@
 
 // Application includes
 #include <adir.h>
+#include <aloggerservice.h>
 
 // Constants and definitions
 

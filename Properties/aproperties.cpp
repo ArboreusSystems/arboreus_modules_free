@@ -29,6 +29,7 @@ using namespace ARB;
 
 AProperties::AProperties(QObject *parent) : QObject(parent) {
 
+	A_CONSOLE_MESSAGE_DEBUG("AProperties created");
 }
 
 
@@ -41,6 +42,7 @@ AProperties::AProperties(QObject *parent) : QObject(parent) {
 
 AProperties::~AProperties(void) {
 
+	A_CONSOLE_MESSAGE_DEBUG("AProperties deleted");
 }
 
 
