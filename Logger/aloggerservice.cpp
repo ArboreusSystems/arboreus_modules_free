@@ -65,6 +65,16 @@ void ALoggerService::mWriteToConsole(
 	std::string oInfo = "[" + std::string(inFile) + "]:[" + std::to_string(inLine) + "]:[" + std::string(inFunction) + "]";
 	qDebug() <<	inTime << oType.c_str() << inMessage << oInfo.c_str();
 
+#else
+
+	Q_UNUSED(inTime);
+	Q_UNUSED(inType);
+	Q_UNUSED(inActor);
+	Q_UNUSED(inMessage);
+	Q_UNUSED(inFile);
+	Q_UNUSED(inLine);
+	Q_UNUSED(inFunction);
+
 #endif
 }
 
