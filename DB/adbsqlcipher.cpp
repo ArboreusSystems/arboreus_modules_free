@@ -43,7 +43,12 @@ ADBSqlCipher::ADBSqlCipher(QObject* inParent) : QObject(inParent) {
 ADBSqlCipher::ADBSqlCipher(ASqlCipherProperties inProperties, QObject* inParent) : QObject(inParent) {
 
 	this->mStart(inProperties);
-	A_CONSOLE_MESSAGE_DEBUG("ADBSqlCipher created with properties");
+
+	A_LOGGER_MESSAGE_INIT;
+	oMessage = std::string("ADBSqlCipher created with properties: \n") +
+		"Name: " + inProperties.Name.toStdString() + "\n" +
+		"Path: " + inProperties.Path.toStdString();
+	A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
 }
 
 

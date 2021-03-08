@@ -16,6 +16,8 @@
 #define ALOGGERDATAMODELS_H
 
 // System includes
+#include <QObject>
+#include <QString>
 
 // Application includes
 

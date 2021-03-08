@@ -29,7 +29,6 @@
 #include <athreadtemplate.h>
 
 // Constants and definitions
-#define A_LOGGER_MESSAGE_INIT std::string oMessage("NoLoggerMessage");
 #define A_LOGGER_DEBUG(inMessage) \
 	(&ALogger::mInstance())->mWriteToLogDebug(inMessage,__FILE__,__LINE__,__FUNCTION__)
 #define A_LOGGER_INFO(inMessage) \

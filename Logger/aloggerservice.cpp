@@ -53,64 +53,13 @@ ALoggerService::~ALoggerService(void) {
 	Doc.
 */
 
-void ALoggerService::mWriteToConsole(
-	uint64_t inTime, const char* inType, const char* inActor,
-	const char* inMessage,
-	const char* inFile,int inLine,const char* inFunction
-) {
-
-#ifdef QT_DEBUG
-
-	std::string oType = "[" + std::string(inType) + "]:[" + std::string(inActor) +"]";
-	std::string oInfo = "[" + std::string(inFile) + "]:[" + std::to_string(inLine) + "]:[" + std::string(inFunction) + "]";
-	qDebug() <<	inTime << oType.c_str() << inMessage << oInfo.c_str();
-
-#else
-
-	Q_UNUSED(inTime);
-	Q_UNUSED(inType);
-	Q_UNUSED(inActor);
-	Q_UNUSED(inMessage);
-	Q_UNUSED(inFile);
-	Q_UNUSED(inLine);
-	Q_UNUSED(inFunction);
-
-#endif
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-void ALoggerService::mWriteToConsole(
-	uint64_t inTime, const char* inType, const char* inActor,
-	const char* inMessage
-) {
-
-	std::string oType = "[" + std::string(inType) + "]:[" + std::string(inActor) +"]";
-	qDebug() <<	inTime << oType.c_str() << inMessage;
-
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
 void ALoggerService::slWriteToLog(ALoggerMessageModel* inMessage) {
 
 	this->mWriteToDB(inMessage);
 
 #ifdef QT_DEBUG
 
-	ALoggerService::mWriteToConsole(
+	fLoggerWriteToConsole(
 		inMessage->Time,
 		inMessage->Type.toStdString().c_str(),
 		inMessage->Actor.toStdString().c_str(),
@@ -118,15 +67,6 @@ void ALoggerService::slWriteToLog(ALoggerMessageModel* inMessage) {
 		inMessage->File.toStdString().c_str(),
 		inMessage->Line.toInt(),
 		inMessage->Function.toStdString().c_str()
-	);
-
-#else
-
-	ALoggerService::mWriteToConsole(
-		inMessage->Time,
-		inMessage->Type.toStdString().c_str(),
-		inMessage->Actor.toStdString().c_str(),
-		inMessage->Message.toStdString().c_str()
 	);
 
 #endif
