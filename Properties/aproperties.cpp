@@ -82,28 +82,33 @@ void AProperties::mInit(void) {
 
 void AProperties::mInitPaths(void) {
 
-	// TODO: Add console message for result of directory ensuring
+	A_LOGGER_MESSAGE_INIT;
+
 	pPathDataApplication = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/" + pNameApplication;
 	if (ADir::mEnsure(pPathDataApplication)) {
-
+		oMessage = std::string("Ensured Application Data path -> ") + pPathDataApplication.toStdString();
+		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
 	} else {
-
+		oMessage = std::string("No Application Data path -> ") + pPathDataApplication.toStdString();
+		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
 	}
 
-	// TODO: Add console message for result of directory ensuring
 	pPathDataConfig = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + "/" + pNameApplication;
 	if (ADir::mEnsure(pPathDataConfig)) {
-
+		oMessage = std::string("Ensured Config Data path -> ") + pPathDataConfig.toStdString();
+		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
 	} else {
-
+		oMessage = std::string("No Config Data path -> ") + pPathDataConfig.toStdString();
+		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
 	}
 
-	// TODO: Add console message for result of directory ensuring
 	pPathDataCache = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + "/" + pNameApplication;
 	if (ADir::mEnsure(pPathDataCache)) {
-
+		oMessage = std::string("Ensured Cache Data path -> ") + pPathDataCache.toStdString();
+		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
 	} else {
-
+		oMessage = std::string("No Cache Data path -> ") + pPathDataCache.toStdString();
+		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
 	}
 }
 
