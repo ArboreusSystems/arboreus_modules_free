@@ -110,6 +110,15 @@ void AProperties::mInitPaths(void) {
 		oMessage = std::string("No Cache Data path -> ") + pPathDataCache.toStdString();
 		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
 	}
+
+	pPathLogs = pPathDataCache + QString("/Logs");
+	if (ADir::mEnsure(pPathLogs)) {
+		oMessage = std::string("Ensured Logs path -> ") + pPathLogs.toStdString();
+		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
+	} else {
+		oMessage = std::string("No Logs path -> ") + pPathLogs.toStdString();
+		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
+	}
 }
 
 
@@ -228,4 +237,18 @@ QString AProperties::mGetPathDataCache(void) {
 
 	return pPathDataCache;
 }
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AProperties::mGetPathLogs(void) {
+
+	return pPathLogs;
+}
+
 

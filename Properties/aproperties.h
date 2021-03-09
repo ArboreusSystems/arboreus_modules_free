@@ -50,6 +50,7 @@ class AProperties : public QObject {
 		QString mGetPathDataApplication(void);
 		QString mGetPathDataConfig(void);
 		QString mGetPathDataCache(void);
+		QString mGetPathLogs(void);
 
 	private:
 
@@ -60,6 +61,8 @@ class AProperties : public QObject {
 		QString pPathDataApplication = "NoPathDataApplication";
 		QString pPathDataConfig = "NoPathDataConfig";
 		QString pPathDataCache = "NoPathDataCache";
+
+		QString pPathLogs = "NoPathLogs";
 
 		explicit AProperties(QObject *parent = nullptr);
 		virtual ~AProperties(void);
