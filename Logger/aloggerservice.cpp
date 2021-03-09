@@ -98,9 +98,27 @@ void ALoggerService::mWriteToDB(ALoggerMessageModel* inMessage) {
 void ALoggerService::slStartDB(ASqlCipherProperties* inProperties) {
 
 	qDebug() << "ThreadID LoggerService:" << QThread::currentThreadId();
-	qDebug() << QThread::currentThreadId() << "inProperties->Name:" << inProperties->Name;
-	qDebug() << QThread::currentThreadId() << "inProperties->Path:" << inProperties->Path;
-	qDebug() << QThread::currentThreadId() << "inProperties->Value:" << inProperties->Value;
+//	qDebug() << QThread::currentThreadId() << "inProperties->Name:" << inProperties->Name;
+//	qDebug() << QThread::currentThreadId() << "inProperties->Path:" << inProperties->Path;
+//	qDebug() << QThread::currentThreadId() << "inProperties->Value:" << inProperties->Value;
+
+//	if (!inProperties->Value.compare(A_DB_NULL_VALUE_QSTRING,Qt::CaseInsensitive)) {
+//		qDebug() << "equal null";
+//		qDebug() << inProperties->Value;
+//	} else {
+//		qDebug() << "not equal null";
+//		qDebug() << inProperties->Value;
+//	}
+
+//	if (inProperties->Value == A_DB_NULL_VALUE_QSTRING) {
+//		qDebug() << "equal null";
+//		qDebug() << inProperties->Value;
+//	} else {
+//		qDebug() << "not equal null";
+//		qDebug() << inProperties->Value;
+//	}
+
+	pSQLManager = new ADBSqlCipher(inProperties,this);
 
 	A_CONSOLE_MESSAGE_DEBUG("DB for Logger started");
 }

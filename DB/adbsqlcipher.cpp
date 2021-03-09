@@ -40,14 +40,16 @@ ADBSqlCipher::ADBSqlCipher(QObject* inParent) : QObject(inParent) {
 	Doc.
 */
 
-ADBSqlCipher::ADBSqlCipher(ASqlCipherProperties inProperties, QObject* inParent) : QObject(inParent) {
+ADBSqlCipher::ADBSqlCipher(ASqlCipherProperties* inProperties, QObject* inParent) : QObject(inParent) {
+
+	qDebug() << "ADBSqlCipher LoggerService:" << QThread::currentThreadId();
 
 	this->mStart(inProperties);
 
 	A_LOGGER_MESSAGE_INIT;
 	oMessage = std::string("ADBSqlCipher created with properties: \n") +
-		"Name: " + inProperties.Name.toStdString() + "\n" +
-		"Path: " + inProperties.Path.toStdString();
+		"Name: " + inProperties->Name.toStdString() + "\n" +
+		"Path: " + inProperties->Path.toStdString();
 	A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
 }
 
@@ -73,26 +75,26 @@ ADBSqlCipher::~ADBSqlCipher(void) {
 	Doc.
 */
 
-bool ADBSqlCipher::mStart(ASqlCipherProperties inProperties) {
+bool ADBSqlCipher::mStart(ASqlCipherProperties* inProperties) {
 
 	A_LOGGER_MESSAGE_INIT;
 
 	if (this->mCheckDriver()) {
 
-		pDB = QSqlDatabase::addDatabase("SQLITECIPHER",inProperties.Name);
-		pDB.setDatabaseName(inProperties.Path);
-		if (inProperties.Value != A_DB_NULL_VALUE) {
-			pDB.setPassword(inProperties.Value);
+		pDB = QSqlDatabase::addDatabase("SQLITECIPHER",inProperties->Name);
+		pDB.setDatabaseName(inProperties->Path);
+		if (inProperties->Value != A_DB_NULL_VALUE_QSTRING) {
+			pDB.setPassword(inProperties->Value);
 		}
 		if (pDB.open()) {
-			oMessage = std::string("Opened DB -> ") + inProperties.Path.toStdString();
+			oMessage = std::string("Opened DB -> ") + inProperties->Path.toStdString();
 			A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
 			return true;
 		}
 
 		oMessage = std::string("Opening DB Failed -> ") +
-			inProperties.Name.toStdString() + ": " +
-			inProperties.Path.toStdString();
+			inProperties->Name.toStdString() + ": " +
+			inProperties->Path.toStdString();
 
 	} else {
 		oMessage = std::string("No SQLITECIPHER driver available");

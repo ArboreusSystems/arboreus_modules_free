@@ -23,15 +23,16 @@
 
 // Constants and defintions
 #define A_DB_NULL_VALUE "A_DB_NULL_VALUE"
+#define A_DB_NULL_VALUE_QSTRING QString(A_DB_NULL_VALUE)
 
 
 namespace ARB {
 
 struct ASqlCipherProperties {
 
-	QString Name;
-	QString Path;
-	QString Value;
+	QString Name = A_DB_NULL_VALUE_QSTRING;
+	QString Path = A_DB_NULL_VALUE_QSTRING;
+	QString Value = A_DB_NULL_VALUE_QSTRING;
 };
 
 struct ASqlCipherReply {

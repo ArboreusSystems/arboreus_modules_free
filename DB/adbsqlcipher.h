@@ -24,6 +24,7 @@
 #include <QVariantList>
 #include <QVariant>
 #include <QList>
+#include <QThread>
 
 // Application includes
 #include <adbdatamodels.h>
@@ -41,12 +42,12 @@ class ADBSqlCipher : public QObject {
 	public:
 
 		explicit ADBSqlCipher(QObject *inParent = nullptr);
-		explicit ADBSqlCipher(ASqlCipherProperties inProperties,QObject* inParent = nullptr);
+		explicit ADBSqlCipher(ASqlCipherProperties* inProperties,QObject* inParent = nullptr);
 		virtual ~ADBSqlCipher(void);
 
 		QSqlDatabase pDB;
 
-		bool mStart(ASqlCipherProperties inProperties);
+		bool mStart(ASqlCipherProperties* inProperties);
 		bool mClose(void);
 		ASqlCipherReply mStringExecute(QString inQueryString);
 		ASqlCipherReply mStringTransaction(QString inQueryString);
