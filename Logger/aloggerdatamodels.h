@@ -20,6 +20,7 @@
 #include <QString>
 
 // Application includes
+#include <adbdatamodels.h>
 
 // Constants and defintions
 
@@ -49,6 +50,15 @@ class ALoggerMessageModel {
 			this->Function = QString("NoFunction");
 		}
 		~ALoggerMessageModel() {}
+};
+
+class ALoggerConfig {
+
+	public:
+
+		explicit ALoggerConfig() {}
+		virtual ~ALoggerConfig() {}
+		virtual ASqlCipherProperties* mGetDBProperties() = 0;
 };
 
 } // namespace ARB

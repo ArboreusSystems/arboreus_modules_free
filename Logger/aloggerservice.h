@@ -21,10 +21,12 @@
 #include <QDateTime>
 #include <QDebug>
 #include <string>
+#include <QThread>
 
 // Application includes
 #include <aloggerglobal.h>
 #include <aloggerdatamodels.h>
+#include <adbsqlcipher.h>
 
 // Constants and definitions
 
@@ -44,12 +46,15 @@ class ALoggerService : public QObject {
 	public slots:
 
 		void slWriteToLog(ALoggerMessageModel* inMessage);
+		void slStartDB(ASqlCipherProperties* inProperties);
 
 	signals:
 
 		void sgLogUpdated(void);
 
 	private:
+
+		ADBSqlCipher* pSQLManager = nullptr;
 
 		void mWriteToDB(ALoggerMessageModel* inMessage);
 };

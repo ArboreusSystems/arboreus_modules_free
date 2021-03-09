@@ -48,6 +48,7 @@ class ALogger : public QObject {
 
 	public:
 
+		ALoggerConfig* pConfig = nullptr;
 		AThreadTemplate* pThread = nullptr;
 		AProperties* pProperties = nullptr;
 		ALoggerService* pService = nullptr;
@@ -77,6 +78,7 @@ class ALogger : public QObject {
 
 	signals:
 
+		void sgStartDB(ASqlCipherProperties* inProperties);
 		void sgWriteToLog(ALoggerMessageModel* inMessage);
 		void sgLogUpdated(void);
 

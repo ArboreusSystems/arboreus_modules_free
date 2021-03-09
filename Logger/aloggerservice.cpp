@@ -86,3 +86,21 @@ void ALoggerService::mWriteToDB(ALoggerMessageModel* inMessage) {
 
 	Q_UNUSED(inMessage);
 }
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ALoggerService::slStartDB(ASqlCipherProperties* inProperties) {
+
+	qDebug() << "ThreadID LoggerService:" << QThread::currentThreadId();
+	qDebug() << QThread::currentThreadId() << "inProperties->Name:" << inProperties->Name;
+	qDebug() << QThread::currentThreadId() << "inProperties->Path:" << inProperties->Path;
+	qDebug() << QThread::currentThreadId() << "inProperties->Value:" << inProperties->Value;
+
+	A_CONSOLE_MESSAGE_DEBUG("DB for Logger started");
+}

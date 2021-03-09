@@ -71,19 +71,34 @@ ALogger& ALogger::mInstance(void) {
 
 void ALogger::mInitWithThread(AThreadTemplate* inThread) {
 
-	pThread = inThread;
-	pService = new ALoggerService();
-	pService->moveToThread(pThread);
+	if (pConfig) {
 
-	QObject::connect(
-		this,&ALogger::sgWriteToLog,
-		pService,&ALoggerService::slWriteToLog
-	);
+		pThread = inThread;
+		pService = new ALoggerService();
+		pService->moveToThread(pThread);
 
-	QObject::connect(
-		pService,&ALoggerService::sgLogUpdated,
-		this,&ALogger::slLogUpdated
-	);
+		QObject::connect(
+			this,&ALogger::sgWriteToLog,
+			pService,&ALoggerService::slWriteToLog
+		);
+
+		QObject::connect(
+			pService,&ALoggerService::sgLogUpdated,
+			this,&ALogger::slLogUpdated
+		);
+
+		QObject::connect(
+			this,&ALogger::sgStartDB,
+			pService,&ALoggerService::slStartDB
+		);
+
+		emit sgStartDB(pConfig->mGetDBProperties());
+
+	} else {
+
+		A_CONSOLE_MESSAGE_CRITICAL("No config");
+
+	}
 }
 
 
