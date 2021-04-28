@@ -8,7 +8,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 28/02/2021 at 14:49:26
+	\li @created 28/04/2021 at 19:50:47
 	\endlist
 */
 // ----------------------------------------------------------
@@ -18,80 +18,42 @@
 
 // System includes
 #include <QObject>
-#include <QDateTime>
-#include <QString>
-#include <QStringList>
-#include <QRegExp>
 
 // Application includes
-#include <aloggerservice.h>
-#include <aproperties.h>
 #include <athreadtemplate.h>
+#include <aloggerservice.h>
 
 // Constants and definitions
-#define A_LOGGER_DEBUG(inMessage) \
-	(&ALogger::mInstance())->mWriteToLogDebug(inMessage,__FILE__,__LINE__,__FUNCTION__)
-#define A_LOGGER_INFO(inMessage) \
-	(&ALogger::mInstance())->mWriteToLogInfo(inMessage,__FILE__,__LINE__,__FUNCTION__)
-#define A_LOGGER_WARNING(inMessage) \
-	(&ALogger::mInstance())->mWriteToLogWarning(inMessage,__FILE__,__LINE__,__FUNCTION__)
-#define A_LOGGER_CRITICAL(inMessage) \
-	(&ALogger::mInstance())->mWriteToLogCritical(inMessage,__FILE__,__LINE__,__FUNCTION__)
 
 // Namespace
 namespace ARB {
 
+// Classes
+class AClientBackend;
+
 // Class definitions
-class ALogger : public QObject {
+class ALogger : public AThreadTemplate<ALoggerService> {
 
 	Q_OBJECT
 
 	public:
 
-		ALoggerConfig* pConfig = nullptr;
-		AThreadTemplate* pThread = nullptr;
-		AProperties* pProperties = nullptr;
-		ALoggerService* pService = nullptr;
-
-		static ALogger& mInstance(void);
-		void mInitWithThread(AThreadTemplate* inThread);
-
-		void mWriteToLogDebug(
-			const char* inMessage,const char* inFile,int inLine,const char* inFunction
-		);
-		void mWriteToLogInfo(
-			const char* inMessage,const char* inFile,int inLine,const char* inFunction
-		);
-		void mWriteToLogWarning(
-			const char* inMessage,const char* inFile,int inLine,const char* inFunction
-		);
-		void mWriteToLogCritical(
-			const char* inMessage,const char* inFile,int inLine,const char* inFunction
-		);
-
-	public slots:
-
-		void slLogUpdated(void);
-		void slWriteToLogInfo(QString inActor,QString inMessage,QString inInfo);
-		void slWriteToLogWarning(QString inActor,QString inMessage,QString inInfo);
-		void slWriteToLogCritical(QString inActor,QString inMessage,QString inInfo);
-
-	signals:
-
-		void sgStartDB(ASqlCipherProperties* inProperties);
-		void sgWriteToLog(ALoggerMessageModel* inMessage);
-		void sgLogUpdated(void);
-
-	private:
-
 		explicit ALogger(QObject* parent = nullptr);
 		virtual ~ALogger(void);
 		Q_DISABLE_COPY(ALogger)
 
-		void mWriteToLog(
-			QString inType, QString inActor, QString inMessage,
-			QString inFile, QString inLine, QString inFunction
-		);
+		void mInit(void);
+
+	public slots:
+
+
+	signals:
+
+		void sgInit();
+
+	private:
+
+		AClientBackend* pBackend = nullptr;
 };
 
 } // namespace ARB
