@@ -1,0 +1,15 @@
+A_DIR_MODULES_FREE_TEMPLATES = $$PWD/Templates
+A_PRI_MODULES_FREE_TEMPLATES = $$A_DIR_MODULES_FREE_TEMPLATES/Templates.pri
+exists($$A_PRI_MODULES_FREE_TEMPLATES) {
+	include($$A_PRI_MODULES_FREE_TEMPLATES)
+} else {
+	error(No Free Module Templates config file $$A_PRI_MODULES_FREE_TEMPLATES)
+}
+
+A_DIR_MODULES_FREE_LOGGER = $$PWD/Logger
+A_PRI_MODULES_FREE_LOGGER = $$A_DIR_MODULES_FREE_LOGGER/Logger.pri
+exists($$A_PRI_MODULES_FREE_LOGGER) {
+	include($$A_PRI_MODULES_FREE_LOGGER)
+} else {
+	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_LOGGER)
+}

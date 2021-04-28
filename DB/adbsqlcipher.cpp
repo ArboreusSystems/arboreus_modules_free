@@ -81,20 +81,22 @@ bool ADBSqlCipher::mStart(ASqlCipherProperties* inProperties) {
 
 	if (this->mCheckDriver()) {
 
-		pDB = QSqlDatabase::addDatabase("SQLITECIPHER",inProperties->Name);
-		pDB.setDatabaseName(inProperties->Path);
-		if (inProperties->Value != A_DB_NULL_VALUE_QSTRING) {
-			pDB.setPassword(inProperties->Value);
+		pDBProperties = inProperties;
+
+		pDB = QSqlDatabase::addDatabase("SQLITECIPHER",pDBProperties->Name);
+		pDB.setDatabaseName(pDBProperties->Path);
+		if (pDBProperties->Value != A_DB_NULL_VALUE_QSTRING) {
+			pDB.setPassword(pDBProperties->Value);
 		}
 		if (pDB.open()) {
-			oMessage = std::string("Opened DB -> ") + inProperties->Path.toStdString();
+			oMessage = std::string("Opened DB -> ") + pDBProperties->Path.toStdString();
 			A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
 			return true;
 		}
 
 		oMessage = std::string("Opening DB Failed -> ") +
-			inProperties->Name.toStdString() + ": " +
-			inProperties->Path.toStdString();
+			pDBProperties->Name.toStdString() + ": " +
+			pDBProperties->Path.toStdString();
 
 	} else {
 		oMessage = std::string("No SQLITECIPHER driver available");
@@ -115,8 +117,11 @@ bool ADBSqlCipher::mStart(ASqlCipherProperties* inProperties) {
 bool ADBSqlCipher::mClose(void) {
 
 	A_LOGGER_MESSAGE_INIT;
-	if (pDB.isOpen()) {pDB.close();}
+	if (pDB.isOpen()) {
+		pDB.close();
+	}
 	if (!pDB.isOpen()) {
+		QSqlDatabase::removeDatabase(pDBProperties->Name);
 		oMessage = std::string("DB Closed -> ") + pDB.connectionName().toStdString();
 		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
 		return true;

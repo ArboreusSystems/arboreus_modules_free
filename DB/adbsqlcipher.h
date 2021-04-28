@@ -45,6 +45,7 @@ class ADBSqlCipher : public QObject {
 		explicit ADBSqlCipher(ASqlCipherProperties* inProperties,QObject* inParent = nullptr);
 		virtual ~ADBSqlCipher(void);
 
+		ASqlCipherProperties* pDBProperties = nullptr;
 		QSqlDatabase pDB;
 
 		bool mStart(ASqlCipherProperties* inProperties);

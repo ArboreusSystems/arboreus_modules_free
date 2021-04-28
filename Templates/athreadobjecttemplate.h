@@ -1,54 +1,48 @@
 // ----------------------------------------------------------
 /*!
-	\headerfile ALoggerService
+	\headerfile
 	\title
-	\brief Template file wizard/classes/cpp/file.h
+	\brief Template file files/cppheader/file.h
 
 	\list
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 28/04/2021 at 19:52:08
+	\li @created 28/04/2021 at 19:43:18
 	\endlist
 */
 // ----------------------------------------------------------
-
-#ifndef ALOGGERSERVICE_H
-#define ALOGGERSERVICE_H
+#ifndef ATHREADOBJECTTEMPLATE_H
+#define ATHREADOBJECTTEMPLATE_H
 
 // System includes
 #include <QObject>
 
 // Application includes
-#include <aloggerglobal.h>
-#include <athreadservicetemplate.h>
 
-// Constants and definitions
+// Constants and defintions
 
 // Namespace
 namespace ARB {
 
-// Class definitions
-class ALoggerService : public AThreadServiceTemplate {
+class AThreadObjectTemplate : public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		explicit ALoggerService(QObject* parent = nullptr);
-		virtual ~ALoggerService(void);
+		explicit AThreadObjectTemplate(QObject* parent = nullptr): QObject(parent) {}
+		virtual ~AThreadObjectTemplate(void) {}
 
 	public slots:
 
-		void slInit(void);
+		virtual void slRun(void) = 0;
 
 	signals:
 
-
-	private:
-
+		void sgFinished(void);
 };
 
 } // namespace ARB
 
-#endif // ALOGGERSERVICE_H
+#endif // ATHREADOBJECTTEMPLATE_H
