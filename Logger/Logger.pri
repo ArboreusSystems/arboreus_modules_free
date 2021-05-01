@@ -2,6 +2,7 @@ INCLUDEPATH += $$PWD
 
 HEADERS += \
 	$$PWD/alogger.h \
+	$$PWD/aloggerdatamodels.h \
 	$$PWD/aloggerglobal.h \
 	$$PWD/aloggerservice.h
 

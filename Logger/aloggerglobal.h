@@ -21,9 +21,9 @@
 #include <QDebug>
 #include <QThread>
 #include <string>
-#include <sstream>
 
 // Application includes
+#include <aloggerdatamodels.h>
 
 // Constants and defintions
 #define _A_LOGGER_DEFAULT_STRING_DEBUG "DBG"
@@ -54,100 +54,147 @@ namespace ARB {
 	Doc.
 */
 
+static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* inModel) {
+
+#ifdef QT_DEBUG
+
+	switch (inModel->Type) {
+		case QtDebugMsg:
+			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_DEBUG,
+				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Function,inModel->File,inModel->Line
+			);
+			break;
+		case QtInfoMsg:
+			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_INFO,
+				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Function,inModel->File,inModel->Line
+			);
+			break;
+		case QtWarningMsg:
+			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_WARNING,
+				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Function,inModel->File,inModel->Line
+			);
+			break;
+		case QtCriticalMsg:
+			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_CRITICAL,
+				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Function,inModel->File,inModel->Line
+			);
+			break;
+		case QtFatalMsg:
+			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_FATAL,
+				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Function,inModel->File,inModel->Line
+			);
+			break;
+		default:
+			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_UNDEFINED,
+				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Function,inModel->File,inModel->Line
+			);
+			break;
+	}
+
+#else
+
+	switch (inModel->Type) {
+		case QtDebugMsg:
+			break;
+		case QtInfoMsg:
+			fprintf(stderr,"%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_INFO,
+				inModel->Time,inModel->ThreadID,inModel->Message
+			);
+			break;
+		case QtWarningMsg:
+			fprintf(stderr,"%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_WARNING,
+				inModel->Time,inModel->ThreadID,inModel->Message
+			);
+			break;
+		case QtCriticalMsg:
+			fprintf(stderr,"%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_CRITICAL,
+				inModel->Time,inModel->ThreadID,inModel->Message
+			);
+			break;
+		case QtFatalMsg:
+			fprintf(stderr,"%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_FATAL,
+				inModel->Time,inModel->ThreadID,inModel->Message
+			);
+			break;
+		default:
+			fprintf(stderr,"%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_UNDEFINED,
+				inModel->Time,inModel->ThreadID,inModel->Message
+			);
+			break;
+	}
+
+#endif
+
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+static void __attribute__((unused)) fLoggerWriteToDB(ALoggerMessageModel* inModel) {
+
+	Q_UNUSED(inModel);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 static void __attribute__((unused)) fLoggerMessageHandler(
 	QtMsgType inType, const QMessageLogContext& inContext, const QString& inMessage
 ) {
 
 	QString oThreadIDString = QString("0x%1");
-	QString oThreadIDValue = oThreadIDString.arg((long)QThread::currentThread(),16);
-	const char* oThreadID = oThreadIDValue.toStdString().c_str();
-	const char* oFunction = inContext.function ? inContext.function : "no function";
-	const char* oFile = inContext.file ? inContext.file : "no file";
-	unsigned long long oTime = QDateTime::currentMSecsSinceEpoch();
+	QString oThreadIDValue = oThreadIDString.arg((long)QThread::currentThread(),0,16);
+	std::string oThreadIDStdString = oThreadIDValue.toStdString();
+
+	std::string oMessageStdString = inMessage.toStdString();
+
+	ALoggerMessageModel oMessageModel;
+	oMessageModel.Type = inType;
+	oMessageModel.Time = QDateTime::currentMSecsSinceEpoch();
+	oMessageModel.ThreadID = oThreadIDStdString.c_str();
+	oMessageModel.Message = oMessageStdString.c_str();
 
 #ifdef QT_DEBUG
 
-	switch (inType) {
-		case QtDebugMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_DEBUG,
-				oTime,oThreadID,inMessage.toStdString().c_str(),
-				oFunction,oFile,inContext.line
-			);
-			break;
-		case QtInfoMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_INFO,
-				oTime,oThreadID,inMessage.toStdString().c_str(),
-				oFunction,oFile,inContext.line
-			);
-			break;
-		case QtWarningMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_WARNING,
-				oTime,oThreadID,inMessage.toStdString().c_str(),
-				oFunction,oFile,inContext.line
-			);
-			break;
-		case QtCriticalMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_CRITICAL,
-				oTime,oThreadID,inMessage.toStdString().c_str(),
-				oFunction,oFile,inContext.line
-			);
-			break;
-		case QtFatalMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_FATAL,
-				oTime,oThreadID,inMessage.toStdString().c_str(),
-				oFunction,oFile,inContext.line
-			);
-			break;
-		default:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_UNDEFINED,
-				oTime,oThreadID,inMessage.toStdString().c_str(),
-				oFunction,oFile,inContext.line
-			);
-			break;
-	}
+	oMessageModel.File = inContext.file ? inContext.file : "no file";
+	oMessageModel.Function = inContext.function ? inContext.function : "no function";
 
-#elif
+	fLoggerWriteToConsole(&oMessageModel);
 
-	switch (inType) {
-		case QtDebugMsg:
-			break;
-		case QtInfoMsg:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_INFO,
-				oTime,oThreadID,inMessage.toStdString().c_str()
-			);
-			break;
-		case QtWarningMsg:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_WARNING,
-				oTime,oThreadID,inMessage.toStdString().c_str()
-			);
-			break;
-		case QtCriticalMsg:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_CRITICAL,
-				oTime,oThreadID,inMessage.toStdString().c_str()
-			);
-			break;
-		case QtFatalMsg:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_FATAL,
-				oTime,oThreadID,inMessage.toStdString().c_str()
-			);
-			break;
-		default:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_UNDEFINED,
-				oTime,oThreadID,inMessage.toStdString().c_str()
-			);
-			break;
-	}
+#else
+
+	Q_UNUSED(inContext);
+
+	fLoggerWriteToConsole(&oMessageModel);
+	fLoggerWriteToDB(&oMessageModel);
+
 
 #endif
 
