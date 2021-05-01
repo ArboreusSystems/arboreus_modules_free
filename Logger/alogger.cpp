@@ -36,6 +36,8 @@ ALogger::ALogger(QObject *parent) : AThreadTemplate<ALoggerService>(new ALoggerS
 		this,&ALogger::sgInit,
 		this->mService(),&ALoggerService::slInit
 	);
+
+	_A_DEBUG << "ALogger created";
 }
 
 
@@ -48,6 +50,7 @@ ALogger::ALogger(QObject *parent) : AThreadTemplate<ALoggerService>(new ALoggerS
 
 ALogger::~ALogger(void) {
 
+	_A_DEBUG << "ALogger deleted";
 }
 
 
@@ -63,5 +66,7 @@ void ALogger::mInit(void) {
 	pBackend = &AClientBackend::mInstance();
 	this->start(QThread::Priority::LowPriority);
 	emit sgInit();
+
+	_A_DEBUG << "ALogger initiated";
 }
 

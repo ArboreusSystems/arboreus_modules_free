@@ -22,6 +22,7 @@
 // Application includes
 #include <athreadtemplate.h>
 #include <aloggerservice.h>
+#include <aloggerglobal.h>
 
 // Constants and definitions
 
