@@ -8,56 +8,37 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 14/12/2019 at 18:18:45
+	\li @created 01/05/2021 at 14:00:40
 	\endlist
 */
 // ----------------------------------------------------------
+
 #ifndef ADBSQLCIPHER_H
 #define ADBSQLCIPHER_H
 
 // System includes
 #include <QObject>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlDriver>
-#include <QSqlRecord>
-#include <QVariantList>
-#include <QVariant>
-#include <QList>
-#include <QThread>
 
 // Application includes
 #include <adbdatamodels.h>
-#include <aloggerglobal.h>
 
 // Constants and definitions
 
-
+// Namespace
 namespace ARB {
 
+// Class definitions
 class ADBSqlCipher : public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		explicit ADBSqlCipher(QObject *inParent = nullptr);
-		explicit ADBSqlCipher(ASqlCipherProperties* inProperties,QObject* inParent = nullptr);
+		explicit ADBSqlCipher(QObject *parent = nullptr);
 		virtual ~ADBSqlCipher(void);
 
-		ASqlCipherProperties* pDBProperties = nullptr;
-		QSqlDatabase pDB;
+	signals:
 
-		bool mStart(ASqlCipherProperties* inProperties);
-		bool mClose(void);
-		ASqlCipherReply mStringExecute(QString inQueryString);
-		ASqlCipherReply mStringTransaction(QString inQueryString);
-		ASqlCipherReply mQueryExecute(QSqlQuery inQuery);
-		ASqlCipherReply mQueryTransaction(QSqlQuery inQuery);
-
-	private:
-
-		bool mCheckDriver(void);
 };
 
 } // namespace ARB
