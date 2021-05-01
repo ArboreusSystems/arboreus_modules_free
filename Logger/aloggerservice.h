@@ -18,10 +18,12 @@
 
 // System includes
 #include <QObject>
+#include <QDateTime>
 
 // Application includes
 #include <aloggerglobal.h>
 #include <athreadservicetemplate.h>
+#include <adbsqlcipher.h>
 
 // Constants and definitions
 
@@ -40,7 +42,7 @@ class ALoggerService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(void);
+		void slInit(QString inPathLoggerData);
 		void slWriteToDB(ALoggerMessageModel* inMessageModel);
 
 	signals:
@@ -48,6 +50,8 @@ class ALoggerService : public AThreadServiceTemplate {
 
 	private:
 
+		QString pPathLoggerData = QString("NoPathLoggerData");
+		ADBSqlCipher* pDB = nullptr;
 };
 
 } // namespace ARB

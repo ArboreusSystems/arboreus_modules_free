@@ -16,11 +16,43 @@
 #define ADBDATAMODELS_H
 
 // System includes
+#include <QObject>
+#include <QString>
+#include <QVariantList>
 
 // Application includes
 
 // Constants and defintions
+#define A_DB_NULL_VALUE "A_DB_NULL_VALUE"
 
 // Namespace
+namespace ARB {
+
+class ADBSqlCipherProperties : public QObject {
+
+	Q_OBJECT
+
+	public:
+
+		QString Name = QString("NoName");
+		QString Path = QString("NoPath");
+		QString Value = QString(A_DB_NULL_VALUE);
+
+		explicit ADBSqlCipherProperties(QObject* parent = nullptr) : QObject(parent) {}
+		virtual ~ADBSqlCipherProperties(void) {}
+};
+
+class ADBSqlCipherReply {
+
+	public:
+
+		bool Status = false;
+		QVariantList Output = {};
+
+		ADBSqlCipherReply(void) {}
+		virtual ~ADBSqlCipherReply(void) {}
+};
+
+} //namespace ARB
 
 #endif // ADBDATAMODELS_H

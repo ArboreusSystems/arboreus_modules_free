@@ -18,11 +18,17 @@
 
 // System includes
 #include <QObject>
+#include <QString>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
 
 // Application includes
+#include <aloggerglobal.h>
 #include <adbdatamodels.h>
 
 // Constants and definitions
+#define A_DB_SQL_CIPHER_DRIVER "SQLITECIPHER"
 
 // Namespace
 namespace ARB {
@@ -34,11 +40,17 @@ class ADBSqlCipher : public QObject {
 
 	public:
 
+		ADBSqlCipherProperties* pProperties = nullptr;
+
 		explicit ADBSqlCipher(QObject *parent = nullptr);
 		virtual ~ADBSqlCipher(void);
 
-	signals:
-
+		bool mStart(ADBSqlCipherProperties* inProperties);
+		void mRemove(void);
+		ADBSqlCipherReply mStringExecute(QString inQueryString);
+		ADBSqlCipherReply mStringTransaction(QString inQueryString);
+		ADBSqlCipherReply mQueryExecute(QSqlQuery inQuery);
+		ADBSqlCipherReply mQueryTransaction(QSqlQuery inQuery);
 };
 
 } // namespace ARB

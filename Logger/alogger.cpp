@@ -69,7 +69,14 @@ void ALogger::mInit(void) {
 
 	pBackend = &AClientBackend::mInstance();
 	this->start(QThread::Priority::LowPriority);
-	emit sgInit();
+
+	QString oPathLoggerData = pBackend->pProperties->mGetPathDataCache() + "/Logs";
+	if (ADir::mEnsure(oPathLoggerData)) {
+		_A_DEBUG << "Ensured path for logs:" << oPathLoggerData;
+		emit sgInit(oPathLoggerData);
+	} else {
+		_A_CRITICAL << "Failed to ensure path for logs:" << oPathLoggerData;
+	}
 
 	_A_DEBUG << "ALogger initiated";
 }

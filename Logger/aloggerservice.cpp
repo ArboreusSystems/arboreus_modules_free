@@ -42,6 +42,8 @@ ALoggerService::ALoggerService(QObject* parent) : AThreadServiceTemplate(parent)
 
 ALoggerService::~ALoggerService(void) {
 
+	pDB->deleteLater();
+
 	_A_DEBUG << "ALoggerService deleted";
 }
 
@@ -53,7 +55,16 @@ ALoggerService::~ALoggerService(void) {
 	Doc.
 */
 
-void ALoggerService::slInit(void) {
+void ALoggerService::slInit(QString inPathLoggerData) {
+
+	pPathLoggerData = inPathLoggerData;
+
+	ADBSqlCipherProperties* oDBProperties = new ADBSqlCipherProperties(this);
+	oDBProperties->Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
+	oDBProperties->Path = pPathLoggerData + "/" + oDBProperties->Name + ".db";
+
+	pDB = new ADBSqlCipher(this);
+	pDB->mStart(oDBProperties);
 
 	_A_DEBUG << "ALoggerService initiated";
 }

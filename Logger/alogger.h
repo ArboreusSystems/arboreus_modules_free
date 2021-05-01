@@ -23,6 +23,7 @@
 #include <athreadtemplate.h>
 #include <aloggerservice.h>
 #include <aloggerglobal.h>
+#include <adir.h>
 
 // Constants and definitions
 
@@ -48,7 +49,7 @@ class ALogger : public AThreadTemplate<ALoggerService> {
 
 	signals:
 
-		void sgInit();
+		void sgInit(QString inPathLoggerData);
 		void sgWriteToDB(ALoggerMessageModel* inMessageModel);
 
 	private:
