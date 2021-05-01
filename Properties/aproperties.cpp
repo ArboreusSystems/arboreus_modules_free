@@ -16,6 +16,9 @@
 // Class header
 #include "aproperties.h"
 
+// Forwarded classes
+#include <aclientbackend.h>
+
 // Namespace
 using namespace ARB;
 
@@ -29,7 +32,7 @@ using namespace ARB;
 
 AProperties::AProperties(QObject *parent) : QObject(parent) {
 
-	A_CONSOLE_MESSAGE_DEBUG("AProperties created");
+	_A_DEBUG << "AProperties created";
 }
 
 
@@ -42,21 +45,7 @@ AProperties::AProperties(QObject *parent) : QObject(parent) {
 
 AProperties::~AProperties(void) {
 
-	A_CONSOLE_MESSAGE_DEBUG("AProperties deleted");
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-AProperties& AProperties::mInstance(void) {
-
-	static AProperties oInstance;
-	return oInstance;
+	_A_DEBUG << "AProperties deleted";
 }
 
 
@@ -69,7 +58,10 @@ AProperties& AProperties::mInstance(void) {
 
 void AProperties::mInit(void) {
 
+	pBackend = &AClientBackend::mInstance();
 	this->mInitPaths();
+
+	_A_DEBUG << "AProperties initiated";
 }
 
 
@@ -82,42 +74,28 @@ void AProperties::mInit(void) {
 
 void AProperties::mInitPaths(void) {
 
-	A_LOGGER_MESSAGE_INIT;
-
-	pPathDataApplication = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/" + pNameApplication;
+	pPathDataApplication = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
+		"/" + pNameOrganisation + "/" + pNameApplication;
 	if (ADir::mEnsure(pPathDataApplication)) {
-		oMessage = std::string("Ensured Application Data path -> ") + pPathDataApplication.toStdString();
-		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
+		_A_DEBUG << "Ensured Application Data path:" << pPathDataApplication;
 	} else {
-		oMessage = std::string("No Application Data path -> ") + pPathDataApplication.toStdString();
-		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
+		_A_CRITICAL << "No Application Data path:" << pPathDataApplication;
 	}
 
-	pPathDataConfig = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + "/" + pNameApplication;
+	pPathDataConfig = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
+		"/" + pNameOrganisation + "/" + pNameApplication;
 	if (ADir::mEnsure(pPathDataConfig)) {
-		oMessage = std::string("Ensured Config Data path -> ") + pPathDataConfig.toStdString();
-		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
+		_A_DEBUG << "Ensured Config Data path:" << pPathDataConfig;
 	} else {
-		oMessage = std::string("No Config Data path -> ") + pPathDataConfig.toStdString();
-		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
+		_A_CRITICAL << "No Config Data path:" << pPathDataConfig;
 	}
 
-	pPathDataCache = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + "/" + pNameApplication;
+	pPathDataCache = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) +
+		"/" + pNameOrganisation + "/" + pNameApplication;
 	if (ADir::mEnsure(pPathDataCache)) {
-		oMessage = std::string("Ensured Cache Data path -> ") + pPathDataCache.toStdString();
-		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
+		_A_DEBUG << "Ensured Cache Data path:" << pPathDataCache;
 	} else {
-		oMessage = std::string("No Cache Data path -> ") + pPathDataCache.toStdString();
-		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
-	}
-
-	pPathLogs = pPathDataCache + QString("/Logs");
-	if (ADir::mEnsure(pPathLogs)) {
-		oMessage = std::string("Ensured Logs path -> ") + pPathLogs.toStdString();
-		A_CONSOLE_MESSAGE_DEBUG(oMessage.c_str());
-	} else {
-		oMessage = std::string("No Logs path -> ") + pPathLogs.toStdString();
-		A_CONSOLE_MESSAGE_CRITICAL(oMessage.c_str());
+		_A_CRITICAL << "No Cache Data path:" << pPathDataCache;
 	}
 }
 
@@ -238,17 +216,5 @@ QString AProperties::mGetPathDataCache(void) {
 	return pPathDataCache;
 }
 
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QString AProperties::mGetPathLogs(void) {
-
-	return pPathLogs;
-}
 
 

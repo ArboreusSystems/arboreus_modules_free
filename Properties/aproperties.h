@@ -30,6 +30,9 @@
 // Namespace
 namespace ARB {
 
+// Classes
+class AClientBackend;
+
 // Class definitions
 class AProperties : public QObject {
 
@@ -37,7 +40,9 @@ class AProperties : public QObject {
 
 	public:
 
-		static AProperties& mInstance(void);
+		explicit AProperties(QObject *parent = nullptr);
+		virtual ~AProperties(void);
+
 		void mInit(void);
 
 		void mSetNameOrganisation(QString inName);
@@ -50,9 +55,10 @@ class AProperties : public QObject {
 		QString mGetPathDataApplication(void);
 		QString mGetPathDataConfig(void);
 		QString mGetPathDataCache(void);
-		QString mGetPathLogs(void);
 
 	private:
+
+		AClientBackend* pBackend = nullptr;
 
 		QString pNameOrganisation = "NoNameOrganisation";
 		QString pNameDomain = "NoNameDomain";
@@ -63,10 +69,6 @@ class AProperties : public QObject {
 		QString pPathDataCache = "NoPathDataCache";
 
 		QString pPathLogs = "NoPathLogs";
-
-		explicit AProperties(QObject *parent = nullptr);
-		virtual ~AProperties(void);
-		Q_DISABLE_COPY(AProperties)
 
 		void mInitPaths(void);
 };

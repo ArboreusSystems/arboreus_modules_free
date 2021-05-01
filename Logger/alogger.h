@@ -44,13 +44,12 @@ class ALogger : public AThreadTemplate<ALoggerService> {
 		Q_DISABLE_COPY(ALogger)
 
 		void mInit(void);
-
-	public slots:
-
+		void mWriteToDB(ALoggerMessageModel* inMessageModel);
 
 	signals:
 
 		void sgInit();
+		void sgWriteToDB(ALoggerMessageModel* inMessageModel);
 
 	private:
 

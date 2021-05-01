@@ -154,7 +154,9 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 
 static void __attribute__((unused)) fLoggerWriteToDB(ALoggerMessageModel* inModel) {
 
-	Q_UNUSED(inModel);
+	if (inModel->Type != QtMsgType::QtDebugMsg) {
+
+	}
 }
 
 

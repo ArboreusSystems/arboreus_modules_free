@@ -41,6 +41,7 @@ class ALoggerService : public AThreadServiceTemplate {
 	public slots:
 
 		void slInit(void);
+		void slWriteToDB(ALoggerMessageModel* inMessageModel);
 
 	signals:
 

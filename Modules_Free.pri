@@ -6,10 +6,34 @@ exists($$A_PRI_MODULES_FREE_TEMPLATES) {
 	error(No Free Module Templates config file $$A_PRI_MODULES_FREE_TEMPLATES)
 }
 
+A_DIR_MODULES_FREE_PROPERTIES = $$PWD/Properties
+A_PRI_MODULES_FREE_PROPERTIES = $$A_DIR_MODULES_FREE_PROPERTIES/Properties.pri
+exists($$A_PRI_MODULES_FREE_PROPERTIES) {
+	include($$A_PRI_MODULES_FREE_PROPERTIES)
+} else {
+	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_PROPERTIES)
+}
+
 A_DIR_MODULES_FREE_LOGGER = $$PWD/Logger
 A_PRI_MODULES_FREE_LOGGER = $$A_DIR_MODULES_FREE_LOGGER/Logger.pri
 exists($$A_PRI_MODULES_FREE_LOGGER) {
 	include($$A_PRI_MODULES_FREE_LOGGER)
 } else {
 	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_LOGGER)
+}
+
+A_DIR_MODULES_FREE_DB = $$PWD/DB
+A_PRI_MODULES_FREE_DB = $$A_DIR_MODULES_FREE_DB/DB.pri
+exists($$A_PRI_MODULES_FREE_DB) {
+	include($$A_PRI_MODULES_FREE_DB)
+} else {
+	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_DB)
+}
+
+A_DIR_MODULES_FREE_UNIVERSAL = $$PWD/Universal
+A_PRI_MODULES_FREE_UNIVERSAL = $$A_DIR_MODULES_FREE_UNIVERSAL/Universal.pri
+exists($$A_PRI_MODULES_FREE_UNIVERSAL) {
+	include($$A_PRI_MODULES_FREE_UNIVERSAL)
+} else {
+	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_UNIVERSAL)
 }

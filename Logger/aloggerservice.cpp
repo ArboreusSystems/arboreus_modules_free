@@ -19,6 +19,7 @@
 // Namespace
 using namespace ARB;
 
+
 // -----------
 /*!
 	\fn
@@ -28,6 +29,7 @@ using namespace ARB;
 
 ALoggerService::ALoggerService(QObject* parent) : AThreadServiceTemplate(parent) {
 
+	_A_DEBUG << "ALoggerService created";
 }
 
 
@@ -40,6 +42,7 @@ ALoggerService::ALoggerService(QObject* parent) : AThreadServiceTemplate(parent)
 
 ALoggerService::~ALoggerService(void) {
 
+	_A_DEBUG << "ALoggerService deleted";
 }
 
 
@@ -51,5 +54,19 @@ ALoggerService::~ALoggerService(void) {
 */
 
 void ALoggerService::slInit(void) {
+
+	_A_DEBUG << "ALoggerService initiated";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ALoggerService::slWriteToDB(ALoggerMessageModel* inMessageModel) {
+
 
 }
