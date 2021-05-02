@@ -17,7 +17,7 @@
 #include "aproperties.h"
 
 // Forwarded classes
-#include <aclientbackend.h>
+#include <abackend.h>
 
 // Namespace
 using namespace ARB;
@@ -58,7 +58,7 @@ AProperties::~AProperties(void) {
 
 void AProperties::mInit(void) {
 
-	pBackend = &AClientBackend::mInstance();
+	pBackend = &ABackend::mInstance();
 	this->mInitPaths();
 
 	_A_DEBUG << "AProperties initiated";

@@ -31,7 +31,7 @@
 namespace ARB {
 
 // Classes
-class AClientBackend;
+class ABackend;
 
 // Class definitions
 class ALogger : public AThreadTemplate<ALoggerService> {
@@ -59,7 +59,7 @@ class ALogger : public AThreadTemplate<ALoggerService> {
 
 	private:
 
-		AClientBackend* pBackend = nullptr;
+		ABackend* pBackend = nullptr;
 };
 
 } // namespace ARB

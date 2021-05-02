@@ -31,7 +31,7 @@
 namespace ARB {
 
 // Classes
-class AClientBackend;
+class ABackend;
 
 // Class definitions
 class AProperties : public QObject {
@@ -58,7 +58,7 @@ class AProperties : public QObject {
 
 	private:
 
-		AClientBackend* pBackend = nullptr;
+		ABackend* pBackend = nullptr;
 
 		QString pNameOrganisation = "NoNameOrganisation";
 		QString pNameDomain = "NoNameDomain";

@@ -17,7 +17,7 @@
 #include "alogger.h"
 
 // Forwarded classes
-#include <aclientbackend.h>
+#include <abackend.h>
 
 // Namespace
 using namespace ARB;
@@ -71,7 +71,7 @@ ALogger::~ALogger(void) {
 
 void ALogger::mInit(void) {
 
-	pBackend = &AClientBackend::mInstance();
+	pBackend = &ABackend::mInstance();
 	this->start(QThread::Priority::LowPriority);
 
 	QString oPathLoggerData = pBackend->pProperties->mGetPathDataCache() + "/Logs";
