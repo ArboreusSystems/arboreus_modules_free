@@ -70,35 +70,35 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 			break;
 		case QtInfoMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
+				_A_LOGGER_DEFAULT_STRING_INFO,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtWarningMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
+				_A_LOGGER_DEFAULT_STRING_WARNING,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtCriticalMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
+				_A_LOGGER_DEFAULT_STRING_CRITICAL,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtFatalMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
+				_A_LOGGER_DEFAULT_STRING_FATAL,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		default:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
+				_A_LOGGER_DEFAULT_STRING_UNDEFINED,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
@@ -156,9 +156,13 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 
 static void __attribute__((unused)) fLoggerWriteToDB(ALoggerMessageModel* inModel) {
 
-	if (inModel->Type != QtMsgType::QtDebugMsg) {
+	Q_UNUSED(inModel)
 
-	}
+#ifndef QT_DEBUG
+
+#else
+
+#endif
 }
 
 

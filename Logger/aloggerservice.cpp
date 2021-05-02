@@ -59,9 +59,9 @@ void ALoggerService::slInit(QString inPathLoggerData) {
 
 	pPathLoggerData = inPathLoggerData;
 
-	ADBSqlCipherProperties* oDBProperties = new ADBSqlCipherProperties(this);
-	oDBProperties->Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
-	oDBProperties->Path = pPathLoggerData + "/" + oDBProperties->Name + ".db";
+	ADBSqlCipherProperties oDBProperties;
+	oDBProperties.Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
+	oDBProperties.Path = pPathLoggerData + "/" + oDBProperties.Name + ".db";
 
 	QString oQueryString = QString(
 		"CREATE TABLE IF NOT EXISTS log ("
@@ -75,7 +75,7 @@ void ALoggerService::slInit(QString inPathLoggerData) {
 	);
 
 	pDB = new ADBSqlCipher(this);
-	if (pDB->mStart(oDBProperties)) {
+	if (pDB->mStart(&oDBProperties)) {
 		ADBSqlCipherReply oDBReply = pDB->mStringExecute(oQueryString);
 		if (!oDBReply.Status) _A_CRITICAL << "Creating table for logs failed";
 	}
