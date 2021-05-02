@@ -47,6 +47,7 @@ class ALoggerService : public AThreadServiceTemplate {
 
 	signals:
 
+		void sgInitiated(void);
 
 	private:
 

@@ -20,6 +20,8 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QThread>
+#include <QString>
+#include <QStringRef>
 #include <string>
 
 // Application includes
@@ -33,8 +35,8 @@
 #define _A_LOGGER_DEFAULT_STRING_FATAL "FTL"
 #define _A_LOGGER_DEFAULT_STRING_UNDEFINED "NDF"
 #define _A_LOGGER_DEFAULT_STRING_SYSTEM "SYS"
-#define _A_LOGGER_DEFAULT_STRING_QML "QML"
 #define _A_LOGGER_DEFAULT_STRING_USER "USR"
+#define _A_LOGGER_DEFAULT_STRING_NETWORK "NET"
 
 #define _A_DEBUG qDebug()
 #define _A_USER qDebug() << _A_LOGGER_DEFAULT_STRING_USER
@@ -60,43 +62,43 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 
 	switch (inModel->Type) {
 		case QtDebugMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_DEBUG,
+			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtInfoMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_INFO,
+			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtWarningMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_WARNING,
+			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtCriticalMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_CRITICAL,
+			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtFatalMsg:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_FATAL,
+			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		default:
-			fprintf(stderr,"%s %llu %s %s [%s]:[%s]:[%u]\n",
-				_A_LOGGER_DEFAULT_STRING_UNDEFINED,
+			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
+				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message,
 				inModel->Function,inModel->File,inModel->Line
 			);
@@ -109,32 +111,32 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 		case QtDebugMsg:
 			break;
 		case QtInfoMsg:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_INFO,
+			fprintf(stderr,"%s:%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_INFO,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message
 			);
 			break;
 		case QtWarningMsg:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_WARNING,
+			fprintf(stderr,"%s:%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_WARNING,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message
 			);
 			break;
 		case QtCriticalMsg:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_CRITICAL,
+			fprintf(stderr,"%s:%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_CRITICAL,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message
 			);
 			break;
 		case QtFatalMsg:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_FATAL,
+			fprintf(stderr,"%s:%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_FATAL,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message
 			);
 			break;
 		default:
-			fprintf(stderr,"%s %llu %s %s\n",
-				_A_LOGGER_DEFAULT_STRING_UNDEFINED,
+			fprintf(stderr,"%s:%s %llu %s %s\n",
+				_A_LOGGER_DEFAULT_STRING_UNDEFINED,inModel->Author,
 				inModel->Time,inModel->ThreadID,inModel->Message
 			);
 			break;
@@ -182,6 +184,18 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 	oMessageModel.Time = QDateTime::currentMSecsSinceEpoch();
 	oMessageModel.ThreadID = oThreadIDStdString.c_str();
 	oMessageModel.Message = oMessageStdString.c_str();
+
+	QString oAuthorString = inMessage.left(3);
+	std::string oAuthor = oAuthorString.toStdString();
+	if (
+		oAuthor == _A_LOGGER_DEFAULT_STRING_USER ||
+		oAuthor == _A_LOGGER_DEFAULT_STRING_SYSTEM ||
+		oAuthor == _A_LOGGER_DEFAULT_STRING_NETWORK
+	) {
+		oMessageModel.Author = oAuthor.c_str();
+	} else {
+		oMessageModel.Author = _A_LOGGER_DEFAULT_STRING_SYSTEM;
+	}
 
 #ifdef QT_DEBUG
 

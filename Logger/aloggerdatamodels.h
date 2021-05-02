@@ -31,6 +31,7 @@ class ALoggerMessageModel {
 
 		unsigned long long Time = 0;
 		QtMsgType Type = QtMsgType::QtDebugMsg;
+		const char* Author = "EMP";
 		const char* ThreadID = "NoType";
 		const char* Message = "NoMessage";
 		const char* Function = "NoFunction";

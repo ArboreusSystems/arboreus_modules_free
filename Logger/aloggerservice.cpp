@@ -63,10 +63,25 @@ void ALoggerService::slInit(QString inPathLoggerData) {
 	oDBProperties->Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
 	oDBProperties->Path = pPathLoggerData + "/" + oDBProperties->Name + ".db";
 
+	QString oQueryString = QString(
+		"CREATE TABLE IF NOT EXISTS log ("
+			"id INTEGER PRIMARY KEY AUTOINCREMENT,"
+			"time INTEGER,"
+			"type VARCHAR(3),"
+			"threadID VARCHAR(24),"
+			"author VARCHAR(100),"
+			"message VARCHAR(255)"
+		")"
+	);
+
 	pDB = new ADBSqlCipher(this);
-	pDB->mStart(oDBProperties);
+	if (pDB->mStart(oDBProperties)) {
+		ADBSqlCipherReply oDBReply = pDB->mStringExecute(oQueryString);
+		if (!oDBReply.Status) _A_CRITICAL << "Creating table for logs failed";
+	}
 
 	_A_DEBUG << "ALoggerService initiated";
+	emit sgInitiated();
 }
 
 
@@ -79,5 +94,5 @@ void ALoggerService::slInit(QString inPathLoggerData) {
 
 void ALoggerService::slWriteToDB(ALoggerMessageModel* inMessageModel) {
 
-
+	Q_UNUSED(inMessageModel);
 }

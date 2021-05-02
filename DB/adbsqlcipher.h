@@ -40,8 +40,6 @@ class ADBSqlCipher : public QObject {
 
 	public:
 
-		ADBSqlCipherProperties* pProperties = nullptr;
-
 		explicit ADBSqlCipher(QObject *parent = nullptr);
 		virtual ~ADBSqlCipher(void);
 
@@ -51,6 +49,12 @@ class ADBSqlCipher : public QObject {
 		ADBSqlCipherReply mStringTransaction(QString inQueryString);
 		ADBSqlCipherReply mQueryExecute(QSqlQuery inQuery);
 		ADBSqlCipherReply mQueryTransaction(QSqlQuery inQuery);
+
+	private:
+
+		QString pPath = QString("NoPath");
+		QString pName = QString("NoName");
+		QString pValue = QString(A_DB_NULL_VALUE);
 };
 
 } // namespace ARB

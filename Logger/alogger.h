@@ -50,7 +50,12 @@ class ALogger : public AThreadTemplate<ALoggerService> {
 	signals:
 
 		void sgInit(QString inPathLoggerData);
+		void sgInitiated(void);
 		void sgWriteToDB(ALoggerMessageModel* inMessageModel);
+
+	public slots:
+
+		void slInitiated(void);
 
 	private:
 

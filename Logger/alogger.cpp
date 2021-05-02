@@ -37,6 +37,10 @@ ALogger::ALogger(QObject *parent) : AThreadTemplate<ALoggerService>(new ALoggerS
 		this->mService(),&ALoggerService::slInit
 	);
 	QObject::connect(
+		this->mService(),&ALoggerService::sgInitiated,
+		this,&ALogger::sgInitiated
+	);
+	QObject::connect(
 		this,&ALogger::sgWriteToDB,
 		this->mService(),&ALoggerService::slWriteToDB
 	);
@@ -94,3 +98,15 @@ void ALogger::mWriteToDB(ALoggerMessageModel* inMessageModel) {
 	emit sgWriteToDB(inMessageModel);
 }
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ALogger::slInitiated(void) {
+
+	emit sgInitiated();
+}
