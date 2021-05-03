@@ -30,7 +30,7 @@ using namespace ARB;
 	Doc.
 */
 
-ALogger::ALogger(QObject *parent) : AThreadTemplate<ALoggerService>(new ALoggerService, parent) {
+ALogger::ALogger(QObject* parent) : AThreadTemplate<ALoggerService>(new ALoggerService, parent) {
 
 	QObject::connect(
 		this,&ALogger::sgInit,

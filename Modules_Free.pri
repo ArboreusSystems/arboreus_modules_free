@@ -37,3 +37,11 @@ exists($$A_PRI_MODULES_FREE_UNIVERSAL) {
 } else {
 	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_UNIVERSAL)
 }
+
+A_DIR_MODULES_FREE_SETTINGS = $$PWD/Settings
+A_PRI_MODULES_FREE_SETTINGS = $$A_DIR_MODULES_FREE_SETTINGS/Settings.pri
+exists($$A_PRI_MODULES_FREE_SETTINGS) {
+	include($$A_PRI_MODULES_FREE_SETTINGS)
+} else {
+	error(No Free Module Settings config file $$A_PRI_MODULES_FREE_SETTINGS)
+}
