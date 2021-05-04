@@ -56,6 +56,10 @@ class AProperties : public QObject {
 		QString mGetPathDataConfig(void);
 		QString mGetPathDataCache(void);
 
+	signals:
+
+		void sgInitiated(void);
+
 	private:
 
 		ABackend* pBackend = nullptr;

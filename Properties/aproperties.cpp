@@ -62,6 +62,8 @@ void AProperties::mInit(void) {
 	this->mInitPaths();
 
 	_A_DEBUG << "AProperties initiated";
+
+	emit sgInitiated();
 }
 
 
