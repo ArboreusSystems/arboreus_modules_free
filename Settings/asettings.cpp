@@ -40,6 +40,14 @@ ASettings::ASettings(QObject* parent) : AThreadTemplate<ASettingsService>(new AS
 		this->mService(),&ASettingsService::sgInitiated,
 		this,&ASettings::slInitiated
 	);
+	QObject::connect(
+		this,&ASettings::sgUpdate,
+		this->mService(),&ASettingsService::slUpdate
+	);
+	QObject::connect(
+		this->mService(),&ASettingsService::sgUpdated,
+		this,&ASettings::slUpdated
+	);
 
 	_A_DEBUG << "ASettings created";
 }
@@ -102,19 +110,19 @@ void ASettings::slInitiated(void) {
 	Doc.
 */
 
-QVariantMap ASettings::mGet(QString inSettingsID) {
+QVariantMap ASettings::mGet(QString inKey) {
 
 	ASettingsReply oOutput;
-	oOutput.Data = pCache.value(inSettingsID,QString(A_SETTING_VALUE_NO_KEY));
+	oOutput.Data = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
 
 	if (oOutput.Data != QString(A_SETTING_VALUE_NO_KEY)) {
 		oOutput.Status = true;
 		return oOutput.mToVariantMap();
 	}
 
-	oOutput = this->mGetFromDB(inSettingsID);
+	oOutput = this->mGetFromDB(inKey);
 	if (oOutput.Status) {
-		pCache.insert(inSettingsID,oOutput.Data);
+		pCache.insert(inKey,oOutput.Data);
 	}
 	return oOutput.mToVariantMap();
 }
@@ -127,11 +135,70 @@ QVariantMap ASettings::mGet(QString inSettingsID) {
 	Doc.
 */
 
-ASettingsReply ASettings::mGetFromDB(QString inSettingsID) {
+void ASettings::mUpdate(QString inKey, QVariant inValue) {
+
+	emit sgUpdate(inKey,inValue);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ASettings::slUpdated(QString inKey, QVariant inValue) {
+
+	emit sgUpdated(inKey,inValue);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ASettingsReply ASettings::mGetFromDB(QString inKey) {
 
 	AThreadObjectControllerTemplate oController;
+	QEventLoop oEventLoop;
 
-	ASettingsReply oOutput;
+	ASettingsAgent oAgent(this->mService(),inKey);
+	QObject::connect(
+		&oAgent,&ASettingsAgent::sgFinished,
+		&oEventLoop,&QEventLoop::quit
+	);
+	QObject::connect(
+		&oController,&AThreadObjectControllerTemplate::sgRun,
+		&oAgent,&ASettingsAgent::slGet
+	);
+	oAgent.moveToThread(this);
 
-	return oOutput;
+	emit oController.sgRun();
+	oEventLoop.exec();
+
+	return oAgent.pReply;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+bool ASettings::mIsKey(QString inKey) {
+
+	QVariant oValue = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
+	if (oValue != QString(A_SETTING_VALUE_NO_KEY))  {
+		_A_DEBUG << "IsKey in cahce";
+		return true;
+	}
+
+	ASettingsReply oOutput = this->mGetFromDB(inKey);
+	return oOutput.Status;
 }

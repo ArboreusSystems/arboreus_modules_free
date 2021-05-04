@@ -45,6 +45,8 @@ class ADBSqlCipher : public QObject {
 
 		bool mStart(ADBSqlCipherProperties* inProperties);
 		void mRemove(void);
+		QString mGetDBName(void);
+		QSqlDatabase mGetDB(void);
 		ADBSqlCipherReply mStringExecute(QString inQueryString);
 		ADBSqlCipherReply mStringTransaction(QString inQueryString);
 		ADBSqlCipherReply mQueryExecute(QSqlQuery inQuery);

@@ -87,7 +87,7 @@ bool ADBSqlCipher::mStart(ADBSqlCipherProperties* inProperties) {
 void ADBSqlCipher::mRemove(void) {
 
 	{
-		QSqlDatabase oDB = QSqlDatabase::database(pPath);
+		QSqlDatabase oDB = this->mGetDB();
 		oDB.close();
 		if (!oDB.isOpen()) {
 			_A_DEBUG << "Closed DB:" << pPath;
@@ -107,11 +107,38 @@ void ADBSqlCipher::mRemove(void) {
 	Doc.
 */
 
+QString ADBSqlCipher::mGetDBName(void) {
+
+	return pName;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QSqlDatabase ADBSqlCipher::mGetDB(void) {
+
+	QSqlDatabase oDB = QSqlDatabase::database(pName);
+	return oDB;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 ADBSqlCipherReply ADBSqlCipher::mStringExecute(QString inQueryString) {
 
 	ADBSqlCipherReply oReply = {};
 
-	QSqlDatabase oDB = QSqlDatabase::database(pName);
+	QSqlDatabase oDB = this->mGetDB();
 
 	QSqlQuery oQuery(oDB);
 	if (!oQuery.prepare(inQueryString)) {
@@ -152,7 +179,7 @@ ADBSqlCipherReply ADBSqlCipher::mStringTransaction(QString inQueryString) {
 
 	ADBSqlCipherReply oReply = {};
 
-	QSqlDatabase oDB = QSqlDatabase::database(pName);
+	QSqlDatabase oDB = this->mGetDB();
 
 	if (oDB.transaction()) {
 		QSqlQuery oQuery(oDB);
@@ -236,7 +263,7 @@ ADBSqlCipherReply ADBSqlCipher::mQueryTransaction(QSqlQuery inQuery) {
 
 	ADBSqlCipherReply oReply = {};
 
-	QSqlDatabase oDB = QSqlDatabase::database(pName);
+	QSqlDatabase oDB = this->mGetDB();
 
 	if (oDB.transaction()) {
 		if (!inQuery.exec()) {

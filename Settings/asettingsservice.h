@@ -18,6 +18,7 @@
 
 // System includes
 #include <QObject>
+#include <QSqlQuery>
 
 // Application includes
 #include <athreadservicetemplate.h>
@@ -38,21 +39,22 @@ class ASettingsService : public AThreadServiceTemplate {
 
 	public:
 
+		ADBSqlCipher* pDB = nullptr;
+
 		explicit ASettingsService(QObject *parent = nullptr);
 		virtual ~ASettingsService(void);
+
+		QString mGetDBName(void);
 
 	signals:
 
 		void sgInitiated(void);
+		void sgUpdated(QString inKey,QVariant inValue);
 
 	public slots:
 
 		void slInit(QString inPathSettingsData);
-
-	private:
-
-		ADBSqlCipher* pDB = nullptr;
-
+		void slUpdate(QString inKey,QVariant inValue);
 };
 
 } // namespace ARB

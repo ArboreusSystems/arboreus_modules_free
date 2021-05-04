@@ -55,12 +55,17 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 
 		void sgInit(QString inPathSettingsData);
 		void sgInitiated();
-		void sgGetFromDB(QString inSettingsID);
+		void sgGetFromDB(QString inKey);
+		void sgUpdated(QString inKey,QVariant inValue);
+		void sgUpdate(QString inKey,QVariant inValue);
 
 	public slots:
 
-		QVariantMap mGet(QString inSettingsID);
+		QVariantMap mGet(QString inKey);
+		void mUpdate(QString inKey,QVariant inValue);
+		bool mIsKey(QString inKey);
 		void slInitiated(void);
+		void slUpdated(QString inKey,QVariant inValue);
 
 	private:
 

@@ -18,9 +18,14 @@
 
 // System includes
 #include <QObject>
+#include <QVariant>
+#include <QVariantList>
+
 
 // Application includes
 #include <asettingsdatamodels.h>
+#include <asettingsservice.h>
+#include <aloggerglobal.h>
 
 // Constants and definitions
 
@@ -34,9 +39,15 @@ class ASettingsAgent : public QObject {
 
 	public:
 
-		ASettingsReply* pReply = nullptr;
+		bool pStatus = false;
+		ASettingsReply pReply;
 
-		explicit ASettingsAgent(QString* inDbName, QObject* parent = nullptr);
+		explicit ASettingsAgent(
+			ASettingsService* inService = nullptr,
+			QString inKey = QString("NoInKey"),
+			QVariant inValue = QVariant(QString("NoInValue")),
+			QObject* parent = nullptr
+		);
 		explicit ASettingsAgent(QObject* parent = nullptr);
 		virtual ~ASettingsAgent(void);
 
@@ -46,11 +57,13 @@ class ASettingsAgent : public QObject {
 
 	public slots:
 
-		void slGet(QString inSettingsID);
+		void slGet(void);
 
 	private:
 
-		QString* pDBName = nullptr;
+		ASettingsService* pService = nullptr;
+		QString pKey;
+		QVariant pValue;
 };
 
 } // namespace ARB

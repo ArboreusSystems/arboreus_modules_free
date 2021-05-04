@@ -27,9 +27,16 @@ using namespace ARB;
 	Doc.
 */
 
-ASettingsAgent::ASettingsAgent(QString* inDbName, QObject* parent) : QObject(parent) {
+ASettingsAgent::ASettingsAgent(
+	ASettingsService* inService, QString inKey,
+	QVariant inValue, QObject* parent
+) : QObject(parent) {
 
+	pKey = inKey;
+	pValue = inValue;
+	pService = inService;
 
+	_A_DEBUG << "ASettingsAgent created for:" << inKey;
 }
 
 
@@ -42,6 +49,7 @@ ASettingsAgent::ASettingsAgent(QString* inDbName, QObject* parent) : QObject(par
 
 ASettingsAgent::ASettingsAgent(QObject *parent) : QObject(parent) {
 
+	_A_DEBUG << "ASettingsAgent created";
 }
 
 
@@ -54,6 +62,7 @@ ASettingsAgent::ASettingsAgent(QObject *parent) : QObject(parent) {
 
 ASettingsAgent::~ASettingsAgent(void) {
 
+	_A_DEBUG << "ASettingsAgent deleted";
 }
 
 
@@ -64,7 +73,17 @@ ASettingsAgent::~ASettingsAgent(void) {
 	Doc.
 */
 
-void ASettingsAgent::slGet(QString inSettingsID) {
+void ASettingsAgent::slGet(void) {
+
+	ADBSqlCipherReply oDbReply = pService->pDB->mStringExecute(
+		"SELECT value FROM settings WHERE key='" + pKey + "';"
+	);
+	if (oDbReply.Status) {
+		if (oDbReply.Output.length() != 0) {
+			pReply.Status = true;
+			pReply.Data = qvariant_cast<QVariantList>(oDbReply.Output[0])[0];
+		}
+	}
 
 	emit sgFinished();
 }

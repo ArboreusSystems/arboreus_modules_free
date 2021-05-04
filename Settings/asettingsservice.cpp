@@ -53,6 +53,19 @@ ASettingsService::~ASettingsService(void) {
 	Doc.
 */
 
+QString ASettingsService::mGetDBName(void) {
+
+	return pDB->mGetDBName();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void ASettingsService::slInit(QString inPathSettingsData) {
 
 	ADBSqlCipherProperties oDBproperties;
@@ -77,3 +90,33 @@ void ASettingsService::slInit(QString inPathSettingsData) {
 	emit sgInitiated();
 }
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ASettingsService::slUpdate(QString inKey, QVariant inValue) {
+
+	_A_DEBUG << "inSettingsID:" << inKey;
+	_A_DEBUG << "inValue:" << inValue;
+
+	QSqlQuery oQuery(pDB->mGetDB());
+	if (!oQuery.prepare(
+		"INSERT OR REPLACE INTO settings (key,value)"
+		"VALUES (:key,:value);"
+	)) {
+		_A_CRITICAL << "Preraring query for writing in settings failed";
+	}
+	oQuery.bindValue(":key",inKey);
+	oQuery.bindValue(":value",inValue);
+
+	ADBSqlCipherReply oReply = pDB->mQueryTransaction(oQuery);
+	if (!oReply.Status) {
+		_A_CRITICAL << "Writing query in settings failed";
+	} else {
+		emit sgUpdated(inKey,inValue);
+	}
+}
