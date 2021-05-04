@@ -45,3 +45,11 @@ exists($$A_PRI_MODULES_FREE_SETTINGS) {
 } else {
 	error(No Free Module Settings config file $$A_PRI_MODULES_FREE_SETTINGS)
 }
+
+A_DIR_MODULES_FREE_NETWORK = $$PWD/Network
+A_PRI_MODULES_FREE_NETWORK = $$A_DIR_MODULES_FREE_NETWORK/Network.pri
+exists($$A_PRI_MODULES_FREE_NETWORK) {
+	include($$A_PRI_MODULES_FREE_NETWORK)
+} else {
+	error(No Free Module Settings config file $$A_PRI_MODULES_FREE_NETWORK)
+}
