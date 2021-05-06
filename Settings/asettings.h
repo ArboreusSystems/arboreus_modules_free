@@ -28,7 +28,6 @@
 #include <asettingsagent.h>
 #include <athreadobjectcontrollertemplate.h>
 
-
 // Constants and definitions
 #define A_SETTING_VALUE_NO_KEY "NoKey"
 

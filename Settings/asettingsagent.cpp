@@ -47,7 +47,7 @@ ASettingsAgent::ASettingsAgent(
 	Doc.
 */
 
-ASettingsAgent::ASettingsAgent(QObject *parent) : QObject(parent) {
+ASettingsAgent::ASettingsAgent(QObject* parent) : QObject(parent) {
 
 	_A_DEBUG << "ASettingsAgent created";
 }

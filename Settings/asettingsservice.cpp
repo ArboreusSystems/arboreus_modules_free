@@ -100,9 +100,6 @@ void ASettingsService::slInit(QString inPathSettingsData) {
 
 void ASettingsService::slUpdate(QString inKey, QVariant inValue) {
 
-	_A_DEBUG << "inSettingsID:" << inKey;
-	_A_DEBUG << "inValue:" << inValue;
-
 	QSqlQuery oQuery(pDB->mGetDB());
 	if (!oQuery.prepare(
 		"INSERT OR REPLACE INTO settings (key,value)"
