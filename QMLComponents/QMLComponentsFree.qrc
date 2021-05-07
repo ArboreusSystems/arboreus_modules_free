@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/ModulesFree/QMLComponents">
+        <file>Text/AText.qml</file>
+        <file>Controls/ASlider.qml</file>
+    </qresource>
+</RCC>

@@ -53,3 +53,11 @@ exists($$A_PRI_MODULES_FREE_NETWORK) {
 } else {
 	error(No Free Module Settings config file $$A_PRI_MODULES_FREE_NETWORK)
 }
+
+A_DIR_MODULES_FREE_QML_COMPONENTS = $$PWD/QMLComponents
+A_PRI_MODULES_FREE_QML_COMPONENTS = $$A_DIR_MODULES_FREE_QML_COMPONENTS/QMLComponentsFree.pri
+exists($$A_PRI_MODULES_FREE_QML_COMPONENTS) {
+	include($$A_PRI_MODULES_FREE_QML_COMPONENTS)
+} else {
+	error(No Free Module QML Components config file $$A_PRI_MODULES_FREE_QML_COMPONENTS)
+}

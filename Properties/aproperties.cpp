@@ -60,6 +60,7 @@ void AProperties::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 	this->mInitPaths();
+	this->mInitIsDesktop();
 
 	_A_DEBUG << "AProperties initiated";
 
@@ -98,6 +99,26 @@ void AProperties::mInitPaths(void) {
 		_A_DEBUG << "Ensured Cache Data path:" << pPathDataCache;
 	} else {
 		_A_CRITICAL << "No Cache Data path:" << pPathDataCache;
+	}
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AProperties::mInitIsDesktop(void) {
+
+	if (
+		qGuiApp->platformName() == QString("android") ||
+		qGuiApp->platformName() == QString("ios")
+	) {
+		pIsDesktop = false;
+	} else {
+		pIsDesktop = true;
 	}
 }
 
@@ -219,4 +240,15 @@ QString AProperties::mGetPathDataCache(void) {
 }
 
 
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+bool AProperties::mIsDesktop(void) {
+
+	return pIsDesktop;
+}
 

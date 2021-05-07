@@ -56,6 +56,10 @@ class AProperties : public QObject {
 		QString mGetPathDataConfig(void);
 		QString mGetPathDataCache(void);
 
+	public slots:
+
+		bool mIsDesktop(void);
+
 	signals:
 
 		void sgInitiated(void);
@@ -63,6 +67,7 @@ class AProperties : public QObject {
 	private:
 
 		ABackend* pBackend = nullptr;
+		bool pIsDesktop = false;
 
 		QString pNameOrganisation = "NoNameOrganisation";
 		QString pNameDomain = "NoNameDomain";
@@ -75,6 +80,7 @@ class AProperties : public QObject {
 		QString pPathLogs = "NoPathLogs";
 
 		void mInitPaths(void);
+		void mInitIsDesktop(void);
 };
 
 } // namespace ARB
