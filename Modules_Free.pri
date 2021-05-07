@@ -61,3 +61,12 @@ exists($$A_PRI_MODULES_FREE_QML_COMPONENTS) {
 } else {
 	error(No Free Module QML Components config file $$A_PRI_MODULES_FREE_QML_COMPONENTS)
 }
+
+A_DIR_MODULES_FREE_DEVICE = $$PWD/Device
+A_PRI_MODULES_FREE_DEVICE = $$A_DIR_MODULES_FREE_DEVICE/Device.pri
+exists($$A_PRI_MODULES_FREE_DEVICE) {
+	include($$A_PRI_MODULES_FREE_DEVICE)
+} else {
+	error(No Free Module Device config file $$A_PRI_MODULES_FREE_DEVICE)
+}
+
