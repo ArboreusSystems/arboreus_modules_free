@@ -61,6 +61,8 @@ void ADevice::mInit(void) {
 	pBackend = &ABackend::mInstance();
 
 	_A_DEBUG << "ADevice initiated";
+
+	emit sgInitiated();
 }
 
 
