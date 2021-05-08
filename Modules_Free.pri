@@ -70,3 +70,10 @@ exists($$A_PRI_MODULES_FREE_DEVICE) {
 	error(No Free Module Device config file $$A_PRI_MODULES_FREE_DEVICE)
 }
 
+A_DIR_MODULES_FREE_UIHANDLER = $$PWD/UIHandler
+A_PRI_MODULES_FREE_UIHANDLER = $$A_DIR_MODULES_FREE_UIHANDLER/UIHandler.pri
+exists($$A_PRI_MODULES_FREE_UIHANDLER) {
+	include($$A_PRI_MODULES_FREE_UIHANDLER)
+} else {
+	error(No Free Module UIHandler config file $$A_PRI_MODULES_FREE_UIHANDLER)
+}
