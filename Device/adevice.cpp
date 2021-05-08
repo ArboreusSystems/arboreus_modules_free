@@ -78,15 +78,15 @@ void ADevice::mInit(void) {
 
 ADeviceSafeAreaInsets ADevice::mGetSafeAreaInsets(void) {
 
-		ADeviceSafeAreaInsets oOutput;
+	ADeviceSafeAreaInsets oOutput;
 
-	#ifdef Q_OS_IOS
-		oOutput = ADeviceIOS::mGetSafeAreaInsets();
-	#elif defined(Q_OS_ANDROID)
-		oOutput = ADeviceAndroid::mGetSafeAreaInsets();
-	#endif
+#ifdef Q_OS_IOS
+	oOutput = ADeviceIOS::mGetSafeAreaInsets();
+#elif defined(Q_OS_ANDROID)
+	oOutput = ADeviceAndroid::mGetSafeAreaInsets();
+#endif
 
-		return oOutput;
+	return oOutput;
 }
 
 
