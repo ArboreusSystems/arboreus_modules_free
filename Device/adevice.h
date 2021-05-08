@@ -60,14 +60,23 @@ class ADevice : public QObject {
 		QVariantMap mSafeAreaInsets(void);
 		void mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle);
 		ADeviceEnums::StatusBarStyle mGetStatusBarStyle(void);
+		ADeviceEnums::Type mType(void);
 
 	signals:
 
 		void sgInitiated(void);
+		void sgOrientationChanged(Qt::ScreenOrientation inOrientation);
 
 	private:
 
 		ABackend* pBackend = nullptr;
+		ADeviceEnums::Type pType = ADeviceEnums::Type::Undefined;
+
+		void mInitType(void);
+
+	private slots:
+
+		void slOrientationChanged(Qt::ScreenOrientation inOrientation);
 };
 
 } // namespace ARB

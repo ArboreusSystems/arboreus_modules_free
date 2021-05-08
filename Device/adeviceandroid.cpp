@@ -66,7 +66,7 @@ ADeviceSafeAreaInsets ADeviceAndroid::mGetSafeAreaInsets(void) {
 
 void ADeviceAndroid::mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle) {
 
-	// TODO:
+	// TODO: Android ARBSTCL-201 Add StatusBarStyle handling to Android version
 }
 
 
@@ -79,7 +79,24 @@ void ADeviceAndroid::mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle) {
 
 ADeviceEnums::StatusBarStyle ADeviceAndroid::mGetStatusBarStyle(void) {
 
-	// TODO:
+	// TODO: Android ARBSTCL-201 Add StatusBarStyle handling to Android version
 
 	return ADeviceEnums::StatusBarStyle::Default;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADeviceEnums::Type ADeviceAndroid::mType(void) {
+
+	ADeviceEnums::Type oOutput = ADeviceEnums::Type::Undefined;
+
+	// TODO: Android ARBSTCL-202 Add device type detection to Android version
+
+	return oOutput;
 }

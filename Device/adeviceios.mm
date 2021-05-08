@@ -159,4 +159,30 @@ ADeviceEnums::StatusBarStyle ADeviceIOS::mGetStatusBarStyle(void) {
 	return oOutput;
 }
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADeviceEnums::Type ADeviceIOS::mType(void) {
+
+	ADeviceEnums::Type oOutput = ADeviceEnums::Type::Undefined;
+
+	switch ([[UIDevice currentDevice] userInterfaceIdiom]) {
+		case UIUserInterfaceIdiomPad:
+			oOutput = ADeviceEnums::Type::Tablet;
+			break;
+		case UIUserInterfaceIdiomPhone:
+			oOutput = ADeviceEnums::Type::Phone;
+			break;
+		default:
+			break;
+	}
+
+	return oOutput;
+}
+
 QT_END_NAMESPACE

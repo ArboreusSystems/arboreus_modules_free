@@ -60,8 +60,16 @@ void ADevice::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 
+	QObject::connect(
+		pBackend->pScreen,&QScreen::orientationChanged,
+		this,&ADevice::slOrientationChanged
+	);
+
+	this->mInitType();
+
 	qmlRegisterType<ADeviceEnums>(pBackend->pConfigGlobal->mGetModuleName(),1,0,"ADeviceEnums");
 	qRegisterMetaType<ADeviceEnums::StatusBarStyle>("ADeviceEnums::StatusBarStyle");
+	qRegisterMetaType<ADeviceEnums::Type>("ADeviceEnums::Type");
 
 	_A_DEBUG << "ADevice initiated";
 
@@ -142,6 +150,51 @@ ADeviceEnums::StatusBarStyle ADevice::mGetStatusBarStyle(void) {
 #endif
 
 	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADeviceEnums::Type ADevice::mType(void) {
+
+	return pType;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ADevice::mInitType(void) {
+
+#ifdef Q_OS_IOS
+	pType = ADeviceIOS::mType();
+#elif defined(Q_OS_ANDROID)
+	pType = ADeviceAndroid::mType();
+#else
+
+#endif
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ADevice::slOrientationChanged(Qt::ScreenOrientation inOrientation) {
+
+	emit sgOrientationChanged(inOrientation);
 }
 
 

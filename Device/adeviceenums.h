@@ -40,6 +40,15 @@ class ADeviceEnums : public QObject {
 			Dark
 		};
 		Q_ENUM(StatusBarStyle)
+
+		enum class Type {
+
+			Undefined,
+			Phone,
+			Tablet,
+			Desktop
+		};
+		Q_ENUM(Type)
 };
 
 } // namespace ARB
