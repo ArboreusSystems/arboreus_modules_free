@@ -32,6 +32,7 @@ using namespace ARB;
 
 AUIHandler::AUIHandler(QObject* parent) : QObject(parent) {
 
+	_A_DEBUG << "AUIHandler created";
 }
 
 
@@ -44,6 +45,7 @@ AUIHandler::AUIHandler(QObject* parent) : QObject(parent) {
 
 AUIHandler::~AUIHandler(void) {
 
+	_A_DEBUG << "AUIHandler deleted";
 }
 
 
@@ -60,6 +62,9 @@ void AUIHandler::mInit(void) {
 
 	pFonts = new AFonts(this);
 	pFonts->mInit();
+
+	pColors = new AColors(this);
+	pColors->mInit();
 
 	_A_DEBUG << "AUIHandler initiated";
 

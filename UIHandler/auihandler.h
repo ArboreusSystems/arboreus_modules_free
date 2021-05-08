@@ -21,6 +21,7 @@
 
 // Application includes
 #include <afonts.h>
+#include <acolors.h>
 
 // Constants and definitions
 
@@ -38,6 +39,7 @@ class AUIHandler : public QObject {
 	public:
 
 		AFonts* pFonts = nullptr;
+		AColors* pColors = nullptr;
 
 		explicit AUIHandler(QObject *parent = nullptr);
 		virtual ~AUIHandler(void);
