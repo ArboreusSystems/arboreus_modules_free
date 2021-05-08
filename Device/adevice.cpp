@@ -60,7 +60,7 @@ void ADevice::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 
-	qmlRegisterType<ADeviceEnums>("Arboreus",1,0,"ADeviceEnums");
+	qmlRegisterType<ADeviceEnums>(pBackend->pConfigGlobal->mGetModuleName(),1,0,"ADeviceEnums");
 	qRegisterMetaType<ADeviceEnums::StatusBarStyle>("ADeviceEnums::StatusBarStyle");
 
 	_A_DEBUG << "ADevice initiated";
