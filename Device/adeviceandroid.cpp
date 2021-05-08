@@ -55,3 +55,31 @@ ADeviceSafeAreaInsets ADeviceAndroid::mGetSafeAreaInsets(void) {
 
 	return oOutput;
 }
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ADeviceAndroid::mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle) {
+
+	// TODO:
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADeviceEnums::StatusBarStyle ADeviceAndroid::mGetStatusBarStyle(void) {
+
+	// TODO:
+
+	return ADeviceEnums::StatusBarStyle::Default;
+}

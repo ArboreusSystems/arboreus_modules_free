@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\headerfile ADeviceIOS
+	\headerfile ADeviceEnums
 	\title
 	\brief Template file wizard/classes/cpp/file.h
 
@@ -8,19 +8,18 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 07/05/2021 at 18:59:23
+	\li @created 08/05/2021 at 11:58:48
 	\endlist
 */
 // ----------------------------------------------------------
 
-#ifndef ADEVICEIOS_H
-#define ADEVICEIOS_H
+#ifndef ADEVICEENUMS_H
+#define ADEVICEENUMS_H
 
 // System includes
 #include <QObject>
 
 // Application includes
-#include <adevicedatamodels.h>
 
 // Constants and definitions
 
@@ -28,20 +27,21 @@
 namespace ARB {
 
 // Class definitions
-class ADeviceIOS : public QObject {
+class ADeviceEnums : public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		explicit ADeviceIOS(QObject* parent = nullptr);
-		virtual ~ADeviceIOS(void);
+		enum class StatusBarStyle: int {
 
-		static ADeviceSafeAreaInsets mGetSafeAreaInsets(void);
-		static void mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle);
-		static ADeviceEnums::StatusBarStyle mGetStatusBarStyle(void);
+			Default,
+			Light,
+			Dark
+		};
+		Q_ENUM(StatusBarStyle)
 };
 
 } // namespace ARB
 
-#endif // ADEVICEIOS_H
+#endif // ADEVICEENUMS_H

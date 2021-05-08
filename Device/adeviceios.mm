@@ -100,4 +100,63 @@ ADeviceSafeAreaInsets ADeviceIOS::mGetSafeAreaInsets(void) {
 	return oOutput;
 }
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ADeviceIOS::mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle) {
+
+	switch (inStyle) {
+		case ADeviceEnums::StatusBarStyle::Dark:
+			if (@available(iOS 13, *)) {
+				[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDarkContent;
+			} else {
+				[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+			}
+			break;
+		case ADeviceEnums::StatusBarStyle::Light:
+			[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+			break;
+		default:
+			[UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+			break;
+	}
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADeviceEnums::StatusBarStyle ADeviceIOS::mGetStatusBarStyle(void) {
+
+	ADeviceEnums::StatusBarStyle oOutput = ADeviceEnums::StatusBarStyle::Default;
+
+	UIWindow* oWindow = nullptr;
+	NSArray* oWindows = [[UIApplication sharedApplication] windows];
+	for (UIWindow* iWindow in oWindows) {
+		if (iWindow.isKeyWindow) {
+			oWindow = iWindow;
+			break;
+		}
+	}
+
+	switch (oWindow.windowScene.statusBarManager.statusBarStyle) {
+		case UIStatusBarStyleDarkContent:
+			oOutput = ADeviceEnums::StatusBarStyle::Dark; break;
+		case UIStatusBarStyleLightContent:
+			oOutput = ADeviceEnums::StatusBarStyle::Light; break;
+		default: break;
+	}
+
+	return oOutput;
+}
+
 QT_END_NAMESPACE

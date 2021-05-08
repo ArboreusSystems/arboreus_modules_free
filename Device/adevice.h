@@ -58,6 +58,8 @@ class ADevice : public QObject {
 	public slots:
 
 		QVariantMap mSafeAreaInsets(void);
+		void mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle);
+		ADeviceEnums::StatusBarStyle mGetStatusBarStyle(void);
 
 	signals:
 

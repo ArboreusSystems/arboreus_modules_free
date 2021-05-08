@@ -60,6 +60,9 @@ void ADevice::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 
+	qmlRegisterType<ADeviceEnums>("Arboreus",1,0,"ADeviceEnums");
+	qRegisterMetaType<ADeviceEnums::StatusBarStyle>("ADeviceEnums::StatusBarStyle");
+
 	_A_DEBUG << "ADevice initiated";
 
 	emit sgInitiated();
@@ -97,6 +100,48 @@ ADeviceSafeAreaInsets ADevice::mGetSafeAreaInsets(void) {
 QVariantMap ADevice::mSafeAreaInsets(void) {
 
 	return this->mGetSafeAreaInsets().mToVariantMap();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ADevice::mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle) {
+
+#ifdef Q_OS_IOS
+	ADeviceIOS::mSetStatusBarStyle(inStyle);
+#elif defined(Q_OS_ANDROID)
+	ADeviceAndroid::mSetStatusBarStyle(inStyle);
+#else
+	Q_UNUSED(inStyle);
+#endif
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADeviceEnums::StatusBarStyle ADevice::mGetStatusBarStyle(void) {
+
+	ADeviceEnums::StatusBarStyle oOutput = ADeviceEnums::StatusBarStyle::Default;
+
+#ifdef Q_OS_IOS
+	oOutput = ADeviceIOS::mGetStatusBarStyle();
+#elif defined(Q_OS_ANDROID)
+	oOutput = ADeviceAndroid::mGetStatusBarStyle();
+#else
+
+#endif
+
+	return oOutput;
 }
 
 

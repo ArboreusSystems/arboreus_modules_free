@@ -3,6 +3,7 @@ INCLUDEPATH += $$PWD
 HEADERS += \
 	$$PWD/adevice.h \
 	$$PWD/adevicedatamodels.h \
+	$$PWD/adeviceenums.h
 
 SOURCES += \
 	$$PWD/adevice.cpp

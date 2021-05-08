@@ -16,9 +16,11 @@
 #define ADEVICEDATAMODELS_H
 
 // System includes
+#include <QObject>
 #include <QVariantMap>
 
 // Application includes
+#include <adeviceenums.h>
 
 // Constants and defintions
 

@@ -38,6 +38,8 @@ class ADeviceAndroid : public QObject {
 		virtual ~ADeviceAndroid(void);
 
 		static ADeviceSafeAreaInsets mGetSafeAreaInsets(void);
+		static void mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle);
+		static ADeviceEnums::StatusBarStyle mGetStatusBarStyle(void);
 };
 
 } // namespace ARB
