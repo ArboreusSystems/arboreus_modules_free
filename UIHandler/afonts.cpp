@@ -81,7 +81,38 @@ QString AFonts::mFontFamily(void) {
 	Doc.
 */
 
+void AFonts::mSetFont(QString inFontFamily) {
+
+	Q_UNUSED(inFontFamily);
+
+	emit sgFontChanged();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void AFonts::mInitFonts(void) {
+
+	this->mSetFontFiraSansCondensed();
+	pFontFamily = QFontDatabase::applicationFontFamilies(0).first();
+
+	_A_DEBUG << "Font family:" << pFontFamily;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AFonts::mSetFontFiraSansCondensed(void) {
 
 	QFontDatabase::removeAllApplicationFonts();
 	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Black.ttf");
@@ -102,9 +133,5 @@ void AFonts::mInitFonts(void) {
 	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-SemiBoldItalic.ttf");
 	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Thin.ttf");
 	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-ThinItalic.ttf");
-
-	pFontFamily = QFontDatabase::applicationFontFamilies(0).first();
-
-	_A_DEBUG << "Font family:" << pFontFamily;
 }
 

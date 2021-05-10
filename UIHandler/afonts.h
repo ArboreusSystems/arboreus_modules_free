@@ -44,6 +44,10 @@ class AFonts : public QObject {
 
 		QString mFontFamily(void);
 
+	signals:
+
+		void sgFontChanged(void);
+
 	private:
 
 		QString pFontFamily = QString("NoFonFamily");

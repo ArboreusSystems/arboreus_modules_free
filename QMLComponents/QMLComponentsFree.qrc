@@ -2,5 +2,7 @@
     <qresource prefix="/ModulesFree/QMLComponents">
         <file>Text/AText.qml</file>
         <file>Controls/ASlider.qml</file>
+        <file>Inputs/AInputText.qml</file>
+        <file>Templates/ATextTemplate.qml</file>
     </qresource>
 </RCC>
