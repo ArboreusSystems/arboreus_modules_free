@@ -3,7 +3,8 @@ INCLUDEPATH += $$PWD
 HEADERS += \
 	$$PWD/acolors.h \
 	$$PWD/afonts.h \
-	$$PWD/auihandler.h
+	$$PWD/auihandler.h \
+	$$PWD/auihandlerdefinitions.h
 
 SOURCES += \
 	$$PWD/acolors.cpp \

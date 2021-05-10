@@ -173,6 +173,21 @@ ADeviceEnums::Type ADevice::mType(void) {
 	Doc.
 */
 
+bool ADevice::mIsLandscape(void) {
+
+	return pBackend->pScreen->isLandscape(
+		pBackend->pScreen->orientation()
+	);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void ADevice::mInitType(void) {
 
 #ifdef Q_OS_IOS

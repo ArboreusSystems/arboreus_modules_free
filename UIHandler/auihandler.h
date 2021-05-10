@@ -20,6 +20,7 @@
 #include <QObject>
 
 // Application includes
+#include <auihandlerdefinitions.h>
 #include <afonts.h>
 #include <acolors.h>
 
@@ -47,6 +48,10 @@ class AUIHandler : public QObject {
 
 		void mInit(void);
 
+	public slots:
+
+		QString mComponentContent(QString inName);
+
 	signals:
 
 		void sgInitiated(void);
@@ -54,6 +59,8 @@ class AUIHandler : public QObject {
 	private:
 
 		ABackend* pBackend = nullptr;
+
+		QString mComponentString(QString inImport,QString inName);
 };
 
 } // namespace ARB

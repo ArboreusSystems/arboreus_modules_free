@@ -61,6 +61,7 @@ class ADevice : public QObject {
 		void mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle);
 		ADeviceEnums::StatusBarStyle mGetStatusBarStyle(void);
 		ADeviceEnums::Type mType(void);
+		bool mIsLandscape(void);
 
 	signals:
 

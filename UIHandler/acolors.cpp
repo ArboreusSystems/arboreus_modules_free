@@ -79,23 +79,9 @@ QString AColors::mTransparent(void) {
 	Doc.
 */
 
-QString AColors::mWhiteDark(void) {
-
-	return pWhiteDark.name();
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QString AColors::mWhite(void) {
-
-	return pWhite.name();
-}
+QString AColors::mBlackLight(void) {return pBlackLight.name();}
+QString AColors::mBlack(void) {return pBlack.name();}
+QString AColors::mBlackDark(void) {return pBlackDark.name();}
 
 
 // -----------
@@ -105,7 +91,6 @@ QString AColors::mWhite(void) {
 	Doc.
 */
 
-QString AColors::mWhiteLight(void) {
-
-	return pWhiteLight.name();
-}
+QString AColors::mWhiteDark(void) {return pWhiteDark.name();}
+QString AColors::mWhite(void) {return pWhite.name();}
+QString AColors::mWhiteLight(void) {return pWhiteLight.name();}

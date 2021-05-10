@@ -71,3 +71,31 @@ void AUIHandler::mInit(void) {
 	emit sgInitiated();
 }
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AUIHandler::mComponentContent(QString inName) {
+
+	QString oImport = A_UI_IMPORT_CONTENT;
+	return this->mComponentString(oImport,inName);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AUIHandler::mComponentString(QString inImport, QString inName) {
+
+	QString oOutput = QString(A_UI_IMPORT_QT_QUICK) + inImport + inName + " {}";
+	return oOutput;
+}
+
