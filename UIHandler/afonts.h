@@ -43,6 +43,7 @@ class AFonts : public QObject {
 	public slots:
 
 		QString mFontFamily(void);
+		void mSetFont(QString inFontFamily);
 
 	signals:
 
@@ -53,6 +54,7 @@ class AFonts : public QObject {
 		QString pFontFamily = QString("NoFonFamily");
 
 		void mInitFonts(void);
+		void mSetFontFiraSansCondensed(void);
 };
 
 } // namespace ARB
