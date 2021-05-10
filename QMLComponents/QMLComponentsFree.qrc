@@ -4,5 +4,6 @@
         <file>Controls/ASlider.qml</file>
         <file>Inputs/AInputText.qml</file>
         <file>Templates/ATextTemplate.qml</file>
+        <file>Templates/ATextInputTemplate.qml</file>
     </qresource>
 </RCC>
