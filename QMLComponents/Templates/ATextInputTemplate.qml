@@ -19,7 +19,17 @@ import QtQuick 2.15
 
 
 // Component
-Item {
+TextInput {
 
 	id: oRoot;
+	font.family: AFonts.mFontFamily();
+
+	Connections {
+
+		target: AFonts;
+		function onSgFontChanged() {
+
+			oRoot.font.family = AFonts.mFontFamily();
+		}
+	}
 }
