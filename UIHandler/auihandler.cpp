@@ -64,7 +64,7 @@ void AUIHandler::mInit(void) {
 	pConfig->mInit(qobject_cast<AUIHandlerConfig*>(pBackend->pApplicationConfig));
 
 	pFonts = new AFonts(this);
-	pFonts->mInit();
+	pFonts->mInit(pConfig->mFonts());
 
 	pColors = new AColors(this);
 	pColors->mInit(pConfig->mColors());

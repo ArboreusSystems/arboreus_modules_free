@@ -20,6 +20,7 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
+#include <QList>
 
 // Application includes
 #include <auihandlerconfig.h>
@@ -57,7 +58,8 @@ class AUIConfig : public QObject {
 		int mRadius(void);
 		int mElementHeight(void);
 
-		QMap<QString,QString> mColors(void)	;
+		QMap<QString,QString> mColors(void);
+		QList<QString> mFonts(void);
 
 	private:
 

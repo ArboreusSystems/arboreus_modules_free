@@ -53,9 +53,9 @@ AFonts::~AFonts(void) {
 	Doc.
 */
 
-void AFonts::mInit(void) {
+void AFonts::mInit(QList<QString> inFontList) {
 
-	this->mInitFonts();
+	this->mSetFontList(inFontList);
 
 	_A_DEBUG << "AFonts initiated";
 }
@@ -96,42 +96,15 @@ void AFonts::mSetFont(QString inFontFamily) {
 	Doc.
 */
 
-void AFonts::mInitFonts(void) {
+void AFonts::mSetFontList(QList<QString> inFontList) {
 
-	this->mSetFontFiraSansCondensed();
+	QFontDatabase::removeAllApplicationFonts();
+	for (int i = 0; i < inFontList.size(); ++i) {
+		QFontDatabase::addApplicationFont(inFontList[i]);
+	}
+
 	pFontFamily = QFontDatabase::applicationFontFamilies(0).first();
 
 	_A_DEBUG << "Font family:" << pFontFamily;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-void AFonts::mSetFontFiraSansCondensed(void) {
-
-	QFontDatabase::removeAllApplicationFonts();
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Black.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-BlackItalic.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Bold.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-BoldItalic.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-ExtraBold.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-ExtraBoldItalic.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-ExtraLight.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-ExtraLightItalic.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Italic.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Light.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-LightItalic.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Medium.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-MediumItalic.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Regular.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-SemiBold.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-SemiBoldItalic.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-Thin.ttf");
-	QFontDatabase::addApplicationFont(":/Resources/Fonts/FiraSansCondensed/FiraSansCondensed-ThinItalic.ttf");
 }
 

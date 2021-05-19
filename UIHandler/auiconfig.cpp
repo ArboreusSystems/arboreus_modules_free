@@ -202,3 +202,16 @@ QMap<QString, QString> AUIConfig::mColors(void) {
 
 	return pConfig->AUIHandlerConfig_Colors();
 }
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QList<QString> AUIConfig::mFonts(void) {
+
+	return pConfig->AUIHandlerConfig_Fonts();
+}

@@ -19,6 +19,7 @@
 // System includes
 #include <QObject>
 #include <QFontDatabase>
+#include <QList>
 
 // Application includes
 #include <aloggerglobal.h>
@@ -38,7 +39,7 @@ class AFonts : public QObject {
 		explicit AFonts(QObject* parent = nullptr);
 		virtual ~AFonts(void);
 
-		void mInit(void);
+		void mInit(QList<QString> inFontList);
 
 	public slots:
 
@@ -53,8 +54,7 @@ class AFonts : public QObject {
 
 		QString pFontFamily = QString("NoFonFamily");
 
-		void mInitFonts(void);
-		void mSetFontFiraSansCondensed(void);
+		void mSetFontList(QList<QString> inFontList);
 };
 
 } // namespace ARB

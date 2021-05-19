@@ -19,6 +19,7 @@
 #include <QObject>
 #include <QMap>
 #include <QString>
+#include <QList>
 
 // Application includes
 
@@ -46,6 +47,7 @@ class AUIHandlerConfig {
 		virtual int AUIHandlerConfig_ElementHeight(void) = 0;
 
 		virtual QMap<QString,QString> AUIHandlerConfig_Colors(void) = 0;
+		virtual QList<QString> AUIHandlerConfig_Fonts(void) = 0;
 };
 
 } // namespace ARB
