@@ -189,3 +189,16 @@ int AUIConfig::mElementHeight(void) {
 
 	return pConfig->AUIHandlerConfig_ElementHeight();
 }
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QMap<QString, QString> AUIConfig::mColors(void) {
+
+	return pConfig->AUIHandlerConfig_Colors();
+}

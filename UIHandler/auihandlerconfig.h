@@ -17,6 +17,8 @@
 
 // System includes
 #include <QObject>
+#include <QMap>
+#include <QString>
 
 // Application includes
 
@@ -42,6 +44,8 @@ class AUIHandlerConfig {
 		virtual int AUIHandlerConfig_Radius(void) = 0;
 
 		virtual int AUIHandlerConfig_ElementHeight(void) = 0;
+
+		virtual QMap<QString,QString> AUIHandlerConfig_Colors(void) = 0;
 };
 
 } // namespace ARB

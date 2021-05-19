@@ -20,6 +20,8 @@
 #include <QObject>
 #include <QColor>
 #include <QString>
+#include <QColor>
+#include <QMap>
 
 // Application includes
 #include <aloggerglobal.h>
@@ -38,31 +40,28 @@ class AColors : public QObject {
 
 		QColor pTransparent = QColor(Qt::transparent).rgba();
 
-		QColor pBlackLight = QColor::fromRgb(10,10,10);
-		QColor pBlack = QColor::fromRgb(5,5,5);
-		QColor pBlackDark = QColor::fromRgb(0,0,0);
-
-		QColor pWhiteDark = QColor::fromRgb(239,239,239);
-		QColor pWhite = QColor::fromRgb(249,249,249);
-		QColor pWhiteLight = QColor::fromRgb(255,255,255);
-
 		explicit AColors(QObject* parent = nullptr);
 		virtual ~AColors(void);
 		Q_DISABLE_COPY(AColors)
 
-		void mInit(void);
+		void mInit(QMap<QString,QString> inColorStrings);
+		void mInitColors(QMap<QString,QString> inColorStrings);
+		QColor mGetColor(QString inKey);
 
 	public slots:
 
+		QString mGetString(QString inKey);
 		QString mTransparent(void);
 
-		QString mBlackLight(void);
-		QString mBlack(void);
-		QString mBlackDark(void);
+	signals:
 
-		QString mWhiteDark(void);
-		QString mWhite(void);
-		QString mWhiteLight(void);
+		void sgColorsInitiated(void);
+
+	private:
+
+		QMap<QString,QString> pColorStrings = {};
+		QMap<QString,QColor> pColors = {};
+		QString pDefaultColor = "magenta";
 };
 
 } // namespace ARB

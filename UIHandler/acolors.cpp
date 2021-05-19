@@ -19,6 +19,7 @@
 // Namespace
 using namespace ARB;
 
+
 // -----------
 /*!
 	\fn
@@ -52,9 +53,62 @@ AColors::~AColors(void) {
 	Doc.
 */
 
-void AColors::mInit(void) {
+void AColors::mInit(QMap<QString,QString> inColorStrings) {
+
+	this->mInitColors(inColorStrings);
 
 	_A_DEBUG << "AColors initiated";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AColors::mInitColors(QMap<QString, QString> inColorStrings) {
+
+	pColorStrings = inColorStrings;
+
+	QMapIterator<QString,QString> iColorStrings(pColorStrings);
+	while (iColorStrings.hasNext()) {
+		iColorStrings.next();
+		pColors.insert(iColorStrings.key(),QColor(iColorStrings.value()));
+	}
+
+	emit sgColorsInitiated();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QColor AColors::mGetColor(QString inKey) {
+
+	QColor oOutput(pDefaultColor);
+	if (pColors.contains(inKey)) oOutput = pColors.value(inKey);
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AColors::mGetString(QString inKey) {
+
+	QString oOutput = pDefaultColor;
+	if (pColorStrings.contains(inKey)) oOutput = pColorStrings.value(inKey);
+	return oOutput;
 }
 
 
@@ -70,27 +124,3 @@ QString AColors::mTransparent(void) {
 	QString oColor("transparent");
 	return oColor;
 }
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QString AColors::mBlackLight(void) {return pBlackLight.name();}
-QString AColors::mBlack(void) {return pBlack.name();}
-QString AColors::mBlackDark(void) {return pBlackDark.name();}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QString AColors::mWhiteDark(void) {return pWhiteDark.name();}
-QString AColors::mWhite(void) {return pWhite.name();}
-QString AColors::mWhiteLight(void) {return pWhiteLight.name();}

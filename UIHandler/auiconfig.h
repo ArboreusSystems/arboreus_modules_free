@@ -18,6 +18,8 @@
 
 // System includes
 #include <QObject>
+#include <QMap>
+#include <QString>
 
 // Application includes
 #include <auihandlerconfig.h>
@@ -54,6 +56,8 @@ class AUIConfig : public QObject {
 		int mBorderSize(void);
 		int mRadius(void);
 		int mElementHeight(void);
+
+		QMap<QString,QString> mColors(void)	;
 
 	private:
 
