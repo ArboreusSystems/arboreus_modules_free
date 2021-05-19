@@ -59,6 +59,8 @@ AProperties::~AProperties(void) {
 void AProperties::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
+	pConfig = qobject_cast<APropertiesConfig*>(pBackend->pApplicationConfig);
+
 	this->mInitPaths();
 	this->mInitIsDesktop();
 
@@ -78,7 +80,7 @@ void AProperties::mInit(void) {
 void AProperties::mInitPaths(void) {
 
 	pPathDataApplication = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
-		"/" + pNameOrganisation + "/" + pNameApplication;
+		"/" + this->mNameOrganisation() + "/" + this->mNameApplication();
 	if (ADir::mEnsure(pPathDataApplication)) {
 		_A_DEBUG << "Ensured Application Data path:" << pPathDataApplication;
 	} else {
@@ -86,7 +88,7 @@ void AProperties::mInitPaths(void) {
 	}
 
 	pPathDataConfig = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
-		"/" + pNameOrganisation + "/" + pNameApplication;
+		"/" + this->mNameOrganisation() + "/" + this->mNameApplication();
 	if (ADir::mEnsure(pPathDataConfig)) {
 		_A_DEBUG << "Ensured Config Data path:" << pPathDataConfig;
 	} else {
@@ -94,7 +96,7 @@ void AProperties::mInitPaths(void) {
 	}
 
 	pPathDataCache = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) +
-		"/" + pNameOrganisation + "/" + pNameApplication;
+		"/" + this->mNameOrganisation() + "/" + this->mNameApplication();
 	if (ADir::mEnsure(pPathDataCache)) {
 		_A_DEBUG << "Ensured Cache Data path:" << pPathDataCache;
 	} else {
@@ -130,9 +132,9 @@ void AProperties::mInitIsDesktop(void) {
 	Doc.
 */
 
-void AProperties::mSetNameOrganisation(QString inName) {
+QString AProperties::mNameOrganisation(void) {
 
-	pNameOrganisation = inName;
+	return pConfig->APropertiesConfig_NameOrganisation();
 }
 
 
@@ -143,9 +145,9 @@ void AProperties::mSetNameOrganisation(QString inName) {
 	Doc.
 */
 
-QString AProperties::mGetNameOrganisation(void) {
+QString AProperties::mNameDomain(void) {
 
-	return pNameOrganisation;
+	return pConfig->APropertiesConfig_NameDomain();
 }
 
 
@@ -156,48 +158,9 @@ QString AProperties::mGetNameOrganisation(void) {
 	Doc.
 */
 
-void AProperties::mSetNameDomain(QString inName) {
+QString AProperties::mNameApplication() {
 
-	pNameDomain = inName;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QString AProperties::mGetNameDomain(void) {
-
-	return pNameDomain;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-void AProperties::mSetNameApplication(QString inName) {
-
-	pNameApplication = inName;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QString AProperties::mGetNameApplication() {
-
-	return pNameApplication;
+	return pConfig->APropertiesConfig_NameApplication();
 }
 
 

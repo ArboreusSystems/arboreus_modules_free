@@ -46,7 +46,7 @@ class AColors : public QObject {
 		QColor pWhite = QColor::fromRgb(249,249,249);
 		QColor pWhiteLight = QColor::fromRgb(255,255,255);
 
-		explicit AColors(QObject *parent = nullptr);
+		explicit AColors(QObject* parent = nullptr);
 		virtual ~AColors(void);
 		Q_DISABLE_COPY(AColors)
 

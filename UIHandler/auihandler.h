@@ -20,6 +20,7 @@
 #include <QObject>
 
 // Application includes
+#include <auiconfig.h>
 #include <auihandlerdefinitions.h>
 #include <afonts.h>
 #include <acolors.h>
@@ -41,8 +42,9 @@ class AUIHandler : public QObject {
 
 		AFonts* pFonts = nullptr;
 		AColors* pColors = nullptr;
+		AUIConfig* pConfig = nullptr;
 
-		explicit AUIHandler(QObject *parent = nullptr);
+		explicit AUIHandler(QObject* parent = nullptr);
 		virtual ~AUIHandler(void);
 		Q_DISABLE_COPY(AUIHandler)
 

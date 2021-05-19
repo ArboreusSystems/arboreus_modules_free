@@ -22,6 +22,7 @@
 #include <QStandardPaths>
 
 // Application includes
+#include <apropertiesconfig.h>
 #include <adir.h>
 #include <aloggerglobal.h>
 
@@ -40,17 +41,14 @@ class AProperties : public QObject {
 
 	public:
 
-		explicit AProperties(QObject *parent = nullptr);
+		explicit AProperties(QObject* parent = nullptr);
 		virtual ~AProperties(void);
 
 		void mInit(void);
 
-		void mSetNameOrganisation(QString inName);
-		QString mGetNameOrganisation(void);
-		void mSetNameDomain(QString inName);
-		QString mGetNameDomain(void);
-		void mSetNameApplication(QString inName);
-		QString mGetNameApplication(void);
+		QString mNameOrganisation(void);
+		QString mNameDomain(void);
+		QString mNameApplication(void);
 
 		QString mGetPathDataApplication(void);
 		QString mGetPathDataConfig(void);
@@ -67,11 +65,8 @@ class AProperties : public QObject {
 	private:
 
 		ABackend* pBackend = nullptr;
+		APropertiesConfig* pConfig = nullptr;
 		bool pIsDesktop = false;
-
-		QString pNameOrganisation = "NoNameOrganisation";
-		QString pNameDomain = "NoNameDomain";
-		QString pNameApplication = "NoNameApplication";
 
 		QString pPathDataApplication = "NoPathDataApplication";
 		QString pPathDataConfig = "NoPathDataConfig";

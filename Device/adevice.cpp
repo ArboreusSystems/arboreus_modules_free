@@ -67,7 +67,7 @@ void ADevice::mInit(void) {
 
 	this->mInitType();
 
-	qmlRegisterType<ADeviceEnums>(pBackend->pConfigGlobal->mGetModuleName(),1,0,"ADeviceEnums");
+	qmlRegisterType<ADeviceEnums>(pBackend->mModuleName(),1,0,"ADeviceEnums");
 	qRegisterMetaType<ADeviceEnums::StatusBarStyle>("ADeviceEnums::StatusBarStyle");
 	qRegisterMetaType<ADeviceEnums::Type>("ADeviceEnums::Type");
 

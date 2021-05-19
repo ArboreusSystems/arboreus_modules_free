@@ -60,6 +60,9 @@ void AUIHandler::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 
+	pConfig = new AUIConfig(this);
+	pConfig->mInit(qobject_cast<AUIHandlerConfig*>(pBackend->pApplicationConfig));
+
 	pFonts = new AFonts(this);
 	pFonts->mInit();
 
