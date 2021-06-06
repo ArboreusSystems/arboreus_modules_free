@@ -41,7 +41,7 @@ class ANetwork : public AThreadTemplate<ANetworkService> {
 
 	public:
 
-		explicit ANetwork(QObject *parent = nullptr);
+		explicit ANetwork(QObject* parent = nullptr);
 		virtual ~ANetwork(void);
 
 		void mInit(void);
