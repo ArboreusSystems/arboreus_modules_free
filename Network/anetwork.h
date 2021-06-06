@@ -18,10 +18,13 @@
 
 // System includes
 #include <QObject>
+#include <QEventLoop>
 
 // Application includes
 #include <athreadtemplate.h>
 #include <anetworkservice.h>
+#include <anetworkagent.h>
+#include <anetworkdatamodels.h>
 
 // Constants and definitions
 
@@ -42,6 +45,8 @@ class ANetwork : public AThreadTemplate<ANetworkService> {
 		virtual ~ANetwork(void);
 
 		void mInit(void);
+		ANetworkReply mPOSTRequest(ANetworkRequestProperties inProperties);
+		ANetworkReply mGETRequest(ANetworkRequestProperties inProperties);
 
 	signals:
 

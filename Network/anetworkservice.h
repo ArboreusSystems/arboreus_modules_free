@@ -18,6 +18,7 @@
 
 // System includes
 #include <QObject>
+#include <QNetworkAccessManager>
 
 // Application includes
 #include <aloggerglobal.h>
@@ -36,8 +37,10 @@ class ANetworkService : public AThreadServiceTemplate {
 
 	public:
 
-		explicit ANetworkService(QObject *parent = nullptr);
+		explicit ANetworkService(QObject* parent = nullptr);
 		virtual ~ANetworkService(void);
+
+		QNetworkAccessManager* mGetNetworkManager(void);
 
 	public slots:
 
@@ -46,6 +49,10 @@ class ANetworkService : public AThreadServiceTemplate {
 	signals:
 
 		void sgInitiated(void);
+
+	private:
+
+		QNetworkAccessManager* pNetworkManager = nullptr;
 };
 
 } // namespace ARB

@@ -46,6 +46,17 @@ ANetworkService::~ANetworkService(void) {
 }
 
 
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QNetworkAccessManager* ANetworkService::mGetNetworkManager(void) {
+
+	return pNetworkManager;
+}
 
 
 // -----------
@@ -56,6 +67,10 @@ ANetworkService::~ANetworkService(void) {
 */
 
 void ANetworkService::slInit(void) {
+
+	pNetworkManager = new QNetworkAccessManager(this);
+
+	_A_DEBUG << "ANetworkService initiated";
 
 	emit sgInitiated();
 }

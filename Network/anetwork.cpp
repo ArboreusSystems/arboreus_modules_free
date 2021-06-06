@@ -81,6 +81,66 @@ void ANetwork::mInit(void) {
 	Doc.
 */
 
+ANetworkReply ANetwork::mPOSTRequest(ANetworkRequestProperties inProperties) {
+
+	AThreadObjectControllerTemplate oController;
+	QEventLoop oEventLoop;
+
+	ANetworkAgent oAgent(inProperties,this->mService()->mGetNetworkManager());
+	QObject::connect(
+		&oAgent,&ANetworkAgent::sgFinished,
+		&oEventLoop,&QEventLoop::quit
+	);
+	QObject::connect(
+		&oController,&AThreadObjectControllerTemplate::sgRun,
+		&oAgent,&ANetworkAgent::slPOST
+	);
+	oAgent.moveToThread(this);
+
+	emit oController.sgRun();
+	oEventLoop.exec();
+
+	return oAgent.pReply;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ANetworkReply ANetwork::mGETRequest(ANetworkRequestProperties inProperties) {
+
+	AThreadObjectControllerTemplate oController;
+	QEventLoop oEventLoop;
+
+	ANetworkAgent oAgent(inProperties,this->mService()->mGetNetworkManager());
+	QObject::connect(
+		&oAgent,&ANetworkAgent::sgFinished,
+		&oEventLoop,&QEventLoop::quit
+	);
+	QObject::connect(
+		&oController,&AThreadObjectControllerTemplate::sgRun,
+		&oAgent,&ANetworkAgent::slGET
+	);
+	oAgent.moveToThread(this);
+
+	emit oController.sgRun();
+	oEventLoop.exec();
+
+	return oAgent.pReply;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void ANetwork::slInitiated(void) {
 
 	_A_DEBUG << "ANetwork initiated";

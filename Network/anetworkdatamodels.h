@@ -16,6 +16,10 @@
 #define ANETWORKDATAMODELS_H
 
 // System includes
+#include <QString>
+#include <QMap>
+#include <QVariantMap>
+#include <QVariantList>
 
 // Application includes
 
@@ -23,6 +27,33 @@
 
 // Namespace
 namespace ARB {
+
+class ANetworkRequestProperties {
+
+	public:
+
+		QString URL = QString("NoDefinedURL");
+		QMap<QString,QString> Headers = {};
+		QByteArray Data = QByteArray();
+};
+
+class ANetworkReply {
+
+	public:
+
+		bool Status = false;
+		QVariantList Headers = {};
+		QByteArray Data = QByteArray();
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("Status",Status);
+			oOutput.insert("Data",Data);
+			oOutput.insert("Headers",Headers);
+			return oOutput;
+		}
+};
 
 }
 
