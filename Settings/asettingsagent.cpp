@@ -81,7 +81,8 @@ void ASettingsAgent::slGet(void) {
 	if (oDbReply.Status) {
 		if (oDbReply.Output.length() != 0) {
 			pReply.Status = true;
-			pReply.Data = qvariant_cast<QVariantList>(oDbReply.Output[0])[0];
+			QVariantList oReplyData = qvariant_cast<QVariantList>(oDbReply.Output[0]);
+			pReply.Data = oReplyData[0];
 		}
 	}
 

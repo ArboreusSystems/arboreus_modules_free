@@ -195,7 +195,7 @@ bool ASettings::mIsKey(QString inKey) {
 
 	QVariant oValue = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
 	if (oValue != QString(A_SETTING_VALUE_NO_KEY))  {
-		_A_DEBUG << "IsKey in cahce";
+		_A_DEBUG << "IsKey in cache";
 		return true;
 	}
 
