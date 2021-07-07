@@ -68,6 +68,19 @@ void AUIConfig::mInit(AUIHandlerConfig* inConfig) {
 	Doc.
 */
 
+QString AUIConfig::mQMLImport(void) {
+
+	return pConfig->AUIHandlerConfig_QMLImport();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 int AUIConfig::mUIWidth(void) {
 
 	return pConfig->AUIHandlerConfig_UIWidth();

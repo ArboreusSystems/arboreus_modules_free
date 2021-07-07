@@ -21,7 +21,7 @@
 
 // Constants and defintions
 #define A_UI_IMPORT_QT_QUICK "import QtQuick 2.15;"
-#define A_UI_IMPORT_CONTENT "import \"qrc:/ClentFree/Modules/QMLComponents/Content\";"
+//#define A_UI_IMPORT_CONTENT "import \"qrc:/ClentFree/Modules/QMLComponents/Content\";"
 
 // Namespace
 

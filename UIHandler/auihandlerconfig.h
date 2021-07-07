@@ -32,6 +32,8 @@ class AUIHandlerConfig {
 
 	public:
 
+		virtual QString AUIHandlerConfig_QMLImport(void) = 0;
+
 		virtual int AUIHandlerConfig_UIWidth(void) = 0;
 		virtual int AUIHandlerConfig_UIHeight(void) = 0;
 		virtual int AUIHandlerConfig_DesktopUIWidth(void) = 0;

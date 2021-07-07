@@ -45,6 +45,8 @@ class AUIConfig : public QObject {
 
 	public slots:
 
+		QString mQMLImport(void);
+
 		int mUIWidth(void);
 		int mUIHeight(void);
 		int mDesktopUIWidth(void);
