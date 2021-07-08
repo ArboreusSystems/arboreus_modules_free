@@ -3,7 +3,13 @@
         <file>Text/AText.qml</file>
         <file>Controls/ASlider.qml</file>
         <file>Inputs/AInputText.qml</file>
-        <file>Templates/ATextTemplate.qml</file>
-        <file>Templates/ATextInputTemplate.qml</file>
+		<file>Templates/Text/ATextTemplate.qml</file>
+		<file>Templates/Inputs/ATextInputTemplate.qml</file>
+		<file>Templates/Headers/AHeaderTemplate.qml</file>
+		<file>Templates/Headers/AHeaderRowTemplate.qml</file>
+		<file>Templates/Headers/AHeaderLeftBlockTemplate.qml</file>
+		<file>Templates/Headers/AHeaderRightBlockTemplate.qml</file>
+		<file>Templates/Headers/AHeaderButtonTemplate.qml</file>
+		<file>Templates/Headers/AHeaderLabelTemplate.qml</file>
     </qresource>
 </RCC>
