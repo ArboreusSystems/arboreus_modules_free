@@ -26,6 +26,8 @@ Rectangle {
 	property double pMargin: 0;
 
 	id: oRootHeaderTemplate;
+	width: parent.width;
+	height: 75;
 
 	Item {
 
