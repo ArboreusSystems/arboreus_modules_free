@@ -9,8 +9,8 @@
         <file>Templates/Headers/AHeaderRowTemplate.qml</file>
         <file>Templates/Headers/AHeaderLeftBlockTemplate.qml</file>
         <file>Templates/Headers/AHeaderRightBlockTemplate.qml</file>
-        <file>Templates/Headers/AHeaderButtonTemplate.qml</file>
         <file>Templates/Headers/AHeaderLabelTemplate.qml</file>
         <file>Templates/Buttons/AButtonTemplate.qml</file>
+        <file>Buttons/Header/AButtonHamburger.qml</file>
     </qresource>
 </RCC>

@@ -22,5 +22,12 @@ import QtQuick.Controls 2.15
 // Component
 Button {
 
+	property string pID: "No ID";
+
 	id: oRoot;
+
+	onClicked: {
+
+		console.info("Button",oRoot.pID,"clicked");
+	}
 }
