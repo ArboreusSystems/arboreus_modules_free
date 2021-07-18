@@ -17,3 +17,5 @@ lupdate_only {
 		$$PWD/Text/*.qml
 }
 
+DISTFILES +=
+
