@@ -7,7 +7,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 10/05/2021 at 11:26:14
+	\li @created 18/07/2021 at 17:45:46
 	\endlist
 */
 // ----------------------------------------------------------
@@ -19,16 +19,10 @@ import QtQuick 2.15
 
 
 // Component
-Text {
+Rectangle {
+
+	property double pMargin: 0;
 
 	id: oRoot;
-
-	Connections {
-
-		target: AFonts;
-		function onSgFontChanged() {
-
-			oRoot.font.family = AFonts.mFontFamily();
-		}
-	}
+	color: AColors.mTransparent();
 }
