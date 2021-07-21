@@ -2,9 +2,8 @@
     <qresource prefix="/ModulesFree/QMLComponents">
         <file>Text/AText.qml</file>
         <file>Controls/ASlider.qml</file>
-        <file>Inputs/AInputText.qml</file>
         <file>Templates/Text/ATextTemplate.qml</file>
-        <file>Templates/Inputs/ATextInputTemplate.qml</file>
+        <file>Templates/Inputs/AInputTextTemplate.qml</file>
         <file>Templates/Headers/AHeaderTemplate.qml</file>
         <file>Templates/Headers/AHeaderRowTemplate.qml</file>
         <file>Templates/Headers/AHeaderLeftBlockTemplate.qml</file>
