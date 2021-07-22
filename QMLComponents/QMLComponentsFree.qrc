@@ -14,5 +14,6 @@
         <file>Templates/Buttons/AButtonBackHeaderTemplate.qml</file>
         <file>Templates/Menu/AMenuItemTemplate.qml</file>
         <file>Templates/Menu/AMenuGroupTemplate.qml</file>
+        <file>Templates/Menu/AMenuButtonTemplate.qml</file>
     </qresource>
 </RCC>

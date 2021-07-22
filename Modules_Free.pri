@@ -77,3 +77,11 @@ exists($$A_PRI_MODULES_FREE_UIHANDLER) {
 } else {
 	error(No Free Module UIHandler config file $$A_PRI_MODULES_FREE_UIHANDLER)
 }
+
+A_DIR_MODULES_FREE_APPLICATION = $$PWD/Application
+A_PRI_MODULES_FREE_APPLICATION = $$A_DIR_MODULES_FREE_APPLICATION/Application.pri
+exists($$A_PRI_MODULES_FREE_APPLICATION) {
+	include($$A_PRI_MODULES_FREE_APPLICATION)
+} else {
+	error(No Free Module Application config file $$A_PRI_MODULES_FREE_APPLICATION)
+}
