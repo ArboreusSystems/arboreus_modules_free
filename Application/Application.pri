@@ -2,6 +2,7 @@ INCLUDEPATH += $$PWD
 
 HEADERS += \
 	$$PWD/aapplication.h \
+	$$PWD/aapplicationdatamodels.h \
 	$$PWD/aconstants.h \
 	$$PWD/aconstantsdefinition.h
 
