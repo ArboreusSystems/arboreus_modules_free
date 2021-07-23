@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\headerfile AApplication
+	\headerfile AConstants
 	\title
 	\brief Template file wizard/classes/cpp/file.h
 
@@ -8,56 +8,49 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 22/07/2021 at 17:15:29
+	\li @created 23/07/2021 at 18:25:26
 	\endlist
 */
 // ----------------------------------------------------------
 
-#ifndef AAPPLICATION_H
-#define AAPPLICATION_H
+#ifndef ACONSTANTS_H
+#define ACONSTANTS_H
 
 // System includes
 #include <QObject>
+#include <QString>
 
 // Application includes
-#include <aconstants.h>
+#include <aloggerglobal.h>
+#include <aconstantsdefinition.h>
 
 // Constants and definitions
 
 // Namespace
 namespace ARB {
 
-// Classes
-class ABackend;
-
 // Class definitions
-class AApplication : public QObject {
+class AConstants : public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		AConstants* pConstants = nullptr;
-
-		explicit AApplication(QObject* parent = nullptr);
-		virtual ~AApplication(void);
-		Q_DISABLE_COPY(AApplication)
-
-		void mInit(void);
+		explicit AConstants(QObject *parent = nullptr);
+		virtual ~AConstants(void);
 
 	public slots:
 
-		void mExit(void);
-
-	signals:
-
-		void sgInitiated(void);
+		QString mStringError(void);
+		QString mStringNormal(void);
+		QString mStringOnClicked(void);
+		QString mStringOnPressed(void);
 
 	private:
 
-		ABackend* pBackend = nullptr;
+		QString mString(const char* inValue);
 };
 
 } // namespace ARB
 
-#endif // AAPPLICATION_H
+#endif // ACONSTANTS_H

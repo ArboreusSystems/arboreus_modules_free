@@ -58,6 +58,7 @@ AApplication::~AApplication(void) {
 
 void AApplication::mInit(void) {
 
+	pConstants = new AConstants(this);
 	_A_DEBUG << "AApplication initiated";
 
 	emit sgInitiated();
