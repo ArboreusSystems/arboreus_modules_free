@@ -32,7 +32,7 @@ class AJsonFileReply {
 
 	public:
 
-		AEnums::Status Status = AEnums::Status::Error;
+		AEnumsStatus::Status Status = AEnumsStatus::Status::Error;
 		QJsonObject Json;
 };
 
@@ -40,7 +40,7 @@ class AJsonFieldReply {
 
 	public:
 
-		AEnums::Status Status = AEnums::Status::Error;
+		AEnumsStatus::Status Status = AEnumsStatus::Status::Error;
 		QVariant Value;
 };
 

@@ -21,6 +21,7 @@
 
 // Application includes
 #include <aconstants.h>
+#include <aapplicationdatamodels.h>
 
 // Constants and definitions
 

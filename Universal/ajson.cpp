@@ -68,7 +68,7 @@ AJsonFileReply AJson::mFromFile(QString inPath) {
 	}
 	oJSONFile.close();
 
-	oReply.Status = AEnums::Status::Ok;
+	oReply.Status = AEnumsStatus::Status::Ok;
 	oReply.Json = oJSONDocument.object();
 	return oReply;
 }
@@ -253,7 +253,7 @@ AJsonFileReply AJson::mDecodeFromFile(QString inValue,QString inPath) {
 //	}
 //	oJSONFile.close();
 
-	oReply.Status = AEnums::Status::Ok;
+	oReply.Status = AEnumsStatus::Status::Ok;
 //	oReply.Json = oJSONDocument.object();
 	return oReply;
 }
@@ -269,7 +269,7 @@ AJsonFileReply AJson::mDecodeFromFile(QString inValue,QString inPath) {
 bool AJson::mChangeValue(QString inOldValue,QString inNewValue,QString inPath) {
 
 	AJsonFileReply oJSONReply = AJson::mDecodeFromFile(inOldValue,inPath);
-	if (oJSONReply.Status != AEnums::Status::Ok) {
+	if (oJSONReply.Status != AEnumsStatus::Status::Ok) {
 		return false;
 	}
 	return AJson::mEncodeFromObject(inNewValue,inPath,oJSONReply.Json);
@@ -286,7 +286,7 @@ bool AJson::mChangeValue(QString inOldValue,QString inNewValue,QString inPath) {
 bool AJson::mRemoveValue(QString inValue,QString inPath) {
 
 	AJsonFileReply oJSONReply = AJson::mDecodeFromFile(inValue,inPath);
-	if (oJSONReply.Status != AEnums::Status::Ok) {
+	if (oJSONReply.Status != AEnumsStatus::Status::Ok) {
 		return false;
 	}
 	return AJson::mToFileFromObject(inPath,oJSONReply.Json);

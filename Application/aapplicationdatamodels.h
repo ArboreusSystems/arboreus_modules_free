@@ -25,7 +25,7 @@
 // Namespace
 namespace ARB {
 
-class AEnums: public QObject {
+class AEnumsStatus: public QObject {
 
 	Q_OBJECT
 
