@@ -32,7 +32,7 @@ class ADir : public QObject {
 
 	public:
 
-		explicit ADir(QObject *parent = nullptr);
+		explicit ADir(QObject* parent = nullptr);
 		virtual ~ADir(void);
 
 		static bool mEnsure(QString inPath);

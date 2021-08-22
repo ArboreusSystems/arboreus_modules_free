@@ -72,7 +72,7 @@ bool ADBSqlCipher::mStart(ADBSqlCipherProperties* inProperties) {
 		return true;
 	}
 
-	_A_CRITICAL << "Failed to open DB:" << pPath;
+	_A_CRITICAL << "Failed to open DB:" << pPath << "With error:" << oDB.lastError().text();
 	return false;
 }
 
@@ -92,7 +92,7 @@ void ADBSqlCipher::mRemove(void) {
 		if (!oDB.isOpen()) {
 			_A_DEBUG << "Closed DB:" << pPath;
 		} else {
-			_A_CRITICAL << "Failed to close DB:" << pPath;
+			_A_CRITICAL << "Failed to close DB:" << pPath << "With error:" << oDB.lastError().text();
 		}
 	}
 
@@ -142,11 +142,13 @@ ADBSqlCipherReply ADBSqlCipher::mStringExecute(QString inQueryString) {
 
 	QSqlQuery oQuery(oDB);
 	if (!oQuery.prepare(inQueryString)) {
-		_A_CRITICAL << "Query not prepared:" << inQueryString;
+		_A_CRITICAL << "Query not prepared:" << inQueryString \
+			<< "With error" << oDB.lastError().text();
 		return oReply;
 	}
 	if (!oQuery.exec()) {
-		_A_CRITICAL << "Query not executed:" << inQueryString;
+		_A_CRITICAL << "Query not executed:" << inQueryString \
+			<< "With error" << oDB.lastError().text();
 		return oReply;
 	}
 
@@ -184,17 +186,21 @@ ADBSqlCipherReply ADBSqlCipher::mStringTransaction(QString inQueryString) {
 	if (oDB.transaction()) {
 		QSqlQuery oQuery(oDB);
 		if (!oQuery.prepare(inQueryString)) {
-			_A_CRITICAL << "Transactioned query not prepared:" << inQueryString;
+			_A_CRITICAL << "Transactioned query not prepared:" << inQueryString \
+				<< "with error:" << oDB.lastError().text();
 			return oReply;
 		}
 		if (!oQuery.exec()) {
-			_A_CRITICAL << "Transactioned query not executed:" << inQueryString;
+			_A_CRITICAL << "Transactioned query not executed:" << inQueryString \
+				<< "with error:" << oDB.lastError().text();
 			return oReply;
 		}
 		if (!oDB.commit()) {
-			_A_CRITICAL << "Transaction not committed for query:" << inQueryString;
+			_A_CRITICAL << "Transaction not committed for query:" << inQueryString \
+				<< "with error:" << oDB.lastError().text();
 			if (!oDB.rollback()) {
-				_A_CRITICAL << "Transaction not rolled back for query:" << inQueryString;
+				_A_CRITICAL << "Transaction not rolled back for query:" << inQueryString \
+					<< "with error:" << oDB.lastError().text();
 			}
 			return oReply;
 		}
@@ -211,7 +217,8 @@ ADBSqlCipherReply ADBSqlCipher::mStringTransaction(QString inQueryString) {
 		oReply.Status = true;
 		oReply.Output = oOutput;
 	} else {
-		_A_CRITICAL << "Transaction not started for query: " << inQueryString;
+		_A_CRITICAL << "Transaction not started for query:" << inQueryString \
+			<< "with error:" << oDB.lastError().text();
 	}
 
 	return oReply;
@@ -230,7 +237,7 @@ ADBSqlCipherReply ADBSqlCipher::mQueryExecute(QSqlQuery inQuery) {
 	ADBSqlCipherReply oReply = {};
 
 	if (!inQuery.exec()) {
-		_A_CRITICAL << "Query object not executed";
+		_A_CRITICAL << "Query object not executed with error:" << inQuery.lastError().text();
 		return oReply;
 	}
 
@@ -267,13 +274,16 @@ ADBSqlCipherReply ADBSqlCipher::mQueryTransaction(QSqlQuery inQuery) {
 
 	if (oDB.transaction()) {
 		if (!inQuery.exec()) {
-			_A_CRITICAL << "Transaction for QSqlQuery object not executed";
+			_A_CRITICAL << "Transaction for QSqlQuery object not executed with error:" \
+				<< oDB.lastError().text();
 			return oReply;
 		}
 		if (!oDB.commit()) {
-			_A_CRITICAL << "Transaction for QSqlQuery object not committed";
+			_A_CRITICAL << "Transaction for QSqlQuery object not committed with error:" \
+				<< oDB.lastError().text();
 			if (!oDB.rollback()) {
-				_A_CRITICAL << "Transaction for QSqlQuery object not rolled back";
+				_A_CRITICAL << "Transaction for QSqlQuery object not rolled back with error:" \
+					<< oDB.lastError().text();
 			}
 			return oReply;
 		}
@@ -290,7 +300,8 @@ ADBSqlCipherReply ADBSqlCipher::mQueryTransaction(QSqlQuery inQuery) {
 		oReply.Status = true;
 		oReply.Output = oOutput;
 	} else {
-		_A_CRITICAL << "Transaction for QSqlQuery object not started";
+		_A_CRITICAL << "Transaction for QSqlQuery object not started with error:" \
+			<< oDB.lastError().text();
 	}
 
 	return oReply;

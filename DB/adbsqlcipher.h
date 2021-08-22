@@ -22,6 +22,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QSqlError>
 
 // Application includes
 #include <aloggerglobal.h>
@@ -40,7 +41,7 @@ class ADBSqlCipher : public QObject {
 
 	public:
 
-		explicit ADBSqlCipher(QObject *parent = nullptr);
+		explicit ADBSqlCipher(QObject* parent = nullptr);
 		virtual ~ADBSqlCipher(void);
 
 		bool mStart(ADBSqlCipherProperties* inProperties);
