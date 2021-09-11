@@ -85,3 +85,11 @@ exists($$A_PRI_MODULES_FREE_APPLICATION) {
 } else {
 	error(No Free Module Application config file $$A_PRI_MODULES_FREE_APPLICATION)
 }
+
+A_DIR_MODULES_FREE_CRYPTOGRAPHY = $$PWD/Cryptography
+A_PRI_MODULES_FREE_CRYPTOGRAPHY = $$A_DIR_MODULES_FREE_CRYPTOGRAPHY/Cryptography.pri
+exists($$A_PRI_MODULES_FREE_CRYPTOGRAPHY) {
+	include($$A_PRI_MODULES_FREE_CRYPTOGRAPHY)
+} else {
+	error(No Free Module Cryptography config file $$A_PRI_MODULES_FREE_CRYPTOGRAPHY)
+}

@@ -23,7 +23,7 @@
 
 // Application includes
 #include <aloggerglobal.h>
-#include <ajsondatamodels.h>
+#include <auniversaldatamodels.h>
 
 // Constants and definitions
 

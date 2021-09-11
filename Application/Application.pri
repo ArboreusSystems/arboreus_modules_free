@@ -5,6 +5,7 @@ PRECOMPILED_HEADER = $$PWD/aapplicationpch.h
 HEADERS += \
 	$$PWD/aapplication.h \
 	$$PWD/aapplicationdatamodels.h \
+	$$PWD/aapplicationpch.h \
 	$$PWD/aconstants.h \
 	$$PWD/aconstantsdefinition.h
 

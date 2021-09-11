@@ -23,6 +23,7 @@
 // Application includes
 
 // Constants and defintions
+#define _A_ENUM_REPLY_STATUS ARB::AEnumsStatus::Status
 
 // Namespace
 namespace ARB {
