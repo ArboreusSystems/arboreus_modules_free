@@ -17,11 +17,9 @@
 #define ACOLORS_H
 
 // System includes
-#include <QObject>
-#include <QColor>
-#include <QString>
-#include <QColor>
-#include <QMap>
+
+// Precompiled includes
+#include <auihandlerpch.h>
 
 // Application includes
 #include <aloggerglobal.h>

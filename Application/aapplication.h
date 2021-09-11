@@ -17,7 +17,9 @@
 #define AAPPLICATION_H
 
 // System includes
-#include <QObject>
+
+// Precompiled includes
+#include <aapplicationpch.h>
 
 // Application includes
 #include <aconstants.h>

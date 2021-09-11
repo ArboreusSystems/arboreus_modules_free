@@ -8,40 +8,29 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 23/07/2021 at 19:37:30
+	\li @created 11/09/2021 at 10:23:39
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef AAPPLICATIONDATAMODELS_H
-#define AAPPLICATIONDATAMODELS_H
+#ifndef ASETTINGSPCH_H
+#define ASETTINGSPCH_H
+
+#if defined __cplusplus
 
 // System includes
-
-// Precompiled includes
-#include <aapplicationpch.h>
+#include <QObject>
+#include <QVariant>
+#include <QVariantMap>
+#include <QVariantList>
+#include <QEventLoop>
+#include <QSqlQuery>
 
 // Application includes
 
 // Constants and defintions
 
 // Namespace
-namespace ARB {
 
-class AEnumsStatus: public QObject {
+#endif
 
-	Q_OBJECT
-
-	public:
-
-		enum class Status: int {
-
-			Error, Ok, Existed, NotExisted,
-			WrongProperties, WrongValue,
-			NoField
-		};
-		Q_ENUM(Status)
-};
-
-} // namespace ARB
-
-#endif // AAPPLICATIONDATAMODELS_H
+#endif // ASETTINGSPCH_H

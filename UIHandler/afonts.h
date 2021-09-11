@@ -17,9 +17,9 @@
 #define AFONTS_H
 
 // System includes
-#include <QObject>
-#include <QFontDatabase>
-#include <QList>
+
+// Precompiled includes
+#include <auihandlerpch.h>
 
 // Application includes
 #include <aloggerglobal.h>

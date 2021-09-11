@@ -1,5 +1,7 @@
 INCLUDEPATH += $$PWD
 
+PRECOMPILED_HEADER = $$PWD/aapplicationpch.h
+
 HEADERS += \
 	$$PWD/aapplication.h \
 	$$PWD/aapplicationdatamodels.h \

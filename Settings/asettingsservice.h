@@ -17,8 +17,9 @@
 #define ASETTINGSSERVICE_H
 
 // System includes
-#include <QObject>
-#include <QSqlQuery>
+
+// Precompiled includes
+#include <asettingspch.h>
 
 // Application includes
 #include <athreadservicetemplate.h>

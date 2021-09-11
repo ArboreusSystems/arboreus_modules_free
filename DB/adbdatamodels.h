@@ -16,9 +16,9 @@
 #define ADBDATAMODELS_H
 
 // System includes
-#include <QObject>
-#include <QString>
-#include <QVariantList>
+
+// Precompiled includes
+#include <adbpch.h>
 
 // Application includes
 

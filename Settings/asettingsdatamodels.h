@@ -16,8 +16,9 @@
 #define ASETTINGSDATAMODELS_H
 
 // System includes
-#include <QVariantMap>
-#include <QVariant>
+
+// Precompiled includes
+#include <asettingspch.h>
 
 // Application includes
 

@@ -17,10 +17,9 @@
 #define ASETTINGS_H
 
 // System includes
-#include <QObject>
-#include <QVariant>
-#include <QVariantMap>
-#include <QEventLoop>
+
+// Precompiled includes
+#include <asettingspch.h>
 
 // Application includes
 #include <athreadtemplate.h>

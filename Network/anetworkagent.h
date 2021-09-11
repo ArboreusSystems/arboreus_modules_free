@@ -17,11 +17,9 @@
 #define ANETWORKAGENT_H
 
 // System includes
-#include <QObject>
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-#include <QEventLoop>
+
+// Precompiled includes
+#include <anetworkpch.h>
 
 // Application includes
 #include <aloggerglobal.h>

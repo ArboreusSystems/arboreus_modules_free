@@ -16,7 +16,9 @@
 #define ATHREADTEMPLATE_H
 
 // System includes
-#include <QThread>
+
+// Precompiled includes
+#include <atemplatespch.h>
 
 // Application includes
 #include <athreadservicetemplate.h>

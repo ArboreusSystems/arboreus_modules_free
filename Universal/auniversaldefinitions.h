@@ -16,7 +16,9 @@
 #define AUNIVERSALDEFINITIONS_H
 
 // System includes
-#include <QDateTime>
+
+// Precompild includes
+#include <auniversalpch.h>
 
 // Application includes
 

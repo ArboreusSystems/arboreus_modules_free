@@ -16,9 +16,9 @@
 #define AJSONDATAMODELS_H
 
 // System includes
-#include <QObject>
-#include <QJsonObject>
-#include <QVariant>
+
+// Precompiled includes
+#include <auniversalpch.h>
 
 // Application includes
 #include <aapplicationdatamodels.h>

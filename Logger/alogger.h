@@ -17,7 +17,9 @@
 #define ALOGGER_H
 
 // System includes
-#include <QObject>
+
+// Precompiled includes
+#include <aloggerpch.h>
 
 // Application includes
 #include <athreadtemplate.h>

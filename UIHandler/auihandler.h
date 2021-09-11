@@ -17,7 +17,9 @@
 #define AUIHANDLER_H
 
 // System includes
-#include <QObject>
+
+// Precompiled includes
+#include <auihandlerpch.h>
 
 // Application includes
 #include <auiconfig.h>

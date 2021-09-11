@@ -17,7 +17,9 @@
 #define ADEVICEIOS_H
 
 // System includes
-#include <QObject>
+
+// Precompiled includes
+#include <adevicepch.h>
 
 // Application includes
 #include <adevicedatamodels.h>

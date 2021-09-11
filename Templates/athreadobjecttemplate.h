@@ -16,7 +16,9 @@
 #define ATHREADOBJECTTEMPLATE_H
 
 // System includes
-#include <QObject>
+
+// Precompiled includes
+#include <atemplatespch.h>
 
 // Application includes
 

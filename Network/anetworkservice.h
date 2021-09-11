@@ -17,8 +17,9 @@
 #define ANETWORKSERVICE_H
 
 // System includes
-#include <QObject>
-#include <QNetworkAccessManager>
+
+// Precompiled includes
+#include <anetworkpch.h>
 
 // Application includes
 #include <aloggerglobal.h>

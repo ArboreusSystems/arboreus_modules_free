@@ -1,9 +1,12 @@
 INCLUDEPATH += $$PWD
 
+PRECOMPILED_HEADER = $$PWD/adevicepch.h
+
 HEADERS += \
 	$$PWD/adevice.h \
 	$$PWD/adevicedatamodels.h \
-	$$PWD/adeviceenums.h
+	$$PWD/adeviceenums.h \
+	$$PWD/adevicepch.h
 
 SOURCES += \
 	$$PWD/adevice.cpp

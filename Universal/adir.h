@@ -17,10 +17,9 @@
 #define ADIR_H
 
 // System includes
-#include <QObject>
-#include <QDir>
-#include <QStringList>
-#include <QStringListIterator>
+
+// Precompiled includes
+#include <auniversalpch.h>
 
 // Application includes
 

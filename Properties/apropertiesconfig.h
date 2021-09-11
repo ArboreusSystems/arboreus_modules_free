@@ -16,7 +16,9 @@
 #define APROPERTIESCONFIG_H
 
 // System includes
-#include <QObject>
+
+// Precompiled includes
+#include <apropertiespch.h>
 
 // Application includes
 

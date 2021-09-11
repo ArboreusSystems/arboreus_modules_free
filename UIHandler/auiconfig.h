@@ -17,10 +17,9 @@
 #define AUICONFIG_H
 
 // System includes
-#include <QObject>
-#include <QMap>
-#include <QString>
-#include <QList>
+
+// Precompiled includes
+#include <auihandlerpch.h>
 
 // Application includes
 #include <auihandlerconfig.h>

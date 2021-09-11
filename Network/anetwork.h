@@ -17,8 +17,9 @@
 #define ANETWORK_H
 
 // System includes
-#include <QObject>
-#include <QEventLoop>
+
+// Precompiled includes
+#include <anetworkpch.h>
 
 // Application includes
 #include <athreadtemplate.h>

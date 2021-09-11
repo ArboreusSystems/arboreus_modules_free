@@ -17,9 +17,9 @@
 #define AJSON_H
 
 // System includes
-#include <QObject>
-#include <QFile>
-#include <QJsonParseError>
+
+// Precompiled includes
+#include <auniversalpch.h>
 
 // Application includes
 #include <aloggerglobal.h>

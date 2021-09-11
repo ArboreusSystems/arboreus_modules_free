@@ -17,8 +17,9 @@
 #define ADEVICE_H
 
 // System includes
-#include <QObject>
-#include <QVariantMap>
+
+// Precompiled includes
+#include <adevicepch.h>
 
 // Application includes
 #include <adevicedatamodels.h>

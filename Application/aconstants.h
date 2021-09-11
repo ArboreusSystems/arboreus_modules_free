@@ -17,8 +17,9 @@
 #define ACONSTANTS_H
 
 // System includes
-#include <QObject>
-#include <QString>
+
+// Precompiled includes
+#include <aapplicationpch.h>
 
 // Application includes
 #include <aloggerglobal.h>

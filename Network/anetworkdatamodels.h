@@ -16,10 +16,9 @@
 #define ANETWORKDATAMODELS_H
 
 // System includes
-#include <QString>
-#include <QMap>
-#include <QVariantMap>
-#include <QVariantList>
+
+// Precompiled includes
+#include <anetworkpch.h>
 
 // Application includes
 

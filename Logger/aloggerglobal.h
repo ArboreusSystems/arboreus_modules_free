@@ -16,13 +16,9 @@
 #define ALOGGERGLOBAL_H
 
 // System includes
-#include <QObject>
-#include <QDateTime>
-#include <QDebug>
-#include <QThread>
-#include <QString>
-#include <QStringRef>
-#include <string>
+
+// Precompiled includes
+#include <aloggerpch.h>
 
 // Application includes
 #include <aloggerdatamodels.h>

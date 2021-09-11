@@ -17,9 +17,9 @@
 #define APROPERTIES_H
 
 // System includes
-#include <QObject>
-#include <QString>
-#include <QStandardPaths>
+
+// Precompiled includes
+#include <apropertiespch.h>
 
 // Application includes
 #include <apropertiesconfig.h>

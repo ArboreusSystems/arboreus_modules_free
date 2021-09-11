@@ -17,8 +17,9 @@
 #define ALOGGERSERVICE_H
 
 // System includes
-#include <QObject>
-#include <QDateTime>
+
+// Precompiled includes
+#include <aloggerpch.h>
 
 // Application includes
 #include <aloggerglobal.h>

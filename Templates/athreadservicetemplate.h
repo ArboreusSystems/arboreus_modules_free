@@ -16,9 +16,9 @@
 #define ATHREADSERVICETEMPLATE_H
 
 // System includes
-#include <QObject>
-#include <QMutex>
-#include <QWaitCondition>
+
+// Precompiled includes
+#include <atemplatespch.h>
 
 // Application includes
 

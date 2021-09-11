@@ -17,10 +17,9 @@
 #define ASETTINGSAGENT_H
 
 // System includes
-#include <QObject>
-#include <QVariant>
-#include <QVariantList>
 
+// Precompiled includes
+#include <asettingspch.h>
 
 // Application includes
 #include <asettingsdatamodels.h>

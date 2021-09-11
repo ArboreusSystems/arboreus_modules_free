@@ -17,12 +17,9 @@
 #define ADBSQLCIPHER_H
 
 // System includes
-#include <QObject>
-#include <QString>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlRecord>
-#include <QSqlError>
+
+// Precompiled includes
+#include <adbpch.h>
 
 // Application includes
 #include <aloggerglobal.h>
