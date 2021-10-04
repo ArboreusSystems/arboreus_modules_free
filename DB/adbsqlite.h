@@ -44,6 +44,7 @@ class ADBSqlite : public QObject {
 		void mRemove(void);
 		QString mGetDBName(void);
 		QSqlDatabase mGetDB(void);
+		ADBSqliteReply mGetTableInfo(QString inTableName);
 		ADBSqliteReply mStringExecute(QString inQueryString);
 		ADBSqliteReply mStringTransaction(QString inQueryString);
 		ADBSqliteReply mQueryExecute(QSqlQuery inQuery);

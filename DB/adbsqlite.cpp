@@ -135,6 +135,21 @@ QSqlDatabase ADBSqlite::mGetDB(void) {
 	Doc.
 */
 
+ADBSqliteReply ADBSqlite::mGetTableInfo(QString inTableName) {
+
+	QString oSQLString = "PRAGMA table_info(" + inTableName + ");";
+	ADBSqliteReply oOutput = this->mStringExecute(oSQLString);
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 ADBSqliteReply ADBSqlite::mStringExecute(QString inQueryString) {
 
 	ADBSqliteReply oReply = {};
