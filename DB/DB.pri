@@ -7,7 +7,9 @@ PRECOMPILED_HEADER = $$PWD/adbpch.h
 HEADERS += \
 	$$PWD/adbdatamodels.h \
 	$$PWD/adbpch.h \
-	$$PWD/adbsqlcipher.h
+	$$PWD/adbsqlite.h \
+	$$PWD/adbsqlitecipher.h
 
 SOURCES += \
-	$$PWD/adbsqlcipher.cpp
+	$$PWD/adbsqlite.cpp \
+	$$PWD/adbsqlitecipher.cpp

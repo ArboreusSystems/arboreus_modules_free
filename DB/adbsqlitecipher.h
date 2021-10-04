@@ -13,8 +13,8 @@
 */
 // ----------------------------------------------------------
 
-#ifndef ADBSQLCIPHER_H
-#define ADBSQLCIPHER_H
+#ifndef ADBSQLITECIPHER_H
+#define ADBSQLITECIPHER_H
 
 // System includes
 
@@ -24,6 +24,7 @@
 // Application includes
 #include <aloggerglobal.h>
 #include <adbdatamodels.h>
+#include <adbsqlite.h>
 
 // Constants and definitions
 #define A_DB_SQL_CIPHER_DRIVER "SQLITECIPHER"
@@ -32,31 +33,20 @@
 namespace ARB {
 
 // Class definitions
-class ADBSqlCipher : public QObject {
-
-	Q_OBJECT
+class ADBSqliteCipher : public ADBSqlite {
 
 	public:
 
-		explicit ADBSqlCipher(QObject* parent = nullptr);
-		virtual ~ADBSqlCipher(void);
+		explicit ADBSqliteCipher(QObject* parent = nullptr);
+		virtual ~ADBSqliteCipher(void);
 
-		bool mStart(ADBSqlCipherProperties* inProperties);
-		void mRemove(void);
-		QString mGetDBName(void);
-		QSqlDatabase mGetDB(void);
-		ADBSqlCipherReply mStringExecute(QString inQueryString);
-		ADBSqlCipherReply mStringTransaction(QString inQueryString);
-		ADBSqlCipherReply mQueryExecute(QSqlQuery inQuery);
-		ADBSqlCipherReply mQueryTransaction(QSqlQuery inQuery);
+		bool mStart(ADBProperties* inProperties);
 
 	private:
 
-		QString pPath = QString("NoPath");
-		QString pName = QString("NoName");
 		QString pValue = QString(A_DB_NULL_VALUE);
 };
 
 } // namespace ARB
 
-#endif // ADBSQLCIPHER_H
+#endif // ADBSQLITECIPHER_H

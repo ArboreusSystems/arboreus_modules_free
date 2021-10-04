@@ -75,7 +75,7 @@ ASettingsAgent::~ASettingsAgent(void) {
 
 void ASettingsAgent::slGet(void) {
 
-	ADBSqlCipherReply oDbReply = pService->pDB->mStringExecute(
+	ADBSqliteReply oDbReply = pService->pDB->mStringExecute(
 		"SELECT value FROM settings WHERE key='" + pKey + "';"
 	);
 	if (oDbReply.Status) {

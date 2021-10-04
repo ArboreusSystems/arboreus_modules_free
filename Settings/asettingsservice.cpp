@@ -68,14 +68,14 @@ QString ASettingsService::mGetDBName(void) {
 
 void ASettingsService::slInit(QString inPathSettingsData) {
 
-	ADBSqlCipherProperties oDBproperties;
+	ADBSqliteCipherProperties oDBproperties;
 	oDBproperties.Name = QString(A_SETTINGS_DB_NAME);
 	oDBproperties.Path = inPathSettingsData + "/" + oDBproperties.Name + ".db";
 
-	pDB = new ADBSqlCipher(this);
+	pDB = new ADBSqliteCipher(this);
 	pDB->mStart(&oDBproperties);
 
-	ADBSqlCipherReply oCreatingReply = pDB->mStringExecute(
+	ADBSqliteReply oCreatingReply = pDB->mStringExecute(
 		"CREATE TABLE IF NOT EXISTS settings "
 		"(key STRING (25) PRIMARY KEY UNIQUE NOT NULL,value BLOB);"
 	);
@@ -110,7 +110,7 @@ void ASettingsService::slUpdate(QString inKey, QVariant inValue) {
 	oQuery.bindValue(":key",inKey);
 	oQuery.bindValue(":value",inValue);
 
-	ADBSqlCipherReply oReply = pDB->mQueryTransaction(oQuery);
+	ADBSqliteReply oReply = pDB->mQueryTransaction(oQuery);
 	if (!oReply.Status) {
 		_A_CRITICAL << "Writing query in settings failed";
 	} else {

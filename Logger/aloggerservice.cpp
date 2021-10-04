@@ -59,7 +59,7 @@ void ALoggerService::slInit(QString inPathLoggerData) {
 
 	pPathLoggerData = inPathLoggerData;
 
-	ADBSqlCipherProperties oDBProperties;
+	ADBSqliteCipherProperties oDBProperties;
 	oDBProperties.Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
 	oDBProperties.Path = pPathLoggerData + "/" + oDBProperties.Name + ".db";
 
@@ -74,9 +74,9 @@ void ALoggerService::slInit(QString inPathLoggerData) {
 		")"
 	);
 
-	pDB = new ADBSqlCipher(this);
+	pDB = new ADBSqliteCipher(this);
 	if (pDB->mStart(&oDBProperties)) {
-		ADBSqlCipherReply oDBReply = pDB->mStringExecute(oQueryString);
+		ADBSqliteReply oDBReply = pDB->mStringExecute(oQueryString);
 		if (!oDBReply.Status) _A_CRITICAL << "Creating table for logs failed";
 	}
 

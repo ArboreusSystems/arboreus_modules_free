@@ -24,7 +24,7 @@
 // Application includes
 #include <aloggerglobal.h>
 #include <athreadservicetemplate.h>
-#include <adbsqlcipher.h>
+#include <adbsqlitecipher.h>
 
 // Constants and definitions
 
@@ -53,7 +53,7 @@ class ALoggerService : public AThreadServiceTemplate {
 	private:
 
 		QString pPathLoggerData = QString("NoPathLoggerData");
-		ADBSqlCipher* pDB = nullptr;
+		ADBSqliteCipher* pDB = nullptr;
 };
 
 } // namespace ARB

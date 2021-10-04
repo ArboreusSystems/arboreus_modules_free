@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\class ADBSqlCipher
+	\class ADBSqlite
 	\title
 	\brief Template file classes/cpp/file.cpp
 
@@ -8,13 +8,13 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 01/05/2021 at 14:00:40
+	\li @created 04/10/2021 at 14:33:15
 	\endlist
 */
 // ----------------------------------------------------------
 
 // Class header
-#include "adbsqlcipher.h"
+#include "adbsqlite.h"
 
 // Namespace
 using namespace ARB;
@@ -27,9 +27,11 @@ using namespace ARB;
 	Doc.
 */
 
-ADBSqlCipher::ADBSqlCipher(QObject *parent) : QObject(parent) {
+ADBSqlite::ADBSqlite(QObject* parent) : QObject(parent) {
 
-	_A_DEBUG << "ADBSqlCipher created";
+	pDriverName = "SQLITE";
+
+	_A_DEBUG << "ADBSqlite created";
 }
 
 
@@ -40,11 +42,11 @@ ADBSqlCipher::ADBSqlCipher(QObject *parent) : QObject(parent) {
 	Doc.
 */
 
-ADBSqlCipher::~ADBSqlCipher(void) {
+ADBSqlite::~ADBSqlite(void) {
 
 	this->mRemove();
 
-	_A_DEBUG << "ADBSqlCipher deleted";
+	_A_DEBUG << "ADBSqlite deleted";
 }
 
 
@@ -55,17 +57,15 @@ ADBSqlCipher::~ADBSqlCipher(void) {
 	Doc.
 */
 
-bool ADBSqlCipher::mStart(ADBSqlCipherProperties* inProperties) {
+bool ADBSqlite::mStart(ADBProperties* inProperties) {
 
-	pName = inProperties->Name;
-	pPath = inProperties->Path;
-	pValue = inProperties->Value;
+	ADBSqliteProperties* oProperties = static_cast<ADBSqliteProperties*>(inProperties);
 
-	QSqlDatabase oDB = QSqlDatabase::addDatabase(A_DB_SQL_CIPHER_DRIVER,pName);
+	pName = oProperties->Name;
+	pPath = oProperties->Path;
+
+	QSqlDatabase oDB = QSqlDatabase::addDatabase(pDriverName,pName);
 	oDB.setDatabaseName(pPath);
-	if (pValue != QString(A_DB_NULL_VALUE)) {
-		oDB.setPassword(pValue);
-	}
 
 	if (oDB.open()) {
 		_A_DEBUG << "Opened DB:" << pPath;
@@ -77,6 +77,7 @@ bool ADBSqlCipher::mStart(ADBSqlCipherProperties* inProperties) {
 }
 
 
+
 // -----------
 /*!
 	\fn
@@ -84,7 +85,7 @@ bool ADBSqlCipher::mStart(ADBSqlCipherProperties* inProperties) {
 	Doc.
 */
 
-void ADBSqlCipher::mRemove(void) {
+void ADBSqlite::mRemove(void) {
 
 	{
 		QSqlDatabase oDB = this->mGetDB();
@@ -107,7 +108,7 @@ void ADBSqlCipher::mRemove(void) {
 	Doc.
 */
 
-QString ADBSqlCipher::mGetDBName(void) {
+QString ADBSqlite::mGetDBName(void) {
 
 	return pName;
 }
@@ -120,7 +121,7 @@ QString ADBSqlCipher::mGetDBName(void) {
 	Doc.
 */
 
-QSqlDatabase ADBSqlCipher::mGetDB(void) {
+QSqlDatabase ADBSqlite::mGetDB(void) {
 
 	QSqlDatabase oDB = QSqlDatabase::database(pName);
 	return oDB;
@@ -134,9 +135,9 @@ QSqlDatabase ADBSqlCipher::mGetDB(void) {
 	Doc.
 */
 
-ADBSqlCipherReply ADBSqlCipher::mStringExecute(QString inQueryString) {
+ADBSqliteReply ADBSqlite::mStringExecute(QString inQueryString) {
 
-	ADBSqlCipherReply oReply = {};
+	ADBSqliteReply oReply = {};
 
 	QSqlDatabase oDB = this->mGetDB();
 
@@ -177,9 +178,9 @@ ADBSqlCipherReply ADBSqlCipher::mStringExecute(QString inQueryString) {
 	Doc.
 */
 
-ADBSqlCipherReply ADBSqlCipher::mStringTransaction(QString inQueryString) {
+ADBSqliteReply ADBSqlite::mStringTransaction(QString inQueryString) {
 
-	ADBSqlCipherReply oReply = {};
+	ADBSqliteReply oReply = {};
 
 	QSqlDatabase oDB = this->mGetDB();
 
@@ -232,9 +233,9 @@ ADBSqlCipherReply ADBSqlCipher::mStringTransaction(QString inQueryString) {
 	Doc.
 */
 
-ADBSqlCipherReply ADBSqlCipher::mQueryExecute(QSqlQuery inQuery) {
+ADBSqliteReply ADBSqlite::mQueryExecute(QSqlQuery inQuery) {
 
-	ADBSqlCipherReply oReply = {};
+	ADBSqliteReply oReply = {};
 
 	if (!inQuery.exec()) {
 		_A_CRITICAL << "Query object not executed with error:" << inQuery.lastError().text();
@@ -266,9 +267,9 @@ ADBSqlCipherReply ADBSqlCipher::mQueryExecute(QSqlQuery inQuery) {
 	Doc.
 */
 
-ADBSqlCipherReply ADBSqlCipher::mQueryTransaction(QSqlQuery inQuery) {
+ADBSqliteReply ADBSqlite::mQueryTransaction(QSqlQuery inQuery) {
 
-	ADBSqlCipherReply oReply = {};
+	ADBSqliteReply oReply = {};
 
 	QSqlDatabase oDB = this->mGetDB();
 

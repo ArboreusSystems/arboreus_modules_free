@@ -25,7 +25,7 @@
 #include <athreadservicetemplate.h>
 #include <aloggerglobal.h>
 #include <asettingsdatamodels.h>
-#include <adbsqlcipher.h>
+#include <adbsqlitecipher.h>
 
 // Constants and definitions
 #define A_SETTINGS_DB_NAME "settings"
@@ -40,7 +40,7 @@ class ASettingsService : public AThreadServiceTemplate {
 
 	public:
 
-		ADBSqlCipher* pDB = nullptr;
+		ADBSqliteCipher* pDB = nullptr;
 
 		explicit ASettingsService(QObject *parent = nullptr);
 		virtual ~ASettingsService(void);

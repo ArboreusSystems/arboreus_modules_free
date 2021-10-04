@@ -28,29 +28,46 @@
 // Namespace
 namespace ARB {
 
-class ADBSqlCipherProperties : public QObject {
+class ADBProperties: public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		QString Name = QString("NoName");
-		QString Path = QString("NoPath");
-		QString Value = QString(A_DB_NULL_VALUE);
-
-		explicit ADBSqlCipherProperties(QObject* parent = nullptr) : QObject(parent) {}
-		virtual ~ADBSqlCipherProperties(void) {}
+		explicit ADBProperties(QObject* parent = nullptr) : QObject(parent) {}
+		virtual ~ADBProperties(void) {}
 };
 
-class ADBSqlCipherReply {
+class ADBSqliteProperties : public ADBProperties {
+
+	public:
+
+		QString Name = QString("NoName");
+		QString Path = QString("NoPath");
+
+		explicit ADBSqliteProperties(QObject* parent = nullptr) : ADBProperties(parent) {}
+		virtual ~ADBSqliteProperties(void) {}
+};
+
+class ADBSqliteCipherProperties : public ADBSqliteProperties {
+
+	public:
+
+		QString Value = QString(A_DB_NULL_VALUE);
+
+		explicit ADBSqliteCipherProperties(QObject* parent = nullptr) : ADBSqliteProperties(parent) {}
+		virtual ~ADBSqliteCipherProperties(void) {}
+};
+
+class ADBSqliteReply {
 
 	public:
 
 		bool Status = false;
 		QVariantList Output = {};
 
-		ADBSqlCipherReply(void) {}
-		virtual ~ADBSqlCipherReply(void) {}
+		ADBSqliteReply(void) {}
+		virtual ~ADBSqliteReply(void) {}
 };
 
 } //namespace ARB
