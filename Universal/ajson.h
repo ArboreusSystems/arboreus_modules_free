@@ -24,8 +24,15 @@
 // Application includes
 #include <aloggerglobal.h>
 #include <auniversaldatamodels.h>
+#include <acryptography.h>
+#include <acryptographyaes.h>
 
 // Constants and definitions
+#define _A_JSON_DEFAULT_ENCRYPTION_OBJECT ACryptographyAES oEncryption( \
+	_A_ENUM_AES_TYPE::AES_256, \
+	_A_ENUM_AES_MODE::CBC \
+)
+
 
 // Namespace
 namespace ARB {

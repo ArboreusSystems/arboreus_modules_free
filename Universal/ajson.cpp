@@ -68,7 +68,7 @@ AJsonFileReply AJson::mFromFile(QString inPath) {
 	}
 	oJSONFile.close();
 
-	oReply.Status = AEnumsStatus::Status::Ok;
+	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
 	oReply.Json = oJSONDocument.object();
 	return oReply;
 }
@@ -200,17 +200,17 @@ bool AJson::mEncodeFromDocument(QString inValue,QString inPath,QJsonDocument inD
 		return false;
 	}
 
-//	A_JSON_DEFAULT_ENCRYPTION_OBJECT;
-//	QByteArray oDatumnEncrypted = oEncryption.mEncode(
-//		inDocument.toJson(),
-//		ACryptography::mValue(inValue),
-//		ACryptography::mVector(inValue)
-//	);
+	_A_JSON_DEFAULT_ENCRYPTION_OBJECT;
+	QByteArray oDatumnEncrypted = oEncryption.mEncode(
+		inDocument.toJson(),
+		ACryptography::mValue(inValue),
+		ACryptography::mVector(inValue)
+	);
 
-//	if (oFile.write(oDatumnEncrypted) >= 0) {
-//		oFile.close();
-//		return true;
-//	}
+	if (oFile.write(oDatumnEncrypted) >= 0) {
+		oFile.close();
+		return true;
+	}
 
 	return false;
 }
@@ -235,26 +235,26 @@ AJsonFileReply AJson::mDecodeFromFile(QString inValue,QString inPath) {
 		return oReply;
 	}
 
-//	QByteArray oValue = ACryptography::mValue(inValue);
-//	QByteArray oVector = ACryptography::mVector(inValue);
-//	QByteArray oJSONEncrypted = oJSONFile.readAll();
+	QByteArray oValue = ACryptography::mValue(inValue);
+	QByteArray oVector = ACryptography::mVector(inValue);
+	QByteArray oJSONEncrypted = oJSONFile.readAll();
 
-//	A_JSON_DEFAULT_ENCRYPTION_OBJECT;
-//	QByteArray oJSONDecypted = oEncryption.mRemovePadding(
-//		oEncryption.mDecode(oJSONEncrypted,oValue,oVector)
-//	);
+	_A_JSON_DEFAULT_ENCRYPTION_OBJECT;
+	QByteArray oJSONDecypted = oEncryption.mRemovePadding(
+		oEncryption.mDecode(oJSONEncrypted,oValue,oVector)
+	);
 
-//	QJsonParseError oJSONParseError;
-//	QJsonDocument oJSONDocument = QJsonDocument::fromJson(
-//		oJSONDecypted,&oJSONParseError
-//	);
-//	if (oJSONDocument.isNull()) {
-//		return oReply;
-//	}
-//	oJSONFile.close();
+	QJsonParseError oJSONParseError;
+	QJsonDocument oJSONDocument = QJsonDocument::fromJson(
+		oJSONDecypted,&oJSONParseError
+	);
+	if (oJSONDocument.isNull()) {
+		return oReply;
+	}
+	oJSONFile.close();
 
-	oReply.Status = AEnumsStatus::Status::Ok;
-//	oReply.Json = oJSONDocument.object();
+	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
+	oReply.Json = oJSONDocument.object();
 	return oReply;
 }
 
@@ -286,7 +286,7 @@ bool AJson::mChangeValue(QString inOldValue,QString inNewValue,QString inPath) {
 bool AJson::mRemoveValue(QString inValue,QString inPath) {
 
 	AJsonFileReply oJSONReply = AJson::mDecodeFromFile(inValue,inPath);
-	if (oJSONReply.Status != AEnumsStatus::Status::Ok) {
+	if (oJSONReply.Status != _A_ENUM_REPLY_STATUS::Ok) {
 		return false;
 	}
 	return AJson::mToFileFromObject(inPath,oJSONReply.Json);
