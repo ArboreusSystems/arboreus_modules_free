@@ -22,6 +22,7 @@
 
 // Application includes
 #include <aapplicationdatamodels.h>
+#include <arandomdatamodels.h>
 
 // Constants and defintions
 #define _A_ENUM_DICTIONARY_TYPE ARB::AEnumsDictionaryType::DictionaryType
