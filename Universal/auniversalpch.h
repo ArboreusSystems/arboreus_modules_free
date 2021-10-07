@@ -36,6 +36,12 @@
 #include <QIODevice>
 #include <QDateTime>
 #include <QRandomGenerator>
+#include <QVector>
+
+#include <algorithm>
+#include <chrono>
+#include <random>
+#include <vector>
 
 // Application includes
 

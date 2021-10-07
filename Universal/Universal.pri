@@ -5,6 +5,8 @@ PRECOMPILED_HEADER = $$PWD/auniversalpch.h
 HEADERS += \
 	$$PWD/adir.h \
 	$$PWD/ajson.h \
+	$$PWD/arandom.h \
+	$$PWD/arandomdatamodels.h \
 	$$PWD/asequencenumber.h \
 	$$PWD/asequencestring.h \
 	$$PWD/auniversaldatamodels.h \
@@ -14,5 +16,6 @@ HEADERS += \
 SOURCES += \
 	$$PWD/adir.cpp \
 	$$PWD/ajson.cpp \
+	$$PWD/arandom.cpp \
 	$$PWD/asequencenumber.cpp \
 	$$PWD/asequencestring.cpp
