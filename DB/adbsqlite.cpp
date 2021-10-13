@@ -150,6 +150,28 @@ ADBSqliteReply ADBSqlite::mGetTableInfo(QString inTableName) {
 	Doc.
 */
 
+qlonglong ADBSqlite::mGetLastRowID(void) {
+
+	qlonglong oOutput = -1;
+	ADBSqliteReply oReply = this->mStringExecute("SELECT last_insert_rowid();");
+
+	if (oReply.Status) {
+		oOutput = qvariant_cast<qlonglong>(
+			qvariant_cast<QVariantList>(oReply.Output.at(0)).at(0)
+		);
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 ADBSqliteReply ADBSqlite::mStringExecute(QString inQueryString) {
 
 	ADBSqliteReply oReply = {};

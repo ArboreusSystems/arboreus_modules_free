@@ -45,6 +45,7 @@ class ADBSqlite : public QObject {
 		QString mGetDBName(void);
 		QSqlDatabase mGetDB(void);
 		ADBSqliteReply mGetTableInfo(QString inTableName);
+		qlonglong mGetLastRowID(void);
 		ADBSqliteReply mStringExecute(QString inQueryString);
 		ADBSqliteReply mStringTransaction(QString inQueryString);
 		ADBSqliteReply mQueryExecute(QSqlQuery inQuery);
