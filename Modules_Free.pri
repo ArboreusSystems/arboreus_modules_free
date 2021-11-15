@@ -93,3 +93,11 @@ exists($$A_PRI_MODULES_FREE_CRYPTOGRAPHY) {
 } else {
 	error(No Free Module Cryptography config file $$A_PRI_MODULES_FREE_CRYPTOGRAPHY)
 }
+
+A_DIR_MODULES_FREE_SESSION = $$PWD/Session
+A_PRI_MODULES_FREE_SESSION = $$A_DIR_MODULES_FREE_SESSION/Session.pri
+exists($$A_PRI_MODULES_FREE_SESSION) {
+	include($$A_PRI_MODULES_FREE_SESSION)
+} else {
+	error(No Free Module Session config file $$A_PRI_MODULES_FREE_SESSION)
+}

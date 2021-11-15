@@ -8,17 +8,17 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 04/05/2021 at 13:33:05
+	\li @created 15/11/2021 at 18:47:48
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef ANETWORKDATAMODELS_H
-#define ANETWORKDATAMODELS_H
+#ifndef ASESSIONDATAMODELS_H
+#define ASESSIONDATAMODELS_H
 
 // System includes
 
 // Precompiled includes
-#include <anetworkpch.h>
+#include <asessionpch.h>
 
 // Application includes
 
@@ -27,33 +27,22 @@
 // Namespace
 namespace ARB {
 
-class ANetworkRequestProperties {
-
-	public:
-
-		QString URL = QString("NoDefinedURL");
-		QMap<QString,QString> Headers = {};
-		QByteArray Data = QByteArray();
-};
-
-class ANetworkReply {
+class ASessionReply {
 
 	public:
 
 		bool Status = false;
-		QVariantList Headers = {};
-		QByteArray Data = QByteArray();
+		QVariant Value;
 
 		QVariantMap mToVariantMap(void) {
 
-			QVariantMap oOutput;
+			QVariantMap oOutput = {};
 			oOutput.insert("Status",Status);
-			oOutput.insert("Data",Data);
-			oOutput.insert("Headers",Headers);
+			oOutput.insert("Value",Value);
 			return oOutput;
 		}
 };
 
 } // namespace ARB
 
-#endif // ANETWORKDATAMODELS_H
+#endif // ASESSIONDATAMODELS_H
