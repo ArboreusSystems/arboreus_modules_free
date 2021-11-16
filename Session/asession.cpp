@@ -76,7 +76,6 @@ void ASession::mInit(void) {
 void ASession::mPut(QString inKey, QVariant inValue) {
 
 	pSession.insert(inKey,inValue);
-	_A_DEBUG << "!!!!!!!" << pSession;
 }
 
 
