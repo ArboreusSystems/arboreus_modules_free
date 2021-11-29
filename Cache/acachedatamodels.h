@@ -8,28 +8,41 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 15/11/2021 at 18:24:30
+	\li @created 15/11/2021 at 18:47:48
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef ASESSIONPCH_H
-#define ASESSIONPCH_H
-
-#if defined __cplusplus
+#ifndef ACACHEDATAMODELS_H
+#define ACACHEDATAMODELS_H
 
 // System includes
-#include <QObject>
-#include <QString>
-#include <QVariant>
-#include <QVariantMap>
-#include <QVariantList>
+
+// Precompiled includes
+#include <acachepch.h>
 
 // Application includes
 
 // Constants and defintions
 
 // Namespace
+namespace ARB {
 
-#endif
+class ACacheReply {
 
-#endif // ASESSIONPCH_H
+	public:
+
+		bool Status = false;
+		QVariant Data;
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput = {};
+			oOutput.insert("Status",Status);
+			oOutput.insert("Data",Data);
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+#endif // ACACHEDATAMODELS_H

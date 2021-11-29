@@ -94,10 +94,10 @@ exists($$A_PRI_MODULES_FREE_CRYPTOGRAPHY) {
 	error(No Free Module Cryptography config file $$A_PRI_MODULES_FREE_CRYPTOGRAPHY)
 }
 
-A_DIR_MODULES_FREE_SESSION = $$PWD/Session
-A_PRI_MODULES_FREE_SESSION = $$A_DIR_MODULES_FREE_SESSION/Session.pri
-exists($$A_PRI_MODULES_FREE_SESSION) {
-	include($$A_PRI_MODULES_FREE_SESSION)
+A_DIR_MODULES_FREE_CACHE = $$PWD/Cache
+A_PRI_MODULES_FREE_CACHE = $$A_DIR_MODULES_FREE_CACHE/Cache.pri
+exists($$A_PRI_MODULES_FREE_CACHE) {
+	include($$A_PRI_MODULES_FREE_CACHE)
 } else {
-	error(No Free Module Session config file $$A_PRI_MODULES_FREE_SESSION)
+	error(No Free Module Cache config file $$A_PRI_MODULES_FREE_CACHE)
 }

@@ -41,6 +41,7 @@ Rectangle {
 	property double pSizeRadius: 0;
 
 	property string pPlaceholder;
+	property alias pText: oTextInput.text;
 
 	property string pFontFamily;
 	property alias pFontPixelSize: oTextInput.font.pixelSize;
