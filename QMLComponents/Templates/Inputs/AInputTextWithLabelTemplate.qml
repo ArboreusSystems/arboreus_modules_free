@@ -17,61 +17,39 @@ import QtQuick 2.15
 
 // Application includes
 
-//
-import "qrc:/ClentFree/Modules/QMLComponents/Text";
-
 
 // Component
-Item {
+Column {
 
-	property alias pLabelText: oLabel.text;
-	property alias pInputText: oInput.pText;
-	property alias pInputPlaceholder: oInput.pPlaceholder;
-
-	property alias pStateNormalName: oInput.pStateNormalName;
-	property alias pStateErrorName: oInput.pStateErrorName;
-	property alias pStateOnFocusName: oInput.pStateOnFocusName;
-
-	property alias pColorBorderNormal: oInput.pColorBorderError;
-	property alias pColorBorderOnFocus: oInput.pColorBorderError;
-	property alias pColorBorderError: oInput.pColorBorderError;
-
-	property alias pColorBackgroundNormal: oInput.pColorBackgroundNormal;
-	property alias pColorBackgroundOnFocus: oInput.pColorBackgroundOnFocus;
-	property alias pColorBackgroundError: oInput.pColorBackgroundError;
-
-	property alias pColorTextNormal: oInput.pColorTextNormal;
-	property alias pColorTextOnFocus: oInput.pColorTextOnFocus;
-	property alias pColorTextError: oInput.pColorTextError;
-
-	property alias pSizeBorder: oInput.pSizeBorder;
-	property alias pSizeRadius: oInput.pSizeRadius;
-
-	property alias pFontFamily: oInput.pFontFamily;
-	property alias pFontPixelSize: oInput.pFontPixelSize;
-
-	property alias pPaddingLeft: oInput.pPaddingLeft;
-	property alias pPaddingRight: oInput.pPaddingRight;
+	property alias pSeparator: oSeparator;
+	property alias pLabel: oLabel;
+	property alias pInputText: oInputText;
 
 	id: oRoot;
-	height: oLabel.height + 2 + oInput.height
+	width: parent.width;
 
-	AText {
+	Component.onCompleted: {
 
-		id: oLabel;
-		width: parent.width;
-		horizontalAlignment: Text.AlignLeft;
-		text: "NoDefinedLabelText";
-		anchors.top: parent.top;
-		anchors.left: parent.left;
+		oSeparator.implicitHeight = oSeparator.children[0].height;
+		oLabel.implicitHeight = oLabel.children[0].height;
+		oInputText.implicitHeight = oInputText.children[0].height;
 	}
 
-	AInputTextTemplate {
+	Item {
 
-		id: oInput;
-		width: parent.width;
-		height: AUIConfig.mElementHeight();
-		anchors.bottom: parent.bottom;
-		anchors.left: parent.left;
+		id: oSeparator;
+		implicitWidth: parent.width;
+	}
+
+	Item {
+
+		id: oLabel;
+		implicitWidth: parent.width;
+	}
+
+	Item {
+
+		id: oInputText;
+		implicitWidth: parent.width;
 	}
 }
