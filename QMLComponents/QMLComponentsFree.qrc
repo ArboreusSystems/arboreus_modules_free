@@ -8,9 +8,9 @@
         <file>Templates/Headers/AHeaderLeftBlockTemplate.qml</file>
         <file>Templates/Headers/AHeaderRightBlockTemplate.qml</file>
         <file>Templates/Headers/AHeaderLabelTemplate.qml</file>
-        <file>Templates/Buttons/AButtonTemplate.qml</file>
+        <file>Templates/Buttons/AButtonGeneralTemplate.qml</file>
         <file>Templates/Menu/AMenuViewTemplate.qml</file>
-        <file>Templates/Buttons/AButtonBackHeaderTemplate.qml</file>
+        <file>Templates/Buttons/AButtonLeftSignTemplate.qml</file>
         <file>Templates/Menu/AMenuItemTemplate.qml</file>
         <file>Templates/Menu/AMenuGroupTemplate.qml</file>
         <file>Templates/Menu/AMenuButtonTemplate.qml</file>

@@ -14,12 +14,13 @@
 
 // System includes
 import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 // Application includes
 
 
 // Component
-Item {
+Slider {
 
 	id: oRoot;
 }

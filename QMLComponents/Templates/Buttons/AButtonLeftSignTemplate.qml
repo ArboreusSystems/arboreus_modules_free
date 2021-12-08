@@ -20,12 +20,10 @@ import QtQuick.Controls 2.15
 
 
 // Component
-AButtonTemplate {
+AButtonGeneralTemplate {
 
-	property string pText: "NoDefinedLabelText";
-	property alias pLabelText: oLabel.color;
-	property alias pLabelFontBold: oLabel.font.bold;
-	property alias pLabelFontPixelSize: oLabel.font.pixelSize;
+	property alias pLabel: oLabel;
+	property alias pSign: oSign;
 
 	id: oRoot;
 	objectName: "NoDefinedBackButtonObjectName";
@@ -38,27 +36,29 @@ AButtonTemplate {
 		anchors.left: parent.left;
 		spacing: 5;
 
-		Rectangle {
+		Component.onCompleted: {
 
-			id: oSignWrapper;
-			height: parent.height;
-			width: oSignWrapper.height;
-
-			Image {
-
-				id: oSign;
-				anchors.fill: parent;
-			}
+			oSign.implicitWidth = oSign.children[0].width;
+			oLabel.implicitWidth = oLabel.children[0].width;
 		}
 
-		Text {
+		Item {
+
+			id: oSign;
+			implicitHeight: parent.height;
+		}
+
+		Item {
 
 			id: oLabel;
-			text: oRoot.pText;
-			color: "pink";
-			font.bold: true;
-			font.pixelSize: 18;
-			anchors.verticalCenter: parent.verticalCenter;
+			implicitHeight: parent.height
 		}
+	}
+
+	background: Rectangle {
+
+		id: oBackground;
+		color: AColors.mTransparent();
+		anchors.fill: parent;
 	}
 }
