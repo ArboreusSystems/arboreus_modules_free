@@ -7,7 +7,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 07/05/2021 at 17:40:03
+	\li @created 08/12/2021 at 10:03:29
 	\endlist
 */
 // ----------------------------------------------------------
@@ -19,7 +19,9 @@ import QtQuick 2.15
 
 
 // Component
-Item {
+Rectangle {
 
-	id: oRoot;
+	id: oRoot
+	color: AColors.mTransparent();
+	anchors.fill: parent;
 }

@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/ModulesFree/QMLComponents">
-        <file>Text/AText.qml</file>
         <file>Controls/ASlider.qml</file>
         <file>Templates/Text/ATextTemplate.qml</file>
         <file>Templates/Inputs/AInputTextTemplate.qml</file>
@@ -16,5 +15,7 @@
         <file>Templates/Menu/AMenuGroupTemplate.qml</file>
         <file>Templates/Menu/AMenuButtonTemplate.qml</file>
         <file>Templates/Inputs/AInputTextWithLabelTemplate.qml</file>
+        <file>Content/AContentMobileWrapper.qml</file>
+        <file>Content/AContentDesktopWrapper.qml</file>
     </qresource>
 </RCC>

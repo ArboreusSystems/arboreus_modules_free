@@ -26,6 +26,6 @@ Button {
 
 	onClicked: {
 
-		console.info("1 Button",oRoot.objectName,"clicked");
+		console.info("Button",oRoot.objectName,"clicked");
 	}
 }
