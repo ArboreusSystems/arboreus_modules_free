@@ -26,6 +26,7 @@ Rectangle {
 
 	id: oRoot
 	color: AColors.mTransparent();
+	anchors.fill: parent;
 
 	Component.onCompleted: {
 
@@ -39,6 +40,17 @@ Rectangle {
 
 		Qt.inputMethod.onKeyboardRectangleChanged.disconnect(mUpdateSize);
 		Qt.inputMethod.onVisibleChanged.disconnect(mUpdateSize);
+	}
+
+	Connections {
+
+		target: ADevice;
+		function onSgOrientationChanged(inOrientation) {
+
+			if (typeof oRoot.mOnSgOrientationChanged === "function") {
+				oRoot.mOnSgOrientationChanged(inOrientation);
+			}
+		}
 	}
 
 	Timer {

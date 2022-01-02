@@ -26,7 +26,7 @@ Item {
 	required property ApplicationWindow pApplicationWindow;
 	property alias pContent: oContentWrapper;
 	property string pColorSafeArea: "magenta";
-	property string pColorBackground: "black";
+	property string pColorBackground: "white";
 	property var pStatusBarStyle: ADeviceEnums.Light;
 
 	id: oRoot;
