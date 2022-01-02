@@ -7,6 +7,8 @@ lupdate_only {
 
 	SOURCES += \
 		$$PWD/*.qml \
+		$$PWD/Application/*.qml \
+		$$PWD/Content/*.qml \
 		$$PWD/Controls/*.qml \
 		$$PWD/Templates/*.qml \
 		$$PWD/Templates/Buttons/*.qml \
