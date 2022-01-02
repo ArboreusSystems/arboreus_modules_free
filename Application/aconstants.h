@@ -40,14 +40,19 @@ class AConstants : public QObject {
 		explicit AConstants(QObject *parent = nullptr);
 		virtual ~AConstants(void);
 
+		const char* mNameComponentArboreus(void);
+
 	public slots:
 
+		QString mStringNameComponentArboreus(void);
 		QString mStringError(void);
 		QString mStringNormal(void);
 		QString mStringOnClicked(void);
 		QString mStringOnPressed(void);
 
 	private:
+
+		const char* pNameComponentArboreus = _A_CONSTANT_NAME_COMPONENT_ARBOREUS;
 
 		QString mString(const char* inValue);
 };

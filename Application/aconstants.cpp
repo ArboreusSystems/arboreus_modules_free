@@ -53,6 +53,32 @@ AConstants::~AConstants(void) {
 	Doc.
 */
 
+const char* AConstants::mNameComponentArboreus(void) {
+
+	return pNameComponentArboreus;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AConstants::mStringNameComponentArboreus(void) {
+
+	return this->mString(pNameComponentArboreus);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 QString AConstants::mStringError(void) {
 
 	return this->mString(_A_CONSTANT_STRING_ERROR);
