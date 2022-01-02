@@ -15,7 +15,9 @@
         <file>Templates/Menu/AMenuGroupTemplate.qml</file>
         <file>Templates/Menu/AMenuButtonTemplate.qml</file>
         <file>Templates/Inputs/AInputTextWithLabelTemplate.qml</file>
-        <file>Content/AContentMobileWrapper.qml</file>
-        <file>Content/AContentDesktopWrapper.qml</file>
+        <file>Content/AContentMobile.qml</file>
+        <file>Content/AContentDesktop.qml</file>
+        <file>Application/AMobileApplicationWrapperFullScreen.qml</file>
+        <file>Application/AMobileApplicationWrapper.qml</file>
     </qresource>
 </RCC>
