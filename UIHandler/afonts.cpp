@@ -98,12 +98,15 @@ void AFonts::mSetFont(QString inFontFamily) {
 
 void AFonts::mSetFontList(QList<QString> inFontList) {
 
-	QFontDatabase::removeAllApplicationFonts();
-	for (int i = 0; i < inFontList.size(); ++i) {
-		QFontDatabase::addApplicationFont(inFontList[i]);
-	}
+	if (!inFontList.isEmpty()) {
 
-	pFontFamily = QFontDatabase::applicationFontFamilies(0).first();
+		QFontDatabase::removeAllApplicationFonts();
+		for (int i = 0; i < inFontList.size(); ++i) {
+			QFontDatabase::addApplicationFont(inFontList[i]);
+		}
+
+		pFontFamily = QFontDatabase::applicationFontFamilies(0).first();
+	}
 
 	_A_DEBUG << "Font family:" << pFontFamily;
 }
