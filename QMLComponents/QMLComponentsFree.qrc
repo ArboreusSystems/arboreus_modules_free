@@ -19,5 +19,6 @@
         <file>Content/AContentDesktop.qml</file>
         <file>Application/AMobileApplicationWrapperFullScreen.qml</file>
         <file>Application/AMobileApplicationWrapper.qml</file>
+        <file>Controls/AMouseArea.qml</file>
     </qresource>
 </RCC>
