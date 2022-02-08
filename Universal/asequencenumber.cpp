@@ -77,3 +77,33 @@ int ASequenceNumber::mRandom(int Number1,int Number2) {
 }
 
 
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+int ASequenceNumber::mRandomPositive(void) {
+
+	int oOutput = mRandom();
+	if (oOutput < 0) oOutput = oOutput * (-1);
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+int ASequenceNumber::mRandomNegative(void) {
+
+	int oOutput = mRandom();
+	if (oOutput > 0) oOutput = oOutput * (-1);
+	return oOutput;
+}
+
+

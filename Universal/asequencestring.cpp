@@ -213,7 +213,7 @@ QString ASequenceString::mRandom(int inLength,QString inDictionary) {
 	QString vString;
 	int vSolt = ASequenceNumber::mRandom(0,1024);
 	for(int i=0; i<inLength + vSolt; ++i) {
-		int vCharPosition = ASequenceNumber::mRandom() % inDictionary.length();
+		int vCharPosition = ASequenceNumber::mRandomPositive() % inDictionary.length();
 		QChar vNextChar = inDictionary.at(vCharPosition);
 		vString.append(vNextChar);
 	}

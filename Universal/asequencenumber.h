@@ -33,11 +33,13 @@ class ASequenceNumber : public QObject {
 
 	public:
 
-		explicit ASequenceNumber(QObject *parent = nullptr);
+		explicit ASequenceNumber(QObject* parent = nullptr);
 		virtual ~ASequenceNumber(void);
 
 		static int mRandom(void);
 		static int mRandom(int Number1,int Number2);
+		static int mRandomPositive(void);
+		static int mRandomNegative(void);
 };
 
 } // namespace ARB
