@@ -1,24 +1,24 @@
 <RCC>
     <qresource prefix="/ModulesFree/QMLComponents">
-        <file>Controls/ASlider.qml</file>
-        <file>Templates/Text/ATextTemplate.qml</file>
-        <file>Templates/Inputs/AInputTextTemplate.qml</file>
-        <file>Templates/Headers/AHeaderTemplate.qml</file>
-        <file>Templates/Headers/AHeaderRowTemplate.qml</file>
-        <file>Templates/Headers/AHeaderLeftBlockTemplate.qml</file>
-        <file>Templates/Headers/AHeaderRightBlockTemplate.qml</file>
-        <file>Templates/Headers/AHeaderLabelTemplate.qml</file>
-        <file>Templates/Buttons/AButtonGeneralTemplate.qml</file>
-        <file>Templates/Menu/AMenuViewTemplate.qml</file>
-        <file>Templates/Buttons/AButtonLeftSignTemplate.qml</file>
-        <file>Templates/Menu/AMenuItemTemplate.qml</file>
-        <file>Templates/Menu/AMenuGroupTemplate.qml</file>
-        <file>Templates/Menu/AMenuButtonTemplate.qml</file>
-        <file>Templates/Inputs/AInputTextWithLabelTemplate.qml</file>
-        <file>Content/AContentMobile.qml</file>
-        <file>Content/AContentDesktop.qml</file>
-        <file>Application/AMobileApplicationWrapperFullScreen.qml</file>
-        <file>Application/AMobileApplicationWrapper.qml</file>
-        <file>Controls/AMouseArea.qml</file>
+        <file>Controls/ASliderTemplate.qml</file>
+		<file>Text/ATextTemplate.qml</file>
+		<file>Inputs/AInputTextTemplate.qml</file>
+		<file>Headers/AHeaderTemplate.qml</file>
+		<file>Headers/AHeaderRowTemplate.qml</file>
+		<file>Headers/AHeaderLeftBlockTemplate.qml</file>
+		<file>Headers/AHeaderRightBlockTemplate.qml</file>
+		<file>Headers/AHeaderLabelTemplate.qml</file>
+		<file>Buttons/AButtonGeneralTemplate.qml</file>
+		<file>Menu/AMenuViewTemplate.qml</file>
+		<file>Buttons/AButtonLeftSignTemplate.qml</file>
+		<file>Menu/AMenuItemTemplate.qml</file>
+		<file>Menu/AMenuGroupTemplate.qml</file>
+		<file>Menu/AMenuButtonTemplate.qml</file>
+		<file>Inputs/AInputTextWithLabelTemplate.qml</file>
+        <file>Content/AContentMobileTemplate.qml</file>
+        <file>Content/AContentDesktopTemplate.qml</file>
+        <file>Application/AMobileApplicationWrapperFullScreenTemplate.qml</file>
+        <file>Application/AMobileApplicationWrapperTemplate.qml</file>
+        <file>QtQuick/AMouseAreaTemplate.qml</file>
     </qresource>
 </RCC>

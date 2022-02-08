@@ -18,7 +18,7 @@ import QtQuick 2.15
 // Application includes
 
 // Application paths
-import "qrc:/ModulesFree/QMLComponents/Templates/Text";
+import "qrc:/ModulesFree/QMLComponents/Text";
 
 
 // Component

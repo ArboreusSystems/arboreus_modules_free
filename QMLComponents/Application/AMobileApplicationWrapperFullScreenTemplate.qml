@@ -35,9 +35,9 @@ Item {
 
 	Component.onCompleted: {
 
-		pApplicationWindow.flags = Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint;
-		mSetStatusBarStyleDefault();
-		mSetSafeAreaInsets();
+		oRoot.pApplicationWindow.flags = Qt.Window | Qt.MaximizeUsingFullscreenGeometryHint;
+		oRoot.mSetStatusBarStyleDefault();
+		oRoot.mSetSafeAreaInsets();
 	}
 
 	Connections {
@@ -55,8 +55,8 @@ Item {
 					oPaddingLeft.color = AColors.mTransparent();
 					oPaddingRight.color = AColors.mTransparent();
 				} else {
-					oPaddingLeft.color = pColorSafeArea;
-					oPaddingRight.color = pColorSafeArea;
+					oPaddingLeft.color = oRoot.pColorSafeArea;
+					oPaddingRight.color = oRoot.pColorSafeArea;
 				}
 			}
 		}

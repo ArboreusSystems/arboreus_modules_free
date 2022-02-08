@@ -24,22 +24,22 @@ Rectangle {
 
 	signal sgKeyboardVisible(bool inVisible);
 
-	id: oRoot
+	id: oRoot;
 	color: AColors.mTransparent();
 	anchors.fill: parent;
 
 	Component.onCompleted: {
 
-		Qt.inputMethod.onKeyboardRectangleChanged.connect(mUpdateSize);
-		Qt.inputMethod.onVisibleChanged.connect(mUpdateSize);
+		Qt.inputMethod.onKeyboardRectangleChanged.connect(oRoot.mUpdateSize);
+		Qt.inputMethod.onVisibleChanged.connect(oRoot.mUpdateSize);
 
-		mUpdateSize();
+		oRoot.mUpdateSize();
 	}
 
 	Component.onDestruction: {
 
-		Qt.inputMethod.onKeyboardRectangleChanged.disconnect(mUpdateSize);
-		Qt.inputMethod.onVisibleChanged.disconnect(mUpdateSize);
+		Qt.inputMethod.onKeyboardRectangleChanged.disconnect(oRoot.mUpdateSize);
+		Qt.inputMethod.onVisibleChanged.disconnect(oRoot.mUpdateSize);
 	}
 
 	Connections {
