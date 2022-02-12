@@ -107,6 +107,22 @@ Item {
 		anchors.right: oPaddingRight.left;
 	}
 
+	Item {
+
+		id: oTopLayerWrapper;
+		anchors.top: oPaddingTop.bottom;
+		anchors.bottom: oPaddingBottom.top;
+		anchors.left: oPaddingLeft.right;
+		anchors.right: oPaddingRight.left;
+		visible: false;
+
+		Loader {
+
+			id: oTopLayerWrapperLoader;
+			anchors.fill: parent;
+		}
+	}
+
 	function mSetSafeAreaInsets() {
 
 		let oSafeAreaInsets = ADevice.mSafeAreaInsets();
@@ -126,5 +142,28 @@ Item {
 	function mSetBackgroundColor(inColor) {
 
 		oRoot.pColorBackground = AColors.mGetString(inColor);
+	}
+
+	function mTopLayerShowWithSource(inSource) {
+
+		oTopLayerWrapper.visible = true;
+		oTopLayerWrapper.z = oRoot.children.length;
+		oTopLayerWrapperLoader.source = inSource;
+	}
+
+	function mTopLayerShow() {
+
+		oTopLayerWrapper.visible = true;
+	}
+
+	function mTopLayerHide() {
+
+		oTopLayerWrapper.visible = false;
+	}
+
+	function mTopLayerReset() {
+
+		oTopLayerWrapperLoader.source = "";
+		oTopLayerWrapper.visible = false;
 	}
 }
