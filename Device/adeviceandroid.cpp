@@ -66,6 +66,8 @@ ADeviceSafeAreaInsets ADeviceAndroid::mGetSafeAreaInsets(void) {
 
 void ADeviceAndroid::mSetStatusBarStyle(ADeviceEnums::StatusBarStyle inStyle) {
 
+	Q_UNUSED(inStyle);
+
 	// TODO: Android ARBSTCL-201 Add StatusBarStyle handling to Android version
 }
 
