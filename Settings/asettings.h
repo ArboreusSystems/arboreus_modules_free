@@ -48,6 +48,8 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 		Q_DISABLE_COPY(ASettings)
 
 		void mInit(void);
+		ASettingsReply mGet(QString inKey);
+		void mUpdate(QString inKey, QVariant inValue);
 
 	signals:
 
@@ -59,9 +61,10 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 
 	public slots:
 
-		QVariantMap mGet(QString inKey);
-		void mUpdate(QString inKey,QVariant inValue);
+		QVariantMap mGetByKey(QString inKey);
+		void mUpdateByKey(QString inKey,QVariant inValue);
 		bool mIsKey(QString inKey);
+
 		void slInitiated(void);
 		void slUpdated(QString inKey,QVariant inValue);
 

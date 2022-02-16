@@ -27,7 +27,7 @@ Item {
 	property alias pContent: oContentWrapper;
 	property string pColorSafeArea: "magenta";
 	property string pColorBackground: "white";
-	property var pStatusBarStyle: ADeviceEnums.Light;
+	property int pStatusBarStyle: ADeviceEnums.Light;
 
 	id: oRoot;
 	width: parent.width;

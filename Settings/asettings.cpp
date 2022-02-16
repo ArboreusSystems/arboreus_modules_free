@@ -95,6 +95,44 @@ void ASettings::mInit(void) {
 	Doc.
 */
 
+ASettingsReply ASettings::mGet(QString inKey) {
+
+	ASettingsReply oOutput;
+	oOutput.Data = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
+
+	if (oOutput.Data != QString(A_SETTING_VALUE_NO_KEY)) {
+		oOutput.Status = true;
+		return oOutput;
+	}
+
+	oOutput = this->mGetFromDB(inKey);
+	if (oOutput.Status) {
+		pCache.insert(inKey,oOutput.Data);
+	}
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ASettings::mUpdate(QString inKey, QVariant inValue) {
+
+	emit sgUpdate(inKey,inValue);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void ASettings::slInitiated(void) {
 
 	_A_DEBUG << "ASettings initiated";
@@ -110,21 +148,9 @@ void ASettings::slInitiated(void) {
 	Doc.
 */
 
-QVariantMap ASettings::mGet(QString inKey) {
+QVariantMap ASettings::mGetByKey(QString inKey) {
 
-	ASettingsReply oOutput;
-	oOutput.Data = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
-
-	if (oOutput.Data != QString(A_SETTING_VALUE_NO_KEY)) {
-		oOutput.Status = true;
-		return oOutput.mToVariantMap();
-	}
-
-	oOutput = this->mGetFromDB(inKey);
-	if (oOutput.Status) {
-		pCache.insert(inKey,oOutput.Data);
-	}
-	return oOutput.mToVariantMap();
+	return this->mGet(inKey).mToVariantMap();
 }
 
 
@@ -135,9 +161,9 @@ QVariantMap ASettings::mGet(QString inKey) {
 	Doc.
 */
 
-void ASettings::mUpdate(QString inKey, QVariant inValue) {
+void ASettings::mUpdateByKey(QString inKey, QVariant inValue) {
 
-	emit sgUpdate(inKey,inValue);
+	this->mUpdate(inKey,inValue);
 }
 
 
