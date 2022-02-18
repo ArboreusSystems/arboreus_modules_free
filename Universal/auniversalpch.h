@@ -21,13 +21,11 @@
 #include <QObject>
 #include <QDir>
 #include <QStringList>
-#include <QStringListIterator>
 #include <QJsonParseError>
 #include <QJsonObject>
 #include <QVariant>
 #include <QDateTime>
 #include <QString>
-#include <QStringRef>
 #include <QChar>
 #include <QCryptographicHash>
 #include <QFile>
@@ -42,6 +40,12 @@
 #include <chrono>
 #include <random>
 #include <vector>
+
+// Qt 5 System includes
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#include <QStringListIterator>
+#include <QStringRef>
+#endif
 
 // Application includes
 
