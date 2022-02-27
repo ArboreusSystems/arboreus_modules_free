@@ -54,7 +54,7 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 	signals:
 
 		void sgInit(QString inPathSettingsData);
-		void sgInitiated();
+		void sgInitiated(void);
 		void sgGetFromDB(QString inKey);
 		void sgUpdated(QString inKey,QVariant inValue);
 		void sgUpdate(QString inKey,QVariant inValue);
