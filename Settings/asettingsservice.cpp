@@ -110,7 +110,7 @@ void ASettingsService::slUpdate(QString inKey, QVariant inValue) {
 	oQuery.bindValue(":key",inKey);
 	oQuery.bindValue(":value",inValue);
 
-	ADBSqliteReply oReply = pDB->mQueryTransaction(oQuery);
+	ADBSqliteReply oReply = pDB->mQueryTransaction(std::move(oQuery));
 	if (!oReply.Status) {
 		_A_CRITICAL << "Writing query in settings failed";
 	} else {

@@ -17,6 +17,9 @@
 
 #if defined __cplusplus
 
+// Standard includes
+#include <utility>
+
 // System includes
 #include <QObject>
 #include <QVariant>
