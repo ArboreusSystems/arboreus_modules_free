@@ -67,7 +67,7 @@ bool ADBSqliteCipher::mStart(ADBProperties* inProperties) {
 
 	QSqlDatabase oDB = QSqlDatabase::addDatabase(pDriverName,pName);
 	oDB.setDatabaseName(pPath);
-	if (pValue != QString(A_DB_NULL_VALUE)) {
+	if (pValue != QString(_A_DB_NULL_VALUE)) {
 		oDB.setPassword(pValue);
 	}
 

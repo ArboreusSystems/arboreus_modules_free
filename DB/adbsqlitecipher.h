@@ -44,7 +44,7 @@ class ADBSqliteCipher : public ADBSqlite {
 
 	private:
 
-		QString pValue = QString(A_DB_NULL_VALUE);
+		QString pValue = QString(_A_DB_NULL_VALUE);
 };
 
 } // namespace ARB
