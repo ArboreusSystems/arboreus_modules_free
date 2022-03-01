@@ -69,7 +69,7 @@ QString ASettingsService::mGetDBName(void) {
 void ASettingsService::slInit(QString inPathSettingsData) {
 
 	ADBSqliteCipherProperties oDBproperties;
-	oDBproperties.Name = QString(A_SETTINGS_DB_NAME);
+	oDBproperties.Name = QString(_A_SETTINGS_DB_NAME);
 	oDBproperties.Path = inPathSettingsData + "/" + oDBproperties.Name + ".db";
 
 	pDB = new ADBSqliteCipher(this);

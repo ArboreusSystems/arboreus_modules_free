@@ -28,7 +28,7 @@
 #include <adbsqlitecipher.h>
 
 // Constants and definitions
-#define A_SETTINGS_DB_NAME "settings"
+#define _A_SETTINGS_DB_NAME "settings"
 
 // Namespace
 namespace ARB {

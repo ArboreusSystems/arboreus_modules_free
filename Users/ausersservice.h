@@ -23,7 +23,10 @@
 
 // Application includes
 #include <athreadservicetemplate.h>
+#include <ausersdatamodels.h>
 #include <aloggerglobal.h>
+#include <adbsqlitecipher.h>
+#include <adir.h>
 
 // Constants and definitions
 
@@ -42,11 +45,19 @@ class AUsersService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(void);
+		void slInit(AUsersModuleProperties inProperties);
 
 	signals:
 
 		void sgInitiated(void);
+
+	private:
+
+		ADBSqliteCipher* pDB = nullptr;
+		QString pPathData = "NoDefinedPathData";
+		QString pPathCache = "NoDefinedPathCache";
+
+		void mInitDB(QString inDBName);
 };
 
 } // namespace ARB

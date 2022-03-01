@@ -53,9 +53,45 @@ AUsersService::~AUsersService(void) {
 	Doc.
 */
 
-void AUsersService::slInit(void) {
+void AUsersService::slInit(AUsersModuleProperties inProperties) {
+
+	QString oPathApplication = inProperties.PathApplication + "/Users";
+	if (ADir::mEnsure(oPathApplication)) {
+		this->pPathData = oPathApplication;
+		_A_DEBUG << "Ensured Users Application path:" << this->pPathData;
+	} else {
+		_A_CRITICAL << "No Users Application path:" << oPathApplication;
+	}
+
+	QString oPathCache = inProperties.PathCache + "/Users";
+	if (ADir::mEnsure(oPathCache)) {
+		this->pPathCache = oPathCache;
+		_A_DEBUG << "Ensured Users Cache path:" << this->pPathCache;
+	} else {
+		_A_CRITICAL << "No Users Cache path:" << oPathCache;
+	}
+
+	this->mInitDB(inProperties.DBTableProperties.Name);
 
 	_A_DEBUG << "AUsersService initiated";
 
 	emit sgInitiated();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AUsersService::mInitDB(QString inDBName) {
+
+	ADBSqliteCipherProperties oDBproperties;
+	oDBproperties.Name = QString(inDBName);
+	oDBproperties.Path = this->pPathData + "/" + oDBproperties.Name + ".db";
+
+	pDB = new ADBSqliteCipher(this);
+	pDB->mStart(&oDBproperties);
 }

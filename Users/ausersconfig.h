@@ -8,28 +8,35 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 27/02/2022 at 15:13:05
+	\li @created 28/02/2022 at 16:37:02
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef AUSERSPCH_H
-#define AUSERSPCH_H
-
-#if defined __cplusplus
+#ifndef AUSERSCONFIG_H
+#define AUSERSCONFIG_H
 
 // System includes
-#include <QObject>
-#include <QVariant>
-#include <QMap>
-#include <QVariantMap>
-#include <QString>
+
+// Precompiled includes
+#include <auserspch.h>
 
 // Application includes
+#include <adbdatamodels.h>
 
 // Constants and defintions
 
 // Namespace
+namespace ARB {
 
-#endif
+class AUsersConfig {
 
-#endif // AUSERSPCH_H
+	public:
+
+		virtual ADBTableProperties AUsersConfig_DBTableProperties(void) = 0;
+};
+
+} // namespace ARB
+
+Q_DECLARE_INTERFACE(ARB::AUsersConfig,"Arboreus.AUsersConfig/1.0")
+
+#endif // AUSERSCONFIG_H

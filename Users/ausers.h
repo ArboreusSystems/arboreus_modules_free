@@ -24,6 +24,8 @@
 // Application includes
 #include <athreadtemplate.h>
 #include <ausersservice.h>
+#include <ausersdatamodels.h>
+#include <ausersconfig.h>
 
 // Constants and definitions
 
@@ -52,12 +54,13 @@ class AUsers : public AThreadTemplate<AUsersService> {
 
 	signals:
 
-		void sgInit(void);
+		void sgInit(AUsersModuleProperties inProperties);
 		void sgInitiated(void);
 
 	private:
 
 		ABackend* pBackend = nullptr;
+		AUsersConfig* pConfig = nullptr;
 };
 
 } // namespace ARB

@@ -67,7 +67,15 @@ AUsers::~AUsers(void) {
 
 void AUsers::mInit(void) {
 
-	emit sgInit();
+	pBackend = &ABackend::mInstance();
+	pConfig = qobject_cast<AUsersConfig*>(pBackend->pApplicationConfig);
+
+	AUsersModuleProperties oProperties;
+	oProperties.PathCache = pBackend->pProperties->mGetPathDataCache();
+	oProperties.PathApplication = pBackend->pProperties->mGetPathDataApplication();
+	oProperties.DBTableProperties = pConfig->AUsersConfig_DBTableProperties();
+
+	emit sgInit(oProperties);
 }
 
 
