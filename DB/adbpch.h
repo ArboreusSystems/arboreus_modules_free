@@ -19,6 +19,7 @@
 
 // System includes
 #include <QObject>
+#include <QList>
 #include <QString>
 #include <QVariantList>
 #include <QSqlDatabase>
