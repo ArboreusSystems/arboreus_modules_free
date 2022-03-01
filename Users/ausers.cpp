@@ -75,6 +75,8 @@ void AUsers::mInit(void) {
 	oProperties.PathApplication = pBackend->pProperties->mGetPathDataApplication();
 	oProperties.DBTableProperties = pConfig->AUsersConfig_DBTableProperties();
 
+	_A_DEBUG << "2222222222:" << oProperties.DBTableProperties.Schema.length();
+
 	emit sgInit(oProperties);
 }
 

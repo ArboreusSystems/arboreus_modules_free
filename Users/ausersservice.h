@@ -26,6 +26,7 @@
 #include <ausersdatamodels.h>
 #include <aloggerglobal.h>
 #include <adbsqlitecipher.h>
+#include <adbsqlgenerator.h>
 #include <adir.h>
 
 // Constants and definitions
@@ -57,7 +58,7 @@ class AUsersService : public AThreadServiceTemplate {
 		QString pPathData = "NoDefinedPathData";
 		QString pPathCache = "NoDefinedPathCache";
 
-		void mInitDB(QString inDBName);
+		void mInitDB(QString inDBName,ADBTableProperties inTableProperties);
 };
 
 } // namespace ARB

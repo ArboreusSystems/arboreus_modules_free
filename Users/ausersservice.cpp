@@ -71,7 +71,7 @@ void AUsersService::slInit(AUsersModuleProperties inProperties) {
 		_A_CRITICAL << "No Users Cache path:" << oPathCache;
 	}
 
-	this->mInitDB(inProperties.DBTableProperties.Name);
+	this->mInitDB("users",inProperties.DBTableProperties);
 
 	_A_DEBUG << "AUsersService initiated";
 
@@ -86,12 +86,14 @@ void AUsersService::slInit(AUsersModuleProperties inProperties) {
 	Doc.
 */
 
-void AUsersService::mInitDB(QString inDBName) {
+void AUsersService::mInitDB(QString inDBName,ADBTableProperties inTableProperties) {
 
 	ADBSqliteCipherProperties oDBproperties;
-	oDBproperties.Name = QString(inDBName);
+	oDBproperties.Name = inDBName;
 	oDBproperties.Path = this->pPathData + "/" + oDBproperties.Name + ".db";
 
 	pDB = new ADBSqliteCipher(this);
 	pDB->mStart(&oDBproperties);
+
+	_A_DEBUG << "!!!!!!!!!!: " << ADBSqlGenerator::mCreateTable(inTableProperties);
 }

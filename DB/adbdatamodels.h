@@ -101,6 +101,7 @@ class ADBFieldProperties {
 
 		_A_ENUM_DB_SQLITE_FIELD_TYPE Type = _A_ENUM_DB_SQLITE_FIELD_TYPE::Undefined;
 		bool PrimaryKey = false;
+		bool Unique = false;
 		bool NotNull = false;
 		bool Default = false;
 		QVariant DefaultValue = "NoDefaultValue";
@@ -123,6 +124,7 @@ class ADBFieldProperties {
 			QVariantMap oOutput;
 			oOutput.insert("Type",QVariant::fromValue(Type));
 			oOutput.insert("PrimaryKey",PrimaryKey);
+			oOutput.insert("Unique",Unique);
 			oOutput.insert("NotNull",NotNull);
 			oOutput.insert("Default",Default);
 			oOutput.insert("DefaultValue",DefaultValue);
@@ -152,6 +154,11 @@ class ADBFieldProperties {
 			oValue = inProperties.value("PrimaryKey",oErrorValue);
 			if (QString::compare(oErrorValue,qvariant_cast<QString>(oValue)) != 0) {
 				PrimaryKey = qvariant_cast<bool>(oValue);
+			}
+
+			oValue = inProperties.value("Unique",oErrorValue);
+			if (QString::compare(oErrorValue,qvariant_cast<QString>(oValue)) != 0) {
+				Unique = qvariant_cast<bool>(oValue);
 			}
 
 			oValue = inProperties.value("NotNull",oErrorValue);
