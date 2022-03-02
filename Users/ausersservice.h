@@ -24,6 +24,7 @@
 // Application includes
 #include <athreadservicetemplate.h>
 #include <ausersdatamodels.h>
+#include <ausersconfig.h>
 #include <aloggerglobal.h>
 #include <adbsqlitecipher.h>
 #include <adbsqlgenerator.h>
@@ -55,6 +56,7 @@ class AUsersService : public AThreadServiceTemplate {
 	private:
 
 		ADBSqliteCipher* pDB = nullptr;
+		AUsersConfig* pConfig = nullptr;
 		QString pPathData = "NoDefinedPathData";
 		QString pPathCache = "NoDefinedPathCache";
 

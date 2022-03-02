@@ -22,6 +22,7 @@
 
 // Application includes
 #include <adbdatamodels.h>
+#include <ausersconfig.h>
 
 // Constants and defintions
 
@@ -34,7 +35,7 @@ class AUsersModuleProperties {
 
 		QString PathCache = "NoPathUsersCache";
 		QString PathApplication = "NoPathUsersApplication";
-		ADBTableProperties DBTableProperties;
+		AUsersConfig* Config = nullptr;
 
 		explicit AUsersModuleProperties(void) {}
 		virtual ~AUsersModuleProperties(void) {}

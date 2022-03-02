@@ -40,7 +40,7 @@ class ADBSqlGenerator : public QObject {
 		explicit ADBSqlGenerator(QObject* parent = nullptr);
 		virtual ~ADBSqlGenerator(void);
 
-		static QString mCreateTable(ADBTableProperties inProperties);
+		static QString mStringCreateTable(ADBTableProperties inProperties);
 };
 
 } // namespace ARB

@@ -73,9 +73,7 @@ void AUsers::mInit(void) {
 	AUsersModuleProperties oProperties;
 	oProperties.PathCache = pBackend->pProperties->mGetPathDataCache();
 	oProperties.PathApplication = pBackend->pProperties->mGetPathDataApplication();
-	oProperties.DBTableProperties = pConfig->AUsersConfig_DBTableProperties();
-
-	_A_DEBUG << "2222222222:" << oProperties.DBTableProperties.Schema.length();
+	oProperties.Config = pConfig;
 
 	emit sgInit(oProperties);
 }

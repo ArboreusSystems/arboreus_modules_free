@@ -55,6 +55,8 @@ AUsersService::~AUsersService(void) {
 
 void AUsersService::slInit(AUsersModuleProperties inProperties) {
 
+	pConfig = inProperties.Config;
+
 	QString oPathApplication = inProperties.PathApplication + "/Users";
 	if (ADir::mEnsure(oPathApplication)) {
 		this->pPathData = oPathApplication;
@@ -71,7 +73,10 @@ void AUsersService::slInit(AUsersModuleProperties inProperties) {
 		_A_CRITICAL << "No Users Cache path:" << oPathCache;
 	}
 
-	this->mInitDB("users",inProperties.DBTableProperties);
+	this->mInitDB(
+		pConfig->AUsersConfig_DBTableName(),
+		pConfig->AUsersConfig_DBTableProperties()
+	);
 
 	_A_DEBUG << "AUsersService initiated";
 
@@ -95,5 +100,12 @@ void AUsersService::mInitDB(QString inDBName,ADBTableProperties inTablePropertie
 	pDB = new ADBSqliteCipher(this);
 	pDB->mStart(&oDBproperties);
 
-	_A_DEBUG << "!!!!!!!!!!: " << ADBSqlGenerator::mCreateTable(inTableProperties);
+	ADBSqliteReply oCreatingReply = pDB->mStringExecute(
+		ADBSqlGenerator::mStringCreateTable(inTableProperties)
+	);
+	if (!oCreatingReply.Status) {
+		_A_CRITICAL << "Creating DB for users failed";
+	} else {
+		_A_DEBUG << "DB for users created";
+	}
 }

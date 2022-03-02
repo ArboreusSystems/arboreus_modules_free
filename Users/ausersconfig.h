@@ -33,6 +33,7 @@ class AUsersConfig {
 	public:
 
 		virtual ADBTableProperties AUsersConfig_DBTableProperties(void) = 0;
+		virtual QString AUsersConfig_DBTableName(void) = 0;
 };
 
 } // namespace ARB

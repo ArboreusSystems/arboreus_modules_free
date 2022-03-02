@@ -47,13 +47,10 @@ ADBSqlGenerator::~ADBSqlGenerator(void) {}
 	Doc.
 */
 
-QString ADBSqlGenerator::mCreateTable(ADBTableProperties inProperties) {
+QString ADBSqlGenerator::mStringCreateTable(ADBTableProperties inProperties) {
 
 	bool oPrimaryKey = false;
-	QString oOutput = QString("") +
-		"CREATE TABLE IF NOT EXISTS " +
-		inProperties.Name +
-		" (id INTEGER PRIMARY KEY AUTOINCREMENT, ";
+	QString oOutput = "CREATE TABLE IF NOT EXISTS " + inProperties.Name + " (";
 
 	for (int i = 0; i < inProperties.Schema.length(); i++) {
 
@@ -77,6 +74,7 @@ QString ADBSqlGenerator::mCreateTable(ADBTableProperties inProperties) {
 			oPrimaryKey = true;
 		}
 
+		if (iField->Autoincrement) oOutput += " AUTOINCREMENT";
 		if (iField->NotNull) oOutput += " NOT NULL";
 		if (iField->Unique && oPrimaryKey) oOutput += " UNIQUE";
 		if (i != (inProperties.Schema.length() - 1)) oOutput += ", ";
