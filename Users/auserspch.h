@@ -22,6 +22,8 @@
 #include <QVariant>
 #include <QMap>
 #include <QVariantMap>
+#include <QList>
+#include <QVariantList>
 #include <QString>
 
 // Application includes

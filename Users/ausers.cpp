@@ -69,6 +69,7 @@ void AUsers::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 	pConfig = qobject_cast<AUsersConfig*>(pBackend->pApplicationConfig);
+	pDBSchema = pConfig->AUsersConfig_DBTableProperties().Schema;
 
 	AUsersModuleProperties oProperties;
 	oProperties.PathCache = pBackend->pProperties->mGetPathDataCache();
@@ -76,6 +77,41 @@ void AUsers::mInit(void) {
 	oProperties.Config = pConfig;
 
 	emit sgInit(oProperties);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QList<ADBFieldProperties> AUsers::mDBSchema(void) {
+
+	return pDBSchema;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QVariantList AUsers::mGetDBSchema(void) {
+
+	QVariantList oOutput;
+
+	for (int i = 0; i < pDBSchema.length(); i++) {
+		QVariantMap iField;
+		iField.insert("Name",pDBSchema[i].Name);
+		iField.insert("UserName",pDBSchema[i].UserName);
+		oOutput.append(iField);
+	}
+
+	return oOutput;
 }
 
 

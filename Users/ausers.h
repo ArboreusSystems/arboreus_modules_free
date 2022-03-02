@@ -47,8 +47,11 @@ class AUsers : public AThreadTemplate<AUsersService> {
 		Q_DISABLE_COPY(AUsers)
 
 		void mInit(void);
+		QList<ADBFieldProperties> mDBSchema(void);
 
 	public slots:
+
+		QVariantList mGetDBSchema(void);
 
 		void slInitiated(void);
 
@@ -61,6 +64,7 @@ class AUsers : public AThreadTemplate<AUsersService> {
 
 		ABackend* pBackend = nullptr;
 		AUsersConfig* pConfig = nullptr;
+		QList<ADBFieldProperties> pDBSchema = {};
 };
 
 } // namespace ARB
