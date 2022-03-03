@@ -93,6 +93,14 @@ class ADBSqliteReply {
 
 		ADBSqliteReply(void) {}
 		virtual ~ADBSqliteReply(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("Status",Status);
+			oOutput.insert("Output",Output);
+			return oOutput;
+		}
 };
 
 class ADBFieldProperties {
@@ -254,6 +262,50 @@ class ADBTableProperties {
 				}
 			}
 		}
+};
+
+class ASqlInsertProperties {
+
+	public:
+
+		QString TableName = "NoTableName";
+		QVariantList Data = {};
+
+		explicit ASqlInsertProperties(void) {}
+		virtual ~ASqlInsertProperties(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("TableName",TableName);
+			oOutput.insert("Data",Data);
+			return oOutput;
+		}
+
+		void mFromVariantMap(QVariantMap inProperties) {
+
+			QString oErrorValue = "ErrorDBFieldValue";
+			QVariant oValue;
+
+			oValue = inProperties.value("TableName",oErrorValue);
+			if (QString::compare(oErrorValue,qvariant_cast<QString>(oValue)) != 0) {
+				TableName = qvariant_cast<QString>(oValue);
+			}
+
+			oValue = inProperties.value("Data",oErrorValue);
+			if (QString::compare(oErrorValue,qvariant_cast<QString>(oValue)) != 0) {
+				Data = qvariant_cast<QVariantList>(oValue);
+			}
+		}
+};
+
+class ASqlUpdateProperties {
+
+
+	public:
+
+		explicit ASqlUpdateProperties(void) {}
+		virtual ~ASqlUpdateProperties(void) {}
 };
 
 } //namespace ARB
