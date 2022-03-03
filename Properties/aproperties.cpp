@@ -59,7 +59,7 @@ AProperties::~AProperties(void) {
 void AProperties::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
-	pConfig = qobject_cast<APropertiesConfig*>(pBackend->pApplicationConfig);
+	pConfig = qobject_cast<APropertiesConfig*>(pBackend->pApplicationConfigObject);
 
 	this->mInitPaths();
 	this->mInitIsDesktop();

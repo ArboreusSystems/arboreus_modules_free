@@ -58,6 +58,8 @@ AApplication::~AApplication(void) {
 
 void AApplication::mInit(void) {
 
+	pBackend = &ABackend::mInstance();
+	pConfig = qobject_cast<AApplicationConfig*>(pBackend->pApplicationConfigObject);
 	pConstants = new AConstants(this);
 	_A_DEBUG << "AApplication initiated";
 

@@ -24,6 +24,7 @@
 // Application includes
 #include <aconstants.h>
 #include <aapplicationdatamodels.h>
+#include <aapplicationconfig.h>
 
 // Constants and definitions
 
@@ -59,6 +60,7 @@ class AApplication : public QObject {
 	private:
 
 		ABackend* pBackend = nullptr;
+		AApplicationConfig* pConfig = nullptr;
 };
 
 } // namespace ARB
