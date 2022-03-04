@@ -122,7 +122,7 @@ QByteArray ACryptography::mSignAdd(QByteArray inDatumn) {
 
 ACryptographySignReply ACryptography::mSignRemove(QByteArray inDatumn) {
 
-	ACryptographySignReply oOutput = {};
+	ACryptographySignReply oOutput;
 
 	if (inDatumn.length() < 16) {
 		return oOutput;

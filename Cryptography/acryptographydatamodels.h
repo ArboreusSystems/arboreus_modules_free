@@ -32,43 +32,13 @@
 // Namespace
 namespace ARB {
 
-struct ACryptographySignReply {
-
-	_A_ENUM_REPLY_STATUS Status = _A_ENUM_REPLY_STATUS::Error;
-	QByteArray Datumn = {};
-};
-
-struct ACryptographyAES256 {
-
-	int Nk = 8;
-	int KeyLength = 32;
-	int Nr = 14;
-	int ExpandedKey = 240;
-};
-
-struct ACryptographyAES192 {
-
-	int Nk = 6;
-	int KeyLength = 24;
-	int Nr = 12;
-	int ExpandedKey = 209;
-};
-
-struct ACryptographyAES128 {
-
-	int Nk = 4;
-	int KeyLength = 16;
-	int Nr = 10;
-	int ExpandedKey = 176;
-};
-
 class AEnumsAESType: public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		enum class AESType: int {AES_128, AES_192, AES_256};
+		enum class AESType: int {AES_128,AES_192,AES_256};
 		Q_ENUM(AESType)
 };
 
@@ -88,8 +58,68 @@ class AEnumsAESPadding: public QObject {
 
 	public:
 
-		enum class AESPadding: int {ZERO, PKCS7, ISO};
+		enum class AESPadding: int {ZERO,PKCS7,ISO};
 		Q_ENUM(AESPadding)
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(_A_ENUM_AES_TYPE)
+Q_DECLARE_METATYPE(_A_ENUM_AES_MODE)
+Q_DECLARE_METATYPE(_A_ENUM_AES_PADDING)
+
+
+// Namespace
+namespace ARB {
+
+class ACryptographySignReply {
+
+	public:
+
+		_A_ENUM_REPLY_STATUS Status = _A_ENUM_REPLY_STATUS::Error;
+		QByteArray Datumn = {};
+
+		explicit ACryptographySignReply(void) {}
+		virtual ~ACryptographySignReply(void) {}
+};
+
+class ACryptographyAES256 {
+
+	public:
+
+		int Nk = 8;
+		int KeyLength = 32;
+		int Nr = 14;
+		int ExpandedKey = 240;
+
+		explicit ACryptographyAES256(void) {}
+		virtual ~ACryptographyAES256(void) {}
+};
+
+class ACryptographyAES192 {
+
+	public:
+
+		int Nk = 6;
+		int KeyLength = 24;
+		int Nr = 12;
+		int ExpandedKey = 209;
+
+		explicit ACryptographyAES192(void) {}
+		virtual ~ACryptographyAES192(void) {}
+};
+
+class ACryptographyAES128 {
+
+	public:
+
+		int Nk = 4;
+		int KeyLength = 16;
+		int Nr = 10;
+		int ExpandedKey = 176;
+
+		explicit ACryptographyAES128(void) {}
+		virtual ~ACryptographyAES128(void) {}
 };
 
 } // namespace ARB
