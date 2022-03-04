@@ -30,7 +30,7 @@ using namespace ARB;
 ASettingsAgent::ASettingsAgent(
 	ASettingsService* inService, QString inKey,
 	QVariant inValue, QObject* parent
-) : QObject(parent) {
+) : AThreadObjectTemplate(parent) {
 
 	pKey = inKey;
 	pValue = inValue;
@@ -47,7 +47,7 @@ ASettingsAgent::ASettingsAgent(
 	Doc.
 */
 
-ASettingsAgent::ASettingsAgent(QObject* parent) : QObject(parent) {
+ASettingsAgent::ASettingsAgent(QObject* parent) : AThreadObjectTemplate(parent) {
 
 	_A_DEBUG << "ASettingsAgent created";
 }
@@ -73,7 +73,7 @@ ASettingsAgent::~ASettingsAgent(void) {
 	Doc.
 */
 
-void ASettingsAgent::slGet(void) {
+void ASettingsAgent::slRun(void) {
 
 	ADBSqliteReply oDbReply = pService->pDB->mStringExecute(
 		"SELECT value FROM settings WHERE key='" + pKey + "';"

@@ -199,7 +199,7 @@ ASettingsReply ASettings::mGetFromDB(QString inKey) {
 	);
 	QObject::connect(
 		&oController,&AThreadObjectControllerTemplate::sgRun,
-		&oAgent,&ASettingsAgent::slGet
+		&oAgent,&ASettingsAgent::slRun
 	);
 	oAgent.moveToThread(this);
 
@@ -220,10 +220,7 @@ ASettingsReply ASettings::mGetFromDB(QString inKey) {
 bool ASettings::mIsKey(QString inKey) {
 
 	QVariant oValue = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
-	if (oValue != QString(A_SETTING_VALUE_NO_KEY))  {
-		_A_DEBUG << "IsKey in cache";
-		return true;
-	}
+	if (oValue != QString(A_SETTING_VALUE_NO_KEY)) return true;
 
 	ASettingsReply oOutput = this->mGetFromDB(inKey);
 	return oOutput.Status;

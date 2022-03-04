@@ -25,6 +25,7 @@
 #include <asettingsdatamodels.h>
 #include <asettingsservice.h>
 #include <aloggerglobal.h>
+#include <athreadobjecttemplate.h>
 
 // Constants and definitions
 
@@ -32,7 +33,7 @@
 namespace ARB {
 
 // Class definitions
-class ASettingsAgent : public QObject {
+class ASettingsAgent : public AThreadObjectTemplate {
 
 	Q_OBJECT
 
@@ -56,7 +57,7 @@ class ASettingsAgent : public QObject {
 
 	public slots:
 
-		void slGet(void);
+		void slRun(void);
 
 	private:
 
