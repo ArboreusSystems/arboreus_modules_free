@@ -30,6 +30,29 @@
 // Namespace
 namespace ARB {
 
+class AEnumsDictionaryType: public QObject {
+
+	Q_OBJECT
+
+	public:
+
+		enum class DictionaryType: int {
+
+			AlphaLower, AlphaUpper, Alpha, AlphaLowerNumeric,
+			AlphaUpperNumeric, AlphaNumeric, Symbols,
+			Numeric
+		};
+		Q_ENUM(DictionaryType)
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(_A_ENUM_DICTIONARY_TYPE)
+
+
+// Namespace
+namespace ARB {
+
 class AJsonFileReply {
 
 	public:
@@ -46,19 +69,12 @@ class AJsonFieldReply {
 		QVariant Value;
 };
 
-class AEnumsDictionaryType: public QObject {
-
-	Q_OBJECT
+class AFileReply {
 
 	public:
 
-		enum class DictionaryType: int {
-
-			AlphaLower, AlphaUpper, Alpha, AlphaLowerNumeric,
-			AlphaUpperNumeric, AlphaNumeric, Symbols,
-			Numeric
-		};
-		Q_ENUM(DictionaryType)
+		_A_ENUM_REPLY_STATUS Status = _A_ENUM_REPLY_STATUS::Error;
+		QByteArray Datumn = 0;
 };
 
 } // namespace ARB
