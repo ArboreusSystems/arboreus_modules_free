@@ -8,7 +8,6 @@ HEADERS += \
 	$$PWD/ajson.h \
 	$$PWD/arandom.h \
 	$$PWD/arandomdatamodels.h \
-	$$PWD/asequencenumber.h \
 	$$PWD/asequencestring.h \
 	$$PWD/auniversaldatamodels.h \
 	$$PWD/auniversaldefinitions.h \
@@ -19,5 +18,4 @@ SOURCES += \
 	$$PWD/afile.cpp \
 	$$PWD/ajson.cpp \
 	$$PWD/arandom.cpp \
-	$$PWD/asequencenumber.cpp \
 	$$PWD/asequencestring.cpp

@@ -211,13 +211,13 @@ QString ASequenceString::mRandom(int inLength) {
 QString ASequenceString::mRandom(int inLength,QString inDictionary) {
 
 	QString vString;
-	int vSolt = ASequenceNumber::mRandom(0,1024);
+	int vSolt = ARandom::mNumberFromRange(0,1024);
 	for(int i=0; i<inLength + vSolt; ++i) {
-		int vCharPosition = ASequenceNumber::mRandomPositive() % inDictionary.length();
+		int vCharPosition = ARandom::mNumberPositiveNoExponent() % inDictionary.length();
 		QChar vNextChar = inDictionary.at(vCharPosition);
 		vString.append(vNextChar);
 	}
-	return vString.mid(ASequenceNumber::mRandom(0,vSolt - 1),inLength);
+	return vString.mid(ARandom::mNumberFromRange(0,vSolt - 1),inLength);
 }
 
 
@@ -260,32 +260,5 @@ QString ASequenceString::mDictionary(_A_ENUM_DICTIONARY_TYPE inType) {
 	return vDictionary;
 }
 
-
-// -----------
-/*!
-	\fn QString ASequenceString::mRegistryValue(QString inFilePath,int inLength)
-
-	Calculating string sequence from defined regidtry file of defined length
-*/
-
-
-QString ASequenceString::mRegistryValue(QString inFilePath,int inLength) {
-
-	QString oRegistryValue = "";
-	QDate oDate = QFileInfo(inFilePath).birthTime().date();
-	int X = oDate.month();
-	int Y = oDate.day();
-	int Z = oDate.dayOfWeek();
-	QFile oRegistryFile(inFilePath);
-	if (oRegistryFile.open(QIODevice::ReadOnly)) {
-		QString oString = QTextStream(&oRegistryFile).readAll();
-		oString = oString.remove("\n");
-		oString = oString.remove(QString::number(Z));
-		for (int i = X*Y, j = 0; j < inLength; i += Z, j ++) {
-			oRegistryValue = oString.mid(i,1).append(oRegistryValue);
-		}
-	}
-	return oRegistryValue;
-}
 
 

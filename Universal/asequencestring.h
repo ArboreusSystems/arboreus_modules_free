@@ -23,7 +23,7 @@
 
 // Application includes
 #include <auniversaldatamodels.h>
-#include <asequencenumber.h>
+#include <arandom.h>
 
 // Constants and definitions
 
@@ -54,7 +54,6 @@ class ASequenceString : public QObject {
 		static QString mMd5ID(void);
 		static QString mMd5FromQString(QString inString);
 		static QString mDictionary(_A_ENUM_DICTIONARY_TYPE inType);
-		static QString mRegistryValue(QString inFilePath,int Length);
 };
 
 } // namespace ARB
