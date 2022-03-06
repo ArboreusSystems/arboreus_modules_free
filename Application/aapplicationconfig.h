@@ -23,6 +23,7 @@
 // Application includes
 
 // Constants and defintions
+#define _A_APPLICATION_EMPTY_REGISTRY QString("")
 
 // Namespace
 namespace ARB {
