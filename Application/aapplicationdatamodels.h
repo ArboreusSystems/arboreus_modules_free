@@ -24,6 +24,8 @@
 
 // Constants and defintions
 #define _A_ENUM_REPLY_STATUS ARB::AEnumsStatus::Status
+#define _A_APPLICATION_EMPTY_REGISTRY QString("")
+
 
 // Namespace
 namespace ARB {
