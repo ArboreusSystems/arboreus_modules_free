@@ -66,9 +66,12 @@ QString ASequenceString::mRandomMatrix(int inWidth,int inHeight) {
 QString ASequenceString::mRandomMatrix(int inWidth, int inHeight, QString inDictionary) {
 
 	QString oMatrix;
+	QString oShakedDictionary = ASequenceString::mShake(inDictionary);
+
 	for (int i = 0; i < inHeight; ++i) {
-		oMatrix += mRandom(inWidth,inDictionary) + QString("\n");
+		oMatrix += mRandom(inWidth,oShakedDictionary) + QString("\n");
 	}
+
 	return oMatrix;
 }
 
@@ -210,14 +213,21 @@ QString ASequenceString::mRandom(int inLength) {
 
 QString ASequenceString::mRandom(int inLength,QString inDictionary) {
 
-	QString vString;
-	int vSolt = ARandom::mNumberFromRange(0,1024);
-	for(int i=0; i<inLength + vSolt; ++i) {
-		int vCharPosition = ARandom::mNumberPositiveNoExponent() % inDictionary.length();
-		QChar vNextChar = inDictionary.at(vCharPosition);
-		vString.append(vNextChar);
+	QString oString;
+
+	if (inDictionary.length() > 0) {
+		int oSolt = ARandom::mNumberFromRange(0,1024);
+		for(int i = 0; i < inLength + oSolt; ++i) {
+			int oCharPosition = ARandom::mNumberPositiveNoExponent() % inDictionary.length();
+			QChar vNextChar = inDictionary.at(oCharPosition);
+			oString.append(vNextChar);
+		}
+		oString.mid(ARandom::mNumberFromRange(0,oSolt - 1),inLength);
+	} else {
+		oString = "Error! Got empty dictionary";
 	}
-	return vString.mid(ARandom::mNumberFromRange(0,vSolt - 1),inLength);
+
+	return oString;
 }
 
 
@@ -261,4 +271,28 @@ QString ASequenceString::mDictionary(_A_ENUM_DICTIONARY_TYPE inType) {
 }
 
 
+// -----------
+/*!
+	\fn
 
+	Doc.
+*/
+
+QString ASequenceString::mShake(QString inString) {
+
+	_A_DEBUG << "!!!!!!!!" << inString;
+
+	QString oStringShaked;
+	int oStringLength = inString.length();
+	int oPosition = 0;
+
+	for (int i = 0; i < oStringLength; i++) {
+		oPosition = 0 + arc4random() % inString.length();
+		oStringShaked += inString.at(oPosition);
+		inString.remove(oPosition,1);
+	}
+
+	_A_DEBUG << "!!!!!!!!" << oStringShaked;
+
+	return oStringShaked;
+}

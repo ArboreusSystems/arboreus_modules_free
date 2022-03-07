@@ -24,6 +24,7 @@
 // Application includes
 #include <auniversaldatamodels.h>
 #include <arandom.h>
+#include <aloggerglobal.h>
 
 // Constants and definitions
 
@@ -54,6 +55,7 @@ class ASequenceString : public QObject {
 		static QString mMd5ID(void);
 		static QString mMd5FromQString(QString inString);
 		static QString mDictionary(_A_ENUM_DICTIONARY_TYPE inType);
+		static QString mShake(QString inString);
 };
 
 } // namespace ARB
