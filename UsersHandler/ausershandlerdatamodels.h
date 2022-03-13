@@ -8,36 +8,39 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 28/02/2022 at 16:37:02
+	\li @created 27/02/2022 at 18:26:06
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef AUSERSCONFIG_H
-#define AUSERSCONFIG_H
+#ifndef AUSERSHANDLERDATAMODELS_H
+#define AUSERSHANDLERDATAMODELS_H
 
 // System includes
 
 // Precompiled includes
-#include <auserspch.h>
+#include <ausershandlerpch.h>
 
 // Application includes
 #include <adbdatamodels.h>
+#include <ausershandlerconfig.h>
 
 // Constants and defintions
 
 // Namespace
 namespace ARB {
 
-class AUsersConfig {
+class AUsersHandlerProperties {
 
 	public:
 
-		virtual ADBTableProperties AUsersConfig_DBTableProperties(void) = 0;
-		virtual QString AUsersConfig_DBTableName(void) = 0;
+		QString PathCache = "NoPathUsersCache";
+		QString PathApplication = "NoPathUsersApplication";
+		AUsersHandlerConfig* Config = nullptr;
+
+		explicit AUsersHandlerProperties(void) {}
+		virtual ~AUsersHandlerProperties(void) {}
 };
 
 } // namespace ARB
 
-Q_DECLARE_INTERFACE(ARB::AUsersConfig,"Arboreus.AUsersConfig/1.0")
-
-#endif // AUSERSCONFIG_H
+#endif // AUSERSHANDLERDATAMODELS_H

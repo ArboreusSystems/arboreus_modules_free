@@ -13,19 +13,20 @@
 */
 // ----------------------------------------------------------
 
-#ifndef AUSERS_H
-#define AUSERS_H
+#ifndef AUSERSHANDLER_H
+#define AUSERSHANDLER_H
 
 // System includes
 
 // Precompiled includes
-#include <auserspch.h>
+#include <ausershandlerpch.h>
 
 // Application includes
 #include <athreadtemplate.h>
-#include <ausersservice.h>
-#include <ausersdatamodels.h>
-#include <ausersconfig.h>
+#include <ausershandlerservice.h>
+#include <ausershandlerdatamodels.h>
+#include <ausershandlerconfig.h>
+#include <ausershandlerobjects.h>
 
 // Constants and definitions
 
@@ -36,37 +37,44 @@ namespace ARB {
 class ABackend;
 
 // Class definitions
-class AUsers : public AThreadTemplate<AUsersService> {
+class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 
 	Q_OBJECT
 
 	public:
 
-		explicit AUsers(QObject* parent = nullptr);
-		virtual ~AUsers(void);
-		Q_DISABLE_COPY(AUsers)
+		AUsersHandlerConfig* pConfig = nullptr;
+		AUsersHandlerObjects* pObjects = nullptr;
+
+		explicit AUsersHandler(QObject* parent = nullptr);
+		virtual ~AUsersHandler(void);
+		Q_DISABLE_COPY(AUsersHandler)
 
 		void mInit(void);
 		QList<ADBFieldProperties> mDBSchema(void);
+		QList<QVariantList> mAll(void);
+		ADBSqliteReply mCreate(ASqlInsertIntoProperties inProperties);
+		ADBSqliteReply mRead(QString inID);
+		ADBSqliteReply mUpdate(ASqlInsertIntoProperties inProperties);
+		ADBSqliteReply mDelete(QString inID);
+		QVariantList mGetDBSchema(void);
+		QVariantList mGetAll(void);
 
 	public slots:
-
-		QVariantList mGetDBSchema(void);
 
 		void slInitiated(void);
 
 	signals:
 
-		void sgInit(AUsersModuleProperties inProperties);
+		void sgInit(AUsersHandlerProperties inProperties);
 		void sgInitiated(void);
 
 	private:
 
 		ABackend* pBackend = nullptr;
-		AUsersConfig* pConfig = nullptr;
 		QList<ADBFieldProperties> pDBSchema = {};
 };
 
 } // namespace ARB
 
-#endif // AUSERS_H
+#endif // AUSERSHANDLER_H

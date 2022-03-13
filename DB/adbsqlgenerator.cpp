@@ -47,7 +47,7 @@ ADBSqlGenerator::~ADBSqlGenerator(void) {}
 	Doc.
 */
 
-QString ADBSqlGenerator::mStringCreateTable(ADBTableProperties inProperties) {
+QString ADBSqlGenerator::mStringCreateTable(ASqlCreateTableProperties inProperties) {
 
 	bool oPrimaryKey = false;
 	QString oOutput = "CREATE TABLE IF NOT EXISTS " + inProperties.Name + " (";
@@ -82,5 +82,19 @@ QString ADBSqlGenerator::mStringCreateTable(ADBTableProperties inProperties) {
 
 	oOutput += ");";
 	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QSqlQuery ADBSqlGenerator::mQueryInsertInto(ASqlInsertIntoProperties inProperties) {
+
+	QSqlQuery oQuery;
+	return oQuery;
 }
 

@@ -13,18 +13,18 @@
 */
 // ----------------------------------------------------------
 
-#ifndef AUSERSSERVICE_H
-#define AUSERSSERVICE_H
+#ifndef AUSERSHANDLERSERVICE_H
+#define AUSERSHANDLERSERVICE_H
 
 // System includes
 
 // Precompiled includes
-#include <auserspch.h>
+#include <ausershandlerpch.h>
 
 // Application includes
 #include <athreadservicetemplate.h>
-#include <ausersdatamodels.h>
-#include <ausersconfig.h>
+#include <ausershandlerdatamodels.h>
+#include <ausershandlerconfig.h>
 #include <aloggerglobal.h>
 #include <adbsqlitecipher.h>
 #include <adbsqlgenerator.h>
@@ -36,18 +36,18 @@
 namespace ARB {
 
 // Class definitions
-class AUsersService : public AThreadServiceTemplate {
+class AUsersHandlerService : public AThreadServiceTemplate {
 
 	Q_OBJECT
 
 	public:
 
-		explicit AUsersService(QObject* parent = nullptr);
-		virtual ~AUsersService(void);
+		explicit AUsersHandlerService(QObject* parent = nullptr);
+		virtual ~AUsersHandlerService(void);
 
 	public slots:
 
-		void slInit(AUsersModuleProperties inProperties);
+		void slInit(AUsersHandlerProperties inProperties);
 
 	signals:
 
@@ -56,13 +56,13 @@ class AUsersService : public AThreadServiceTemplate {
 	private:
 
 		ADBSqliteCipher* pDB = nullptr;
-		AUsersConfig* pConfig = nullptr;
+		AUsersHandlerConfig* pConfig = nullptr;
 		QString pPathData = "NoDefinedPathData";
 		QString pPathCache = "NoDefinedPathCache";
 
-		void mInitDB(QString inDBName,ADBTableProperties inTableProperties);
+		void mInitDB(QString inDBName,ASqlCreateTableProperties inTableProperties);
 };
 
 } // namespace ARB
 
-#endif // AUSERSSERVICE_H
+#endif // AUSERSHANDLERSERVICE_H

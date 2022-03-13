@@ -203,15 +203,35 @@ class ADBFieldProperties {
 		}
 };
 
-class ADBTableProperties {
+class ASqlCreateTableProperties {
 
 	public:
 
 		QString Name = "NoDefinedTableName";
 		QList<ADBFieldProperties> Schema = {};
 
-		ADBTableProperties(void) {}
-		virtual ~ADBTableProperties(void) {}
+		ASqlCreateTableProperties(void) {}
+		virtual ~ASqlCreateTableProperties(void) {}
+
+
+		// -----------
+		/*!
+			\fn
+
+			Doc.
+		*/
+
+		QVariantMap mSchemaToVariantMap(void) {
+
+			QVariantMap oSchema;
+
+			for (int i = 0; i < this->Schema.length(); i++) {
+				ADBFieldProperties* iProperties = &this->Schema[i];
+				oSchema.insert(iProperties->Name,iProperties->DefaultValue);
+			}
+
+			return oSchema;
+		}
 
 
 		// -----------
@@ -264,15 +284,15 @@ class ADBTableProperties {
 		}
 };
 
-class ASqlInsertProperties {
+class ASqlInsertIntoProperties {
 
 	public:
 
 		QString TableName = "NoTableName";
 		QVariantList Data = {};
 
-		explicit ASqlInsertProperties(void) {}
-		virtual ~ASqlInsertProperties(void) {}
+		explicit ASqlInsertIntoProperties(void) {}
+		virtual ~ASqlInsertIntoProperties(void) {}
 
 		QVariantMap mToVariantMap(void) {
 
@@ -301,11 +321,18 @@ class ASqlInsertProperties {
 
 class ASqlUpdateProperties {
 
-
 	public:
 
 		explicit ASqlUpdateProperties(void) {}
 		virtual ~ASqlUpdateProperties(void) {}
+};
+
+class ASqlDeleteProperties {
+
+	public:
+
+		explicit ASqlDeleteProperties(void) {}
+		virtual ~ASqlDeleteProperties(void) {}
 };
 
 } //namespace ARB

@@ -12,8 +12,8 @@
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef AUSERSPCH_H
-#define AUSERSPCH_H
+#ifndef AUSERSHANDLERPCH_H
+#define AUSERSHANDLERPCH_H
 
 #if defined __cplusplus
 
@@ -34,4 +34,4 @@
 
 #endif
 
-#endif // AUSERSPCH_H
+#endif // AUSERSHANDLERPCH_H

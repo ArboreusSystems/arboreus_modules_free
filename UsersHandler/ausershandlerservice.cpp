@@ -14,7 +14,7 @@
 // ----------------------------------------------------------
 
 // Class header
-#include "ausersservice.h"
+#include "ausershandlerservice.h"
 
 // Namespace
 using namespace ARB;
@@ -27,9 +27,9 @@ using namespace ARB;
 	Doc.
 */
 
-AUsersService::AUsersService(QObject* parent) : AThreadServiceTemplate(parent) {
+AUsersHandlerService::AUsersHandlerService(QObject* parent) : AThreadServiceTemplate(parent) {
 
-	_A_DEBUG << "AUsersService created";
+	_A_DEBUG << "AUsersHandlerService created";
 }
 
 
@@ -40,9 +40,9 @@ AUsersService::AUsersService(QObject* parent) : AThreadServiceTemplate(parent) {
 	Doc.
 */
 
-AUsersService::~AUsersService(void) {
+AUsersHandlerService::~AUsersHandlerService(void) {
 
-	_A_DEBUG << "AUsersService deleted";
+	_A_DEBUG << "AUsersHandlerService deleted";
 }
 
 
@@ -53,11 +53,13 @@ AUsersService::~AUsersService(void) {
 	Doc.
 */
 
-void AUsersService::slInit(AUsersModuleProperties inProperties) {
+void AUsersHandlerService::slInit(AUsersHandlerProperties inProperties) {
 
 	pConfig = inProperties.Config;
 
-	QString oPathApplication = inProperties.PathApplication + "/Users";
+	QString oPathApplication = inProperties.PathApplication + "/";
+	oPathApplication += pConfig->AUsersHandlerConfig_ModuleName();
+
 	if (ADir::mEnsure(oPathApplication)) {
 		this->pPathData = oPathApplication;
 		_A_DEBUG << "Ensured Users Application path:" << this->pPathData;
@@ -65,7 +67,9 @@ void AUsersService::slInit(AUsersModuleProperties inProperties) {
 		_A_CRITICAL << "No Users Application path:" << oPathApplication;
 	}
 
-	QString oPathCache = inProperties.PathCache + "/Users";
+	QString oPathCache = inProperties.PathCache + "/";
+	oPathCache += pConfig->AUsersHandlerConfig_ModuleName();
+
 	if (ADir::mEnsure(oPathCache)) {
 		this->pPathCache = oPathCache;
 		_A_DEBUG << "Ensured Users Cache path:" << this->pPathCache;
@@ -74,8 +78,8 @@ void AUsersService::slInit(AUsersModuleProperties inProperties) {
 	}
 
 	this->mInitDB(
-		pConfig->AUsersConfig_DBTableName(),
-		pConfig->AUsersConfig_DBTableProperties()
+		pConfig->AUsersHandlerConfig_DBTableName(),
+		pConfig->AUsersHandlerConfig_DBTableProperties()
 	);
 
 	_A_DEBUG << "AUsersService initiated";
@@ -91,7 +95,7 @@ void AUsersService::slInit(AUsersModuleProperties inProperties) {
 	Doc.
 */
 
-void AUsersService::mInitDB(QString inDBName,ADBTableProperties inTableProperties) {
+void AUsersHandlerService::mInitDB(QString inDBName,ASqlCreateTableProperties inTableProperties) {
 
 	ADBSqliteCipherProperties oDBproperties;
 	oDBproperties.Name = inDBName;
