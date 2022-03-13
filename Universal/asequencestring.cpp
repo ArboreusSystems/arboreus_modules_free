@@ -280,8 +280,6 @@ QString ASequenceString::mDictionary(_A_ENUM_DICTIONARY_TYPE inType) {
 
 QString ASequenceString::mShake(QString inString) {
 
-	_A_DEBUG << "!!!!!!!!" << inString;
-
 	QString oStringShaked;
 	int oStringLength = inString.length();
 	int oPosition = 0;
@@ -291,8 +289,6 @@ QString ASequenceString::mShake(QString inString) {
 		oStringShaked += inString.at(oPosition);
 		inString.remove(oPosition,1);
 	}
-
-	_A_DEBUG << "!!!!!!!!" << oStringShaked;
 
 	return oStringShaked;
 }
