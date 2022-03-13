@@ -55,10 +55,11 @@ AUsersHandlerService::~AUsersHandlerService(void) {
 
 void AUsersHandlerService::slInit(AUsersHandlerProperties inProperties) {
 
-	pConfig = inProperties.Config;
+	pUsersHandlerConfig = qobject_cast<AUsersHandlerConfig*>(inProperties.Config);
+	pApplicationConfig = qobject_cast<AApplicationConfig*>(inProperties.Config);
 
 	QString oPathApplication = inProperties.PathApplication + "/";
-	oPathApplication += pConfig->AUsersHandlerConfig_ModuleName();
+	oPathApplication += pUsersHandlerConfig->AUsersHandlerConfig_ModuleName();
 
 	if (ADir::mEnsure(oPathApplication)) {
 		this->pPathData = oPathApplication;
@@ -68,7 +69,7 @@ void AUsersHandlerService::slInit(AUsersHandlerProperties inProperties) {
 	}
 
 	QString oPathCache = inProperties.PathCache + "/";
-	oPathCache += pConfig->AUsersHandlerConfig_ModuleName();
+	oPathCache += pUsersHandlerConfig->AUsersHandlerConfig_ModuleName();
 
 	if (ADir::mEnsure(oPathCache)) {
 		this->pPathCache = oPathCache;
@@ -78,8 +79,8 @@ void AUsersHandlerService::slInit(AUsersHandlerProperties inProperties) {
 	}
 
 	this->mInitDB(
-		pConfig->AUsersHandlerConfig_DBTableName(),
-		pConfig->AUsersHandlerConfig_DBTableProperties()
+		pUsersHandlerConfig->AUsersHandlerConfig_DBTableName(),
+		pUsersHandlerConfig->AUsersHandlerConfig_DBTableProperties()
 	);
 
 	_A_DEBUG << "AUsersService initiated";
@@ -100,6 +101,10 @@ void AUsersHandlerService::mInitDB(QString inDBName,ASqlCreateTableProperties in
 	ADBSqliteCipherProperties oDBproperties;
 	oDBproperties.Name = inDBName;
 	oDBproperties.Path = this->pPathData + "/" + oDBproperties.Name + ".db";
+
+	if (pUsersHandlerConfig->AUsersHandlerConfig_Encrypted()) {
+		oDBproperties.Value = pApplicationConfig->AApplicationConfig_Value();
+	}
 
 	pDB = new ADBSqliteCipher(this);
 	pDB->mStart(&oDBproperties);

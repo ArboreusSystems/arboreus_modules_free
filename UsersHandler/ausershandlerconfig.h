@@ -35,6 +35,7 @@ class AUsersHandlerConfig {
 		virtual ASqlCreateTableProperties AUsersHandlerConfig_DBTableProperties(void) = 0;
 		virtual QString AUsersHandlerConfig_DBTableName(void) = 0;
 		virtual QString AUsersHandlerConfig_ModuleName(void) = 0;
+		virtual bool AUsersHandlerConfig_Encrypted(void) = 0;
 };
 
 } // namespace ARB

@@ -76,7 +76,7 @@ void AUsersHandler::mInit(void) {
 	AUsersHandlerProperties oProperties;
 	oProperties.PathCache = pBackend->pProperties->mGetPathDataCache();
 	oProperties.PathApplication = pBackend->pProperties->mGetPathDataApplication();
-	oProperties.Config = pConfig;
+	oProperties.Config = pBackend->pApplicationConfigObject;
 
 	emit sgInit(oProperties);
 }

@@ -35,7 +35,7 @@ class AUsersHandlerProperties {
 
 		QString PathCache = "NoPathUsersCache";
 		QString PathApplication = "NoPathUsersApplication";
-		AUsersHandlerConfig* Config = nullptr;
+		QObject* Config = nullptr;
 
 		explicit AUsersHandlerProperties(void) {}
 		virtual ~AUsersHandlerProperties(void) {}

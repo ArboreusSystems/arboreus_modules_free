@@ -29,6 +29,7 @@
 #include <adbsqlitecipher.h>
 #include <adbsqlgenerator.h>
 #include <adir.h>
+#include <aapplicationconfig.h>
 
 // Constants and definitions
 
@@ -56,7 +57,8 @@ class AUsersHandlerService : public AThreadServiceTemplate {
 	private:
 
 		ADBSqliteCipher* pDB = nullptr;
-		AUsersHandlerConfig* pConfig = nullptr;
+		AUsersHandlerConfig* pUsersHandlerConfig = nullptr;
+		AApplicationConfig* pApplicationConfig = nullptr;
 		QString pPathData = "NoDefinedPathData";
 		QString pPathCache = "NoDefinedPathCache";
 
