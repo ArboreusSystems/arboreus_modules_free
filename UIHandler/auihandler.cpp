@@ -69,6 +69,9 @@ void AUIHandler::mInit(void) {
 	pColors = new AColors(this);
 	pColors->mInit(pConfig->mColors());
 
+	pSignals = new AUISignals(this);
+	pSignals->mInit();
+
 	_A_DEBUG << "AUIHandler initiated";
 
 	emit sgInitiated();

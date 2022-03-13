@@ -27,7 +27,7 @@ using namespace ARB;
 	Doc.
 */
 
-AColors::AColors(QObject *parent) : QObject(parent) {
+AColors::AColors(QObject* parent) : QObject(parent) {
 
 	_A_DEBUG << "AColors created";
 }

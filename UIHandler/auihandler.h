@@ -26,6 +26,7 @@
 #include <auihandlerdefinitions.h>
 #include <afonts.h>
 #include <acolors.h>
+#include <auisignals.h>
 
 // Constants and definitions
 
@@ -45,6 +46,7 @@ class AUIHandler : public QObject {
 		AFonts* pFonts = nullptr;
 		AColors* pColors = nullptr;
 		AUIConfig* pConfig = nullptr;
+		AUISignals* pSignals = nullptr;
 
 		explicit AUIHandler(QObject* parent = nullptr);
 		virtual ~AUIHandler(void);
