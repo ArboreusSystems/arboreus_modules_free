@@ -12,8 +12,8 @@
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef ATHREADOBJECTTEMPLATE_H
-#define ATHREADOBJECTTEMPLATE_H
+#ifndef ATHREADAGENTTEMPLATE_H
+#define ATHREADAGENTTEMPLATE_H
 
 // System includes
 
@@ -27,14 +27,14 @@
 // Namespace
 namespace ARB {
 
-class AThreadObjectTemplate : public QObject {
+class AThreadAgentTemplate : public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		explicit AThreadObjectTemplate(QObject* parent = nullptr): QObject(parent) {}
-		virtual ~AThreadObjectTemplate(void) {}
+		explicit AThreadAgentTemplate(QObject* parent = nullptr): QObject(parent) {}
+		virtual ~AThreadAgentTemplate(void) {}
 
 	public slots:
 
@@ -47,4 +47,4 @@ class AThreadObjectTemplate : public QObject {
 
 } // namespace ARB
 
-#endif // ATHREADOBJECTTEMPLATE_H
+#endif // ATHREADAGENTTEMPLATE_H

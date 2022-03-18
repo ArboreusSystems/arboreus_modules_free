@@ -23,10 +23,12 @@
 
 // Application includes
 #include <athreadtemplate.h>
+#include <athreadobjectcontrollertemplate.h>
 #include <ausershandlerservice.h>
 #include <ausershandlerdatamodels.h>
 #include <ausershandlerconfig.h>
 #include <ausershandlerobjects.h>
+#include <ausersagentcreate.h>
 
 // Constants and definitions
 
@@ -57,12 +59,12 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 		ADBSqliteReply mRead(QString inID);
 		ADBSqliteReply mUpdate(ASqlInsertIntoProperties inProperties);
 		ADBSqliteReply mDelete(QString inID);
-		QVariantList mGetDBSchema(void);
-		QVariantList mGetAll(void);
 
 	public slots:
 
 		void slInitiated(void);
+		QVariantList mGetDBSchema(void);
+		QVariantList mGetAll(void);
 
 	signals:
 

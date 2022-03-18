@@ -30,7 +30,7 @@ using namespace ARB;
 ASettingsAgent::ASettingsAgent(
 	ASettingsService* inService, QString inKey,
 	QVariant inValue, QObject* parent
-) : AThreadObjectTemplate(parent) {
+) : AThreadAgentTemplate(parent) {
 
 	pKey = inKey;
 	pValue = inValue;
@@ -47,7 +47,7 @@ ASettingsAgent::ASettingsAgent(
 	Doc.
 */
 
-ASettingsAgent::ASettingsAgent(QObject* parent) : AThreadObjectTemplate(parent) {
+ASettingsAgent::ASettingsAgent(QObject* parent) : AThreadAgentTemplate(parent) {
 
 	_A_DEBUG << "ASettingsAgent created";
 }

@@ -289,7 +289,7 @@ class ASqlInsertIntoProperties {
 	public:
 
 		QString TableName = "NoTableName";
-		QVariantList Data = {};
+		QList<QVariantList> Data = {};
 
 		explicit ASqlInsertIntoProperties(void) {}
 		virtual ~ASqlInsertIntoProperties(void) {}
@@ -298,7 +298,7 @@ class ASqlInsertIntoProperties {
 
 			QVariantMap oOutput;
 			oOutput.insert("TableName",TableName);
-			oOutput.insert("Data",Data);
+			oOutput.insert("Data",QVariant::fromValue(Data));
 			return oOutput;
 		}
 
@@ -314,7 +314,7 @@ class ASqlInsertIntoProperties {
 
 			oValue = inProperties.value("Data",oErrorValue);
 			if (QString::compare(oErrorValue,qvariant_cast<QString>(oValue)) != 0) {
-				Data = qvariant_cast<QVariantList>(oValue);
+				Data = qvariant_cast<QList<QVariantList>>(oValue);
 			}
 		}
 };

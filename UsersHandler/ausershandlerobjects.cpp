@@ -37,8 +37,6 @@ AUsersHandlerObjects::AUsersHandlerObjects(ABackend* inBackend, QObject* parent)
 	ASqlCreateTableProperties oProperties = pConfig->AUsersHandlerConfig_DBTableProperties();
 	pUserProperties = oProperties.mSchemaToVariantMap();
 
-	_A_DEBUG << "2222222222222222222" << pUserProperties;
-
 	_A_DEBUG << "AUsersHandlerObjects created";
 }
 
@@ -64,8 +62,6 @@ AUsersHandlerObjects::~AUsersHandlerObjects(void) {
 */
 
 QVariantMap AUsersHandlerObjects::mUserPropeties(void) {
-
-	_A_DEBUG << "333333333333333333" << pUserProperties;
 
 	return pUserProperties;
 }

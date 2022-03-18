@@ -119,11 +119,27 @@ QList<QVariantList> AUsersHandler::mAll(void) {
 
 ADBSqliteReply AUsersHandler::mCreate(ASqlInsertIntoProperties inProperties) {
 
-	_A_DEBUG << "!!!!!!!!!!!!!!" << inProperties.Data;
-	_A_DEBUG << "!!!!!!!!!!!!!!" << inProperties.TableName;
+	AThreadObjectControllerTemplate oController;
+	QEventLoop oEventLoop;
 
-	ADBSqliteReply oReply;
-	return oReply;
+	AUsersAgentCreate oAgent;
+	oAgent.pService = this->mService();
+	oAgent.pTabeName = inProperties.TableName;
+	oAgent.pData = inProperties.Data;
+	QObject::connect(
+		&oAgent,&AUsersAgentCreate::sgFinished,
+		&oEventLoop,&QEventLoop::quit
+	);
+	QObject::connect(
+		&oController,&AThreadObjectControllerTemplate::sgRun,
+		&oAgent,&AUsersAgentCreate::slRun
+	);
+	oAgent.moveToThread(this);
+
+	emit oController.sgRun();
+	oEventLoop.exec();
+
+	return oAgent.pReply;
 }
 
 
