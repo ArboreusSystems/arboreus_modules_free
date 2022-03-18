@@ -76,14 +76,18 @@ ASettings::~ASettings(void) {
 void ASettings::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
+	pConfig = qobject_cast<ASettingsConfig*>(pBackend->pApplicationConfigObject);
 	this->start(QThread::Priority::LowestPriority);
 
-	QString oPathSettingsData = pBackend->pProperties->mGetPathDataApplication() + "/Settings";
-	if (ADir::mEnsure(oPathSettingsData)) {
-		_A_DEBUG << "Ensured path for settings:" << oPathSettingsData;
-		emit sgInit(oPathSettingsData);
+	ASettingsProperties oProperties;
+	oProperties.Config = pBackend->pApplicationConfigObject;
+	oProperties.Path = pBackend->pProperties->mGetPathDataApplication() + "/Settings";
+
+	if (ADir::mEnsure(oProperties.Path)) {
+		_A_DEBUG << "Ensured path for settings:" << oProperties.Path;
+		emit sgInit(oProperties);
 	} else {
-		_A_CRITICAL << "Failed to ensure path for settings:" << oPathSettingsData;
+		_A_CRITICAL << "Failed to ensure path for settings:" << oProperties.Path;
 	}
 }
 

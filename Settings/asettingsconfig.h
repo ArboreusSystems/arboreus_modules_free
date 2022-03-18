@@ -8,33 +8,34 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 11/09/2021 at 10:23:39
+	\li @created 18/03/2022 at 17:33:02
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef ASETTINGSPCH_H
-#define ASETTINGSPCH_H
-
-#if defined __cplusplus
-
-// Standard includes
-#include <utility>
+#ifndef ASETTINGSCONFIG_H
+#define ASETTINGSCONFIG_H
 
 // System includes
-#include <QObject>
-#include <QVariant>
-#include <QVariantMap>
-#include <QVariantList>
-#include <QEventLoop>
-#include <QSqlQuery>
-#include <QString>
+
+// Precompiled includes
+#include <asettingspch.h>
 
 // Application includes
 
 // Constants and defintions
 
 // Namespace
+namespace ARB {
 
-#endif
+class ASettingsConfig {
 
-#endif // ASETTINGSPCH_H
+	public:
+
+		virtual bool ASettingsConfig_Encrypted(void) = 0;
+};
+
+} // namespace ARB
+
+Q_DECLARE_INTERFACE(ARB::ASettingsConfig,"Arboreus.ASettingsConfig/1.0")
+
+#endif // ASETTINGSCONFIG_H

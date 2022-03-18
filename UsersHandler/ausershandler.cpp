@@ -72,6 +72,7 @@ void AUsersHandler::mInit(void) {
 	pConfig = qobject_cast<AUsersHandlerConfig*>(pBackend->pApplicationConfigObject);
 	pDBSchema = pConfig->AUsersHandlerConfig_DBTableProperties().Schema;
 	pObjects = new AUsersHandlerObjects(pBackend,this);
+	this->start(QThread::Priority::LowPriority);
 
 	AUsersHandlerProperties oProperties;
 	oProperties.PathCache = pBackend->pProperties->mGetPathDataCache();

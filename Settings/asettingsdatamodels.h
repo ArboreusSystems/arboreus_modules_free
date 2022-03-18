@@ -27,6 +27,17 @@
 // Namespace
 namespace ARB {
 
+class ASettingsProperties {
+
+	public:
+
+		QString Path = "NoDefinedPath";
+		QObject* Config = nullptr;
+
+		ASettingsProperties(void) {}
+		~ASettingsProperties(void) {}
+};
+
 class ASettingsReply {
 
 	public:

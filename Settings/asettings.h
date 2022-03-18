@@ -25,6 +25,7 @@
 #include <athreadtemplate.h>
 #include <asettingsservice.h>
 #include <asettingsagent.h>
+#include <asettingsconfig.h>
 #include <athreadobjectcontrollertemplate.h>
 
 // Constants and definitions
@@ -43,6 +44,8 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 
 	public:
 
+		ASettingsConfig* pConfig = nullptr;
+
 		explicit ASettings(QObject* parent = nullptr);
 		virtual ~ASettings(void);
 		Q_DISABLE_COPY(ASettings)
@@ -53,7 +56,7 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 
 	signals:
 
-		void sgInit(QString inPathSettingsData);
+		void sgInit(ASettingsProperties inProperties);
 		void sgInitiated(void);
 		void sgGetFromDB(QString inKey);
 		void sgUpdated(QString inKey,QVariant inValue);

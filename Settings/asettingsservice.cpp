@@ -66,11 +66,18 @@ QString ASettingsService::mGetDBName(void) {
 	Doc.
 */
 
-void ASettingsService::slInit(QString inPathSettingsData) {
+void ASettingsService::slInit(ASettingsProperties inProperties) {
+
+	pSettingsConfig = qobject_cast<ASettingsConfig*>(inProperties.Config);
+	pApplicationConfig = qobject_cast<AApplicationConfig*>(inProperties.Config);
 
 	ADBSqliteCipherProperties oDBproperties;
 	oDBproperties.Name = QString(_A_SETTINGS_DB_NAME);
-	oDBproperties.Path = inPathSettingsData + "/" + oDBproperties.Name + ".db";
+	oDBproperties.Path = inProperties.Path + "/" + oDBproperties.Name + ".db";
+
+	if (pSettingsConfig->ASettingsConfig_Encrypted()) {
+		oDBproperties.Value = pApplicationConfig->AApplicationConfig_Value();
+	}
 
 	pDB = new ADBSqliteCipher(this);
 	pDB->mStart(&oDBproperties);

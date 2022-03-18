@@ -26,6 +26,8 @@
 #include <aloggerglobal.h>
 #include <asettingsdatamodels.h>
 #include <adbsqlitecipher.h>
+#include <asettingsconfig.h>
+#include <aapplicationconfig.h>
 
 // Constants and definitions
 #define _A_SETTINGS_DB_NAME "settings"
@@ -49,13 +51,18 @@ class ASettingsService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(QString inPathSettingsData);
+		void slInit(ASettingsProperties inProperties);
 		void slUpdate(QString inKey,QVariant inValue);
 
 	signals:
 
 		void sgInitiated(void);
 		void sgUpdated(QString inKey,QVariant inValue);
+
+	private:
+
+		ASettingsConfig* pSettingsConfig = nullptr;
+		AApplicationConfig* pApplicationConfig = nullptr;
 };
 
 } // namespace ARB
