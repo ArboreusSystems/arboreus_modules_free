@@ -30,7 +30,7 @@ using namespace ARB;
 	Doc.
 */
 
-ACache::ACache(QObject *parent) : QObject(parent) {
+ACache::ACache(QObject* parent) : QObject(parent) {
 
 	_A_DEBUG << "ACache created";
 }

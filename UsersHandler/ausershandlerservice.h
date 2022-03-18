@@ -48,7 +48,7 @@ class AUsersHandlerService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(QObject* inConfig,QString inPath);
+		void slInit(AUsersHandlerProperties inProperties);
 
 	signals:
 

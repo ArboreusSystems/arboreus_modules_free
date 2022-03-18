@@ -53,12 +53,12 @@ AUsersHandlerService::~AUsersHandlerService(void) {
 	Doc.
 */
 
-void AUsersHandlerService::slInit(QObject* inConfig,QString inPath) {
+void AUsersHandlerService::slInit(AUsersHandlerProperties inProperties) {
 
-	pUsersHandlerConfig = qobject_cast<AUsersHandlerConfig*>(inConfig);
-	pApplicationConfig = qobject_cast<AApplicationConfig*>(inConfig);
+	pUsersHandlerConfig = qobject_cast<AUsersHandlerConfig*>(inProperties.Config);
+	pApplicationConfig = qobject_cast<AApplicationConfig*>(inProperties.Config);
 
-	QString oPathApplication = inPath + "/";
+	QString oPathApplication = inProperties.PathApplication + "/";
 	oPathApplication += pUsersHandlerConfig->AUsersHandlerConfig_ModuleName();
 
 	if (ADir::mEnsure(oPathApplication)) {
@@ -68,7 +68,7 @@ void AUsersHandlerService::slInit(QObject* inConfig,QString inPath) {
 		_A_CRITICAL << "No Users Application path:" << oPathApplication;
 	}
 
-	QString oPathCache = inPath + "/";
+	QString oPathCache = inProperties.PathCache + "/";
 	oPathCache += pUsersHandlerConfig->AUsersHandlerConfig_ModuleName();
 
 	if (ADir::mEnsure(oPathCache)) {
