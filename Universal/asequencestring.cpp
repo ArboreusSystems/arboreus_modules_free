@@ -222,7 +222,7 @@ QString ASequenceString::mRandom(int inLength,QString inDictionary) {
 			QChar vNextChar = inDictionary.at(oCharPosition);
 			oString.append(vNextChar);
 		}
-		oString.mid(ARandom::mNumberFromRange(0,oSolt - 1),inLength);
+		static_cast<void>(oString.mid(ARandom::mNumberFromRange(0,oSolt - 1),inLength));
 	} else {
 		oString = "Error! Got empty dictionary";
 	}

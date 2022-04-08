@@ -94,6 +94,8 @@ QString ADBSqlGenerator::mStringCreateTable(ASqlCreateTableProperties inProperti
 
 QSqlQuery ADBSqlGenerator::mQueryInsertInto(ASqlInsertIntoProperties inProperties) {
 
+	Q_UNUSED(inProperties);
+
 	QSqlQuery oQuery;
 	return oQuery;
 }
