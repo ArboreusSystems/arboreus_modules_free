@@ -33,7 +33,6 @@ class AApplicationConfig {
 
 	public:
 
-		virtual void AApplicationConfig_Init(QString inInitPath) = 0;
 		virtual QString AApplicationConfig_Value(void) = 0;
 		virtual QString AApplicationConfig_Salt(void) = 0;
 };

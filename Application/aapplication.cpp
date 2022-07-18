@@ -62,8 +62,6 @@ void AApplication::mInit(void) {
 	pConfig = qobject_cast<AApplicationConfig*>(pBackend->pApplicationConfigObject);
 	pConstants = new AConstants(this);
 
-	pConfig->AApplicationConfig_Init(pBackend->pProperties->mGetPathDataCache());
-
 	_A_DEBUG << "AApplication initiated";
 
 	emit sgInitiated();
