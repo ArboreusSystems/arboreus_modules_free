@@ -30,7 +30,7 @@ using namespace ARB;
 	Doc.
 */
 
-AProperties::AProperties(QObject *parent) : QObject(parent) {
+AProperties::AProperties(QObject* parent) : QObject(parent) {
 
 	_A_DEBUG << "AProperties created";
 }
