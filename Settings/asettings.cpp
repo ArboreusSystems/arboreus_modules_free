@@ -32,6 +32,8 @@ using namespace ARB;
 
 ASettings::ASettings(QObject* parent) : AThreadTemplate<ASettingsService>(new ASettingsService, parent) {
 
+	qRegisterMetaType<ASettingsProperties>();
+
 	QObject::connect(
 		this,&ASettings::sgInit,
 		this->mService(),&ASettingsService::slInit

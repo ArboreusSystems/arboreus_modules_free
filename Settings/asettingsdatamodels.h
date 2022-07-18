@@ -38,6 +38,12 @@ class ASettingsProperties {
 		~ASettingsProperties(void) {}
 };
 
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ASettingsProperties)
+
+namespace ARB {
+
 class ASettingsReply {
 
 	public:
