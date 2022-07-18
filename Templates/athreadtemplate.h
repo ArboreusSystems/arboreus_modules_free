@@ -74,7 +74,6 @@ class AThreadTemplate: public QThread {
 		void run(void) override {
 
 			QThread::run();
-			delete pService;
 		}
 
 	private:
