@@ -33,7 +33,7 @@ class AThreadServiceTemplate : public QObject {
 
 	public:
 
-		explicit AThreadServiceTemplate(QObject *parent = nullptr): QObject(parent) {
+		explicit AThreadServiceTemplate(QObject* parent = nullptr): QObject(parent) {
 
 			pMutex.lock();
 		}
