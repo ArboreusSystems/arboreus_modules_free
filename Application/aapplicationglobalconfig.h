@@ -8,26 +8,29 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 11/09/2021 at 09:47:33
+	\li @created 26/07/2022 at 11:17:33
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef AAPPLICATIONPCH_H
-#define AAPPLICATIONPCH_H
-
-#if defined __cplusplus
+#ifndef AAPPLICATIONGLOBALCONFIG_H
+#define AAPPLICATIONGLOBALCONFIG_H
 
 // System includes
-#include <QObject>
-#include <QString>
-#include <QByteArray>
 
 // Application includes
+
+// iOS includes
+#if defined(Q_OS_IOS)
+#include <aapplicationiosglobalconfig.h>
+#endif
+
+// Android includes
+#if defined(Q_OS_ANDROID)
+
+#endif
 
 // Constants and defintions
 
 // Namespace
 
-#endif
-
-#endif // AAPPLICATIONPCH_H
+#endif // AAPPLICATIONGLOBALCONFIG_H

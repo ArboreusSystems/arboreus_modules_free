@@ -22,6 +22,11 @@
 
 // Application includes
 
+// iOS includes
+#if defined(Q_OS_IOS)
+#include <aapplicationiosdatamodels.h>
+#endif
+
 // Constants and defintions
 #define _A_ENUM_REPLY_STATUS ARB::AEnumsStatus::Status
 #define _A_APPLICATION_EMPTY_REGISTRY QString("")
