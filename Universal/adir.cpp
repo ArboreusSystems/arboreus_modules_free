@@ -27,7 +27,7 @@ using namespace ARB;
 	Class constructor.
 */
 
-ADir::ADir(QObject *parent) : QObject(parent) {}
+ADir::ADir(QObject* parent) : QObject(parent) {}
 
 
 // -----------

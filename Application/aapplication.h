@@ -22,9 +22,11 @@
 #include <aapplicationpch.h>
 
 // Application includes
+#include <athreadtemplate.h>
 #include <aconstants.h>
 #include <aapplicationdatamodels.h>
 #include <aapplicationconfig.h>
+#include <aapplicationservice.h>
 
 // Constants and definitions
 
@@ -35,7 +37,7 @@ namespace ARB {
 class ABackend;
 
 // Class definitions
-class AApplication : public QObject {
+class AApplication : public AThreadTemplate<AApplicationService> {
 
 	Q_OBJECT
 
@@ -51,11 +53,16 @@ class AApplication : public QObject {
 
 	public slots:
 
+		void slInitiated(void);
+
 		void mExit(void);
 
 	signals:
 
+		void sgInit(void);
 		void sgInitiated(void);
+		void sgDidEnterForeground(void);
+		void sgDidEnterBackground(void);
 
 	private:
 

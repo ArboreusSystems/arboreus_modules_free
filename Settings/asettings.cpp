@@ -78,11 +78,11 @@ ASettings::~ASettings(void) {
 void ASettings::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
-	pConfig = qobject_cast<ASettingsConfig*>(pBackend->pApplicationConfigObject);
+	pConfig = qobject_cast<ASettingsConfig*>(pBackend->pGlobalConfigObject);
 	this->start(QThread::Priority::LowestPriority);
 
 	ASettingsProperties oProperties;
-	oProperties.Config = pBackend->pApplicationConfigObject;
+	oProperties.Config = pBackend->pGlobalConfigObject;
 	oProperties.Path = pBackend->pProperties->mGetPathDataApplication() + "/Settings";
 
 	if (ADir::mEnsure(oProperties.Path)) {

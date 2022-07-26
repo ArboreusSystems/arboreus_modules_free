@@ -30,7 +30,16 @@ using namespace ARB;
 	Doc.
 */
 
-AApplication::AApplication(QObject *parent) : QObject(parent) {
+AApplication::AApplication(QObject* parent) : AThreadTemplate<AApplicationService>(new AApplicationService, parent) {
+
+	QObject::connect(
+		this,&AApplication::sgInit,
+		this->mService(),&AApplicationService::slInit
+	);
+	QObject::connect(
+		this->mService(),&AApplicationService::sgInitiated,
+		this,&AApplication::sgInitiated
+	);
 
 	_A_DEBUG << "AApplication created";
 }
@@ -59,12 +68,24 @@ AApplication::~AApplication(void) {
 void AApplication::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
-	pConfig = qobject_cast<AApplicationConfig*>(pBackend->pApplicationConfigObject);
+	pConfig = qobject_cast<AApplicationConfig*>(pBackend->pGlobalConfigObject);
 	pConstants = new AConstants(this);
 
-	_A_DEBUG << "AApplication initiated";
+	emit this->sgInit();
+}
 
-	emit sgInitiated();
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AApplication::slInitiated(void) {
+
+	_A_DEBUG << "AApplication initiated";
+	emit this->sgInitiated();
 }
 
 
