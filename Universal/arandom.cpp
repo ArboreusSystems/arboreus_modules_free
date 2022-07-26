@@ -62,18 +62,18 @@ long long ARandom::mNumber(void) {
 	Doc.
 */
 
-long long ARandom::mNumberPositive(_A_ENUMS_RANDOM_EXPONENT inExponent) {
+long long ARandom::mNumberPositive(_A_ENUM_RANDOM_EXPONENT inExponent) {
 
 	long long oNumber = mNumber();
 	switch (inExponent) {
-		case _A_ENUMS_RANDOM_EXPONENT::Deca: oNumber = oNumber % _A_NUMBER_DECA; break;
-		case _A_ENUMS_RANDOM_EXPONENT::Hecto: oNumber = oNumber % _A_NUMBER_HECTO; break;
-		case _A_ENUMS_RANDOM_EXPONENT::Kilo: oNumber = oNumber % _A_NUMBER_KILO; break;
-		case _A_ENUMS_RANDOM_EXPONENT::Mega: oNumber = oNumber % _A_NUMBER_MEGA; break;
-		case _A_ENUMS_RANDOM_EXPONENT::Giga: oNumber = oNumber % _A_NUMBER_GIGA; break;
-		case _A_ENUMS_RANDOM_EXPONENT::Tera: oNumber = oNumber % _A_NUMBER_TERA; break;
-		case _A_ENUMS_RANDOM_EXPONENT::Peta: oNumber = oNumber % _A_NUMBER_PETA; break;
-		case _A_ENUMS_RANDOM_EXPONENT::Exa: oNumber = oNumber % _A_NUMBER_EXA; break;
+		case _A_ENUM_RANDOM_EXPONENT::Deca: oNumber = oNumber % _A_NUMBER_DECA; break;
+		case _A_ENUM_RANDOM_EXPONENT::Hecto: oNumber = oNumber % _A_NUMBER_HECTO; break;
+		case _A_ENUM_RANDOM_EXPONENT::Kilo: oNumber = oNumber % _A_NUMBER_KILO; break;
+		case _A_ENUM_RANDOM_EXPONENT::Mega: oNumber = oNumber % _A_NUMBER_MEGA; break;
+		case _A_ENUM_RANDOM_EXPONENT::Giga: oNumber = oNumber % _A_NUMBER_GIGA; break;
+		case _A_ENUM_RANDOM_EXPONENT::Tera: oNumber = oNumber % _A_NUMBER_TERA; break;
+		case _A_ENUM_RANDOM_EXPONENT::Peta: oNumber = oNumber % _A_NUMBER_PETA; break;
+		case _A_ENUM_RANDOM_EXPONENT::Exa: oNumber = oNumber % _A_NUMBER_EXA; break;
 		default: break;
 	}
 	if (oNumber < 0) {return oNumber * (-1);}
@@ -88,7 +88,7 @@ long long ARandom::mNumberPositive(_A_ENUMS_RANDOM_EXPONENT inExponent) {
 	Doc.
 */
 
-long long ARandom::mNumberNegative(_A_ENUMS_RANDOM_EXPONENT inExponent) {
+long long ARandom::mNumberNegative(_A_ENUM_RANDOM_EXPONENT inExponent) {
 
 	return mNumberPositive(inExponent) * (-1);
 }
@@ -126,11 +126,11 @@ long long ARandom::mNumberNoExponent(void) {
 
 	if (ARandom::mNumber() % 2) {
 		return mNumberNegative(
-			static_cast<_A_ENUMS_RANDOM_EXPONENT>(mNumberFromRange(0,7))
+			static_cast<_A_ENUM_RANDOM_EXPONENT>(mNumberFromRange(0,7))
 		);
 	} else {
 		return mNumberPositive(
-			static_cast<_A_ENUMS_RANDOM_EXPONENT>(mNumberFromRange(0,7))
+			static_cast<_A_ENUM_RANDOM_EXPONENT>(mNumberFromRange(0,7))
 		);
 	}
 }
@@ -146,7 +146,7 @@ long long ARandom::mNumberNoExponent(void) {
 long long ARandom::mNumberPositiveNoExponent(void) {
 
 	return ARandom::mNumberPositive(
-		static_cast<_A_ENUMS_RANDOM_EXPONENT>(mNumberFromRange(0,7))
+		static_cast<_A_ENUM_RANDOM_EXPONENT>(mNumberFromRange(0,7))
 	);
 }
 
@@ -161,7 +161,7 @@ long long ARandom::mNumberPositiveNoExponent(void) {
 long long ARandom::mNumberNegativeNoExponent(void) {
 
 	return ARandom::mNumberNegative(
-		static_cast<_A_ENUMS_RANDOM_EXPONENT>(mNumberFromRange(0,7))
+		static_cast<_A_ENUM_RANDOM_EXPONENT>(mNumberFromRange(0,7))
 	);
 }
 
@@ -173,18 +173,18 @@ long long ARandom::mNumberNegativeNoExponent(void) {
 	Doc.
 */
 
-QVector<long long> ARandom::mList(_A_ENUMS_RANDOM_DICTIONARY_TYPE inType, long long inLength) {
+QVector<long long> ARandom::mList(_A_ENUM_RANDOM_DICTIONARY_TYPE inType, long long inLength) {
 
 	QVector<long long> oDictionary = {};
 	long long oIterator = 0;
 
 	switch (inType) {
-		case _A_ENUMS_RANDOM_DICTIONARY_TYPE::Negative:
+		case _A_ENUM_RANDOM_DICTIONARY_TYPE::Negative:
 			for (; oIterator < inLength; oIterator++) {
 				oDictionary.push_back(mNumberNegativeNoExponent());
 			}
 			break;
-		case _A_ENUMS_RANDOM_DICTIONARY_TYPE::Positive:
+		case _A_ENUM_RANDOM_DICTIONARY_TYPE::Positive:
 			for (; oIterator < inLength; oIterator++) {
 				oDictionary.push_back(mNumberPositiveNoExponent());
 			}
@@ -207,7 +207,7 @@ QVector<long long> ARandom::mList(_A_ENUMS_RANDOM_DICTIONARY_TYPE inType, long l
 	Doc.
 */
 
-QVector<long long> ARandom::mUniqueList(_A_ENUMS_RANDOM_DICTIONARY_TYPE inType, long long inLength) {
+QVector<long long> ARandom::mUniqueList(_A_ENUM_RANDOM_DICTIONARY_TYPE inType, long long inLength) {
 
 	QVector<long long> oDictionary = {};
 	long long oIterator = 0;
@@ -215,10 +215,10 @@ QVector<long long> ARandom::mUniqueList(_A_ENUMS_RANDOM_DICTIONARY_TYPE inType, 
 
 	while (oIterator != inLength) {
 		switch (inType) {
-			case _A_ENUMS_RANDOM_DICTIONARY_TYPE::Negative:
+			case _A_ENUM_RANDOM_DICTIONARY_TYPE::Negative:
 				oNumber = mNumberNegativeNoExponent();
 				break;
-			case _A_ENUMS_RANDOM_DICTIONARY_TYPE::Positive:
+			case _A_ENUM_RANDOM_DICTIONARY_TYPE::Positive:
 				oNumber = mNumberPositiveNoExponent();
 				break;
 			default:

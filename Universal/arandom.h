@@ -39,14 +39,14 @@ class ARandom : public QObject {
 		virtual ~ARandom(void);
 
 		static long long mNumber(void);
-		static long long mNumberPositive(_A_ENUMS_RANDOM_EXPONENT inExponent);
-		static long long mNumberNegative(_A_ENUMS_RANDOM_EXPONENT inExponent);
+		static long long mNumberPositive(_A_ENUM_RANDOM_EXPONENT inExponent);
+		static long long mNumberNegative(_A_ENUM_RANDOM_EXPONENT inExponent);
 		static long long mNumberFromRange(long long inNumber1, long long inNumber2);
 		static long long mNumberNoExponent(void);
 		static long long mNumberPositiveNoExponent(void);
 		static long long mNumberNegativeNoExponent(void);
-		static QVector<long long> mList(_A_ENUMS_RANDOM_DICTIONARY_TYPE inType, long long inLength);
-		static QVector<long long> mUniqueList(_A_ENUMS_RANDOM_DICTIONARY_TYPE inType, long long inLength);
+		static QVector<long long> mList(_A_ENUM_RANDOM_DICTIONARY_TYPE inType, long long inLength);
+		static QVector<long long> mUniqueList(_A_ENUM_RANDOM_DICTIONARY_TYPE inType, long long inLength);
 };
 
 #endif // ARANDOM_H

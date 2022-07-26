@@ -32,8 +32,8 @@
 #define _A_NUMBER_PETA 1000000000000000
 #define _A_NUMBER_EXA 1000000000000000000
 
-#define _A_ENUMS_RANDOM_DICTIONARY_TYPE ARB::AEnumsRandomDictionaryType::RandomDictionaryType
-#define _A_ENUMS_RANDOM_EXPONENT ARB::AEnumsRandomExponent::RandomExponent
+#define _A_ENUM_RANDOM_DICTIONARY_TYPE ARB::AEnumsRandomDictionaryType::RandomDictionaryType
+#define _A_ENUM_RANDOM_EXPONENT ARB::AEnumsRandomExponent::RandomExponent
 
 
 // Namespace
