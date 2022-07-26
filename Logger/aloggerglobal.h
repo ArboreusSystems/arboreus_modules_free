@@ -41,6 +41,35 @@
 #define _A_CRITICAL qCritical()
 #define _A_FATAL(inMessage) qFatal(inMessage)
 
+#define _A_CONSOLE_DEBUG(inMessage) fLoggerMessageHandlerConsole( \
+	QtMsgType::QtDebugMsg, \
+	inMessage, \
+	__LINE__, \
+	__FILE__, \
+	__FUNCTION__ \
+)
+#define _A_CONSOLE_INFO(inMessage) fLoggerMessageHandlerConsole( \
+	QtMsgType::QtInfoMsg, \
+	inMessage, \
+	__LINE__, \
+	__FILE__, \
+	__FUNCTION__ \
+)
+#define _A_CONSOLE_WARNING(inMessage) fLoggerMessageHandlerConsole( \
+	QtMsgType::QtWarningMsg, \
+	inMessage, \
+	__LINE__, \
+	__FILE__, \
+	__FUNCTION__ \
+)
+#define _A_CONSOLE_CRITICAL(inMessage) fLoggerMessageHandlerConsole( \
+	QtMsgType::QtCriticalMsg, \
+	inMessage, \
+	__LINE__, \
+	__FILE__, \
+	__FUNCTION__ \
+)
+
 // Namespace
 namespace ARB {
 
@@ -214,6 +243,40 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 
 #endif
 
+}
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+static void __attribute__((unused)) fLoggerMessageHandlerConsole(
+	QtMsgType inType, QString inMessage, int inLine, const char* inFile, const char* inFunction
+) {
+
+#ifdef QT_DEBUG
+
+	QString oThreadIDString = QString("0x%1");
+	QString oThreadIDValue = oThreadIDString.arg((long)QThread::currentThread(),0,16);
+	std::string oThreadIDStdString = oThreadIDValue.toStdString();
+
+	std::string oMessageStdString = inMessage.toStdString();
+
+	ALoggerMessageModel oMessageModel;
+	oMessageModel.Type = inType;
+	oMessageModel.Time = QDateTime::currentMSecsSinceEpoch();
+	oMessageModel.ThreadID = oThreadIDStdString.c_str();
+	oMessageModel.Message = oMessageStdString.c_str();
+	oMessageModel.Author = _A_LOGGER_DEFAULT_STRING_SYSTEM;
+	oMessageModel.File = inFile;
+	oMessageModel.Function = inFunction;
+	oMessageModel.Line = inLine;
+
+	fLoggerWriteToConsole(&oMessageModel);
+
+#endif
 }
 
 } // namespace ARB
