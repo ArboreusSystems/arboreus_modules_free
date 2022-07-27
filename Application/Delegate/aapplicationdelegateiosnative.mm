@@ -18,7 +18,6 @@
 
 // Namespaces
 using namespace ARB;
-using namespace KRN;
 
 // Class global properties
 static ABackend* gBackend = nullptr;
