@@ -16,6 +16,9 @@
 // Class header
 #include "aapplicationheartbeat.h"
 
+// Namespace
+using namespace ARB;
+
 
 // -----------
 /*!
@@ -24,8 +27,11 @@
 	Doc.
 */
 
-AApplicationHeartbeat::AApplicationHeartbeat(QObject* parent) : QObject(parent) {
+AApplicationHeartbeat::AApplicationHeartbeat(AApplicationConfig* inConfig,QObject* parent) : QObject(parent) {
 
+	if (inConfig) pConfig = inConfig;
+
+	_A_DEBUG << "AApplicationHeartbeat created";
 }
 
 
@@ -38,5 +44,112 @@ AApplicationHeartbeat::AApplicationHeartbeat(QObject* parent) : QObject(parent) 
 
 AApplicationHeartbeat::~AApplicationHeartbeat(void) {
 
+	_A_DEBUG << "AApplicationHeartbeat deleted";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AApplicationHeartbeat::slInit(void) {
+
+	pTimer = new QTimer(this);
+	pTime = pConfig->AApplicationConfig_Heartbeat_DefaultTime();
+
+	QObject::connect(
+		pTimer,&QTimer::timeout,
+		this,&AApplicationHeartbeat::slOnBeat
+	);
+
+	if (pConfig->AApplicationConfig_Heartbeat_DefaultAutostart()) {
+		this->mStart();
+	}
+
+	_A_DEBUG << "AApplicationHeartbeat initiated";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AApplicationHeartbeat::mSetTime(int inTime) {
+
+	pTime = inTime;
+	if (pTimer->isActive()) {
+		pTimer->stop();
+		pTimer->start(pTime);
+	}
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AApplicationHeartbeat::mStart(void) {
+
+	if (pTimer->isActive()) this->mStop();
+	pTimer->start(pTime);
+
+	_A_INFO << "AApplicationHeartbeat started";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AApplicationHeartbeat::mStartWithTime(int inTime) {
+
+	pTime = inTime;
+	if (pTimer->isActive()) pTimer->stop();
+	pTimer->start(pTime);
+
+	_A_INFO << "AApplicationHeartbeat started with time:" << pTime;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AApplicationHeartbeat::mStop(void) {
+
+	if (pTimer->isActive()) pTimer->stop();
+
+	_A_INFO << "AApplicationHeartbeat stopped";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AApplicationHeartbeat::slOnBeat(void) {
+
+	_A_DEBUG << "HEARTBEAT";
+
+	pConfig->AApplicationConfig_Heartbeat_OnBeat();
+	emit this->sgOnBeat();
 }
 

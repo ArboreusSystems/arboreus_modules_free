@@ -68,8 +68,16 @@ AApplication::~AApplication(void) {
 void AApplication::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
-	pConfig = qobject_cast<AApplicationConfig*>(pBackend->pGlobalConfigObject);
 	pConstants = new AConstants(this);
+	pConfig = qobject_cast<AApplicationConfig*>(pBackend->pGlobalConfigObject);
+
+	this->setPriority(pConfig->AApplicationConfig_Application_ThreadPriority());
+
+	pApplicationHeartbeat = new AApplicationHeartbeat(pConfig,this);
+	QObject::connect(
+		this,&AApplication::sgInit,
+		pApplicationHeartbeat,&AApplicationHeartbeat::slInit
+	);
 
 	emit this->sgInit();
 }

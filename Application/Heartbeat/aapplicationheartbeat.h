@@ -17,26 +17,51 @@
 #define AAPPLICATIONHEARTBEAT_H
 
 // System includes
-#include <QObject>
+#include <aapplicationpch.h>
 
 // Application includes
+#include <alogger.h>
+#include <aapplicationconfig.h>
 
 // Constants and definitions
 
 // Namespace
+namespace ARB {
 
 // Class definitions
 class AApplicationHeartbeat : public QObject {
 
 	Q_OBJECT
 
-public:
+	public:
 
-	explicit AApplicationHeartbeat(QObject *parent = nullptr);
-	virtual ~AApplicationHeartbeat(void);
+		explicit AApplicationHeartbeat(AApplicationConfig* inConfig = nullptr,QObject* parent = nullptr);
+		virtual ~AApplicationHeartbeat(void);
 
-signals:
+	public slots:
 
+		void slInit(void);
+
+		void mSetTime(int inTime);
+		void mStart(void);
+		void mStartWithTime(int inTime);
+		void mStop(void);
+
+	signals:
+
+		void sgOnBeat(void);
+
+	private:
+
+		int pTime = 0;
+		QTimer* pTimer = nullptr;
+		AApplicationConfig* pConfig = nullptr;
+
+	private slots:
+
+		void slOnBeat(void);
 };
+
+} // namespace ARB
 
 #endif // AAPPLICATIONHEARTBEAT_H

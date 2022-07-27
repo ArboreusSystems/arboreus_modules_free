@@ -7,7 +7,6 @@ PRECOMPILED_HEADER = $$PWD/aapplicationpch.h
 
 HEADERS += \
 	$$PWD/Heartbeat/aapplicationheartbeat.h \
-	$$PWD/Heartbeat/aapplicationheartbeatconfig.h \
 	$$PWD/aapplication.h \
 	$$PWD/aapplicationconfig.h \
 	$$PWD/aapplicationdatamodels.h \

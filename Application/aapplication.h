@@ -27,6 +27,7 @@
 #include <aapplicationdatamodels.h>
 #include <aapplicationconfig.h>
 #include <aapplicationservice.h>
+#include <aapplicationheartbeat.h>
 
 // Constants and definitions
 
@@ -44,6 +45,7 @@ class AApplication : public AThreadTemplate<AApplicationService> {
 	public:
 
 		AConstants* pConstants = nullptr;
+		AApplicationHeartbeat* pApplicationHeartbeat = nullptr;
 
 		explicit AApplication(QObject* parent = nullptr);
 		virtual ~AApplication(void);

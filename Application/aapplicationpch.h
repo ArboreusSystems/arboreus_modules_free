@@ -21,6 +21,8 @@
 #include <QObject>
 #include <QString>
 #include <QByteArray>
+#include <QTimer>
+#include <QThread>
 
 // Application includes
 

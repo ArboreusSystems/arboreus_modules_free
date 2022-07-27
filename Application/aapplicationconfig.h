@@ -34,8 +34,15 @@ class AApplicationConfig {
 
 	public:
 
+
 		// ------------------------
-		// Delegate
+		// Application
+
+		virtual QThread::Priority AApplicationConfig_Application_ThreadPriority(void) = 0;
+
+
+		// ------------------------
+		// Registry
 
 		virtual QString AApplicationConfig_Registry_Value(void) = 0;
 		virtual QString AApplicationConfig_Registry_Salt(void) = 0;
@@ -56,6 +63,14 @@ class AApplicationConfig {
 		virtual void AApplicationConfig_Delegate_DidEnterBackground(void) = 0;
 		virtual void AApplicationConfig_Delegate_WillEnterForeground(void) = 0;
 #endif
+
+
+		// ------------------------
+		// Heartbeat
+
+		virtual void AApplicationConfig_Heartbeat_OnBeat(void) = 0;
+		virtual int AApplicationConfig_Heartbeat_DefaultTime(void) = 0;
+		virtual bool AApplicationConfig_Heartbeat_DefaultAutostart(void) = 0;
 };
 
 } // namespace ARB
