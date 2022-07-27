@@ -24,7 +24,7 @@
 
 // iOS includes
 #if defined(Q_OS_IOS)
-#include <aapplicationiosdatamodels.h>
+#include <aapplicationdelegatedatamodels.h>
 #endif
 
 // Constants and defintions

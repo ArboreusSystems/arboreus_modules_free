@@ -12,8 +12,8 @@
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef AAPPLICATIONIOSGLOBALCONFIG_H
-#define AAPPLICATIONIOSGLOBALCONFIG_H
+#ifndef AAPPLICATIONDELEGATEGLOBALCONFIG_H
+#define AAPPLICATIONDELEGATEGLOBALCONFIG_H
 
 // System includes
 
@@ -31,4 +31,4 @@ void fAApplicationConfig_DidFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_L
 
 } // namespace ARB
 
-#endif // AAPPLICATIONIOSGLOBALCONFIG_H
+#endif // AAPPLICATIONDELEGATEGLOBALCONFIG_H

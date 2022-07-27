@@ -12,8 +12,8 @@
 	\endlist
 */
 // ----------------------------------------------------------
-#ifndef AAPPLICATIONIOSDATAMODELS_H
-#define AAPPLICATIONIOSDATAMODELS_H
+#ifndef AAPPLICATIONDELEGATEDATAMODELS_H
+#define AAPPLICATIONDELEGATEDATAMODELS_H
 
 // System includes
 
@@ -78,4 +78,4 @@ class AEnumsApplicationIOSLaunchOption: public QObject {
 
 } // namespace ARB
 
-#endif // AAPPLICATIONIOSDATAMODELS_H
+#endif // AAPPLICATIONDELEGATEDATAMODELS_H

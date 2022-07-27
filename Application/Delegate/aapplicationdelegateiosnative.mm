@@ -14,7 +14,7 @@
 // ----------------------------------------------------------
 
 // Class header
-#include "aapplicationiosnativedelegate.h"
+#include "aapplicationdelegateiosnative.h"
 
 // Namespaces
 using namespace ARB;
@@ -24,16 +24,16 @@ using namespace KRN;
 static ABackend* gBackend = nullptr;
 
 // Constants and definitons
-#define _A_IOS_NATIVE_APPLICATION_CONFIG qobject_cast<AApplicationConfig*>(gBackend->pGlobalConfigObject)
+#define _A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG qobject_cast<AApplicationConfig*>(gBackend->pGlobalConfigObject)
 
 // Class interface
-@interface QIOSApplicationDelegate (AApplicationDelegate)
+@interface QIOSApplicationDelegate (AApplicationDelegateIOSNative)
 
 @end
 
 
 // Class definition
-@implementation QIOSApplicationDelegate (AApplicationDelegate)
+@implementation QIOSApplicationDelegate (AApplicationDelegateIOSNative)
 
 // ----------------------------------
 #pragma mark UIApplicationDelegate
@@ -70,14 +70,14 @@ static ABackend* gBackend = nullptr;
 
 	#pragma unused(application)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_DidBecomeActive();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidBecomeActive();
 }
 
 -(void) applicationWillResignActive:(UIApplication*) application {
 
 	#pragma unused(application)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_WillResignActive();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_WillResignActive();
 }
 
 //-(BOOL) application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
@@ -87,41 +87,41 @@ static ABackend* gBackend = nullptr;
 //	return YES;
 //}
 
--(void) applicationDidReceiveMemoryWarning:(UIApplication *)application {
+-(void) applicationDidReceiveMemoryWarning:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_DidReceiveMemoryWarning();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidReceiveMemoryWarning();
 }
 
--(void) applicationWillTerminate:(UIApplication*) application {
+-(void) applicationWillTerminate:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_WillTerminate();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_WillTerminate();
 }
 
--(void) applicationSignificantTimeChange:(UIApplication *)application {
+-(void) applicationSignificantTimeChange:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_SignificantTimeChange();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_SignificantTimeChange();
 }
 
--(void) application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*) deviceToken {
+-(void) application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
 
 	#pragma unused(application)
 
 	QByteArray oData = QByteArray::fromNSData(deviceToken);
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_DidRegisterForRemoteNotificationsWithDeviceToken(oData);
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidRegisterForRemoteNotificationsWithDeviceToken(oData);
 }
 
--(void) application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+-(void) application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
 
 	#pragma unused(application)
 	#pragma unused(error)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_DidFailToRegisterForRemoteNotificationsWithError();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidFailToRegisterForRemoteNotificationsWithError();
 }
 
 //-(void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -129,26 +129,26 @@ static ABackend* gBackend = nullptr;
 //	NSLog(@"didReceiveRemoteNotification");
 //}
 
--(void)application:(UIApplication *)application didUpdateUserActivity:(NSUserActivity *)userActivity {
+-(void) application:(UIApplication*)application didUpdateUserActivity:(NSUserActivity*)userActivity {
 
 	#pragma unused(application)
 	#pragma unused(userActivity)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_DidUpdateUserActivity();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidUpdateUserActivity();
 }
 
--(void) applicationDidEnterBackground:(UIApplication*) application {
+-(void) applicationDidEnterBackground:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_DidEnterBackground();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidEnterBackground();
 }
 
--(void) applicationWillEnterForeground:(UIApplication*) application {
+-(void) applicationWillEnterForeground:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_IOS_NATIVE_APPLICATION_CONFIG->AApplicationConfig_WillEnterForeground();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_WillEnterForeground();
 }
 
 @end

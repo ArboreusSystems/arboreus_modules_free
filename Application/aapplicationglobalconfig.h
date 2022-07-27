@@ -21,7 +21,7 @@
 
 // iOS includes
 #if defined(Q_OS_IOS)
-#include <aapplicationiosglobalconfig.h>
+#include <aapplicationdelegateglobalconfig.h>
 #endif
 
 // Android includes

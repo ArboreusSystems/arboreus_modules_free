@@ -1,6 +1,6 @@
 INCLUDEPATH += \
 	$$PWD \
-	$$PWD/IOS \
+	$$PWD/Delegate \
 
 PRECOMPILED_HEADER = $$PWD/aapplicationpch.h
 
@@ -22,10 +22,10 @@ SOURCES += \
 ios {
 
 	OBJECTIVE_HEADERS += \
-		$$PWD/IOS/aapplicationiosdatamodels.h \
-		$$PWD/IOS/aapplicationiosglobalconfig.h \
-		$$PWD/IOS/aapplicationiosnativedelegate.h \
+	$$PWD/Delegate/aapplicationdelegatedatamodels.h \
+	$$PWD/Delegate/aapplicationdelegateglobalconfig.h \
+	$$PWD/Delegate/aapplicationdelegateiosnative.h
 
 	OBJECTIVE_SOURCES += \
-		$$PWD/IOS/aapplicationiosnativedelegate.mm
+	$$PWD/Delegate/aapplicationdelegateiosnative.mm
 }

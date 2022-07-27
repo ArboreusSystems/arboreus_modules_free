@@ -13,8 +13,8 @@
 */
 // ----------------------------------------------------------
 
-#ifndef AAPPLICATIONIOSNATIVEDELEGATE_H
-#define AAPPLICATIONIOSNATIVEDELEGATE_H
+#ifndef AAPPLICATIONDELEGATEIOSNATIVE_H
+#define AAPPLICATIONDELEGATEIOSNATIVE_H
 
 // System includes
 
@@ -36,4 +36,4 @@
 
 @end
 
-#endif // AAPPLICATIONIOSNATIVEDELEGATE_H
+#endif // AAPPLICATIONDELEGATEIOSNATIVE_H
