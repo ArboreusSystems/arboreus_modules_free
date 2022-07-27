@@ -34,20 +34,27 @@ class AApplicationConfig {
 
 	public:
 
-		virtual QString AApplicationConfig_Value(void) = 0;
-		virtual QString AApplicationConfig_Salt(void) = 0;
+		// ------------------------
+		// Delegate
+
+		virtual QString AApplicationConfig_Registry_Value(void) = 0;
+		virtual QString AApplicationConfig_Registry_Salt(void) = 0;
+
+
+		// ------------------------
+		// Delegate
 
 #if defined(Q_OS_IOS)
-		virtual void AApplicationConfig_DidBecomeActive(void) = 0;
-		virtual void AApplicationConfig_WillResignActive(void) = 0;
-		virtual void AApplicationConfig_DidReceiveMemoryWarning(void) = 0;
-		virtual void AApplicationConfig_WillTerminate(void) = 0;
-		virtual void AApplicationConfig_SignificantTimeChange(void) = 0;
-		virtual void AApplicationConfig_DidRegisterForRemoteNotificationsWithDeviceToken(QByteArray inToken) = 0;
-		virtual void AApplicationConfig_DidFailToRegisterForRemoteNotificationsWithError(void) = 0;
-		virtual void AApplicationConfig_DidUpdateUserActivity(void) = 0;
-		virtual void AApplicationConfig_DidEnterBackground(void) = 0;
-		virtual void AApplicationConfig_WillEnterForeground(void) = 0;
+		virtual void AApplicationConfig_Delegate_DidBecomeActive(void) = 0;
+		virtual void AApplicationConfig_Delegate_WillResignActive(void) = 0;
+		virtual void AApplicationConfig_Delegate_DidReceiveMemoryWarning(void) = 0;
+		virtual void AApplicationConfig_Delegate_WillTerminate(void) = 0;
+		virtual void AApplicationConfig_Delegate_SignificantTimeChange(void) = 0;
+		virtual void AApplicationConfig_Delegate_DidRegisterForRemoteNotificationsWithDeviceToken(QByteArray inToken) = 0;
+		virtual void AApplicationConfig_Delegate_DidFailToRegisterForRemoteNotificationsWithError(void) = 0;
+		virtual void AApplicationConfig_Delegate_DidUpdateUserActivity(void) = 0;
+		virtual void AApplicationConfig_Delegate_DidEnterBackground(void) = 0;
+		virtual void AApplicationConfig_Delegate_WillEnterForeground(void) = 0;
 #endif
 };
 

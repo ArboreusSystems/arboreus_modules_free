@@ -1,10 +1,13 @@
 INCLUDEPATH += \
 	$$PWD \
 	$$PWD/Delegate \
+	$$PWD/Heartbeat
 
 PRECOMPILED_HEADER = $$PWD/aapplicationpch.h
 
 HEADERS += \
+	$$PWD/Heartbeat/aapplicationheartbeat.h \
+	$$PWD/Heartbeat/aapplicationheartbeatconfig.h \
 	$$PWD/aapplication.h \
 	$$PWD/aapplicationconfig.h \
 	$$PWD/aapplicationdatamodels.h \
@@ -15,6 +18,7 @@ HEADERS += \
 	$$PWD/aconstantsdefinition.h
 
 SOURCES += \
+	$$PWD/Heartbeat/aapplicationheartbeat.cpp \
 	$$PWD/aapplication.cpp \
 	$$PWD/aapplicationservice.cpp \
 	$$PWD/aconstants.cpp
@@ -22,10 +26,10 @@ SOURCES += \
 ios {
 
 	OBJECTIVE_HEADERS += \
-	$$PWD/Delegate/aapplicationdelegatedatamodels.h \
-	$$PWD/Delegate/aapplicationdelegateglobalconfig.h \
-	$$PWD/Delegate/aapplicationdelegateiosnative.h
+		$$PWD/Delegate/aapplicationdelegatedatamodels.h \
+		$$PWD/Delegate/aapplicationdelegateglobalconfig.h \
+		$$PWD/Delegate/aapplicationdelegateiosnative.h
 
 	OBJECTIVE_SOURCES += \
-	$$PWD/Delegate/aapplicationdelegateiosnative.mm
+		$$PWD/Delegate/aapplicationdelegateiosnative.mm
 }

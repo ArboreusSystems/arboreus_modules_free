@@ -26,8 +26,8 @@
 namespace ARB {
 
 // Global functions
-void fAApplicationConfig_WillFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION inOption);
-void fAApplicationConfig_DidFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION inOption);
+void fAApplicationConfig_Delegate_WillFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION inOption);
+void fAApplicationConfig_Delegate_DidFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION inOption);
 
 } // namespace ARB
 

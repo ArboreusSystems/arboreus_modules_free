@@ -51,7 +51,7 @@ static ABackend* gBackend = nullptr;
 		_A_CONSOLE_DEBUG("ABackend NOT assigned to global variable");
 	}
 	
-	fAApplicationConfig_WillFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION::Undefined);
+	fAApplicationConfig_Delegate_WillFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION::Undefined);
 
 	return YES;
 }
@@ -61,7 +61,7 @@ static ABackend* gBackend = nullptr;
 	#pragma unused(application)
 	#pragma unused(launchOptions)
 
-	fAApplicationConfig_DidFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION::Undefined);
+	fAApplicationConfig_Delegate_DidFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION::Undefined);
 
 	return YES;
 }
@@ -70,14 +70,14 @@ static ABackend* gBackend = nullptr;
 
 	#pragma unused(application)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidBecomeActive();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_DidBecomeActive();
 }
 
 -(void) applicationWillResignActive:(UIApplication*) application {
 
 	#pragma unused(application)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_WillResignActive();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_WillResignActive();
 }
 
 //-(BOOL) application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
@@ -91,21 +91,21 @@ static ABackend* gBackend = nullptr;
 
 	#pragma unused(application)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidReceiveMemoryWarning();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_DidReceiveMemoryWarning();
 }
 
 -(void) applicationWillTerminate:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_WillTerminate();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_WillTerminate();
 }
 
 -(void) applicationSignificantTimeChange:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_SignificantTimeChange();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_SignificantTimeChange();
 }
 
 -(void) application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken {
@@ -113,7 +113,7 @@ static ABackend* gBackend = nullptr;
 	#pragma unused(application)
 
 	QByteArray oData = QByteArray::fromNSData(deviceToken);
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidRegisterForRemoteNotificationsWithDeviceToken(oData);
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_DidRegisterForRemoteNotificationsWithDeviceToken(oData);
 }
 
 -(void) application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error {
@@ -121,7 +121,7 @@ static ABackend* gBackend = nullptr;
 	#pragma unused(application)
 	#pragma unused(error)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidFailToRegisterForRemoteNotificationsWithError();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_DidFailToRegisterForRemoteNotificationsWithError();
 }
 
 //-(void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
@@ -134,21 +134,21 @@ static ABackend* gBackend = nullptr;
 	#pragma unused(application)
 	#pragma unused(userActivity)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidUpdateUserActivity();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_DidUpdateUserActivity();
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_DidEnterBackground();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_DidEnterBackground();
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application {
 
 	#pragma unused(application)
 
-	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_WillEnterForeground();
+	_A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG->AApplicationConfig_Delegate_WillEnterForeground();
 }
 
 @end
