@@ -147,8 +147,6 @@ void AApplicationHeartbeat::mStop(void) {
 
 void AApplicationHeartbeat::slOnBeat(void) {
 
-	_A_DEBUG << "HEARTBEAT";
-
 	pConfig->AApplicationConfig_Heartbeat_OnBeat();
 	emit this->sgOnBeat();
 }
