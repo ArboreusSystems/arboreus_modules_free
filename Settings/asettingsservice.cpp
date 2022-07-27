@@ -76,7 +76,7 @@ void ASettingsService::slInit(ASettingsProperties inProperties) {
 	oDBproperties.Path = inProperties.Path + "/" + oDBproperties.Name + ".db";
 
 	if (pSettingsConfig->ASettingsConfig_Encrypted()) {
-		oDBproperties.Value = pApplicationConfig->AApplicationConfig_Value();
+		oDBproperties.Value = pApplicationConfig->AApplicationConfig_Registry_Value();
 	}
 
 	pDB = new ADBSqliteCipher(this);
