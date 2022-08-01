@@ -55,7 +55,10 @@ class AApplicationConfig {
 		// ------------------------
 		// Lifecycle
 
-		virtual void AApplicationConfig_Lifecycle_WillLaunchUI(ABackend* inBackend) = 0;
+		virtual void AApplicationConfig_Lifecycle_WillLaunchBackend(void) = 0;
+		virtual void AApplicationConfig_Lifecycle_DidLaunchBackend(void) = 0;
+		virtual void AApplicationConfig_Lifecycle_WillLaunchUI(void) = 0;
+		virtual void AApplicationConfig_Lifecycle_DidLaunchUI(void) = 0;
 
 
 		// ------------------------
