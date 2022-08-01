@@ -20,7 +20,7 @@
 using namespace ARB;
 
 // Class global properties
-static ABackend* gBackend = nullptr;
+static ABackend* gBackend = &ABackend::mInstance();
 
 // Constants and definitons
 #define _A_APPLICATION_DELEGATE_IOS_NATIVE_CONFIG qobject_cast<AApplicationConfig*>(gBackend->pGlobalConfigObject)
@@ -42,14 +42,7 @@ static ABackend* gBackend = nullptr;
 
 	#pragma unused(application)
 	#pragma unused(launchOptions)
-	
-	gBackend = &ABackend::mInstance();
-	if (gBackend) {
-		_A_CONSOLE_DEBUG("ABackend assigned to global variable");
-	} else {
-		_A_CONSOLE_DEBUG("ABackend NOT assigned to global variable");
-	}
-	
+
 	fAApplicationConfig_Delegate_WillFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION::Undefined);
 
 	return YES;

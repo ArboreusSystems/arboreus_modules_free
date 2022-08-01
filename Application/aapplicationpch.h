@@ -18,6 +18,8 @@
 #if defined __cplusplus
 
 // System includes
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 #include <QObject>
 #include <QString>
 #include <QByteArray>

@@ -17,6 +17,9 @@
 
 // System includes
 
+// Precompiled includes
+#include <aapplicationpch.h>
+
 // Application includes
 
 // iOS includes

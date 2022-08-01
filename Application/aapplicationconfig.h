@@ -30,6 +30,10 @@
 // Namespace
 namespace ARB {
 
+// Classes
+class ABackend;
+
+// Interface
 class AApplicationConfig {
 
 	public:
@@ -46,6 +50,12 @@ class AApplicationConfig {
 
 		virtual QString AApplicationConfig_Registry_Value(void) = 0;
 		virtual QString AApplicationConfig_Registry_Salt(void) = 0;
+
+
+		// ------------------------
+		// Lifecycle
+
+		virtual void AApplicationConfig_Lifecycle_WillLaunchUI(ABackend* inBackend) = 0;
 
 
 		// ------------------------
