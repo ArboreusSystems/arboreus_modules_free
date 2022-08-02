@@ -22,11 +22,14 @@
 #include <aloggerpch.h>
 
 // Application includes
+#include <aloggerconfig.h>
 #include <aloggerglobal.h>
 #include <athreadservicetemplate.h>
 #include <adbsqlitecipher.h>
 
 // Constants and definitions
+
+// Global variables
 
 // Namespace
 namespace ARB {
@@ -43,8 +46,8 @@ class ALoggerService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(QString inPathLoggerData);
-		void slWriteToDB(ALoggerMessageModel* inMessageModel);
+		void slInit(QString inPathLoggerData,QObject* inConfigObject);
+		void slWriteToLogbook(ARB::ALoggerMessageModel* inMessageModel);
 
 	signals:
 
@@ -54,6 +57,9 @@ class ALoggerService : public AThreadServiceTemplate {
 
 		QString pPathLoggerData = QString("NoPathLoggerData");
 		ADBSqliteCipher* pDB = nullptr;
+		ALoggerConfig* pConfig = nullptr;
+
+		void mInitMessageCache(void);
 };
 
 } // namespace ARB

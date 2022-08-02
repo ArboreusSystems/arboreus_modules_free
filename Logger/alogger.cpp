@@ -24,6 +24,24 @@ using namespace ARB;
 
 
 // -----------
+// Global functions
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel* inModel) {
+
+	ABackend::mInstance().pLogger->mWriteToLogbook(inModel);
+}
+
+
+// -----------
+// Class definition
+
+// -----------
 /*!
 	\fn
 
@@ -41,8 +59,8 @@ ALogger::ALogger(QObject* parent) : AThreadTemplate<ALoggerService>(new ALoggerS
 		this,&ALogger::sgInitiated
 	);
 	QObject::connect(
-		this,&ALogger::sgWriteToDB,
-		this->mService(),&ALoggerService::slWriteToDB
+		this,&ALogger::sgWriteToLogbook,
+		this->mService(),&ALoggerService::slWriteToLogbook
 	);
 
 	_A_DEBUG << "ALogger created";
@@ -72,12 +90,14 @@ ALogger::~ALogger(void) {
 void ALogger::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
-	this->start(QThread::Priority::LowPriority);
+	pConfig = qobject_cast<ALoggerConfig*>(pBackend->pGlobalConfigObject);
+
+	this->setPriority(pConfig->ALoggerConfig_ThreadPriority());
 
 	QString oPathLoggerData = pBackend->pProperties->mGetPathDataCache() + "/Logs";
 	if (ADir::mEnsure(oPathLoggerData)) {
 		_A_DEBUG << "Ensured path for logs:" << oPathLoggerData;
-		emit sgInit(oPathLoggerData);
+		emit sgInit(oPathLoggerData,pBackend->pGlobalConfigObject);
 	} else {
 		_A_CRITICAL << "Failed to ensure path for logs:" << oPathLoggerData;
 	}
@@ -93,9 +113,9 @@ void ALogger::mInit(void) {
 	Doc.
 */
 
-void ALogger::mWriteToDB(ALoggerMessageModel* inMessageModel) {
+void ALogger::mWriteToLogbook(ALoggerMessageModel* inMessageModel) {
 
-	emit sgWriteToDB(inMessageModel);
+	emit sgWriteToLogbook(inMessageModel);
 }
 
 
@@ -110,3 +130,4 @@ void ALogger::slInitiated(void) {
 
 	emit sgInitiated();
 }
+

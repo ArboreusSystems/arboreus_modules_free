@@ -19,6 +19,10 @@
 // Namespace
 using namespace ARB;
 
+// Global variables
+QList<ARB::ALoggerMessageModel> gLoggerMessageCache = {};
+bool gLoggerIsInitiated = false;
+
 
 // -----------
 /*!
@@ -55,9 +59,10 @@ ALoggerService::~ALoggerService(void) {
 	Doc.
 */
 
-void ALoggerService::slInit(QString inPathLoggerData) {
+void ALoggerService::slInit(QString inPathLoggerData,QObject* inConfigObject) {
 
 	pPathLoggerData = inPathLoggerData;
+	pConfig = qobject_cast<ALoggerConfig*>(inConfigObject);
 
 	ADBSqliteCipherProperties oDBProperties;
 	oDBProperties.Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
@@ -80,6 +85,8 @@ void ALoggerService::slInit(QString inPathLoggerData) {
 		if (!oDBReply.Status) _A_CRITICAL << "Creating table for logs failed";
 	}
 
+	this->mInitMessageCache();
+
 	_A_DEBUG << "ALoggerService initiated";
 	emit sgInitiated();
 }
@@ -92,7 +99,26 @@ void ALoggerService::slInit(QString inPathLoggerData) {
 	Doc.
 */
 
-void ALoggerService::slWriteToDB(ALoggerMessageModel* inMessageModel) {
+void ALoggerService::slWriteToLogbook(ALoggerMessageModel* inMessageModel) {
 
 	Q_UNUSED(inMessageModel);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ALoggerService::mInitMessageCache(void) {
+
+	for (int i = 0; i < gLoggerMessageCache.length(); i++) {
+		ALoggerMessageModel* iModel = const_cast<ALoggerMessageModel*>(
+			&(gLoggerMessageCache.at(i))
+		);
+		this->slWriteToLogbook(iModel);
+	}
+	gLoggerMessageCache.clear();
 }

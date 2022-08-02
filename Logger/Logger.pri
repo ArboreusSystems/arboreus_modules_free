@@ -4,6 +4,7 @@ PRECOMPILED_HEADER = $$PWD/aloggerpch.h
 
 HEADERS += \
 	$$PWD/alogger.h \
+	$$PWD/aloggerconfig.h \
 	$$PWD/aloggerdatamodels.h \
 	$$PWD/aloggerglobal.h \
 	$$PWD/aloggerpch.h \

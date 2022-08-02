@@ -25,6 +25,7 @@
 #include <athreadtemplate.h>
 #include <aloggerservice.h>
 #include <aloggerglobal.h>
+#include <aloggerconfig.h>
 #include <adir.h>
 
 // Constants and definitions
@@ -47,13 +48,13 @@ class ALogger : public AThreadTemplate<ALoggerService> {
 		Q_DISABLE_COPY(ALogger)
 
 		void mInit(void);
-		void mWriteToDB(ALoggerMessageModel* inMessageModel);
+		void mWriteToLogbook(ALoggerMessageModel* inMessageModel);
 
 	signals:
 
-		void sgInit(QString inPathLoggerData);
+		void sgInit(QString inPathLoggerData,QObject* inConfigObject);
 		void sgInitiated(void);
-		void sgWriteToDB(ALoggerMessageModel* inMessageModel);
+		void sgWriteToLogbook(ARB::ALoggerMessageModel* inMessageModel);
 
 	public slots:
 
@@ -62,6 +63,7 @@ class ALogger : public AThreadTemplate<ALoggerService> {
 	private:
 
 		ABackend* pBackend = nullptr;
+		ALoggerConfig* pConfig = nullptr;
 };
 
 } // namespace ARB

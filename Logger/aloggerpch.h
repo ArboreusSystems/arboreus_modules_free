@@ -23,6 +23,7 @@
 #include <QDebug>
 #include <QThread>
 #include <QString>
+#include <QList>
 #include <string>
 
 // Qt 5 System includes

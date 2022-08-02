@@ -22,6 +22,7 @@
 
 // Application includes
 #include <aloggerdatamodels.h>
+//#include <alogger.h>
 
 // Constants and defintions
 #define _A_LOGGER_DEFAULT_STRING_DEBUG "DBG"
@@ -69,6 +70,14 @@
 	__FILE__, \
 	__FUNCTION__ \
 )
+
+// Global variables
+extern QList<ARB::ALoggerMessageModel> gLoggerMessageCache;
+extern bool gLoggerIsInitiated;
+
+// Global functions
+void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel* inModel);
+
 
 // Namespace
 namespace ARB {
@@ -179,25 +188,6 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 	Doc.
 */
 
-static void __attribute__((unused)) fLoggerWriteToDB(ALoggerMessageModel* inModel) {
-
-	Q_UNUSED(inModel)
-
-#ifndef QT_DEBUG
-
-#else
-
-#endif
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
 static void __attribute__((unused)) fLoggerMessageHandler(
 	QtMsgType inType, const QMessageLogContext& inContext, const QString& inMessage
 ) {
@@ -233,12 +223,18 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 
 	fLoggerWriteToConsole(&oMessageModel);
 
+	if (gLoggerIsInitiated) {
+		fLoggerWriteToLogbook(&oMessageModel);
+	} else {
+		gLoggerMessageCache.append(oMessageModel);
+	}
+
 #else
 
 	Q_UNUSED(inContext);
 
 	fLoggerWriteToConsole(&oMessageModel);
-	fLoggerWriteToDB(&oMessageModel);
+	fLoggerWriteToLogbook(&oMessageModel);
 
 
 #endif
@@ -275,6 +271,8 @@ static void __attribute__((unused)) fLoggerMessageHandlerConsole(
 	oMessageModel.Line = inLine;
 
 	fLoggerWriteToConsole(&oMessageModel);
+
+	gLoggerMessageCache.append(oMessageModel);
 
 #endif
 }
