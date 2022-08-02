@@ -216,9 +216,11 @@ QString ASequenceString::mRandom(int inLength,QString inDictionary) {
 	QString oString;
 
 	if (inDictionary.length() > 0) {
-		int oSolt = ARandom::mNumberFromRange(0,1024);
+		int oSolt = static_cast<int>(ARandom::mNumberFromRange(0,1024));
 		for(int i = 0; i < inLength + oSolt; ++i) {
-			int oCharPosition = ARandom::mNumberPositiveNoExponent() % inDictionary.length();
+			int oCharPosition = static_cast<int>(
+				ARandom::mNumberPositiveNoExponent() % inDictionary.length()
+			);
 			QChar vNextChar = inDictionary.at(oCharPosition);
 			oString.append(vNextChar);
 		}
@@ -281,10 +283,10 @@ QString ASequenceString::mDictionary(_A_ENUM_DICTIONARY_TYPE inType) {
 QString ASequenceString::mShake(QString inString) {
 
 	QString oStringShaked;
-	int oStringLength = inString.length();
-	int oPosition = 0;
+	long long oStringLength = inString.length();
+	long oPosition = 0;
 
-	for (int i = 0; i < oStringLength; i++) {
+	for (long long i = 0; i < oStringLength; i++) {
 		oPosition = 0 + arc4random() % inString.length();
 		oStringShaked += inString.at(oPosition);
 		inString.remove(oPosition,1);

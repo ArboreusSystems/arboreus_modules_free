@@ -40,6 +40,8 @@
 #include <chrono>
 #include <random>
 #include <vector>
+#include <sys/time.h>
+#include <sys/utsname.h>
 
 // Qt 5 System includes
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
