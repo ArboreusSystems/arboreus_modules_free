@@ -97,10 +97,11 @@ void ALoggerFileAgent::mWriteToLogbook(ALoggerMessageModel inMessageModel) {
 		oType,
 		inMessageModel.Author,
 		inMessageModel.Time,
-		inMessageModel.ThreadID,
-		inMessageModel.Message,
+		inMessageModel.ThreadID.constData(),
+		inMessageModel.Message.constData(),
 		inMessageModel.Function,
 		inMessageModel.File,
 		inMessageModel.Line
 	);
+	fflush(pFile);
 }

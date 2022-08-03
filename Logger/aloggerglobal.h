@@ -98,42 +98,48 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 		case QtDebugMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
 				_A_LOGGER_DEFAULT_STRING_DEBUG,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData(),
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtInfoMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
 				_A_LOGGER_DEFAULT_STRING_INFO,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData(),
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtWarningMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
 				_A_LOGGER_DEFAULT_STRING_WARNING,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData(),
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtCriticalMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
 				_A_LOGGER_DEFAULT_STRING_CRITICAL,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData(),
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		case QtFatalMsg:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
 				_A_LOGGER_DEFAULT_STRING_FATAL,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData(),
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
 		default:
 			fprintf(stderr,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
 				_A_LOGGER_DEFAULT_STRING_UNDEFINED,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message,
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData(),
 				inModel->Function,inModel->File,inModel->Line
 			);
 			break;
@@ -147,31 +153,36 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 		case QtInfoMsg:
 			fprintf(stderr,"%s:%s %llu %s %s\n",
 				_A_LOGGER_DEFAULT_STRING_INFO,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData()
 			);
 			break;
 		case QtWarningMsg:
 			fprintf(stderr,"%s:%s %llu %s %s\n",
 				_A_LOGGER_DEFAULT_STRING_WARNING,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData()
 			);
 			break;
 		case QtCriticalMsg:
 			fprintf(stderr,"%s:%s %llu %s %s\n",
 				_A_LOGGER_DEFAULT_STRING_CRITICAL,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData()
 			);
 			break;
 		case QtFatalMsg:
 			fprintf(stderr,"%s:%s %llu %s %s\n",
 				_A_LOGGER_DEFAULT_STRING_FATAL,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData()
 			);
 			break;
 		default:
 			fprintf(stderr,"%s:%s %llu %s %s\n",
 				_A_LOGGER_DEFAULT_STRING_UNDEFINED,inModel->Author,
-				inModel->Time,inModel->ThreadID,inModel->Message
+				inModel->Time,inModel->ThreadID.constData(),
+				inModel->Message.constData()
 			);
 			break;
 	}
@@ -194,15 +205,15 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 
 	QString oThreadIDString = QString("0x%1");
 	QString oThreadIDValue = oThreadIDString.arg((long)QThread::currentThread(),0,16);
-	std::string oThreadIDStdString = oThreadIDValue.toStdString();
+//	std::string oThreadIDStdString = oThreadIDValue.toStdString();
 
-	std::string oMessageStdString = inMessage.toStdString();
+//	std::string oMessageStdString = inMessage.toStdString();
 
 	ALoggerMessageModel oMessageModel;
 	oMessageModel.Type = inType;
 	oMessageModel.Time = QDateTime::currentMSecsSinceEpoch();
-	oMessageModel.ThreadID = oThreadIDStdString.c_str();
-	oMessageModel.Message = oMessageStdString.c_str();
+	oMessageModel.ThreadID = oThreadIDValue.toUtf8();
+	oMessageModel.Message = inMessage.toUtf8();
 
 	QString oAuthorString = inMessage.left(3);
 	std::string oAuthor = oAuthorString.toStdString();
@@ -264,8 +275,8 @@ static void __attribute__((unused)) fLoggerMessageHandlerConsole(
 	ALoggerMessageModel oMessageModel;
 	oMessageModel.Type = inType;
 	oMessageModel.Time = QDateTime::currentMSecsSinceEpoch();
-	oMessageModel.ThreadID = oThreadIDStdString.c_str();
-	oMessageModel.Message = oMessageStdString.c_str();
+	oMessageModel.ThreadID = oThreadIDValue.toUtf8();
+	oMessageModel.Message = inMessage.toUtf8();
 	oMessageModel.Author = _A_LOGGER_DEFAULT_STRING_SYSTEM;
 	oMessageModel.File = inFile;
 	oMessageModel.Function = inFunction;

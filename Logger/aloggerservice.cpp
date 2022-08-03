@@ -87,7 +87,7 @@ void ALoggerService::slInit(ARB::ALoggerServiceProperties inProperties) {
 
 	this->mInitAgent(inProperties);
 	this->mInitMessageCache();
-//	gLoggerIsInitiated = true;
+	gLoggerIsInitiated = true;
 
 	_A_DEBUG << "ALoggerService initiated";
 	emit sgInitiated();
@@ -117,9 +117,6 @@ void ALoggerService::slWriteToLogbook(ARB::ALoggerMessageModel inMessageModel) {
 void ALoggerService::mInitMessageCache(void) {
 
 	for (int i = 0; i < gLoggerMessageCache.length(); i++) {
-//		ALoggerMessageModel* iModel = const_cast<ALoggerMessageModel*>(
-//			&(gLoggerMessageCache.at(i))
-//		);
 		this->slWriteToLogbook(gLoggerMessageCache.at(i));
 	}
 	gLoggerMessageCache.clear();
