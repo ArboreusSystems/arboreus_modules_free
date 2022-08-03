@@ -53,6 +53,7 @@ class AProperties : public QObject {
 		QString mGetPathDataApplication(void);
 		QString mGetPathDataConfig(void);
 		QString mGetPathDataCache(void);
+		QString mGetPathDataDocuments(void);
 
 	public slots:
 
@@ -71,6 +72,7 @@ class AProperties : public QObject {
 		QString pPathDataApplication = "NoPathDataApplication";
 		QString pPathDataConfig = "NoPathDataConfig";
 		QString pPathDataCache = "NoPathDataCache";
+		QString pPathDataDocuments = "NoPathDataDocuments";
 
 		QString pPathLogs = "NoPathLogs";
 

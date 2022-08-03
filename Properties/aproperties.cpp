@@ -102,6 +102,13 @@ void AProperties::mInitPaths(void) {
 	} else {
 		_A_CRITICAL << "No Cache Data path:" << pPathDataCache;
 	}
+
+	pPathDataDocuments = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+	if (ADir::mEnsure(pPathDataDocuments)) {
+		_A_DEBUG << "Ensured Documents Data path:" << pPathDataDocuments;
+	} else {
+		_A_CRITICAL << "No Documents Data path:" << pPathDataDocuments;
+	}
 }
 
 
@@ -200,6 +207,19 @@ QString AProperties::mGetPathDataConfig(void) {
 QString AProperties::mGetPathDataCache(void) {
 
 	return pPathDataCache;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AProperties::mGetPathDataDocuments(void) {
+
+	return pPathDataDocuments;
 }
 
 
