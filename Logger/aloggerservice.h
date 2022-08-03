@@ -26,6 +26,9 @@
 #include <aloggerglobal.h>
 #include <athreadservicetemplate.h>
 #include <adbsqlitecipher.h>
+#include <aloggeragent.h>
+#include <aloggerdbagent.h>
+#include <aloggerfileagent.h>
 
 // Constants and definitions
 
@@ -46,8 +49,8 @@ class ALoggerService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(QString inPathLoggerData,QObject* inConfigObject);
-		void slWriteToLogbook(ARB::ALoggerMessageModel* inMessageModel);
+		void slInit(ARB::ALoggerServiceProperties inProperties);
+		void slWriteToLogbook(ARB::ALoggerMessageModel inMessageModel);
 
 	signals:
 
@@ -55,11 +58,13 @@ class ALoggerService : public AThreadServiceTemplate {
 
 	private:
 
-		QString pPathLoggerData = QString("NoPathLoggerData");
-		ADBSqliteCipher* pDB = nullptr;
+//		QString pPathLoggerData = QString("NoPathLoggerData");
+//		ADBSqliteCipher* pDB = nullptr;
 		ALoggerConfig* pConfig = nullptr;
+		ALoggerAgentInterface* pAgent = nullptr;
 
 		void mInitMessageCache(void);
+		void mInitAgent(ALoggerServiceProperties inProperties);
 };
 
 } // namespace ARB

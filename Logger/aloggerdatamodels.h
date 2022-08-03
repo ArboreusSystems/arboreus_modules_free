@@ -37,7 +37,7 @@ class AEnumsLoggerLogbookType: public QObject {
 
 		enum class Type: int {
 
-			DB, File, All
+			DB, File
 		};
 		Q_ENUM(Type)
 };
@@ -65,7 +65,24 @@ class ALoggerMessageModel {
 };
 
 }
-
 Q_DECLARE_METATYPE(ARB::ALoggerMessageModel)
+
+// Namespace
+namespace ARB {
+
+class ALoggerServiceProperties {
+
+	public:
+
+		QString PathLoggerDB = "NoPathLoggerDB";
+		QString PathLoggerFile = "PathLoggerFile";
+		QObject* ConfigObject = nullptr;
+
+		explicit ALoggerServiceProperties(void) {}
+		virtual ~ALoggerServiceProperties(void) {}
+};
+
+}
+Q_DECLARE_METATYPE(ARB::ALoggerServiceProperties)
 
 #endif // ALOGGERDATAMODELS_H

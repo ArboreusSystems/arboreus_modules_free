@@ -32,7 +32,7 @@ using namespace ARB;
 
 	Doc.
 */
-void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel* inModel) {
+void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inModel) {
 
 	ABackend::mInstance().pLogger->mWriteToLogbook(inModel);
 }
@@ -94,12 +94,20 @@ void ALogger::mInit(void) {
 
 	this->setPriority(pConfig->ALoggerConfig_ThreadPriority());
 
-	QString oPathLoggerData = pBackend->pProperties->mGetPathDataCache() + "/Logs";
-	if (ADir::mEnsure(oPathLoggerData)) {
-		_A_DEBUG << "Ensured path for logs:" << oPathLoggerData;
-		emit sgInit(oPathLoggerData,pBackend->pGlobalConfigObject);
+	ALoggerServiceProperties oProperties;
+	oProperties.PathLoggerDB = pBackend->pProperties->mGetPathDataCache() + "/Logs";
+	oProperties.PathLoggerFile = pBackend->pProperties->mGetPathDataDocuments() + "/Logs";
+	oProperties.ConfigObject = pBackend->pGlobalConfigObject;
+
+	bool oEnsurePathLoggerDB = ADir::mEnsure(oProperties.PathLoggerDB);
+	bool oEnsurePathLoggerFile = ADir::mEnsure(oProperties.PathLoggerFile);
+	if (oEnsurePathLoggerDB && oEnsurePathLoggerFile) {
+		_A_DEBUG << "Ensured path for Logger DB:" << oProperties.PathLoggerDB;
+		_A_DEBUG << "Ensured path for Logger File:" << oProperties.PathLoggerFile;
+		emit sgInit(oProperties);
 	} else {
-		_A_CRITICAL << "Failed to ensure path for logs:" << oPathLoggerData;
+		_A_CRITICAL << "Failed to ensure path for Logger DB:" << oProperties.PathLoggerDB;
+		_A_CRITICAL << "Failed to ensure path for Logger File:" << oProperties.PathLoggerFile;
 	}
 
 	_A_DEBUG << "ALogger initiated";
@@ -113,7 +121,7 @@ void ALogger::mInit(void) {
 	Doc.
 */
 
-void ALogger::mWriteToLogbook(ALoggerMessageModel* inMessageModel) {
+void ALogger::mWriteToLogbook(ALoggerMessageModel inMessageModel) {
 
 	emit sgWriteToLogbook(inMessageModel);
 }

@@ -24,7 +24,9 @@
 #include <QThread>
 #include <QString>
 #include <QList>
+#include <QByteArray>
 #include <string>
+#include <stdio.h>
 
 // Qt 5 System includes
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)

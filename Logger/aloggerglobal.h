@@ -76,7 +76,7 @@ extern QList<ARB::ALoggerMessageModel> gLoggerMessageCache;
 extern bool gLoggerIsInitiated;
 
 // Global functions
-void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel* inModel);
+void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inModel);
 
 
 // Namespace
@@ -220,11 +220,12 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 
 	oMessageModel.File = inContext.file ? inContext.file : "no file";
 	oMessageModel.Function = inContext.function ? inContext.function : "no function";
+	oMessageModel.Line = inContext.line;
 
 	fLoggerWriteToConsole(&oMessageModel);
 
 	if (gLoggerIsInitiated) {
-		fLoggerWriteToLogbook(&oMessageModel);
+		fLoggerWriteToLogbook(oMessageModel);
 	} else {
 		gLoggerMessageCache.append(oMessageModel);
 	}

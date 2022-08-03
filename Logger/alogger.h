@@ -48,13 +48,13 @@ class ALogger : public AThreadTemplate<ALoggerService> {
 		Q_DISABLE_COPY(ALogger)
 
 		void mInit(void);
-		void mWriteToLogbook(ALoggerMessageModel* inMessageModel);
+		void mWriteToLogbook(ALoggerMessageModel inMessageModel);
 
 	signals:
 
-		void sgInit(QString inPathLoggerData,QObject* inConfigObject);
+		void sgInit(ARB::ALoggerServiceProperties inProperties);
 		void sgInitiated(void);
-		void sgWriteToLogbook(ARB::ALoggerMessageModel* inMessageModel);
+		void sgWriteToLogbook(ARB::ALoggerMessageModel inMessageModel);
 
 	public slots:
 

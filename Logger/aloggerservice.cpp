@@ -46,7 +46,7 @@ ALoggerService::ALoggerService(QObject* parent) : AThreadServiceTemplate(parent)
 
 ALoggerService::~ALoggerService(void) {
 
-	pDB->deleteLater();
+//	pDB->deleteLater();
 
 	_A_DEBUG << "ALoggerService deleted";
 }
@@ -59,33 +59,35 @@ ALoggerService::~ALoggerService(void) {
 	Doc.
 */
 
-void ALoggerService::slInit(QString inPathLoggerData,QObject* inConfigObject) {
+void ALoggerService::slInit(ARB::ALoggerServiceProperties inProperties) {
 
-	pPathLoggerData = inPathLoggerData;
-	pConfig = qobject_cast<ALoggerConfig*>(inConfigObject);
+//	pPathLoggerData = inProperties.PathLoggerData;
+	pConfig = qobject_cast<ALoggerConfig*>(inProperties.ConfigObject);
 
-	ADBSqliteCipherProperties oDBProperties;
-	oDBProperties.Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
-	oDBProperties.Path = pPathLoggerData + "/" + oDBProperties.Name + ".db";
+//	ADBSqliteCipherProperties oDBProperties;
+//	oDBProperties.Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
+//	oDBProperties.Path = pPathLoggerData + "/" + oDBProperties.Name + ".db";
 
-	QString oQueryString = QString(
-		"CREATE TABLE IF NOT EXISTS log ("
-			"id INTEGER PRIMARY KEY AUTOINCREMENT,"
-			"time INTEGER,"
-			"type VARCHAR(3),"
-			"threadID VARCHAR(24),"
-			"author VARCHAR(100),"
-			"message VARCHAR(255)"
-		")"
-	);
+//	QString oQueryString = QString(
+//		"CREATE TABLE IF NOT EXISTS log ("
+//			"id INTEGER PRIMARY KEY AUTOINCREMENT,"
+//			"time INTEGER,"
+//			"type VARCHAR(3),"
+//			"threadID VARCHAR(24),"
+//			"author VARCHAR(100),"
+//			"message VARCHAR(255)"
+//		")"
+//	);
 
-	pDB = new ADBSqliteCipher(this);
-	if (pDB->mStart(&oDBProperties)) {
-		ADBSqliteReply oDBReply = pDB->mStringExecute(oQueryString);
-		if (!oDBReply.Status) _A_CRITICAL << "Creating table for logs failed";
-	}
+//	pDB = new ADBSqliteCipher(this);
+//	if (pDB->mStart(&oDBProperties)) {
+//		ADBSqliteReply oDBReply = pDB->mStringExecute(oQueryString);
+//		if (!oDBReply.Status) _A_CRITICAL << "Creating table for logs failed";
+//	}
 
+	this->mInitAgent(inProperties);
 	this->mInitMessageCache();
+//	gLoggerIsInitiated = true;
 
 	_A_DEBUG << "ALoggerService initiated";
 	emit sgInitiated();
@@ -99,9 +101,9 @@ void ALoggerService::slInit(QString inPathLoggerData,QObject* inConfigObject) {
 	Doc.
 */
 
-void ALoggerService::slWriteToLogbook(ALoggerMessageModel* inMessageModel) {
+void ALoggerService::slWriteToLogbook(ARB::ALoggerMessageModel inMessageModel) {
 
-	Q_UNUSED(inMessageModel);
+	pAgent->mWriteToLogbook(inMessageModel);
 }
 
 
@@ -115,10 +117,35 @@ void ALoggerService::slWriteToLogbook(ALoggerMessageModel* inMessageModel) {
 void ALoggerService::mInitMessageCache(void) {
 
 	for (int i = 0; i < gLoggerMessageCache.length(); i++) {
-		ALoggerMessageModel* iModel = const_cast<ALoggerMessageModel*>(
-			&(gLoggerMessageCache.at(i))
-		);
-		this->slWriteToLogbook(iModel);
+//		ALoggerMessageModel* iModel = const_cast<ALoggerMessageModel*>(
+//			&(gLoggerMessageCache.at(i))
+//		);
+		this->slWriteToLogbook(gLoggerMessageCache.at(i));
 	}
 	gLoggerMessageCache.clear();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void ALoggerService::mInitAgent(ALoggerServiceProperties inProperties) {
+
+	switch (pConfig->ALoggerConfig_LogbookType()) {
+		case _A_ENUM_LOGGER_LOGBOOK_TYPE::DB:
+			pAgent = qobject_cast<ALoggerAgentInterface*>(new ALoggerDBAgent(this));
+			break;
+		case _A_ENUM_LOGGER_LOGBOOK_TYPE::File:
+			pAgent = qobject_cast<ALoggerAgentInterface*>(new ALoggerFileAgent(this));
+			break;
+		default:
+			pAgent = qobject_cast<ALoggerAgentInterface*>(new ALoggerAgent(this));
+			break;
+	}
+
+	pAgent->mInit(inProperties);
 }
