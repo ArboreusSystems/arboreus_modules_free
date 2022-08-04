@@ -20,7 +20,6 @@
 using namespace ARB;
 
 // Global variables
-extern bool gLoggerIsWriteToFileDirectly;
 extern FILE* gLoggerLogbookFile;
 
 
@@ -45,8 +44,6 @@ ALoggerFileAgent::ALoggerFileAgent(QObject* parent) : QObject(parent) {
 */
 
 ALoggerFileAgent::~ALoggerFileAgent(void) {
-
-	gLoggerIsWriteToFileDirectly = true;
 
 	_A_DEBUG << "ALoggerFileAgent deleleted";
 }

@@ -24,6 +24,7 @@ using namespace ARB;
 
 // Global variables
 extern FILE* gLoggerLogbookFile;
+extern bool gLoggerIsWriteToFileDirectly;
 
 
 // -----------
@@ -42,6 +43,19 @@ void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inMo
 	} else {
 		ABackend::mInstance().pLogger->mWriteToLogbook(inModel);
 	}
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void __attribute__((unused)) fLogger_Lifecycle_WillQuit(void) {
+
+	gLoggerIsWriteToFileDirectly = true;
 }
 
 
@@ -102,9 +116,14 @@ void ALogger::mInit(void) {
 	this->setPriority(pConfig->ALoggerConfig_ThreadPriority());
 
 	ALoggerServiceProperties oProperties;
-	oProperties.PathLoggerDB = pBackend->pProperties->mGetPathDataCache() + "/Logs";
-	oProperties.PathLoggerFile = pBackend->pProperties->mGetPathDataDocuments() + "/Logs";
 	oProperties.ConfigObject = pBackend->pGlobalConfigObject;
+	if (pConfig->ALoggerConfig_LogBookInDocuments()) {
+		oProperties.PathLoggerDB = pBackend->pProperties->mGetPathDataDocuments() + "/Logs/DB";
+		oProperties.PathLoggerFile = pBackend->pProperties->mGetPathDataDocuments() + "/Logs/File";
+	} else {
+		oProperties.PathLoggerDB = pBackend->pProperties->mGetPathDataCache() + "/Logs/DB";
+		oProperties.PathLoggerFile = pBackend->pProperties->mGetPathDataCache() + "/Logs/File";
+	}
 
 	bool oEnsurePathLoggerDB = ADir::mEnsure(oProperties.PathLoggerDB);
 	bool oEnsurePathLoggerFile = ADir::mEnsure(oProperties.PathLoggerFile);

@@ -79,7 +79,7 @@ extern FILE* gLoggerLogbookFile;
 
 // Global functions
 void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inModel);
-
+void __attribute__((unused)) fLogger_Lifecycle_WillQuit(void);
 
 // Namespace
 namespace ARB {

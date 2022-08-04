@@ -35,6 +35,7 @@ class ALoggerConfig {
 
 		virtual QThread::Priority ALoggerConfig_ThreadPriority(void) = 0;
 		virtual bool ALoggerConfig_Encrypted(void) = 0;
+		virtual bool ALoggerConfig_LogBookInDocuments(void) = 0;
 		virtual _A_ENUM_LOGGER_LOGBOOK_TYPE ALoggerConfig_LogbookType(void) = 0;
 };
 
