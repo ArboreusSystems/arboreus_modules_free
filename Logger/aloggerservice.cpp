@@ -22,6 +22,8 @@ using namespace ARB;
 // Global variables
 QList<ARB::ALoggerMessageModel> gLoggerMessageCache = {};
 bool gLoggerIsInitiated = false;
+bool gLoggerIsWriteToFileDirectly = false;
+FILE* gLoggerLogbookFile = nullptr;
 
 
 // -----------
@@ -46,8 +48,6 @@ ALoggerService::ALoggerService(QObject* parent) : AThreadServiceTemplate(parent)
 
 ALoggerService::~ALoggerService(void) {
 
-//	pDB->deleteLater();
-
 	_A_DEBUG << "ALoggerService deleted";
 }
 
@@ -61,29 +61,7 @@ ALoggerService::~ALoggerService(void) {
 
 void ALoggerService::slInit(ARB::ALoggerServiceProperties inProperties) {
 
-//	pPathLoggerData = inProperties.PathLoggerData;
 	pConfig = qobject_cast<ALoggerConfig*>(inProperties.ConfigObject);
-
-//	ADBSqliteCipherProperties oDBProperties;
-//	oDBProperties.Name = "log_" + QString::number(QDateTime::currentMSecsSinceEpoch());
-//	oDBProperties.Path = pPathLoggerData + "/" + oDBProperties.Name + ".db";
-
-//	QString oQueryString = QString(
-//		"CREATE TABLE IF NOT EXISTS log ("
-//			"id INTEGER PRIMARY KEY AUTOINCREMENT,"
-//			"time INTEGER,"
-//			"type VARCHAR(3),"
-//			"threadID VARCHAR(24),"
-//			"author VARCHAR(100),"
-//			"message VARCHAR(255)"
-//		")"
-//	);
-
-//	pDB = new ADBSqliteCipher(this);
-//	if (pDB->mStart(&oDBProperties)) {
-//		ADBSqliteReply oDBReply = pDB->mStringExecute(oQueryString);
-//		if (!oDBReply.Status) _A_CRITICAL << "Creating table for logs failed";
-//	}
 
 	this->mInitAgent(inProperties);
 	this->mInitMessageCache();

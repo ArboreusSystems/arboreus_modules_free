@@ -19,6 +19,10 @@
 // Namespace
 using namespace ARB;
 
+// Global variables
+extern bool gLoggerIsWriteToFileDirectly;
+extern FILE* gLoggerLogbookFile;
+
 
 // -----------
 /*!
@@ -42,11 +46,7 @@ ALoggerFileAgent::ALoggerFileAgent(QObject* parent) : QObject(parent) {
 
 ALoggerFileAgent::~ALoggerFileAgent(void) {
 
-//	delete pFileTextStream;
-
-//	if (pFile->isOpen()) pFile->close();
-	fclose(pFile);
-	delete pFile;
+	gLoggerIsWriteToFileDirectly = true;
 
 	_A_DEBUG << "ALoggerFileAgent deleleted";
 }
@@ -66,6 +66,7 @@ void ALoggerFileAgent::mInit(ALoggerServiceProperties inProperties) {
 
 	if ((pFile = fopen(oPathFile.toStdString().c_str(),"a")) != NULL) {
 		_A_DEBUG << "Logbook file initiated:" << oPathFile;
+		gLoggerLogbookFile = pFile;
 	} else {
 		_A_CRITICAL << "Failed intiation of logbook file:" << oPathFile;
 	}
@@ -83,25 +84,5 @@ void ALoggerFileAgent::mInit(ALoggerServiceProperties inProperties) {
 
 void ALoggerFileAgent::mWriteToLogbook(ALoggerMessageModel inMessageModel) {
 
-	const char* oType;
-	switch (inMessageModel.Type) {
-		case QtDebugMsg: oType = _A_LOGGER_DEFAULT_STRING_DEBUG; break;
-		case QtInfoMsg: oType = _A_LOGGER_DEFAULT_STRING_INFO; break;
-		case QtWarningMsg: oType = _A_LOGGER_DEFAULT_STRING_WARNING; break;
-		case QtCriticalMsg: oType = _A_LOGGER_DEFAULT_STRING_CRITICAL; break;
-		case QtFatalMsg: oType = _A_LOGGER_DEFAULT_STRING_FATAL; break;
-		default: oType = _A_LOGGER_DEFAULT_STRING_UNDEFINED; break;
-	}
-
-	fprintf(pFile,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
-		oType,
-		inMessageModel.Author,
-		inMessageModel.Time,
-		inMessageModel.ThreadID.constData(),
-		inMessageModel.Message.constData(),
-		inMessageModel.Function,
-		inMessageModel.File,
-		inMessageModel.Line
-	);
-	fflush(pFile);
+	fLoggerMessageHandlerFile(pFile,inMessageModel);
 }

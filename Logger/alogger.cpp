@@ -22,6 +22,9 @@
 // Namespace
 using namespace ARB;
 
+// Global variables
+extern FILE* gLoggerLogbookFile;
+
 
 // -----------
 // Global functions
@@ -34,7 +37,11 @@ using namespace ARB;
 */
 void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inModel) {
 
-	ABackend::mInstance().pLogger->mWriteToLogbook(inModel);
+	if (gLoggerIsWriteToFileDirectly) {
+		fLoggerMessageHandlerFile(gLoggerLogbookFile,inModel);
+	} else {
+		ABackend::mInstance().pLogger->mWriteToLogbook(inModel);
+	}
 }
 
 

@@ -74,6 +74,8 @@
 // Global variables
 extern QList<ARB::ALoggerMessageModel> gLoggerMessageCache;
 extern bool gLoggerIsInitiated;
+extern bool gLoggerIsWriteToFileDirectly;
+extern FILE* gLoggerLogbookFile;
 
 // Global functions
 void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inModel);
@@ -205,9 +207,6 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 
 	QString oThreadIDString = QString("0x%1");
 	QString oThreadIDValue = oThreadIDString.arg((long)QThread::currentThread(),0,16);
-//	std::string oThreadIDStdString = oThreadIDValue.toStdString();
-
-//	std::string oMessageStdString = inMessage.toStdString();
 
 	ALoggerMessageModel oMessageModel;
 	oMessageModel.Type = inType;
@@ -252,6 +251,40 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 #endif
 
 }
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+static void __attribute__((unused)) fLoggerMessageHandlerFile(FILE* inFile,ALoggerMessageModel inMessageModel){
+
+	const char* oType;
+	switch (inMessageModel.Type) {
+		case QtDebugMsg: oType = _A_LOGGER_DEFAULT_STRING_DEBUG; break;
+		case QtInfoMsg: oType = _A_LOGGER_DEFAULT_STRING_INFO; break;
+		case QtWarningMsg: oType = _A_LOGGER_DEFAULT_STRING_WARNING; break;
+		case QtCriticalMsg: oType = _A_LOGGER_DEFAULT_STRING_CRITICAL; break;
+		case QtFatalMsg: oType = _A_LOGGER_DEFAULT_STRING_FATAL; break;
+		default: oType = _A_LOGGER_DEFAULT_STRING_UNDEFINED; break;
+	}
+
+	fprintf(inFile,"%s:%s %llu %s %s [%s]:[%s]:[%u]\n",
+		oType,
+		inMessageModel.Author,
+		inMessageModel.Time,
+		inMessageModel.ThreadID.constData(),
+		inMessageModel.Message.constData(),
+		inMessageModel.Function,
+		inMessageModel.File,
+		inMessageModel.Line
+	);
+	fflush(inFile);
+}
+
 
 // -----------
 /*!

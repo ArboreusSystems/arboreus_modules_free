@@ -58,8 +58,6 @@ class ALoggerService : public AThreadServiceTemplate {
 
 	private:
 
-//		QString pPathLoggerData = QString("NoPathLoggerData");
-//		ADBSqliteCipher* pDB = nullptr;
 		ALoggerConfig* pConfig = nullptr;
 		ALoggerAgentInterface* pAgent = nullptr;
 
