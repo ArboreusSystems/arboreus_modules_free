@@ -106,5 +106,8 @@ void AApplication::slInitiated(void) {
 
 void AApplication::mExit(void) {
 
+	fLogger_Application_Exit();
 	qApp->exit();
+
+	_A_DEBUG << "AApplication mExit";
 }

@@ -56,6 +56,21 @@ void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inMo
 
 void __attribute__((unused)) fLogger_Lifecycle_WillQuit(void) {
 
+	if (gLoggerIsWriteToFileDirectly != true) {
+		gLoggerIsWriteToFileDirectly = true;
+	}
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void __attribute__((unused)) fLogger_Application_Exit(void) {
+
 	gLoggerIsWriteToFileDirectly = true;
 }
 
