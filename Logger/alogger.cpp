@@ -36,6 +36,7 @@ extern bool gLoggerIsWriteToFileDirectly;
 
 	Doc.
 */
+
 void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inModel) {
 
 	if (gLoggerIsWriteToFileDirectly) {
