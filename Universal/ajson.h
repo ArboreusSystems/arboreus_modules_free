@@ -52,6 +52,7 @@ class AJson : public QObject {
 		static bool mToFileFromMap(QString inPath,QVariantMap inMap);
 		static bool mToFileFromHash(QString inPath,QVariantHash inHash);
 		static AJsonFileReply mFromFile(QString inPath);
+		static bool mEncodeFromString(QString inValue,QString inPath,QString inString);
 		static bool mEncodeFromObject(QString inValue,QString inPath,QJsonObject inObject);
 		static bool mEncodeFromDocument(QString inValue,QString inPath,QJsonDocument inDocument);
 		static bool mEncodeFromMap(QString inValue,QString inPath,QVariantMap inMap);

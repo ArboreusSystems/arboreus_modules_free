@@ -143,6 +143,21 @@ bool AJson::mToFileFromDocument(QString inPath, QJsonDocument inDocument) {
 
 // -----------
 /*!
+	\fn
+
+	Doc
+*/
+
+bool AJson::mEncodeFromString(QString inValue, QString inPath, QString inString) {
+
+	return mEncodeFromDocument(
+		inValue,inPath,QJsonDocument::fromJson(inString.toUtf8())
+	);
+}
+
+
+// -----------
+/*!
 	\fn bool AJson::mEncodeFromObject(QString inValue, QString inPath, QJsonObject inObject)
 
 	Write encoded JSON file from QJsonObject.
