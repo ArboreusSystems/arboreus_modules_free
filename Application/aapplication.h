@@ -52,6 +52,8 @@ class AApplication : public AThreadTemplate<AApplicationService> {
 		Q_DISABLE_COPY(AApplication)
 
 		void mInit(void);
+		QString mValue(void);
+		QString mSalt(void);
 
 	public slots:
 

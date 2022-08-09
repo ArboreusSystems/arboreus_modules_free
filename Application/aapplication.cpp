@@ -90,6 +90,32 @@ void AApplication::mInit(void) {
 	Doc.
 */
 
+QString AApplication::mValue(void) {
+
+	return pConfig->AApplicationConfig_Registry_Value();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AApplication::mSalt(void) {
+
+	return pConfig->AApplicationConfig_Registry_Salt();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void AApplication::slInitiated(void) {
 
 	_A_DEBUG << "AApplication initiated";
