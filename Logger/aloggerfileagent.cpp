@@ -81,5 +81,5 @@ void ALoggerFileAgent::mInit(ALoggerServiceProperties inProperties) {
 
 void ALoggerFileAgent::mWriteToLogbook(ALoggerMessageModel inMessageModel) {
 
-	fLoggerMessageHandlerFile(pFile,inMessageModel);
+	fLogger_MessageHandlerFile(pFile,inMessageModel);
 }

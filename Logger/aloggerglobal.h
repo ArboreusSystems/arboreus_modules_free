@@ -42,28 +42,28 @@
 #define _A_CRITICAL qCritical()
 #define _A_FATAL(inMessage) qFatal(inMessage)
 
-#define _A_CONSOLE_DEBUG(inMessage) fLoggerMessageHandlerConsole( \
+#define _A_CONSOLE_DEBUG(inMessage) fLogger_MessageHandlerConsole( \
 	QtMsgType::QtDebugMsg, \
 	inMessage, \
 	__LINE__, \
 	__FILE__, \
 	__FUNCTION__ \
 )
-#define _A_CONSOLE_INFO(inMessage) fLoggerMessageHandlerConsole( \
+#define _A_CONSOLE_INFO(inMessage) fLogger_MessageHandlerConsole( \
 	QtMsgType::QtInfoMsg, \
 	inMessage, \
 	__LINE__, \
 	__FILE__, \
 	__FUNCTION__ \
 )
-#define _A_CONSOLE_WARNING(inMessage) fLoggerMessageHandlerConsole( \
+#define _A_CONSOLE_WARNING(inMessage) fLogger_MessageHandlerConsole( \
 	QtMsgType::QtWarningMsg, \
 	inMessage, \
 	__LINE__, \
 	__FILE__, \
 	__FUNCTION__ \
 )
-#define _A_CONSOLE_CRITICAL(inMessage) fLoggerMessageHandlerConsole( \
+#define _A_CONSOLE_CRITICAL(inMessage) fLogger_MessageHandlerConsole( \
 	QtMsgType::QtCriticalMsg, \
 	inMessage, \
 	__LINE__, \
@@ -78,7 +78,7 @@ extern bool gLoggerIsWriteToFileDirectly;
 extern FILE* gLoggerLogbookFile;
 
 // Global functions
-void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inModel);
+void __attribute__((unused)) fLogger_WriteToLogbook(ARB::ALoggerMessageModel inModel);
 void __attribute__((unused)) fLogger_Lifecycle_WillQuit(void);
 void __attribute__((unused)) fLogger_Application_Exit(void);
 
@@ -93,7 +93,7 @@ namespace ARB {
 	Doc.
 */
 
-static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* inModel) {
+static void __attribute__((unused)) fLogger_WriteToConsole(ALoggerMessageModel* inModel) {
 
 #ifdef QT_DEBUG
 
@@ -202,7 +202,7 @@ static void __attribute__((unused)) fLoggerWriteToConsole(ALoggerMessageModel* i
 	Doc.
 */
 
-static void __attribute__((unused)) fLoggerMessageHandler(
+static void __attribute__((unused)) fLogger_MessageHandler(
 	QtMsgType inType, const QMessageLogContext& inContext, const QString& inMessage
 ) {
 
@@ -233,10 +233,10 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 	oMessageModel.Function = inContext.function ? inContext.function : "no function";
 	oMessageModel.Line = inContext.line;
 
-	fLoggerWriteToConsole(&oMessageModel);
+	fLogger_WriteToConsole(&oMessageModel);
 
 	if (gLoggerIsInitiated) {
-		fLoggerWriteToLogbook(oMessageModel);
+		fLogger_WriteToLogbook(oMessageModel);
 	} else {
 		gLoggerMessageCache.append(oMessageModel);
 	}
@@ -261,7 +261,7 @@ static void __attribute__((unused)) fLoggerMessageHandler(
 	Doc.
 */
 
-static void __attribute__((unused)) fLoggerMessageHandlerFile(FILE* inFile,ALoggerMessageModel inMessageModel){
+static void __attribute__((unused)) fLogger_MessageHandlerFile(FILE* inFile,ALoggerMessageModel inMessageModel){
 
 	const char* oType;
 	switch (inMessageModel.Type) {
@@ -294,7 +294,7 @@ static void __attribute__((unused)) fLoggerMessageHandlerFile(FILE* inFile,ALogg
 	Doc.
 */
 
-static void __attribute__((unused)) fLoggerMessageHandlerConsole(
+static void __attribute__((unused)) fLogger_MessageHandlerConsole(
 	QtMsgType inType, QString inMessage, int inLine, const char* inFile, const char* inFunction
 ) {
 
@@ -316,7 +316,7 @@ static void __attribute__((unused)) fLoggerMessageHandlerConsole(
 	oMessageModel.Function = inFunction;
 	oMessageModel.Line = inLine;
 
-	fLoggerWriteToConsole(&oMessageModel);
+	fLogger_WriteToConsole(&oMessageModel);
 
 	gLoggerMessageCache.append(oMessageModel);
 

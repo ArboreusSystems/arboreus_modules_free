@@ -37,10 +37,10 @@ extern bool gLoggerIsWriteToFileDirectly;
 	Doc.
 */
 
-void __attribute__((unused)) fLoggerWriteToLogbook(ARB::ALoggerMessageModel inModel) {
+void __attribute__((unused)) fLogger_WriteToLogbook(ARB::ALoggerMessageModel inModel) {
 
 	if (gLoggerIsWriteToFileDirectly) {
-		fLoggerMessageHandlerFile(gLoggerLogbookFile,inModel);
+		fLogger_MessageHandlerFile(gLoggerLogbookFile,inModel);
 	} else {
 		ABackend::mInstance().pLogger->mWriteToLogbook(inModel);
 	}
