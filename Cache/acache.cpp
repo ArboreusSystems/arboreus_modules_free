@@ -73,7 +73,7 @@ void ACache::mInit(void) {
 	Doc.
 */
 
-ACacheReply ACache::mPut(QString inKey, QVariant inValue) {
+ACacheReply ACache::mPutHandler(QString inKey, QVariant inValue) {
 
 	ACacheReply oOutput;
 
@@ -91,7 +91,7 @@ ACacheReply ACache::mPut(QString inKey, QVariant inValue) {
 	Doc.
 */
 
-ACacheReply ACache::mGet(QString inKey) {
+ACacheReply ACache::mGetHandler(QString inKey) {
 
 	ACacheReply oOutput;
 
@@ -111,7 +111,7 @@ ACacheReply ACache::mGet(QString inKey) {
 	Doc.
 */
 
-ACacheReply ACache::mGetOut(QString inKey) {
+ACacheReply ACache::mGetOutHandler(QString inKey) {
 
 	ACacheReply oOutput;
 
@@ -137,7 +137,7 @@ ACacheReply ACache::mGetOut(QString inKey) {
 	Doc.
 */
 
-ACacheReply ACache::mRemove(QString inKey) {
+ACacheReply ACache::mRemoveHandler(QString inKey) {
 
 	ACacheReply oOutput;
 
@@ -172,9 +172,9 @@ bool ACache::mIsKey(QString inKey) {
 	Doc.
 */
 
-QVariantMap ACache::mPutInCache(QString inKey, QVariant inValue) {
+QVariantMap ACache::mPut(QString inKey, QVariant inValue) {
 
-	return this->mPut(inKey,inValue).mToVariantMap();
+	return this->mPutHandler(inKey,inValue).mToVariantMap();
 }
 
 
@@ -187,9 +187,9 @@ QVariantMap ACache::mPutInCache(QString inKey, QVariant inValue) {
 	Doc.
 */
 
-QVariantMap ACache::mGetFromCache(QString inKey) {
+QVariantMap ACache::mGet(QString inKey) {
 
-	return this->mGet(inKey).mToVariantMap();
+	return this->mGetHandler(inKey).mToVariantMap();
 }
 
 
@@ -200,9 +200,9 @@ QVariantMap ACache::mGetFromCache(QString inKey) {
 	Doc.
 */
 
-QVariantMap ACache::mGetOutFromCache(QString inKey) {
+QVariantMap ACache::mGetOut(QString inKey) {
 
-	return this->mGetOut(inKey).mToVariantMap();
+	return this->mGetOutHandler(inKey).mToVariantMap();
 }
 
 
@@ -213,9 +213,9 @@ QVariantMap ACache::mGetOutFromCache(QString inKey) {
 	Doc.
 */
 
-QVariantMap ACache::mRemoveFromCache(QString inKey) {
+QVariantMap ACache::mRemove(QString inKey) {
 
-	return this->mRemove(inKey).mToVariantMap();
+	return this->mRemoveHandler(inKey).mToVariantMap();
 }
 
 
@@ -274,7 +274,7 @@ bool ACache::mIsKeyInObject(QString inObjectID, QString inKey) {
 QVariantMap ACache::mCreateObject(QString inObjectID) {
 
 	QVariantMap oTemplate = {};
-	return this->mPut(inObjectID,oTemplate).mToVariantMap();
+	return this->mPutHandler(inObjectID,oTemplate).mToVariantMap();
 }
 
 
@@ -287,7 +287,7 @@ QVariantMap ACache::mCreateObject(QString inObjectID) {
 
 QVariantMap ACache::mCreateObjectWithTemplate(QString inObjectID, QVariantMap inTemplate) {
 
-	return this->mPut(inObjectID,inTemplate).mToVariantMap();
+	return this->mPutHandler(inObjectID,inTemplate).mToVariantMap();
 }
 
 
@@ -440,5 +440,5 @@ QVariantMap ACache::mGetOutFromObject(QString inObjectID, QString inKey) {
 
 QVariantMap ACache::mRemoveObject(QString inObjectID) {
 
-	return this->mRemove(inObjectID).mToVariantMap();
+	return this->mRemoveHandler(inObjectID).mToVariantMap();
 }

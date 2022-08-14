@@ -44,19 +44,19 @@ class ACache : public QObject {
 
 		void mInit(void);
 
-		ACacheReply mPut(QString inKey,QVariant inValue);
-		ACacheReply mGet(QString inKey);
-		ACacheReply mGetOut(QString inKey);
-		ACacheReply mRemove(QString inKey);
+		ACacheReply mPutHandler(QString inKey,QVariant inValue);
+		ACacheReply mGetHandler(QString inKey);
+		ACacheReply mGetOutHandler(QString inKey);
+		ACacheReply mRemoveHandler(QString inKey);
 
 	public slots:
 
 		bool mIsKey(QString inKey);
 
-		QVariantMap mPutInCache(QString inKey,QVariant inValue);
-		QVariantMap mGetFromCache(QString inKey);
-		QVariantMap mGetOutFromCache(QString inKey);
-		QVariantMap mRemoveFromCache(QString inKey);
+		QVariantMap mPut(QString inKey,QVariant inValue);
+		QVariantMap mGet(QString inKey);
+		QVariantMap mGetOut(QString inKey);
+		QVariantMap mRemove(QString inKey);
 
 		bool mIsObject(QString inKey);
 		bool mIsKeyInObject(QString inObjectID, QString inKey);
