@@ -244,9 +244,11 @@ AJsonFileReply AJson::mDecodeFromFile(QString inValue,QString inPath) {
 
 	QFile oJSONFile(inPath);
 	if (!oJSONFile.exists()) {
+		_A_CRITICAL << "Opening JSON file for decoding not existed";
 		return oReply;
 	}
 	if (!oJSONFile.open(QIODevice::ReadOnly|QIODevice::Text)) {
+		_A_CRITICAL << "Opening JSON file for decoding failed";
 		return oReply;
 	}
 
@@ -264,12 +266,14 @@ AJsonFileReply AJson::mDecodeFromFile(QString inValue,QString inPath) {
 		oJSONDecypted,&oJSONParseError
 	);
 	if (oJSONDocument.isNull()) {
+		_A_CRITICAL << "Decode JSON from file failed with error:" << oJSONParseError.errorString();
 		return oReply;
 	}
 	oJSONFile.close();
 
 	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
 	oReply.Json = oJSONDocument.object();
+
 	return oReply;
 }
 
