@@ -21,16 +21,7 @@
 #include <aapplicationpch.h>
 
 // Application includes
-
-// iOS includes
-#if defined(Q_OS_IOS)
 #include <aapplicationdelegateglobalconfig.h>
-#endif
-
-// Android includes
-#if defined(Q_OS_ANDROID)
-
-#endif
 
 // Constants and defintions
 

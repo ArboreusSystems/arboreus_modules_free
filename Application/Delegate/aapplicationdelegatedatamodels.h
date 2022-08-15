@@ -17,65 +17,21 @@
 
 // System includes
 
-// Precompiled includes
-#include <aapplicationpch.h>
-
 // Application includes
 
+// iOS includes
+#if defined(Q_OS_IOS)
+#include <aapplicationdelegateiosdatamodels.h>
+#endif
+
+// Android includes
+#if defined(Q_OS_ANDROID)
+
+#endif
+
 // Constants and defintions
-#define _A_ENUM_APPLICATION_IOS_LAUNCH_OPTION ARB::AEnumsApplicationIOSLaunchOption::Option
 
 // Namespace
-namespace ARB {
 
-class AEnumsApplicationIOSLaunchOption: public QObject {
-
-	Q_OBJECT
-
-	public:
-
-		enum class Option: int {
-
-			Undefined,
-			BluetoothCentrals,
-			BluetoothPeripherals,
-			CloudKitShareMetadata,
-			LocationKey,
-			NewsstandDownloads,
-			RemoteNotification,
-			ShortcutItemKey,
-			SourceApplication,
-			OptionsURL,
-			UserActivityDictionary,
-			UserActivityType
-		};
-		Q_ENUM(Option)
-};
-
-//class AEnumAppllicationIOSLaunchOption : public QObject {
-
-//	Q_OBJECT
-
-//	public:
-
-//		enum class Option: int {
-
-//			Undefined,
-//			BluetoothCentrals,
-//			BluetoothPeripherals,
-//			CloudKitShareMetadata,
-//			LocationKey,
-//			NewsstandDownloads,
-//			RemoteNotification,
-//			ShortcutItemKey,
-//			SourceApplication,
-//			OptionsURL,
-//			UserActivityDictionary,
-//			UserActivityType
-//		};
-//		Q_ENUM(ARB::AEnumAppllicationIOSLaunchOption)
-//};
-
-} // namespace ARB
 
 #endif // AAPPLICATIONDELEGATEDATAMODELS_H

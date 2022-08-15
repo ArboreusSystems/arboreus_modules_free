@@ -18,17 +18,20 @@
 // System includes
 
 // Application includes
-#include <aapplicationdatamodels.h>
+
+// iOS includes
+#if defined(Q_OS_IOS)
+#include <aapplicationdelegateiosglobalconfig.h>
+#endif
+
+// Android includes
+#if defined(Q_OS_ANDROID)
+
+#endif
 
 // Constants and defintions
 
 // Namespace
-namespace ARB {
 
-// Global functions
-void fAApplicationConfig_Delegate_WillFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION inOption);
-void fAApplicationConfig_Delegate_DidFinishLaunchingWithOptions(_A_ENUM_APPLICATION_IOS_LAUNCH_OPTION inOption);
-
-} // namespace ARB
 
 #endif // AAPPLICATIONDELEGATEGLOBALCONFIG_H

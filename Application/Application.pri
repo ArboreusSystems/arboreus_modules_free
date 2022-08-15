@@ -6,6 +6,8 @@ INCLUDEPATH += \
 PRECOMPILED_HEADER = $$PWD/aapplicationpch.h
 
 HEADERS += \
+	$$PWD/Delegate/aapplicationdelegatedatamodels.h \
+	$$PWD/Delegate/aapplicationdelegateglobalconfig.h \
 	$$PWD/Heartbeat/aapplicationheartbeat.h \
 	$$PWD/aapplication.h \
 	$$PWD/aapplicationconfig.h \
@@ -24,11 +26,28 @@ SOURCES += \
 
 ios {
 
+	INCLUDEPATH += \
+		$$PWD/Delegate/IOS
+
+	HEADERS += \
+		$$PWD/Delegate/IOS/aapplicationdelegateiosdatamodels.h \
+		$$PWD/Delegate/IOS/aapplicationdelegateiosglobalconfig.h
+
+	SOURCES +=
+
 	OBJECTIVE_HEADERS += \
-		$$PWD/Delegate/aapplicationdelegatedatamodels.h \
-		$$PWD/Delegate/aapplicationdelegateglobalconfig.h \
-		$$PWD/Delegate/aapplicationdelegateiosnative.h
+		$$PWD/Delegate/IOS/aapplicationdelegateiosnative.h
 
 	OBJECTIVE_SOURCES += \
-		$$PWD/Delegate/aapplicationdelegateiosnative.mm
+		$$PWD/Delegate/IOS/aapplicationdelegateiosnative.mm
+}
+
+android {
+
+	INCLUDEPATH += \
+		$$PWD/Delegate/Android
+
+	HEADERS +=
+
+	SOURCES +=
 }
