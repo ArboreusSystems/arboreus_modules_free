@@ -55,6 +55,7 @@ ALoggerDBAgent::~ALoggerDBAgent(void) {
 
 void ALoggerDBAgent::mInit(ALoggerServiceProperties inProperties) {
 
+	Q_UNUSED(inProperties)
 	_A_DEBUG << "ALoggerDBAgent initiated";
 }
 
@@ -68,5 +69,6 @@ void ALoggerDBAgent::mInit(ALoggerServiceProperties inProperties) {
 
 void ALoggerDBAgent::mWriteToLogbook(ALoggerMessageModel inMessageModel) {
 
+	Q_UNUSED(inMessageModel)
 }
 
