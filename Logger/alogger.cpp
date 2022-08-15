@@ -25,6 +25,7 @@ using namespace ARB;
 // Global variables
 extern FILE* gLoggerLogbookFile;
 extern bool gLoggerIsWriteToFileDirectly;
+ALogger* gLogger = nullptr;
 
 
 // -----------
@@ -42,7 +43,7 @@ void __attribute__((unused)) fLogger_WriteToLogbook(ARB::ALoggerMessageModel inM
 	if (gLoggerIsWriteToFileDirectly) {
 		fLogger_MessageHandlerFile(gLoggerLogbookFile,inModel);
 	} else {
-		ABackend::mInstance().pLogger->mWriteToLogbook(inModel);
+		gLogger->mWriteToLogbook(inModel);
 	}
 }
 
@@ -58,6 +59,7 @@ void __attribute__((unused)) fLogger_Lifecycle_WillQuit(void) {
 
 	if (gLoggerIsWriteToFileDirectly != true) {
 		gLoggerIsWriteToFileDirectly = true;
+		gLogger = nullptr;
 	}
 }
 
@@ -128,6 +130,7 @@ void ALogger::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 	pConfig = qobject_cast<ALoggerConfig*>(pBackend->pGlobalConfigObject);
+	gLogger = pBackend->pLogger;
 
 	this->setPriority(pConfig->ALoggerConfig_ThreadPriority());
 
