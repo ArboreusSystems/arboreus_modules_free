@@ -48,8 +48,6 @@ class ADBFieldType: public QObject {
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(_A_ENUM_DB_SQLITE_FIELD_TYPE)
-
 
 namespace ARB {
 
@@ -63,6 +61,14 @@ class ADBProperties: public QObject {
 		virtual ~ADBProperties(void) {}
 };
 
+} //namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADBProperties)
+
+
+// Namespace
+namespace ARB {
+
 class ADBSqliteProperties : public ADBProperties {
 
 	public:
@@ -74,6 +80,14 @@ class ADBSqliteProperties : public ADBProperties {
 		virtual ~ADBSqliteProperties(void) {}
 };
 
+} //namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADBSqliteProperties)
+
+
+// Namespace
+namespace ARB {
+
 class ADBSqliteCipherProperties : public ADBSqliteProperties {
 
 	public:
@@ -83,6 +97,14 @@ class ADBSqliteCipherProperties : public ADBSqliteProperties {
 		explicit ADBSqliteCipherProperties(QObject* parent = nullptr) : ADBSqliteProperties(parent) {}
 		virtual ~ADBSqliteCipherProperties(void) {}
 };
+
+} //namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADBSqliteCipherProperties)
+
+
+// Namespace
+namespace ARB {
 
 class ADBSqliteReply {
 
@@ -102,6 +124,14 @@ class ADBSqliteReply {
 			return oOutput;
 		}
 };
+
+} //namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADBSqliteReply)
+
+
+// Namespace
+namespace ARB {
 
 class ADBFieldProperties {
 
@@ -203,6 +233,14 @@ class ADBFieldProperties {
 		}
 };
 
+} //namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADBFieldProperties)
+
+
+// Namespace
+namespace ARB {
+
 class ASqlCreateTableProperties {
 
 	public:
@@ -284,6 +322,14 @@ class ASqlCreateTableProperties {
 		}
 };
 
+} //namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ASqlCreateTableProperties)
+
+
+// Namespace
+namespace ARB {
+
 class ASqlInsertIntoProperties {
 
 	public:
@@ -319,6 +365,12 @@ class ASqlInsertIntoProperties {
 		}
 };
 
+} //namespace ARB
+
+
+// Namespace
+namespace ARB {
+
 class ASqlUpdateProperties {
 
 	public:
@@ -326,6 +378,14 @@ class ASqlUpdateProperties {
 		explicit ASqlUpdateProperties(void) {}
 		virtual ~ASqlUpdateProperties(void) {}
 };
+
+} //namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ASqlUpdateProperties)
+
+
+// Namespace
+namespace ARB {
 
 class ASqlDeleteProperties {
 
@@ -336,5 +396,7 @@ class ASqlDeleteProperties {
 };
 
 } //namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ASqlDeleteProperties)
 
 #endif // ADBDATAMODELS_H
