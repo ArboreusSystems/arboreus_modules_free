@@ -1,7 +1,5 @@
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/apropertiespch.h
-
 HEADERS += \
 	$$PWD/aproperties.h \
 	$$PWD/apropertiesconfig.h \
