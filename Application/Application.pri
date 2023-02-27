@@ -3,8 +3,6 @@ INCLUDEPATH += \
 	$$PWD/Delegate \
 	$$PWD/Heartbeat
 
-PRECOMPILED_HEADER = $$PWD/aapplicationpch.h
-
 HEADERS += \
 	$$PWD/Delegate/aapplicationdelegatedatamodels.h \
 	$$PWD/Delegate/aapplicationdelegateglobalconfig.h \
