@@ -105,13 +105,16 @@ long long ARandom::mNumberFromRange(long long inNumber1, long long inNumber2) {
 
 	long long oMaximum = inNumber1;
 	long long oMinimum = inNumber2;
+	long long oOutput = 0;
 
 	if (inNumber1 < inNumber2) {
 		oMaximum = inNumber2;
 		oMinimum = inNumber1;
 	}
 
-	return oMinimum + abs(mNumber() % (oMaximum - oMinimum));
+	oOutput = oMinimum + abs(mNumber() % (oMaximum - oMinimum));
+
+	return oOutput;
 }
 
 
