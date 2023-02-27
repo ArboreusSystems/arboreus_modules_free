@@ -1,7 +1,5 @@
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/adevicepch.h
-
 HEADERS += \
 	$$PWD/adevice.h \
 	$$PWD/adevicedatamodels.h \
