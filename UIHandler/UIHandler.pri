@@ -1,7 +1,5 @@
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/auihandlerpch.h
-
 HEADERS += \
 	$$PWD/acolors.h \
 	$$PWD/afonts.h \
