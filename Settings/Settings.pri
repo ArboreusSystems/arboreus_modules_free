@@ -1,7 +1,5 @@
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/asettingspch.h
-
 HEADERS += \
 	$$PWD/asettings.h \
 	$$PWD/asettingsagent.h \
