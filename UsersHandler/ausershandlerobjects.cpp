@@ -32,10 +32,10 @@ using namespace ARB;
 
 AUsersHandlerObjects::AUsersHandlerObjects(ABackend* inBackend, QObject* parent) : QObject(parent) {
 
-	pConfig = qobject_cast<AUsersHandlerConfig*>(inBackend->pApplicationConfigObject);
+	pConfig = qobject_cast<AUsersHandlerConfig*>(inBackend->pGlobalConfigObject);
 
-	ASqlCreateTableProperties oProperties = pConfig->AUsersHandlerConfig_DBTableProperties();
-	pUserProperties = oProperties.mSchemaToVariantMap();
+	ASqlCreateTableProperties oDBTableProperties = pConfig->AUsersHandlerConfig_DBTableProperties();
+	pUserProperties = oDBTableProperties.mSchemaToVariantMap();
 
 	_A_DEBUG << "AUsersHandlerObjects created";
 }

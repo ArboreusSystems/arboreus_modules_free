@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\headerfile AUsersAgentCreate
+	\headerfile AUsersCreateAgent
 	\title
 	\brief Template file wizard/classes/cpp/file.h
 
@@ -8,15 +8,16 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 18/03/2022 at 19:09:55
+	\li @created 19/08/2022 at 06:54:18
 	\endlist
 */
 // ----------------------------------------------------------
 
-#ifndef AUSERSAGENTCREATE_H
-#define AUSERSAGENTCREATE_H
+#ifndef AUSERSCREATEAGENT_H
+#define AUSERSCREATEAGENT_H
 
 // System includes
+#include <QObject>
 
 // Precompiled includes
 #include <ausershandlerpch.h>
@@ -35,7 +36,7 @@
 namespace ARB {
 
 // Class definitions
-class AUsersAgentCreate : public AThreadAgentTemplate {
+class AUsersCreateAgent : public AThreadAgentTemplate {
 
 	Q_OBJECT
 
@@ -46,8 +47,8 @@ class AUsersAgentCreate : public AThreadAgentTemplate {
 		QString pTabeName = "NoTableName";
 		QList<QVariantList> pData = {};
 
-		explicit AUsersAgentCreate(QObject* parent = nullptr);
-		virtual ~AUsersAgentCreate(void);
+		explicit AUsersCreateAgent(QObject* parent = nullptr);
+		virtual ~AUsersCreateAgent(void);
 
 	public slots:
 
@@ -56,4 +57,4 @@ class AUsersAgentCreate : public AThreadAgentTemplate {
 
 } // namespace ARB
 
-#endif // AUSERSAGENTCREATE_H
+#endif // AUSERSCREATEAGENT_H

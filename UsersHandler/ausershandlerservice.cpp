@@ -103,7 +103,7 @@ void AUsersHandlerService::mInitDB(QString inDBName,ASqlCreateTableProperties in
 	oDBproperties.Path = this->pPathData + "/" + oDBproperties.Name + ".db";
 
 	if (pUsersHandlerConfig->AUsersHandlerConfig_Encrypted()) {
-		oDBproperties.Value = pApplicationConfig->AApplicationConfig_Value();
+		oDBproperties.Value = pApplicationConfig->AApplicationConfig_Registry_Value();
 	}
 
 	pDB = new ADBSqliteCipher(this);

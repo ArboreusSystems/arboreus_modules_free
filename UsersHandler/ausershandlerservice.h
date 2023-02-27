@@ -48,7 +48,7 @@ class AUsersHandlerService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(AUsersHandlerProperties inProperties);
+		void slInit(ARB::AUsersHandlerProperties inProperties);
 
 	signals:
 

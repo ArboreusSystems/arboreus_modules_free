@@ -69,7 +69,7 @@ AUsersHandler::~AUsersHandler(void) {
 void AUsersHandler::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
-	pConfig = qobject_cast<AUsersHandlerConfig*>(pBackend->pApplicationConfigObject);
+	pConfig = qobject_cast<AUsersHandlerConfig*>(pBackend->pGlobalConfigObject);
 	pDBSchema = pConfig->AUsersHandlerConfig_DBTableProperties().Schema;
 	pObjects = new AUsersHandlerObjects(pBackend,this);
 	this->start(QThread::Priority::LowPriority);
@@ -77,7 +77,7 @@ void AUsersHandler::mInit(void) {
 	AUsersHandlerProperties oProperties;
 	oProperties.PathCache = pBackend->pProperties->mGetPathDataCache();
 	oProperties.PathApplication = pBackend->pProperties->mGetPathDataApplication();
-	oProperties.Config = pBackend->pApplicationConfigObject;
+	oProperties.Config = pBackend->pGlobalConfigObject;
 
 	emit sgInit(oProperties);
 }
@@ -122,17 +122,17 @@ ADBSqliteReply AUsersHandler::mCreate(ASqlInsertIntoProperties inProperties) {
 	AThreadObjectControllerTemplate oController;
 	QEventLoop oEventLoop;
 
-	AUsersAgentCreate oAgent;
+	AUsersCreateAgent oAgent;
 	oAgent.pService = this->mService();
 	oAgent.pTabeName = inProperties.TableName;
 	oAgent.pData = inProperties.Data;
 	QObject::connect(
-		&oAgent,&AUsersAgentCreate::sgFinished,
+		&oAgent,&AUsersCreateAgent::sgFinished,
 		&oEventLoop,&QEventLoop::quit
 	);
 	QObject::connect(
 		&oController,&AThreadObjectControllerTemplate::sgRun,
-		&oAgent,&AUsersAgentCreate::slRun
+		&oAgent,&AUsersCreateAgent::slRun
 	);
 	oAgent.moveToThread(this);
 
@@ -236,7 +236,7 @@ QVariantList AUsersHandler::mGetAll(void) {
 
 void AUsersHandler::slInitiated(void) {
 
-	_A_DEBUG << "AUsers initiated";
+	_A_DEBUG << "AUsersHandler initiated";
 
 	emit sgInitiated();
 }

@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\class AUsersAgentCreate
+	\class AUsersCreateAgent
 	\title
 	\brief Template file classes/cpp/file.cpp
 
@@ -8,13 +8,13 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 18/03/2022 at 19:09:55
+	\li @created 19/08/2022 at 06:54:18
 	\endlist
 */
 // ----------------------------------------------------------
 
 // Class header
-#include "ausersagentcreate.h"
+#include "auserscreateagent.h"
 
 // Namespace
 using namespace ARB;
@@ -27,9 +27,9 @@ using namespace ARB;
 	Doc.
 */
 
-AUsersAgentCreate::AUsersAgentCreate(QObject* parent) : AThreadAgentTemplate(parent) {
+AUsersCreateAgent::AUsersCreateAgent(QObject* parent) : AThreadAgentTemplate(parent) {
 
-	_A_DEBUG << "AUsersAgentCreate created";
+	_A_DEBUG << "AUsersCreateAgent created";
 }
 
 
@@ -40,9 +40,9 @@ AUsersAgentCreate::AUsersAgentCreate(QObject* parent) : AThreadAgentTemplate(par
 	Doc.
 */
 
-AUsersAgentCreate::~AUsersAgentCreate(void) {
+AUsersCreateAgent::~AUsersCreateAgent(void) {
 
-	_A_DEBUG << "AUsersAgentCreate deleted";
+	_A_DEBUG << "AUsersCreateAgent deleted";
 }
 
 
@@ -53,10 +53,12 @@ AUsersAgentCreate::~AUsersAgentCreate(void) {
 	Doc.
 */
 
-void AUsersAgentCreate::slRun(void) {
+void AUsersCreateAgent::slRun(void) {
+
+
 
 	_A_DEBUG << "111111111111111111111111111111";
+	_A_DEBUG << pData;
 
 	emit sgFinished();
 }
-

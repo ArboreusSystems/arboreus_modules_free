@@ -1,7 +1,12 @@
-INCLUDEPATH += $$PWD
+INCLUDEPATH += \
+	$$PWD \
+	$$PWD/Agents
 
 HEADERS += \
-    $$PWD/ausersagentcreate.h \
+    $$PWD/Agents/auserscreateagent.h \
+    $$PWD/Agents/ausersdeleteagent.h \
+    $$PWD/Agents/ausersreadagent.h \
+    $$PWD/Agents/ausersupdateagent.h \
     $$PWD/ausershandler.h \
     $$PWD/ausershandlerconfig.h \
     $$PWD/ausershandlerdatamodels.h \
@@ -10,7 +15,10 @@ HEADERS += \
     $$PWD/ausershandlerservice.h
 
 SOURCES += \
-    $$PWD/ausersagentcreate.cpp \
+    $$PWD/Agents/auserscreateagent.cpp \
+    $$PWD/Agents/ausersdeleteagent.cpp \
+    $$PWD/Agents/ausersreadagent.cpp \
+    $$PWD/Agents/ausersupdateagent.cpp \
     $$PWD/ausershandler.cpp \
     $$PWD/ausershandlerobjects.cpp \
     $$PWD/ausershandlerservice.cpp

@@ -28,7 +28,10 @@
 #include <ausershandlerdatamodels.h>
 #include <ausershandlerconfig.h>
 #include <ausershandlerobjects.h>
-#include <ausersagentcreate.h>
+#include <auserscreateagent.h>
+#include <ausersreadagent.h>
+#include <ausersupdateagent.h>
+#include <ausersdeleteagent.h>
 
 // Constants and definitions
 
@@ -68,7 +71,7 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 
 	signals:
 
-		void sgInit(AUsersHandlerProperties inProperties);
+		void sgInit(ARB::AUsersHandlerProperties inProperties);
 		void sgInitiated(void);
 
 	private:
