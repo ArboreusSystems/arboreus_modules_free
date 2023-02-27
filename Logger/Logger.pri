@@ -1,7 +1,5 @@
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/aloggerpch.h
-
 HEADERS += \
 	$$PWD/alogger.h \
 	$$PWD/aloggeragent.h \
