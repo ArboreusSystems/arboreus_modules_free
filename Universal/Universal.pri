@@ -1,7 +1,5 @@
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/auniversalpch.h
-
 HEADERS += \
 	$$PWD/adir.h \
 	$$PWD/afile.h \
