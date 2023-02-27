@@ -1,7 +1,5 @@
 INCLUDEPATH += $$PWD
 
-PRECOMPILED_HEADER = $$PWD/atemplatespch.h
-
 HEADERS += \
 	$$PWD/athreadagenttemplate.h \
 	$$PWD/athreadobjectcontrollertemplate.h \
