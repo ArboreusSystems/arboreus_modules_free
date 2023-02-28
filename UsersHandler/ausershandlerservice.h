@@ -48,11 +48,11 @@ class AUsersHandlerService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(ARB::AUsersHandlerProperties inProperties);
+		void slInitHandlerService(ARB::AUsersHandlerProperties inProperties);
 
 	signals:
 
-		void sgInitiated(void);
+		void sgInitiatedHandlerService(void);
 
 	private:
 

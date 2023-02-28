@@ -55,7 +55,7 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 		virtual ~AUsersHandler(void);
 		Q_DISABLE_COPY(AUsersHandler)
 
-		void mInit(void);
+		virtual void mInit(void);
 		QList<ADBFieldProperties> mDBSchema(void);
 		QList<QVariantList> mAll(void);
 		ADBSqliteReply mCreate(ASqlInsertIntoProperties inProperties);
@@ -65,19 +65,22 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 
 	public slots:
 
-		void slInitiated(void);
 		QVariantList mGetDBSchema(void);
 		QVariantList mGetAll(void);
 
 	signals:
 
-		void sgInit(ARB::AUsersHandlerProperties inProperties);
-		void sgInitiated(void);
+		void sgInitHandler(ARB::AUsersHandlerProperties inProperties);
+		void sgInitiatedHandler(void);
 
 	private:
 
 		ABackend* pBackend = nullptr;
 		QList<ADBFieldProperties> pDBSchema = {};
+
+	private slots:
+
+		void slInitiatedHandler(void);
 };
 
 } // namespace ARB

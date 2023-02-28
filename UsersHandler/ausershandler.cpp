@@ -34,12 +34,12 @@ AUsersHandler::AUsersHandler(QObject* parent)
 : AThreadTemplate<AUsersHandlerService>(new AUsersHandlerService,parent) {
 
 	QObject::connect(
-		this,&AUsersHandler::sgInit,
-		this->mService(),&AUsersHandlerService::slInit
+		this,&AUsersHandler::sgInitHandler,
+		this->mService(),&AUsersHandlerService::slInitHandlerService
 	);
 	QObject::connect(
-		this->mService(),&AUsersHandlerService::sgInitiated,
-		this,&AUsersHandler::slInitiated
+		this->mService(),&AUsersHandlerService::sgInitiatedHandlerService,
+		this,&AUsersHandler::slInitiatedHandler
 	);
 
 	_A_DEBUG << "AUsersHandler created";
@@ -79,7 +79,7 @@ void AUsersHandler::mInit(void) {
 	oProperties.PathApplication = pBackend->pProperties->mGetPathDataApplication();
 	oProperties.Config = pBackend->pGlobalConfigObject;
 
-	emit sgInit(oProperties);
+	emit sgInitHandler(oProperties);
 }
 
 
@@ -234,10 +234,10 @@ QVariantList AUsersHandler::mGetAll(void) {
 	Doc.
 */
 
-void AUsersHandler::slInitiated(void) {
+void AUsersHandler::slInitiatedHandler(void) {
 
 	_A_DEBUG << "AUsersHandler initiated";
 
-	emit sgInitiated();
+	emit sgInitiatedHandler();
 }
 

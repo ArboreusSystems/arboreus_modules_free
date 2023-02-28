@@ -101,3 +101,11 @@ exists($$A_PRI_MODULES_FREE_CACHE) {
 } else {
 	error(No Free Module Cache config file $$A_PRI_MODULES_FREE_CACHE)
 }
+
+A_DIR_MODULES_USERS_HANDLER = $$PWD/UsersHandler
+A_PRI_MODULES_USERS_HANDLER = $$A_DIR_MODULES_USERS_HANDLER/UsersHandler.pri
+exists($$A_PRI_MODULES_USERS_HANDLER) {
+	include($$A_PRI_MODULES_USERS_HANDLER)
+} else {
+	error(No Users Handler Module config file $$A_PRI_MODULES_USERS_HANDLER)
+}

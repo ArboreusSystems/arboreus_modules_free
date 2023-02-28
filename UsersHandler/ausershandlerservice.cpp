@@ -53,7 +53,7 @@ AUsersHandlerService::~AUsersHandlerService(void) {
 	Doc.
 */
 
-void AUsersHandlerService::slInit(AUsersHandlerProperties inProperties) {
+void AUsersHandlerService::slInitHandlerService(ARB::AUsersHandlerProperties inProperties) {
 
 	pUsersHandlerConfig = qobject_cast<AUsersHandlerConfig*>(inProperties.Config);
 	pApplicationConfig = qobject_cast<AApplicationConfig*>(inProperties.Config);
@@ -85,7 +85,7 @@ void AUsersHandlerService::slInit(AUsersHandlerProperties inProperties) {
 
 	_A_DEBUG << "AUsersService initiated";
 
-	emit sgInitiated();
+	emit sgInitiatedHandlerService();
 }
 
 
