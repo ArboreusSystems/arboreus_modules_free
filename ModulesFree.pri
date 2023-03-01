@@ -109,3 +109,11 @@ exists($$A_PRI_MODULES_USERS_HANDLER) {
 } else {
 	error(No Users Handler Module config file $$A_PRI_MODULES_USERS_HANDLER)
 }
+
+A_DIR_MODULES_FREE_JS_COMPONENTS = $$PWD/JSComponents
+A_PRI_MODULES_FREE_JS_COMPONENTS = $$A_DIR_MODULES_FREE_JS_COMPONENTS/JSComponentsFree.pri
+exists($$A_PRI_MODULES_FREE_JS_COMPONENTS) {
+	include($$A_PRI_MODULES_FREE_JS_COMPONENTS)
+} else {
+	error(No Free Module JS Components config file $$A_PRI_MODULES_FREE_JS_COMPONENTS)
+}
