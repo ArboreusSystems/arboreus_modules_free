@@ -51,7 +51,7 @@ class ASettingsService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInit(ASettingsProperties inProperties);
+		void slInit(ARB::ASettingsProperties inProperties);
 		void slUpdate(QString inKey,QVariant inValue);
 
 	signals:
