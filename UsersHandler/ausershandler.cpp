@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\class AUsers
+	\class AUsersHandler
 	\title
 	\brief Template file classes/cpp/file.cpp
 
@@ -8,7 +8,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 27/02/2022 at 15:10:11
+	\li @created 08/03/2023 at 09:25:18
 	\endlist
 */
 // ----------------------------------------------------------
@@ -16,11 +16,11 @@
 // Class header
 #include "ausershandler.h"
 
-// Forwarded classes
-#include <abackend.h>
-
-// Namespace
+// Namespace definition
 using namespace ARB;
+
+// Forwarded includes
+#include <abackend.h>
 
 
 // -----------
@@ -30,16 +30,15 @@ using namespace ARB;
 	Doc.
 */
 
-AUsersHandler::AUsersHandler(QObject* parent)
-: AThreadTemplate<AUsersHandlerService>(new AUsersHandlerService,parent) {
+AUsersHandler::AUsersHandler(QObject* parent) : AThreadTemplate<AUsersHandlerService>(new AUsersHandlerService, parent) {
 
 	QObject::connect(
-		this,&AUsersHandler::sgInitHandler,
-		this->mService(),&AUsersHandlerService::slInitHandlerService
+		this,&AUsersHandler::sgInit,
+		this->mService(),&AUsersHandlerService::slInit
 	);
 	QObject::connect(
-		this->mService(),&AUsersHandlerService::sgInitiatedHandlerService,
-		this,&AUsersHandler::slInitiatedHandler
+		this->mService(),&AUsersHandlerService::sgInitiated,
+		this,&AUsersHandler::slInitiated
 	);
 
 	_A_DEBUG << "AUsersHandler created";
@@ -68,18 +67,7 @@ AUsersHandler::~AUsersHandler(void) {
 
 void AUsersHandler::mInit(void) {
 
-	pBackend = &ABackend::mInstance();
-	pConfig = qobject_cast<AUsersHandlerConfig*>(pBackend->pGlobalConfigObject);
-	pDBSchema = pConfig->AUsersHandlerConfig_DBTableProperties().Schema;
-	pObjects = new AUsersHandlerObjects(pBackend,this);
-	this->start(QThread::Priority::LowPriority);
-
-	AUsersHandlerProperties oProperties;
-	oProperties.PathCache = pBackend->pProperties->mGetPathDataCache();
-	oProperties.PathApplication = pBackend->pProperties->mGetPathDataApplication();
-	oProperties.Config = pBackend->pGlobalConfigObject;
-
-	emit sgInitHandler(oProperties);
+	emit this->sgInit();
 }
 
 
@@ -90,154 +78,22 @@ void AUsersHandler::mInit(void) {
 	Doc.
 */
 
-QList<ADBFieldProperties> AUsersHandler::mDBSchema(void) {
+void AUsersHandler::slInitiated(void) {
 
-	return pDBSchema;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QList<QVariantList> AUsersHandler::mAll(void) {
-
-	QList<QVariantList> oOutput;
-	return oOutput;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-ADBSqliteReply AUsersHandler::mCreate(ASqlInsertIntoProperties inProperties) {
-
-	AThreadObjectControllerTemplate oController;
-	QEventLoop oEventLoop;
-
-	AUsersCreateAgent oAgent;
-	oAgent.pService = this->mService();
-	oAgent.pTabeName = inProperties.TableName;
-	oAgent.pData = inProperties.Data;
-	QObject::connect(
-		&oAgent,&AUsersCreateAgent::sgFinished,
-		&oEventLoop,&QEventLoop::quit
-	);
-	QObject::connect(
-		&oController,&AThreadObjectControllerTemplate::sgRun,
-		&oAgent,&AUsersCreateAgent::slRun
-	);
-	oAgent.moveToThread(this);
-
-	emit oController.sgRun();
-	oEventLoop.exec();
-
-	return oAgent.pReply;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-ADBSqliteReply AUsersHandler::mRead(QString inID) {
-
-	Q_UNUSED(inID)
-
-	ADBSqliteReply oReply;
-	return oReply;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-ADBSqliteReply AUsersHandler::mUpdate(ASqlInsertIntoProperties inProperties) {
-
-	Q_UNUSED(inProperties)
-
-	ADBSqliteReply oReply;
-	return oReply;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-ADBSqliteReply AUsersHandler::mDelete(QString inID) {
-
-	Q_UNUSED(inID)
-
-	ADBSqliteReply oReply;
-	return oReply;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QVariantList AUsersHandler::mGetDBSchema(void) {
-
-	QVariantList oOutput;
-
-	for (int i = 0; i < pDBSchema.length(); i++) {
-		QVariantMap iField;
-		iField.insert("Name",pDBSchema[i].Name);
-		iField.insert("UserName",pDBSchema[i].UserName);
-		oOutput.append(iField);
-	}
-
-	return oOutput;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-QVariantList AUsersHandler::mGetAll(void) {
-
-	QVariantList oOutput;
-	return oOutput;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-void AUsersHandler::slInitiatedHandler(void) {
+	this->mSetCurrent("11111");
 
 	_A_DEBUG << "AUsersHandler initiated";
-
-	emit sgInitiatedHandler();
+	emit this->sgInitiated();
 }
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AUsersHandler::mSetCurrent(QString inID) {
+
+}

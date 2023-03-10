@@ -8,7 +8,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 27/02/2022 at 15:13:05
+	\li @created 08/03/2023 at 09:26:28
 	\endlist
 */
 // ----------------------------------------------------------
@@ -19,13 +19,9 @@
 
 // System includes
 #include <QObject>
-#include <QVariant>
-#include <QMap>
-#include <QVariantMap>
-#include <QList>
-#include <QVariantList>
 #include <QString>
-#include <QEventLoop>
+#include <QVariant>
+#include <QVariantMap>
 
 // Application includes
 

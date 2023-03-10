@@ -8,7 +8,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 13/03/2022 at 14:18:30
+	\li @created 10/03/2023 at 16:03:57
 	\endlist
 */
 // ----------------------------------------------------------
@@ -16,10 +16,7 @@
 // Class header
 #include "ausershandlerobjects.h"
 
-// Forwarded classes
-#include <abackend.h>
-
-// Namespace
+// Namespace definition
 using namespace ARB;
 
 
@@ -30,12 +27,7 @@ using namespace ARB;
 	Doc.
 */
 
-AUsersHandlerObjects::AUsersHandlerObjects(ABackend* inBackend, QObject* parent) : QObject(parent) {
-
-	pConfig = qobject_cast<AUsersHandlerConfig*>(inBackend->pGlobalConfigObject);
-
-	ASqlCreateTableProperties oDBTableProperties = pConfig->AUsersHandlerConfig_DBTableProperties();
-	pUserProperties = oDBTableProperties.mSchemaToVariantMap();
+AUsersHandlerObjects::AUsersHandlerObjects(QObject* parent) : QObject(parent) {
 
 	_A_DEBUG << "AUsersHandlerObjects created";
 }
@@ -61,8 +53,9 @@ AUsersHandlerObjects::~AUsersHandlerObjects(void) {
 	Doc.
 */
 
-QVariantMap AUsersHandlerObjects::mUserPropeties(void) {
+QVariantMap AUsersHandlerObjects::mUserData(void) {
 
-	return pUserProperties;
+	QVariantMap oOutput;
+	return oOutput;
 }
 

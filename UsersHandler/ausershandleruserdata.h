@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\headerfile AUsersHandlerObjects
+	\headerfile AUsersHandlerUserData
 	\title
 	\brief Template file wizard/classes/cpp/file.h
 
@@ -8,13 +8,13 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 10/03/2023 at 16:03:57
+	\li @created 10/03/2023 at 13:53:45
 	\endlist
 */
 // ----------------------------------------------------------
 
-#ifndef AUSERSHANDLEROBJECTS_H
-#define AUSERSHANDLEROBJECTS_H
+#ifndef AUSERSHANDLERUSERDATA_H
+#define AUSERSHANDLERUSERDATA_H
 
 // System includes
 
@@ -25,25 +25,31 @@
 #include <aloggerglobal.h>
 
 // Constants and definitions
+#define _A_USER_DATA_NO_KEY QString("<<NoKey>>")
+#define _A_USER_DATA_NAME_ID "ID"
+#define _A_USER_DATA_NAME_VALUE_ADDON "ValueAddon"
+
 
 // Namespace
 namespace ARB {
 
 // Class definitions
-class AUsersHandlerObjects : public QObject {
-
-	Q_OBJECT
+class AUsersHandlerUserData : public QVariantMap {
 
 	public:
 
-		explicit AUsersHandlerObjects(QObject* parent = nullptr);
-		virtual ~AUsersHandlerObjects(void);
+		explicit AUsersHandlerUserData(QVariantMap inData);
+		explicit AUsersHandlerUserData(void);
+		virtual ~AUsersHandlerUserData(void);
 
-	public slots:
+		QString mGetID(void);
+		QString mGetValueAddon(void);
 
-		QVariantMap mUserData(void);
+	private:
+
+		void mLoadData(QVariantMap inData);
 };
 
 } // namespace ARB
 
-#endif // AUSERSHANDLEROBJECTS_H
+#endif // AUSERSHANDLERUSERDATA_H

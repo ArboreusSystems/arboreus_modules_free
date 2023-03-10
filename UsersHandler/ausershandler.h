@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\headerfile AUsers
+	\headerfile AUsersHandler
 	\title
 	\brief Template file wizard/classes/cpp/file.h
 
@@ -8,7 +8,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 27/02/2022 at 15:10:11
+	\li @created 08/03/2023 at 09:25:18
 	\endlist
 */
 // ----------------------------------------------------------
@@ -22,16 +22,11 @@
 #include <ausershandlerpch.h>
 
 // Application includes
+#include <aloggerglobal.h>
 #include <athreadtemplate.h>
-#include <athreadobjectcontrollertemplate.h>
 #include <ausershandlerservice.h>
-#include <ausershandlerdatamodels.h>
-#include <ausershandlerconfig.h>
+#include <ausershandleruserdata.h>
 #include <ausershandlerobjects.h>
-#include <auserscreateagent.h>
-#include <ausersreadagent.h>
-#include <ausersupdateagent.h>
-#include <ausersdeleteagent.h>
 
 // Constants and definitions
 
@@ -48,7 +43,6 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 
 	public:
 
-		AUsersHandlerConfig* pConfig = nullptr;
 		AUsersHandlerObjects* pObjects = nullptr;
 
 		explicit AUsersHandler(QObject* parent = nullptr);
@@ -56,31 +50,22 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 		Q_DISABLE_COPY(AUsersHandler)
 
 		virtual void mInit(void);
-		QList<ADBFieldProperties> mDBSchema(void);
-		QList<QVariantList> mAll(void);
-		ADBSqliteReply mCreate(ASqlInsertIntoProperties inProperties);
-		ADBSqliteReply mRead(QString inID);
-		ADBSqliteReply mUpdate(ASqlInsertIntoProperties inProperties);
-		ADBSqliteReply mDelete(QString inID);
 
 	public slots:
 
-		QVariantList mGetDBSchema(void);
-		QVariantList mGetAll(void);
+		void slInitiated(void);
+		void mSetCurrent(QString inID);
 
 	signals:
 
-		void sgInitHandler(ARB::AUsersHandlerProperties inProperties);
-		void sgInitiatedHandler(void);
+		void sgInit(void);
+		void sgInitiated(void);
+		void sgDidSetCurrent(void);
 
 	private:
 
 		ABackend* pBackend = nullptr;
-		QList<ADBFieldProperties> pDBSchema = {};
-
-	private slots:
-
-		void slInitiatedHandler(void);
+		AUsersHandlerUserData* pCurrent = nullptr;
 };
 
 } // namespace ARB

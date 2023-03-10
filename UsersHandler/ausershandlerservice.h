@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\headerfile AUsersService
+	\headerfile AUsersHandlerService
 	\title
 	\brief Template file wizard/classes/cpp/file.h
 
@@ -8,7 +8,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 27/02/2022 at 15:17:17
+	\li @created 08/03/2023 at 09:26:06
 	\endlist
 */
 // ----------------------------------------------------------
@@ -22,14 +22,9 @@
 #include <ausershandlerpch.h>
 
 // Application includes
-#include <athreadservicetemplate.h>
-#include <ausershandlerdatamodels.h>
-#include <ausershandlerconfig.h>
 #include <aloggerglobal.h>
-#include <adbsqlitecipher.h>
-#include <adbsqlgenerator.h>
-#include <adir.h>
-#include <aapplicationconfig.h>
+#include <athreadservicetemplate.h>
+#include <adbkeyvalue.h>
 
 // Constants and definitions
 
@@ -48,21 +43,15 @@ class AUsersHandlerService : public AThreadServiceTemplate {
 
 	public slots:
 
-		void slInitHandlerService(ARB::AUsersHandlerProperties inProperties);
+		void slInit(void);
 
 	signals:
 
-		void sgInitiatedHandlerService(void);
+		void sgInitiated(void);
 
 	private:
 
-		ADBSqliteCipher* pDB = nullptr;
-		AUsersHandlerConfig* pUsersHandlerConfig = nullptr;
-		AApplicationConfig* pApplicationConfig = nullptr;
-		QString pPathData = "NoDefinedPathData";
-		QString pPathCache = "NoDefinedPathCache";
-
-		void mInitDB(QString inDBName,ASqlCreateTableProperties inTableProperties);
+		ADBKeyValue* pDB = nullptr;
 };
 
 } // namespace ARB

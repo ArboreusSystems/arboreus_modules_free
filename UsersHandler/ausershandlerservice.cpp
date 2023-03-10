@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-	\class AUsersService
+	\class AUsersHandlerService
 	\title
 	\brief Template file classes/cpp/file.cpp
 
@@ -8,7 +8,7 @@
 	\li @notice Template file classes/file.h
 	\li @copyright Arboreus (http://arboreus.systems)
 	\li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-	\li @created 27/02/2022 at 15:17:17
+	\li @created 08/03/2023 at 09:26:06
 	\endlist
 */
 // ----------------------------------------------------------
@@ -16,7 +16,7 @@
 // Class header
 #include "ausershandlerservice.h"
 
-// Namespace
+// Namespace definition
 using namespace ARB;
 
 
@@ -29,7 +29,7 @@ using namespace ARB;
 
 AUsersHandlerService::AUsersHandlerService(QObject* parent) : AThreadServiceTemplate(parent) {
 
-	_A_DEBUG << "AUsersHandlerService created";
+	_A_DEBUG << "AUserHandlerService created";
 }
 
 
@@ -42,7 +42,7 @@ AUsersHandlerService::AUsersHandlerService(QObject* parent) : AThreadServiceTemp
 
 AUsersHandlerService::~AUsersHandlerService(void) {
 
-	_A_DEBUG << "AUsersHandlerService deleted";
+	_A_DEBUG << "AUserHandlerService deleted";
 }
 
 
@@ -53,68 +53,8 @@ AUsersHandlerService::~AUsersHandlerService(void) {
 	Doc.
 */
 
-void AUsersHandlerService::slInitHandlerService(ARB::AUsersHandlerProperties inProperties) {
+void AUsersHandlerService::slInit(void) {
 
-	pUsersHandlerConfig = qobject_cast<AUsersHandlerConfig*>(inProperties.Config);
-	pApplicationConfig = qobject_cast<AApplicationConfig*>(inProperties.Config);
-
-	QString oPathApplication = inProperties.PathApplication + "/";
-	oPathApplication += pUsersHandlerConfig->AUsersHandlerConfig_ModuleName();
-
-	if (ADir::mEnsure(oPathApplication)) {
-		this->pPathData = oPathApplication;
-		_A_DEBUG << "Ensured Users Application path:" << this->pPathData;
-	} else {
-		_A_CRITICAL << "No Users Application path:" << oPathApplication;
-	}
-
-	QString oPathCache = inProperties.PathCache + "/";
-	oPathCache += pUsersHandlerConfig->AUsersHandlerConfig_ModuleName();
-
-	if (ADir::mEnsure(oPathCache)) {
-		this->pPathCache = oPathCache;
-		_A_DEBUG << "Ensured Users Cache path:" << this->pPathCache;
-	} else {
-		_A_CRITICAL << "No Users Cache path:" << oPathCache;
-	}
-
-	this->mInitDB(
-		pUsersHandlerConfig->AUsersHandlerConfig_DBTableName(),
-		pUsersHandlerConfig->AUsersHandlerConfig_DBTableProperties()
-	);
-
-	_A_DEBUG << "AUsersService initiated";
-
-	emit sgInitiatedHandlerService();
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-void AUsersHandlerService::mInitDB(QString inDBName,ASqlCreateTableProperties inTableProperties) {
-
-	ADBSqliteCipherProperties oDBproperties;
-	oDBproperties.Name = inDBName;
-	oDBproperties.Path = this->pPathData + "/" + oDBproperties.Name + ".db";
-
-	if (pUsersHandlerConfig->AUsersHandlerConfig_Encrypted()) {
-		oDBproperties.Value = pApplicationConfig->AApplicationConfig_Registry_Value();
-	}
-
-	pDB = new ADBSqliteCipher(this);
-	pDB->mStart(&oDBproperties);
-
-	ADBSqliteReply oCreatingReply = pDB->mStringExecute(
-		ADBSqlGenerator::mStringCreateTable(inTableProperties)
-	);
-	if (!oCreatingReply.Status) {
-		_A_CRITICAL << "Creating DB for users failed";
-	} else {
-		_A_DEBUG << "DB for users created";
-	}
+	_A_DEBUG << "AUserHandlerService initiated";
+	emit this->sgInitiated();
 }
