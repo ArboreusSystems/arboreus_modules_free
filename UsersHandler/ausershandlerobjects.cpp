@@ -74,6 +74,6 @@ AUsersHandlerObjects::~AUsersHandlerObjects(void) {
 
 QVariantMap AUsersHandlerObjects::mUserData(void) {
 
-	return pConfig->AUsersHandlerConfig_DataModelObject();;
+	return pConfig->AUsersHandlerConfig_DataModelObject();
 }
 
