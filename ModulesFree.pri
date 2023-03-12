@@ -11,7 +11,7 @@ A_PRI_MODULES_FREE_PROPERTIES = $$A_DIR_MODULES_FREE_PROPERTIES/Properties.pri
 exists($$A_PRI_MODULES_FREE_PROPERTIES) {
 	include($$A_PRI_MODULES_FREE_PROPERTIES)
 } else {
-	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_PROPERTIES)
+	error(No Free Module Properties config file $$A_PRI_MODULES_FREE_PROPERTIES)
 }
 
 A_DIR_MODULES_FREE_LOGGER = $$PWD/Logger
@@ -27,7 +27,15 @@ A_PRI_MODULES_FREE_DB = $$A_DIR_MODULES_FREE_DB/DB.pri
 exists($$A_PRI_MODULES_FREE_DB) {
 	include($$A_PRI_MODULES_FREE_DB)
 } else {
-	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_DB)
+	error(No Free Module DB config file $$A_PRI_MODULES_FREE_DB)
+}
+
+A_DIR_MODULES_FREE_DB_KEY_VALUE = $$PWD/DBKeyValue
+A_PRI_MODULES_FREE_DB_KEY_VALUE = $$A_DIR_MODULES_FREE_DB_KEY_VALUE/DBKeyValue.pri
+exists($$A_PRI_MODULES_FREE_DB_KEY_VALUE) {
+	include($$A_PRI_MODULES_FREE_DB_KEY_VALUE)
+} else {
+	error(No Free Module DBKeyValue config file $$A_PRI_MODULES_FREE_DB)
 }
 
 A_DIR_MODULES_FREE_UNIVERSAL = $$PWD/Universal
@@ -35,7 +43,7 @@ A_PRI_MODULES_FREE_UNIVERSAL = $$A_DIR_MODULES_FREE_UNIVERSAL/Universal.pri
 exists($$A_PRI_MODULES_FREE_UNIVERSAL) {
 	include($$A_PRI_MODULES_FREE_UNIVERSAL)
 } else {
-	error(No Free Module Logger config file $$A_PRI_MODULES_FREE_UNIVERSAL)
+	error(No Free Module Universal config file $$A_PRI_MODULES_FREE_UNIVERSAL)
 }
 
 A_DIR_MODULES_FREE_SETTINGS = $$PWD/Settings
@@ -51,7 +59,7 @@ A_PRI_MODULES_FREE_NETWORK = $$A_DIR_MODULES_FREE_NETWORK/Network.pri
 exists($$A_PRI_MODULES_FREE_NETWORK) {
 	include($$A_PRI_MODULES_FREE_NETWORK)
 } else {
-	error(No Free Module Settings config file $$A_PRI_MODULES_FREE_NETWORK)
+	error(No Free Module Network config file $$A_PRI_MODULES_FREE_NETWORK)
 }
 
 A_DIR_MODULES_FREE_QML_COMPONENTS = $$PWD/QMLComponents
@@ -107,7 +115,7 @@ A_PRI_MODULES_USERS_HANDLER = $$A_DIR_MODULES_USERS_HANDLER/UsersHandler.pri
 exists($$A_PRI_MODULES_USERS_HANDLER) {
 	include($$A_PRI_MODULES_USERS_HANDLER)
 } else {
-	error(No Users Handler Module config file $$A_PRI_MODULES_USERS_HANDLER)
+	error(No UserHandler Module config file $$A_PRI_MODULES_USERS_HANDLER)
 }
 
 A_DIR_MODULES_FREE_JS_COMPONENTS = $$PWD/JSComponents

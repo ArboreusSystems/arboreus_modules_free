@@ -67,6 +67,12 @@ AUsersHandler::~AUsersHandler(void) {
 
 void AUsersHandler::mInit(void) {
 
+	pBackend = &ABackend::mInstance();
+	pConfig = qobject_cast<AUsersHandlerConfig*>(pBackend->pGlobalConfigObject);
+
+	this->mInitPaths();
+	this->mInitUsers();
+
 	emit this->sgInit();
 }
 
@@ -95,5 +101,64 @@ void AUsersHandler::slInitiated(void) {
 */
 
 void AUsersHandler::mSetCurrent(QString inID) {
+
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AUsersHandler::mInitPaths(void) {
+
+	pPathDataApplication = \
+		pBackend->pProperties->mGetPathDataApplication() + "/" +
+		pConfig->AUsersHandlerConfig_ModuleName();
+	if (ADir::mEnsure(pPathDataApplication)) {
+		_A_DEBUG << "Ensured Users Applicatoin Data path:" << pPathDataApplication;
+	} else {
+		_A_CRITICAL << "No Users Applicatoin Data path:" << pPathDataApplication;
+	}
+
+	pPathDataConfig = \
+		pBackend->pProperties->mGetPathDataConfig() + "/" +
+		pConfig->AUsersHandlerConfig_ModuleName();
+	if (ADir::mEnsure(pPathDataConfig)) {
+		_A_DEBUG << "Ensured Users Config Data path:" << pPathDataConfig;
+	} else {
+		_A_CRITICAL << "No Users Config Data path:" << pPathDataConfig;
+	}
+
+	pPathDataCache = \
+		pBackend->pProperties->mGetPathDataCache() + "/" +
+		pConfig->AUsersHandlerConfig_ModuleName();
+	if (ADir::mEnsure(pPathDataCache)) {
+		_A_DEBUG << "Ensured Users Cache Data path:" << pPathDataCache;
+	} else {
+		_A_CRITICAL << "No Users Cache Data path:" << pPathDataCache;
+	}
+
+	pPathDataDocuments = \
+		pBackend->pProperties->mGetPathDataDocuments() + "/" +
+		pConfig->AUsersHandlerConfig_ModuleName();
+	if (ADir::mEnsure(pPathDataDocuments)) {
+		_A_DEBUG << "Ensured Users Documents Data path:" << pPathDataDocuments;
+	} else {
+		_A_CRITICAL << "No Users Documents Data path:" << pPathDataDocuments;
+	}
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AUsersHandler::mInitUsers(void) {
 
 }

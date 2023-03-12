@@ -27,6 +27,7 @@
 #include <ausershandlerservice.h>
 #include <ausershandleruserdata.h>
 #include <ausershandlerobjects.h>
+#include <ausershandlerconfig.h>
 
 // Constants and definitions
 
@@ -65,7 +66,15 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 	private:
 
 		ABackend* pBackend = nullptr;
+		AUsersHandlerConfig* pConfig = nullptr;
 		AUsersHandlerUserData* pCurrent = nullptr;
+		QString pPathDataApplication = "NoDefinedPathDataApplication";
+		QString pPathDataConfig = "NoDefinedDataConfig";
+		QString pPathDataCache = "NoDefinedDataCache";
+		QString pPathDataDocuments = "NoDefinedDataDocuments";
+
+		void mInitPaths(void);
+		void mInitUsers(void);
 };
 
 } // namespace ARB
