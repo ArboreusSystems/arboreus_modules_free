@@ -69,6 +69,7 @@ void AUsersHandler::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 	pConfig = qobject_cast<AUsersHandlerConfig*>(pBackend->pGlobalConfigObject);
+	pObjects = new AUsersHandlerObjects(pConfig,this);
 
 	this->mInitPaths();
 	this->mInitUsers();

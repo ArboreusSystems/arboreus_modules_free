@@ -27,9 +27,28 @@ using namespace ARB;
 	Doc.
 */
 
-AUsersHandlerObjects::AUsersHandlerObjects(QObject* parent) : QObject(parent) {
+AUsersHandlerObjects::AUsersHandlerObjects(AUsersHandlerConfig* inConfig, QObject* parent) {
+
+	if (inConfig) {
+		pConfig = inConfig;
+	} else {
+		_A_WARNING << "No config when creating AUsersHandlerObjects";
+	}
 
 	_A_DEBUG << "AUsersHandlerObjects created";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AUsersHandlerObjects::AUsersHandlerObjects(QObject* parent) : QObject(parent) {
+
+	_A_DEBUG << "AUsersHandlerObjects created without config";
 }
 
 
@@ -55,7 +74,6 @@ AUsersHandlerObjects::~AUsersHandlerObjects(void) {
 
 QVariantMap AUsersHandlerObjects::mUserData(void) {
 
-	QVariantMap oOutput;
-	return oOutput;
+	return pConfig->AUsersHandlerConfig_DataModelObject();;
 }
 

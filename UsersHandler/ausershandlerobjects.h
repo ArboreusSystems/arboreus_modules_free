@@ -23,6 +23,7 @@
 
 // Application includes
 #include <aloggerglobal.h>
+#include <ausershandlerconfig.h>
 
 // Constants and definitions
 
@@ -36,12 +37,20 @@ class AUsersHandlerObjects : public QObject {
 
 	public:
 
+		explicit AUsersHandlerObjects(
+			AUsersHandlerConfig* inConfig = nullptr,
+			QObject* parent = nullptr
+		);
 		explicit AUsersHandlerObjects(QObject* parent = nullptr);
 		virtual ~AUsersHandlerObjects(void);
 
 	public slots:
 
 		QVariantMap mUserData(void);
+
+	private:
+
+		AUsersHandlerConfig* pConfig = nullptr;
 };
 
 } // namespace ARB
