@@ -6,6 +6,7 @@ HEADERS += \
 	$$PWD/auiconfig.h \
 	$$PWD/auihandler.h \
 	$$PWD/auihandlerconfig.h \
+	$$PWD/auihandlerdatamodels.h \
 	$$PWD/auihandlerdefinitions.h \
 	$$PWD/auihandlerpch.h \
 	$$PWD/auisignals.h
