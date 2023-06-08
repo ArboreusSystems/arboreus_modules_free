@@ -87,7 +87,7 @@ void AUsersHandler::mInit(void) {
 
 void AUsersHandler::slInitiated(void) {
 
-	this->mSetCurrent("11111");
+//	this->mSetCurrent("11111");
 
 	_A_DEBUG << "AUsersHandler initiated";
 	emit this->sgInitiated();
@@ -101,8 +101,26 @@ void AUsersHandler::slInitiated(void) {
 	Doc.
 */
 
-void AUsersHandler::mSetCurrent(QString inID) {
+AUsersHandlerReply AUsersHandler::mSetCurrentHandler(QString inID) {
 
+    AUsersHandlerReply oOutput;
+    return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AUsersHandlerReply AUsersHandler::mCreateHandler(AUsersHandlerUserData inUserData) {
+
+	_A_DEBUG << "Create user: 2";
+
+    AUsersHandlerReply oOutput;
+	return oOutput;
 }
 
 

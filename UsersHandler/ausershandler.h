@@ -28,6 +28,7 @@
 #include <ausershandleruserdata.h>
 #include <ausershandlerobjects.h>
 #include <ausershandlerconfig.h>
+#include <ausershandlerdatamodels.h>
 
 // Constants and definitions
 
@@ -55,13 +56,17 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 	public slots:
 
 		void slInitiated(void);
-		void mSetCurrent(QString inID);
 
 	signals:
 
 		void sgInit(void);
 		void sgInitiated(void);
 		void sgDidSetCurrent(void);
+
+	protected:
+
+		AUsersHandlerReply mCreateHandler(AUsersHandlerUserData inUserData);
+		AUsersHandlerReply mSetCurrentHandler(QString inID);
 
 	private:
 
