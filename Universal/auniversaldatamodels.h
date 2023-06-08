@@ -25,7 +25,7 @@
 #include <arandomdatamodels.h>
 
 // Constants and defintions
-#define _A_ENUM_DICTIONARY_TYPE ARB::AEnumsDictionaryType::DictionaryType
+#define _A_ENUMS_DICTIONARY_TYPE ARB::AEnumsDictionaryType::DictionaryType
 
 // Namespace
 namespace ARB {
@@ -47,7 +47,7 @@ class AEnumsDictionaryType: public QObject {
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(_A_ENUM_DICTIONARY_TYPE)
+Q_DECLARE_METATYPE(_A_ENUMS_DICTIONARY_TYPE)
 
 
 // Namespace

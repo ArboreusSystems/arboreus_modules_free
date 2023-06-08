@@ -32,8 +32,8 @@
 #define _A_NUMBER_PETA 1000000000000000
 #define _A_NUMBER_EXA 1000000000000000000
 
-#define _A_ENUM_RANDOM_DICTIONARY_TYPE ARB::AEnumsRandomDictionaryType::RandomDictionaryType
-#define _A_ENUM_RANDOM_EXPONENT ARB::AEnumsRandomExponent::RandomExponent
+#define _A_ENUMS_RANDOM_DICTIONARY_TYPE ARB::AEnumsRandomDictionaryType::DictionaryType
+#define _A_ENUMS_RANDOM_EXPONENT ARB::AEnumsRandomExponent::Exponent
 
 
 // Namespace
@@ -45,13 +45,13 @@ class AEnumsRandomDictionaryType: public QObject {
 
 	public:
 
-		enum class RandomDictionaryType: int {
+		enum class DictionaryType: int {
 
 			Free,
 			Positive,
 			Negative
 		};
-		Q_ENUM(RandomDictionaryType)
+		Q_ENUM(DictionaryType)
 };
 
 class AEnumsRandomExponent: public QObject {
@@ -60,7 +60,7 @@ class AEnumsRandomExponent: public QObject {
 
 	public:
 
-		enum class RandomExponent: int {
+		enum class Exponent: int {
 
 			Deca,
 			Hecto,
@@ -72,9 +72,12 @@ class AEnumsRandomExponent: public QObject {
 			Exa,
 			Full
 		};
-		Q_ENUM(RandomExponent)
+		Q_ENUM(Exponent)
 };
 
 } // namespace ARB
+
+Q_DECLARE_METATYPE(_A_ENUMS_RANDOM_DICTIONARY_TYPE)
+Q_DECLARE_METATYPE(_A_ENUMS_RANDOM_EXPONENT)
 
 #endif // ARANDOMDATAMODELS_H

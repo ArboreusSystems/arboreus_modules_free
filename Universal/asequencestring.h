@@ -54,7 +54,7 @@ class ASequenceString : public QObject {
 		static QString mMd4FromQString(QString inString);
 		static QString mMd5ID(void);
 		static QString mMd5FromQString(QString inString);
-		static QString mDictionary(_A_ENUM_DICTIONARY_TYPE inType);
+		static QString mDictionary(_A_ENUMS_DICTIONARY_TYPE inType);
 		static QString mShake(QString inString);
 };
 

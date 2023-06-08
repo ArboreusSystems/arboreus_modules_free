@@ -51,7 +51,7 @@ QString ASequenceString::mRandomMatrix(int inWidth,int inHeight) {
 
 	return mRandomMatrix(
 		inWidth,inHeight,
-		mDictionary(_A_ENUM_DICTIONARY_TYPE::AlphaNumeric)
+		mDictionary(_A_ENUMS_DICTIONARY_TYPE::AlphaNumeric)
 	);
 }
 
@@ -200,7 +200,7 @@ QString ASequenceString::mMd4FromQString(QString inString) {
 
 QString ASequenceString::mRandom(int inLength) {
 
-	return mRandom(inLength,mDictionary(_A_ENUM_DICTIONARY_TYPE::AlphaNumeric));
+	return mRandom(inLength,mDictionary(_A_ENUMS_DICTIONARY_TYPE::AlphaNumeric));
 }
 
 
@@ -240,29 +240,29 @@ QString ASequenceString::mRandom(int inLength,QString inDictionary) {
 	Return QString within dictionary for generating sequence.
 */
 
-QString ASequenceString::mDictionary(_A_ENUM_DICTIONARY_TYPE inType) {
+QString ASequenceString::mDictionary(_A_ENUMS_DICTIONARY_TYPE inType) {
 
 	QString vDictionary;
 	switch (inType) {
-		case _A_ENUM_DICTIONARY_TYPE::AlphaLower:
+		case _A_ENUMS_DICTIONARY_TYPE::AlphaLower:
 			vDictionary = "abcdefghijklmnopqrstuvwxyz";
 			break;
-		case _A_ENUM_DICTIONARY_TYPE::AlphaUpper:
+		case _A_ENUMS_DICTIONARY_TYPE::AlphaUpper:
 			vDictionary = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 			break;
-		case _A_ENUM_DICTIONARY_TYPE::Alpha:
+		case _A_ENUMS_DICTIONARY_TYPE::Alpha:
 			vDictionary = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 			break;
-		case _A_ENUM_DICTIONARY_TYPE::AlphaLowerNumeric:
+		case _A_ENUMS_DICTIONARY_TYPE::AlphaLowerNumeric:
 			vDictionary = "abcdefghijklmnopqrstuvwxyz0123456789";
 			break;
-		case _A_ENUM_DICTIONARY_TYPE::AlphaUpperNumeric:
+		case _A_ENUMS_DICTIONARY_TYPE::AlphaUpperNumeric:
 			vDictionary = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 			break;
-		case _A_ENUM_DICTIONARY_TYPE::Numeric:
+		case _A_ENUMS_DICTIONARY_TYPE::Numeric:
 			vDictionary = "0123456789";
 			break;
-		case _A_ENUM_DICTIONARY_TYPE::Symbols:
+		case _A_ENUMS_DICTIONARY_TYPE::Symbols:
 			vDictionary = "±!@#$%^&*()_+=-§`?><~{}][ ,.;':";
 			break;
 		default:

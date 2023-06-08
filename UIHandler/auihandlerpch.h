@@ -25,6 +25,8 @@
 #include <QMap>
 #include <QFontDatabase>
 #include <QList>
+#include <QVariant>
+#include <QVariantMap>
 
 // Application includes
 
