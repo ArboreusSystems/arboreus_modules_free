@@ -59,11 +59,11 @@ QString ADBSqlGenerator::mStringCreateTable(ASqlCreateTableProperties inProperti
 		oOutput += iField->Name + " ";
 
 		switch (iField->Type) {
-			case _A_ENUM_DB_SQLITE_FIELD_TYPE::Integer: oOutput += "INTEGER"; break;
-			case _A_ENUM_DB_SQLITE_FIELD_TYPE::Text: oOutput += "TEXT"; break;
-			case _A_ENUM_DB_SQLITE_FIELD_TYPE::Blob: oOutput += "BLOB"; break;
-			case _A_ENUM_DB_SQLITE_FIELD_TYPE::Real: oOutput += "REAL"; break;
-			case _A_ENUM_DB_SQLITE_FIELD_TYPE::Null: oOutput += "NULL"; break;
+			case _A_ENUMS_DB_SQLITE_FIELD_TYPE::Integer: oOutput += "INTEGER"; break;
+			case _A_ENUMS_DB_SQLITE_FIELD_TYPE::Text: oOutput += "TEXT"; break;
+			case _A_ENUMS_DB_SQLITE_FIELD_TYPE::Blob: oOutput += "BLOB"; break;
+			case _A_ENUMS_DB_SQLITE_FIELD_TYPE::Real: oOutput += "REAL"; break;
+			case _A_ENUMS_DB_SQLITE_FIELD_TYPE::Null: oOutput += "NULL"; break;
 			default:
 				_A_CRITICAL << "Wrong or undefined data type for SQL table";
 				break;

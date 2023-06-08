@@ -111,10 +111,10 @@ void ALoggerService::mInitMessageCache(void) {
 void ALoggerService::mInitAgent(ALoggerServiceProperties inProperties) {
 
 	switch (pConfig->ALoggerConfig_LogbookType()) {
-		case _A_ENUM_LOGGER_LOGBOOK_TYPE::DB:
+		case _A_ENUMS_LOGGER_LOGBOOK_TYPE::DB:
 			pAgent = qobject_cast<ALoggerAgentInterface*>(new ALoggerDBAgent(this));
 			break;
-		case _A_ENUM_LOGGER_LOGBOOK_TYPE::File:
+		case _A_ENUMS_LOGGER_LOGBOOK_TYPE::File:
 			pAgent = qobject_cast<ALoggerAgentInterface*>(new ALoggerFileAgent(this));
 			break;
 		default:

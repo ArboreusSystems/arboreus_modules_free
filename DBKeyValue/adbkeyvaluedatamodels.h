@@ -24,26 +24,28 @@
 #include <adbdatamodels.h>
 
 // Constants and defintions
-#define _A_ENUM_DB_KEY_VALUE_REPLY_STATUS ARB::ADBKeyValueReplyStatus::ADBKeyValueReplyStatusEnum
+#define _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS ARB::AEnumsDBKeyValueReplyStatus::ReplyStatus
 
 
 // Namespace
 namespace ARB {
 
-class ADBKeyValueReplyStatus: public QObject {
+class AEnumsDBKeyValueReplyStatus: public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		enum class ADBKeyValueReplyStatusEnum: int {
+		enum class ReplyStatus: int {
 
 			Error,Ok,NotExisted,NotDefined
 		};
-		Q_ENUM(ADBKeyValueReplyStatusEnum)
+		Q_ENUM(ReplyStatus)
 };
 
 } // namespace ARB
+
+Q_DECLARE_METATYPE(_A_ENUMS_DB_KEY_VALUE_REPLY_STATUS)
 
 
 // Namespace
@@ -80,7 +82,7 @@ class ADBKeyValueReply {
 
 	public:
 
-		_A_ENUM_DB_KEY_VALUE_REPLY_STATUS Status = _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::NotDefined;
+		_A_ENUMS_DB_KEY_VALUE_REPLY_STATUS Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::NotDefined;
 		QVariant Data = "NoData";
 
 		explicit ADBKeyValueReply() {}

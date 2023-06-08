@@ -89,8 +89,8 @@ bool AFile::mEncode(QString inValue, QString inPath, QByteArray inDatumn) {
 	if (!oFile.open(QFile::WriteOnly)) return false;
 
 	ACryptographyAES oCryptography(
-		_A_ENUM_AES_TYPE::AES_256,
-		_A_ENUM_AES_MODE::ECB
+		_A_ENUMS_CRYPTOGRAPHY_AES_TYPE::AES_256,
+		_A_ENUMS_CRYPTOGRAPHY_AES_MODE::ECB
 	);
 
 	QByteArray oEncodedDatumn = oCryptography.mEncode(
@@ -131,8 +131,8 @@ AFileReply AFile::mDecode(QString inValue, QString inPath) {
 	if (!oFile.open(QFile::ReadOnly)) return oReply;
 
 	ACryptographyAES oCryptography(
-		_A_ENUM_AES_TYPE::AES_256,
-		_A_ENUM_AES_MODE::ECB
+		_A_ENUMS_CRYPTOGRAPHY_AES_TYPE::AES_256,
+		_A_ENUMS_CRYPTOGRAPHY_AES_MODE::ECB
 	);
 
 	QByteArray oDatumnEncoded = oFile.readAll();

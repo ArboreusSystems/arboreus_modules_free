@@ -28,9 +28,9 @@ using namespace ARB;
 */
 
 ACryptographyAES::ACryptographyAES(
-	_A_ENUM_AES_TYPE inLevel,
-	_A_ENUM_AES_MODE inMode,
-	_A_ENUM_AES_PADDING inPadding,
+	_A_ENUMS_CRYPTOGRAPHY_AES_TYPE inLevel,
+	_A_ENUMS_CRYPTOGRAPHY_AES_MODE inMode,
+	_A_ENUMS_CRYPTOGRAPHY_AES_PADDING inPadding,
 	QObject* parent
 ): QObject(parent) {
 
@@ -42,21 +42,21 @@ ACryptographyAES::ACryptographyAES(
 	pState = NULL;
 
 	switch (inLevel) {
-		case _A_ENUM_AES_TYPE::AES_128: {
+		case _A_ENUMS_CRYPTOGRAPHY_AES_TYPE::AES_128: {
 				ACryptographyAES128 oAES;
 				pNk = oAES.Nk;
 				pKeyLength = oAES.KeyLength;
 				pNr = oAES.Nr;
 				pExpandedKey = oAES.ExpandedKey;
 			}; break;
-		case _A_ENUM_AES_TYPE::AES_192: {
+		case _A_ENUMS_CRYPTOGRAPHY_AES_TYPE::AES_192: {
 				ACryptographyAES192 oAES;
 				pNk = oAES.Nk;
 				pKeyLength = oAES.KeyLength;
 				pNr = oAES.Nr;
 				pExpandedKey = oAES.ExpandedKey;
 			}; break;
-		case _A_ENUM_AES_TYPE::AES_256: {
+		case _A_ENUMS_CRYPTOGRAPHY_AES_TYPE::AES_256: {
 				ACryptographyAES256 oAES;
 				pNk = oAES.Nk;
 				pKeyLength = oAES.KeyLength;
@@ -97,7 +97,7 @@ QByteArray ACryptographyAES::mEncode(
 	const QByteArray& inIv
 ) {
 
-	if (pMode >= (int)_A_ENUM_AES_MODE::CBC && (inIv.isNull() || inIv.size() != pBlockLength)) {
+	if (pMode >= (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::CBC && (inIv.isNull() || inIv.size() != pBlockLength)) {
 		return QByteArray();
 	}
 
@@ -108,12 +108,12 @@ QByteArray ACryptographyAES::mEncode(
 	oAlignedText.append(mGetPadding(inRawText.size(), pBlockLength));
 
 	switch(pMode) {
-		case (int)_A_ENUM_AES_MODE::ECB:
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::ECB:
 			for(int i = 0; i < oAlignedText.size(); i += pBlockLength) {
 				oOutput.append(mCipher(oExpandedKey, oAlignedText.mid(i, pBlockLength)));
 			}
 			break;
-		case (int)_A_ENUM_AES_MODE::CBC: {
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::CBC: {
 				QByteArray ivTemp(inIv);
 				for(int i = 0; i < oAlignedText.size(); i += pBlockLength) {
 					oAlignedText.replace(i, pBlockLength, mByteXor(oAlignedText.mid(i, pBlockLength),ivTemp));
@@ -122,7 +122,7 @@ QByteArray ACryptographyAES::mEncode(
 				}
 			}
 			break;
-		case (int)_A_ENUM_AES_MODE::CFB: {
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::CFB: {
 				oOutput.append(mByteXor(oAlignedText.left(pBlockLength), mCipher(oExpandedKey, inIv)));
 				for(int i=0; i < oAlignedText.size(); i+= pBlockLength) {
 					if (i+pBlockLength < oAlignedText.size()) {
@@ -134,7 +134,7 @@ QByteArray ACryptographyAES::mEncode(
 				}
 			}
 			break;
-		case (int)_A_ENUM_AES_MODE::OFB: {
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::OFB: {
 				QByteArray oOfbTemp;
 				oOfbTemp.append(mCipher(oExpandedKey, inIv));
 				for (int i=pBlockLength; i < oAlignedText.size(); i += pBlockLength) {
@@ -163,7 +163,7 @@ QByteArray ACryptographyAES::mDecode(
 	const QByteArray& inIv
 ) {
 
-	if (pMode >= (int)_A_ENUM_AES_MODE::CBC && (inIv.isNull() || inIv.size() != pBlockLength)) {
+	if (pMode >= (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::CBC && (inIv.isNull() || inIv.size() != pBlockLength)) {
 		return QByteArray();
 	}
 
@@ -171,12 +171,12 @@ QByteArray ACryptographyAES::mDecode(
 	QByteArray oExpandedKey = mExpandKey(inKey);
 
 	switch(pMode) {
-		case (int)_A_ENUM_AES_MODE::ECB:
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::ECB:
 			for(int i = 0; i < inRawText.size(); i += pBlockLength) {
 				oOutput.append(mInvCipher(oExpandedKey, inRawText.mid(i, pBlockLength)));
 			}
 			break;
-		case (int)_A_ENUM_AES_MODE::CBC: {
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::CBC: {
 				QByteArray ivTemp(inIv);
 				for(int i = 0; i < inRawText.size(); i += pBlockLength) {
 					oOutput.append(mInvCipher(oExpandedKey, inRawText.mid(i, pBlockLength)));
@@ -185,7 +185,7 @@ QByteArray ACryptographyAES::mDecode(
 				}
 			}
 			break;
-		case (int)_A_ENUM_AES_MODE::CFB: {
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::CFB: {
 				oOutput.append(mByteXor(inRawText.mid(0, pBlockLength), mCipher(oExpandedKey, inIv)));
 				for(int i = 0; i < inRawText.size(); i += pBlockLength) {
 					if (i + pBlockLength < inRawText.size()) {
@@ -197,7 +197,7 @@ QByteArray ACryptographyAES::mDecode(
 				}
 			}
 			break;
-		case (int)_A_ENUM_AES_MODE::OFB: {
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_MODE::OFB: {
 				QByteArray oOfbTemp;
 				oOfbTemp.append(mCipher(oExpandedKey, inIv));
 				for (int i = pBlockLength; i < inRawText.size(); i += pBlockLength){
@@ -223,7 +223,7 @@ QByteArray ACryptographyAES::mDecode(
 
 QByteArray ACryptographyAES::mRemovePadding(const QByteArray& inRawText) {
 
-	return mRemovePadding(inRawText, (_A_ENUM_AES_PADDING) pPadding);
+	return mRemovePadding(inRawText, (_A_ENUMS_CRYPTOGRAPHY_AES_PADDING) pPadding);
 }
 
 
@@ -263,7 +263,7 @@ QByteArray ACryptographyAES::mExpandKey(const QByteArray& inKey) {
 			oTempa[0] =  oTempa[0] ^ pRCon[i/pNk];
 		}
 
-		if (pLevel == (int)_A_ENUM_AES_TYPE::AES_256 && i % pNk == 4) {
+		if (pLevel == (int)_A_ENUMS_CRYPTOGRAPHY_AES_TYPE::AES_256 && i % pNk == 4) {
 			oTempa[0] = mGetSBoxValue(oTempa[0]);
 			oTempa[1] = mGetSBoxValue(oTempa[1]);
 			oTempa[2] = mGetSBoxValue(oTempa[2]);
@@ -289,12 +289,12 @@ QByteArray ACryptographyAES::mExpandKey(const QByteArray& inKey) {
 */
 
 QByteArray ACryptographyAES::mCrypt(
-	_A_ENUM_AES_TYPE inLevel,
-	_A_ENUM_AES_MODE inMode,
+	_A_ENUMS_CRYPTOGRAPHY_AES_TYPE inLevel,
+	_A_ENUMS_CRYPTOGRAPHY_AES_MODE inMode,
 	const QByteArray& inRawText,
 	const QByteArray& inKey,
 	const QByteArray& inIv,
-	_A_ENUM_AES_PADDING inPadding
+	_A_ENUMS_CRYPTOGRAPHY_AES_PADDING inPadding
 ) {
 
 	ACryptographyAES* oCryptography = new ACryptographyAES(inLevel, inMode, inPadding);
@@ -310,12 +310,12 @@ QByteArray ACryptographyAES::mCrypt(
 */
 
 QByteArray ACryptographyAES::mDecrypt(
-	_A_ENUM_AES_TYPE inLevel,
-	_A_ENUM_AES_MODE inMode,
+	_A_ENUMS_CRYPTOGRAPHY_AES_TYPE inLevel,
+	_A_ENUMS_CRYPTOGRAPHY_AES_MODE inMode,
 	const QByteArray& inRawText,
 	const QByteArray& inKey,
 	const QByteArray& inIv,
-	_A_ENUM_AES_PADDING inPadding
+	_A_ENUMS_CRYPTOGRAPHY_AES_PADDING inPadding
 ) {
 
 	ACryptographyAES* oCryptography = new ACryptographyAES(inLevel, inMode, inPadding);
@@ -331,8 +331,8 @@ QByteArray ACryptographyAES::mDecrypt(
 */
 
 QByteArray ACryptographyAES::mExpandKey(
-	_A_ENUM_AES_TYPE inLevel,
-	_A_ENUM_AES_MODE inMode,
+	_A_ENUMS_CRYPTOGRAPHY_AES_TYPE inLevel,
+	_A_ENUMS_CRYPTOGRAPHY_AES_MODE inMode,
 	const QByteArray& inKey
 ) {
 
@@ -350,7 +350,7 @@ QByteArray ACryptographyAES::mExpandKey(
 
 QByteArray ACryptographyAES::mRemovePadding(
 	const QByteArray &inRawText,
-	_A_ENUM_AES_PADDING inPadding
+	_A_ENUMS_CRYPTOGRAPHY_AES_PADDING inPadding
 ) {
 
 	if (inRawText.isEmpty()) {
@@ -359,15 +359,15 @@ QByteArray ACryptographyAES::mRemovePadding(
 
 	QByteArray oOutput(inRawText);
 	switch (inPadding) {
-		case _A_ENUM_AES_PADDING::ZERO:
+		case _A_ENUMS_CRYPTOGRAPHY_AES_PADDING::ZERO:
 			while (oOutput.at(oOutput.length()-1) == 0x00) {
 				oOutput.remove(oOutput.length()-1, 1);
 			}
 			break;
-		case _A_ENUM_AES_PADDING::PKCS7:
+		case _A_ENUMS_CRYPTOGRAPHY_AES_PADDING::PKCS7:
 			oOutput.remove(oOutput.length() - oOutput.back(),oOutput.back());
 			break;
-		case _A_ENUM_AES_PADDING::ISO: {
+		case _A_ENUMS_CRYPTOGRAPHY_AES_PADDING::ISO: {
 				int iMarkerIndex = oOutput.length() - 1;
 				for (; iMarkerIndex >= 0; --iMarkerIndex) {
 					if (oOutput.at(iMarkerIndex) != 0x00) {
@@ -549,16 +549,16 @@ QByteArray ACryptographyAES::mGetPadding(int inCurrSize, int inAlignment) {
 
 	int oSize = (inAlignment - inCurrSize % inAlignment) % inAlignment;
 	switch(pPadding) {
-		case (int)_A_ENUM_AES_PADDING::ZERO:
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_PADDING::ZERO:
 			return QByteArray(oSize, 0x00);
 			break;
-		case (int)_A_ENUM_AES_PADDING::PKCS7:
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_PADDING::PKCS7:
 			if (oSize == 0) {
 				oSize = inAlignment;
 			}
 			return QByteArray(oSize, oSize);
 			break;
-		case (int)_A_ENUM_AES_PADDING::ISO:
+		case (int)_A_ENUMS_CRYPTOGRAPHY_AES_PADDING::ISO:
 			if (oSize > 0) {
 				return QByteArray (oSize - 1, 0x00).prepend(0x80);
 			}

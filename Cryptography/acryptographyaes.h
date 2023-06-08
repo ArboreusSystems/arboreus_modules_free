@@ -39,9 +39,9 @@ class ACryptographyAES : public QObject {
 	public:
 
 		explicit ACryptographyAES(
-			_A_ENUM_AES_TYPE inLevel,
-			_A_ENUM_AES_MODE inMode,
-			_A_ENUM_AES_PADDING inPadding = _A_ENUM_AES_PADDING::ISO,
+			_A_ENUMS_CRYPTOGRAPHY_AES_TYPE inLevel,
+			_A_ENUMS_CRYPTOGRAPHY_AES_MODE inMode,
+			_A_ENUMS_CRYPTOGRAPHY_AES_PADDING inPadding = _A_ENUMS_CRYPTOGRAPHY_AES_PADDING::ISO,
 			QObject* parent = nullptr
 		);
 		virtual ~ACryptographyAES(void);
@@ -60,29 +60,29 @@ class ACryptographyAES : public QObject {
 		QByteArray mExpandKey(const QByteArray& inKey);
 
 		static QByteArray mCrypt(
-			_A_ENUM_AES_TYPE inLevel,
-			_A_ENUM_AES_MODE inMode,
+			_A_ENUMS_CRYPTOGRAPHY_AES_TYPE inLevel,
+			_A_ENUMS_CRYPTOGRAPHY_AES_MODE inMode,
 			const QByteArray& inRawText,
 			const QByteArray& inKey,
 			const QByteArray& inIv = NULL,
-			_A_ENUM_AES_PADDING inPadding = _A_ENUM_AES_PADDING::ISO
+			_A_ENUMS_CRYPTOGRAPHY_AES_PADDING inPadding = _A_ENUMS_CRYPTOGRAPHY_AES_PADDING::ISO
 		);
 		static QByteArray mDecrypt(
-			_A_ENUM_AES_TYPE inLevel,
-			_A_ENUM_AES_MODE inMode,
+			_A_ENUMS_CRYPTOGRAPHY_AES_TYPE inLevel,
+			_A_ENUMS_CRYPTOGRAPHY_AES_MODE inMode,
 			const QByteArray& inRawText,
 			const QByteArray& inKey,
 			const QByteArray& inIv = NULL,
-			_A_ENUM_AES_PADDING inPadding = _A_ENUM_AES_PADDING::ISO
+			_A_ENUMS_CRYPTOGRAPHY_AES_PADDING inPadding = _A_ENUMS_CRYPTOGRAPHY_AES_PADDING::ISO
 		);
 		static QByteArray mExpandKey(
-			_A_ENUM_AES_TYPE inLevel,
-			_A_ENUM_AES_MODE inMode,
+			_A_ENUMS_CRYPTOGRAPHY_AES_TYPE inLevel,
+			_A_ENUMS_CRYPTOGRAPHY_AES_MODE inMode,
 			const QByteArray& inKey
 		);
 		static QByteArray mRemovePadding(
 			const QByteArray& inRawText,
-			_A_ENUM_AES_PADDING inPadding
+			_A_ENUMS_CRYPTOGRAPHY_AES_PADDING inPadding
 		);
 
 	private:

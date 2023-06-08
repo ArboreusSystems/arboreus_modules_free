@@ -48,4 +48,6 @@ class AEnumsStatus: public QObject {
 
 } // namespace ARB
 
+Q_DECLARE_METATYPE(_A_ENUM_REPLY_STATUS)
+
 #endif // AAPPLICATIONDATAMODELS_H

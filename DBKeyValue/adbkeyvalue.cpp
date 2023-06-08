@@ -96,7 +96,7 @@ bool ADBKeyValue::mIsKey(QString inKey) {
 
 	ADBKeyValueReply oCheckingReply = this->mRead(inKey);
 	switch (oCheckingReply.Status) {
-		case _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::Ok:
+		case _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok:
 			oOutput = true;
 			break;
 		default:
@@ -117,7 +117,7 @@ bool ADBKeyValue::mIsKey(QString inKey) {
 ADBKeyValueReply ADBKeyValue::mRead(QString inKey) {
 
 	ADBKeyValueReply oOutput;
-	oOutput.Status = _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::Error;
+	oOutput.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Error;
 
 	QString oSQL = \
 		"SELECT value FROM " + pProperties->NameTable + " " +
@@ -129,9 +129,9 @@ ADBKeyValueReply ADBKeyValue::mRead(QString inKey) {
 		return oOutput;
 	} else {
 		if (oReply.Output.length() == 0) {
-			oOutput.Status = _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::NotExisted;
+			oOutput.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::NotExisted;
 		} else {
-			oOutput.Status = _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::Ok;
+			oOutput.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok;
 			oOutput.Data = qvariant_cast<QVariant>(oReply.Output[0]);
 		}
 	}
@@ -150,14 +150,14 @@ ADBKeyValueReply ADBKeyValue::mRead(QString inKey) {
 ADBKeyValueReply ADBKeyValue::mReadAll(void) {
 
 	ADBKeyValueReply oOutput;
-	oOutput.Status = _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::Error;
+	oOutput.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Error;
 
 	ADBSqliteReply oReply = pDB->mStringExecute("SELECT * FROM " + pProperties->NameTable + ";");
 	if (!oReply.Status) {
 		_A_CRITICAL << "Reading all data from DBKeyValue failed:" << pProperties->Path;
 		return oOutput;
 	} else {
-		oOutput.Status = _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::Ok;
+		oOutput.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok;
 		oOutput.Data = oReply.Output;
 	}
 
@@ -175,7 +175,7 @@ ADBKeyValueReply ADBKeyValue::mReadAll(void) {
 ADBKeyValueReply ADBKeyValue::mWrite(QString inKey, QVariant inValue) {
 
 	ADBKeyValueReply oReply;
-	oReply.Status = _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::Error;
+	oReply.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Error;
 
 	QString oSQL = \
 		"INSERT OR REPLACE INTO " + pProperties->NameTable + " (key,value)" +
@@ -194,7 +194,7 @@ ADBKeyValueReply ADBKeyValue::mWrite(QString inKey, QVariant inValue) {
 		_A_CRITICAL << "Writing query in DBKeyValue " << pProperties->NameTable << "failed";
 		return oReply;
 	} else {
-		oReply.Status = _A_ENUM_DB_KEY_VALUE_REPLY_STATUS::Ok;
+		oReply.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok;
 	}
 
 	return oReply;

@@ -26,27 +26,29 @@
 #define _A_DB_NULL_VALUE "A_DB_NULL_VALUE"
 #define _A_DB_TABLE_SCHEMA QList<ARB::ADBFieldProperties>
 
-#define _A_ENUM_DB_SQLITE_FIELD_TYPE ARB::ADBFieldType::ADBSqliteFieldTypeEnum
+#define _A_ENUMS_DB_SQLITE_FIELD_TYPE ARB::AEnumsDBFieldType::Type
 
 
 // Namespace
 namespace ARB {
 
-class ADBFieldType: public QObject {
+class AEnumsDBFieldType: public QObject {
 
 	Q_OBJECT
 
 	public:
 
-		enum class ADBSqliteFieldTypeEnum: int {
+		enum class Type: int {
 
 			Undefined,Null,Integer,
 			Real,Text,Blob
 		};
-		Q_ENUM(ADBSqliteFieldTypeEnum)
+		Q_ENUM(Type)
 };
 
 } // namespace ARB
+
+Q_DECLARE_METATYPE(_A_ENUMS_DB_SQLITE_FIELD_TYPE)
 
 
 namespace ARB {
@@ -137,7 +139,7 @@ class ADBFieldProperties {
 
 	public:
 
-		_A_ENUM_DB_SQLITE_FIELD_TYPE Type = _A_ENUM_DB_SQLITE_FIELD_TYPE::Undefined;
+		_A_ENUMS_DB_SQLITE_FIELD_TYPE Type = _A_ENUMS_DB_SQLITE_FIELD_TYPE::Undefined;
 		bool PrimaryKey = false;
 		bool Autoincrement = false;
 		bool Unique = false;
@@ -188,7 +190,7 @@ class ADBFieldProperties {
 
 			oValue = inProperties.value("Type",oErrorValue);
 			if (QString::compare(oErrorValue,qvariant_cast<QString>(oValue)) != 0) {
-				Type = qvariant_cast<_A_ENUM_DB_SQLITE_FIELD_TYPE>(oValue);
+				Type = qvariant_cast<_A_ENUMS_DB_SQLITE_FIELD_TYPE>(oValue);
 			}
 
 			oValue = inProperties.value("PrimaryKey",oErrorValue);

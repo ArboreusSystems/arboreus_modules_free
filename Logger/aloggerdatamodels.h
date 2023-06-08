@@ -23,7 +23,7 @@
 // Application includes
 
 // Constants and defintions
-#define _A_ENUM_LOGGER_LOGBOOK_TYPE ARB::AEnumsLoggerLogbookType::Type
+#define _A_ENUMS_LOGGER_LOGBOOK_TYPE ARB::AEnumsLoggerLogbookType::Type
 
 
 // Namespace
@@ -43,6 +43,9 @@ class AEnumsLoggerLogbookType: public QObject {
 };
 
 } // namespace ARB
+
+Q_DECLARE_METATYPE(_A_ENUMS_LOGGER_LOGBOOK_TYPE)
+
 
 // Namespace
 namespace ARB {
@@ -65,7 +68,9 @@ class ALoggerMessageModel {
 };
 
 }
+
 Q_DECLARE_METATYPE(ARB::ALoggerMessageModel)
+
 
 // Namespace
 namespace ARB {
@@ -83,6 +88,7 @@ class ALoggerServiceProperties {
 };
 
 }
+
 Q_DECLARE_METATYPE(ARB::ALoggerServiceProperties)
 
 #endif // ALOGGERDATAMODELS_H

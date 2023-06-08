@@ -24,15 +24,15 @@
 #include <aapplicationdatamodels.h>
 
 // Constants and defintions
-#define _A_ENUM_AES_TYPE ARB::AEnumsAESType::AESType
-#define _A_ENUM_AES_MODE ARB::AEnumsAESMode::AESMode
-#define _A_ENUM_AES_PADDING ARB::AEnumsAESPadding::AESPadding
+#define _A_ENUMS_CRYPTOGRAPHY_AES_TYPE ARB::AEnumsCryptographyAESType::AESType
+#define _A_ENUMS_CRYPTOGRAPHY_AES_MODE ARB::AEnumsCryptographyAESMode::AESMode
+#define _A_ENUMS_CRYPTOGRAPHY_AES_PADDING ARB::AEnumsCryptographyAESPadding::AESPadding
 
 
 // Namespace
 namespace ARB {
 
-class AEnumsAESType: public QObject {
+class AEnumsCryptographyAESType: public QObject {
 
 	Q_OBJECT
 
@@ -42,7 +42,7 @@ class AEnumsAESType: public QObject {
 		Q_ENUM(AESType)
 };
 
-class AEnumsAESMode: public QObject {
+class AEnumsCryptographyAESMode: public QObject {
 
 	Q_OBJECT
 
@@ -52,7 +52,7 @@ class AEnumsAESMode: public QObject {
 		Q_ENUM(AESMode)
 };
 
-class AEnumsAESPadding: public QObject {
+class AEnumsCryptographyAESPadding: public QObject {
 
 	Q_OBJECT
 
@@ -64,9 +64,9 @@ class AEnumsAESPadding: public QObject {
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(_A_ENUM_AES_TYPE)
-Q_DECLARE_METATYPE(_A_ENUM_AES_MODE)
-Q_DECLARE_METATYPE(_A_ENUM_AES_PADDING)
+Q_DECLARE_METATYPE(_A_ENUMS_CRYPTOGRAPHY_AES_TYPE)
+Q_DECLARE_METATYPE(_A_ENUMS_CRYPTOGRAPHY_AES_MODE)
+Q_DECLARE_METATYPE(_A_ENUMS_CRYPTOGRAPHY_AES_PADDING)
 
 
 // Namespace
