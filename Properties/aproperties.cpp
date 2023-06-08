@@ -103,7 +103,8 @@ void AProperties::mInitPaths(void) {
 		_A_CRITICAL << "No Cache Data path:" << pPathDataCache;
 	}
 
-	pPathDataDocuments = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+	pPathDataDocuments = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) +
+		"/" + this->mNameOrganisation() + "/" + this->mNameApplication();
 	if (ADir::mEnsure(pPathDataDocuments)) {
 		_A_DEBUG << "Ensured Documents Data path:" << pPathDataDocuments;
 	} else {
