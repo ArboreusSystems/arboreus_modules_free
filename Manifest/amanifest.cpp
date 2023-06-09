@@ -22,9 +22,9 @@ using namespace ARB;
 
 // -----------
 /*!
-    \fn
+	\fn
 
-    Doc.
+	Doc.
 */
 
 AManifest::AManifest(QObject* parent) : QObject(parent) {
@@ -53,25 +53,130 @@ AManifest::~AManifest(void) {
 	Doc.
 */
 
-AManifestReply AManifest::mLoad(AManifestProperties inProperties) {
+void AManifest::mInitWithFile(AManifestFile inFile) {
+
+	pFile = inFile;
+	_A_DEBUG << "Manifest initiated with file:" << pFile.mPath();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mLoadFromFilePublic(void) {
+
+	AManifestReply oOutput;
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mLoadFromFilePrivate(QString inValue) {
+
+	AManifestReply oOutput;
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mSaveToFile(void) {
+
+	AManifestReply oOutput;
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AManifest::mWriteByKeyPublic(QString inKey, QVariant inValue) {
+
+	this->mWriteByKey(inKey,inValue,_A_ENUMS_MANIFEST_DATA_TYPE::Public);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AManifest::mWriteByKeyPrivate(QString inKey, QVariant inValue) {
+
+	this->mWriteByKey(inKey,inValue,_A_ENUMS_MANIFEST_DATA_TYPE::Private);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AManifest::mWriteByKey(QString inKey, QVariant inValue, _A_ENUMS_MANIFEST_DATA_TYPE inType) {
+
+	AManifestData oData;
+	oData.Type = inType;
+	oData.Data = inValue;
+
+	pData.insert(inKey,oData);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mReadByKey(QString inKey) {
 
 	AManifestReply oOutput;
 
-	pProperties = inProperties;
-
-	if(ADir::mEnsure(pProperties.Path)) {
-		_A_DEBUG << "Ensured manifest path:" << pProperties.Path;
+	if (this->mIsKey(inKey)) {
+		oOutput.Type = _A_ENUMS_MANIFEST_REPLY_TYPE::Ok;
+		oOutput.Data = pData.value(inKey).Data;
 	} else {
-		oOutput.Type = _A_ENUM_MANIFEST_REPLY_TYPE::WrongPath;
-		oOutput.Data = pProperties.Path;
-		_A_CRITICAL << "The path for manifest file not ensured:" << pProperties.Path;
+		oOutput.Type = _A_ENUMS_MANIFEST_REPLY_TYPE::NoKey;
+		oOutput.Data = inKey;
 	}
-
-	_A_DEBUG << "Mainfest loaded" << pProperties.Path;
-
 
 	return oOutput;
 }
 
 
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+bool AManifest::mIsKey(QString inKey) {
+
+	return pData.contains(inKey);
+}
 

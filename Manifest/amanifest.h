@@ -42,12 +42,20 @@ class AManifest : public QObject {
 		explicit AManifest(QObject* parent = nullptr);
 		virtual ~AManifest(void);
 
-		AManifestReply mLoad(AManifestProperties inProperties);
+		void mInitWithFile(AManifestFile inFile);
+		AManifestReply mLoadFromFilePublic(void);
+		AManifestReply mLoadFromFilePrivate(QString inValue);
+		AManifestReply mSaveToFile(void);
+		void mWriteByKeyPublic(QString inKey, QVariant inValue);
+		void mWriteByKeyPrivate(QString inKey, QVariant inValue);
+		void mWriteByKey(QString inKey, QVariant inValue, _A_ENUMS_MANIFEST_DATA_TYPE inType);
+		AManifestReply mReadByKey(QString inKey);
+		bool mIsKey(QString inKey);
 
 	private:
 
-		AManifestProperties pProperties;
-		QString pPath = "NoDefinedPath";
+		AManifestFile pFile;
+		QMap<QString,AManifestData> pData = {};
 };
 
 } // namespace ARB
