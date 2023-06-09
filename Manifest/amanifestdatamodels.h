@@ -8,7 +8,7 @@
     \li @notice Template file classes/file.h
     \li @copyright Arboreus (http://arboreus.systems)
     \li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-    \li @created 05/06/2023 at 19:15:53
+    \li @created 09/06/2023 at 15:59:24
     \endlist
 */
 // ----------------------------------------------------------
@@ -23,55 +23,72 @@
 // Application includes
 
 // Constants and defintions
-#define _A_ENUM_MANIFEST_REPLY_TYPE ARB::AManifestReplyType::AManifestReplyTypeEnum
-#define _A_ENUM_MANIFEST_ROW_TYPE ARB::AManifestRowType::AManifestRowTypeEnum
-
-// Namespace
-namespace ARB {
-
-class AManifestReplyType: public QObject {
-
-	public:
-
-		enum class AManifestReplyTypeEnum: int {
-
-			Error, Ok, NoKey, WrongPath
-		};
-		Q_ENUM(AManifestReplyTypeEnum)
-};
-
-} // namespace ARB
+#define _A_ENUMS_MANIFEST_DATA_TYPE ARB::AEnumsManifestDataType::DataType
+#define _A_ENUMS_MANIFEST_REPLY_TYPE ARB::AEnumsManifestReplyType::ReplyType
 
 
 // Namespace
 namespace ARB {
 
-class AManifestRowType: public QObject {
+class AEnumsManifestDataType: public QObject {
+
+	Q_OBJECT
 
 	public:
 
-		enum class AManifestRowTypeEnum: int {
+		enum class DataType: int {
 
-			Error, Public, Encoded, Base64
+			Public = 0,
+			Private = 1
 		};
-		Q_ENUM(AManifestRowTypeEnum)
-
-		static QString mToString(_A_ENUM_MANIFEST_ROW_TYPE inType) {
-
-			QString oOutput = "Error";
-
-			switch (inType) {
-				case _A_ENUM_MANIFEST_ROW_TYPE::Public: oOutput = "Public";break;
-				case _A_ENUM_MANIFEST_ROW_TYPE::Encoded: oOutput = "Encoded";break;
-				case _A_ENUM_MANIFEST_ROW_TYPE::Base64: oOutput = "Base64";break;
-				default: break;
-			}
-
-			return oOutput;
-		}
+		Q_ENUM(DataType)
 };
 
 } // namespace ARB
+
+Q_DECLARE_METATYPE(_A_ENUMS_MANIFEST_DATA_TYPE)
+
+
+// Namespace
+namespace ARB {
+
+class AEnumsManifestReplyType: public QObject {
+
+	Q_OBJECT
+
+	public:
+
+		enum class ReplyType: int {
+
+			Error = 0,
+			Ok = 1,
+			NoKey = 2
+		};
+		Q_ENUM(ReplyType)
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(_A_ENUMS_MANIFEST_REPLY_TYPE)
+
+
+// Namespace
+namespace ARB {
+
+class AManifestData {
+
+	public:
+
+		_A_ENUMS_MANIFEST_DATA_TYPE Type = _A_ENUMS_MANIFEST_DATA_TYPE::Public;
+		QVariant Data = "NoData";
+
+		explicit AManifestData(void) {}
+		virtual ~AManifestData(void) {}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::AManifestData)
 
 
 // Namespace
@@ -81,11 +98,11 @@ class AManifestReply {
 
 	public:
 
-		AManifestReply(void) {}
-		virtual ~AManifestReply(void) {}
+		_A_ENUMS_MANIFEST_REPLY_TYPE Type = _A_ENUMS_MANIFEST_REPLY_TYPE::Error;
+		QVariant Data = "NoData";
 
-		_A_ENUM_MANIFEST_REPLY_TYPE Type = _A_ENUM_MANIFEST_REPLY_TYPE::Error;
-		QVariant Data = {};
+		explicit AManifestReply(void) {}
+		virtual ~AManifestReply(void) {}
 };
 
 } // namespace ARB
@@ -96,41 +113,26 @@ Q_DECLARE_METATYPE(ARB::AManifestReply)
 // Namespace
 namespace ARB {
 
-class AManifestProperties {
+class AManifestFile {
 
 	public:
 
-		AManifestProperties(void) {}
-		virtual ~AManifestProperties(void) {}
-
-		QString Path = "NoDefinedPath";
+		QString Dir = "NoDefinedDir";
 		QString Name = "NoDefinedName";
+
+		explicit AManifestFile(void) {}
+		virtual ~AManifestFile(void) {}
+
+		QString mPath(void) {
+
+			QString oPath = this->Dir + "/" + this->Name;
+			return oPath;
+		}
 };
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(ARB::AManifestProperties)
-
-
-// Namespace
-namespace ARB {
-
-class AManifestRowProperties {
-
-	public:
-
-		AManifestRowProperties(void) {}
-		virtual ~AManifestRowProperties(void) {}
-
-		_A_ENUM_MANIFEST_ROW_TYPE Type = _A_ENUM_MANIFEST_ROW_TYPE::Error;
-		QString Key = "NoDefinedKey";
-		QVariant Value = "NoDefinedValue";
-};
-
-} // namespace ARB
-
-Q_DECLARE_METATYPE(ARB::AManifestRowProperties)
-
+Q_DECLARE_METATYPE(ARB::AManifestFile)
 
 
 #endif // AMANIFESTDATAMODELS_H
