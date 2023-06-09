@@ -67,7 +67,7 @@ void AManifest::mInitWithFile(AManifestFile inFile) {
 	Doc.
 */
 
-AManifestReply AManifest::mLoadFromFilePublic(void) {
+AManifestReply AManifest::mLoadPublic(void) {
 
 	AManifestReply oOutput;
 	return oOutput;
@@ -81,7 +81,7 @@ AManifestReply AManifest::mLoadFromFilePublic(void) {
 	Doc.
 */
 
-AManifestReply AManifest::mLoadFromFilePrivate(QString inValue) {
+AManifestReply AManifest::mLoadPrivate(QString inValue) {
 
 	AManifestReply oOutput;
 	return oOutput;
@@ -95,9 +95,48 @@ AManifestReply AManifest::mLoadFromFilePrivate(QString inValue) {
 	Doc.
 */
 
-AManifestReply AManifest::mSaveToFile(void) {
+AManifestReply AManifest::mSave(void) {
 
 	AManifestReply oOutput;
+
+	if (!ADir::mEnsure(pFile.Dir)) {
+		_A_CRITICAL << "Not ensured dir for manifest file" << pFile.mPath();
+		return oOutput;
+	}
+
+	QVariantMap oManifest;
+	QVariantList oManifestPublic;
+	QVariantList oManifestPrivate;
+
+	foreach (QString iKey, pData.keys()) {
+		AManifestData iData = pData.value(iKey);
+		QVariantMap iRow;
+		iRow.insert("key",iKey);
+		iRow.insert("value",iData.Data);
+		if (iData.Type == _A_ENUMS_MANIFEST_DATA_TYPE::Private) {
+			oManifestPrivate.append(iRow);
+		} else {
+			oManifestPublic.append(iRow);
+		}
+	}
+
+	oManifest.insert(
+		pFile.Aliases.value(_A_ENUMS_MANIFEST_DATA_TYPE::Public),
+		oManifestPublic
+	);
+	oManifest.insert(
+		pFile.Aliases.value(_A_ENUMS_MANIFEST_DATA_TYPE::Private),
+		oManifestPrivate
+	);
+
+	if (!AJson::mToFileFromMap(pFile.mPath(),oManifest)) {
+		_A_CRITICAL << "Manifest JSON file not saved:" << pFile.mPath();
+		return oOutput;
+	} else {
+		oOutput.Type = _A_ENUMS_MANIFEST_REPLY_TYPE::Ok;
+		_A_DEBUG << "Did write manifest:" << pFile.mPath();
+	}
+
 	return oOutput;
 }
 
@@ -109,9 +148,9 @@ AManifestReply AManifest::mSaveToFile(void) {
 	Doc.
 */
 
-void AManifest::mWriteByKeyPublic(QString inKey, QVariant inValue) {
+AManifestReply AManifest::mWriteByKeyPublic(QString inKey, QVariant inValue) {
 
-	this->mWriteByKey(inKey,inValue,_A_ENUMS_MANIFEST_DATA_TYPE::Public);
+	return this->mWriteByKey(inKey,inValue,_A_ENUMS_MANIFEST_DATA_TYPE::Public);
 }
 
 
@@ -122,9 +161,9 @@ void AManifest::mWriteByKeyPublic(QString inKey, QVariant inValue) {
 	Doc.
 */
 
-void AManifest::mWriteByKeyPrivate(QString inKey, QVariant inValue) {
+AManifestReply AManifest::mWriteByKeyPrivate(QString inKey, QVariant inValue) {
 
-	this->mWriteByKey(inKey,inValue,_A_ENUMS_MANIFEST_DATA_TYPE::Private);
+	return this->mWriteByKey(inKey,inValue,_A_ENUMS_MANIFEST_DATA_TYPE::Private);
 }
 
 
@@ -135,13 +174,15 @@ void AManifest::mWriteByKeyPrivate(QString inKey, QVariant inValue) {
 	Doc.
 */
 
-void AManifest::mWriteByKey(QString inKey, QVariant inValue, _A_ENUMS_MANIFEST_DATA_TYPE inType) {
+AManifestReply AManifest::mWriteByKey(QString inKey, QVariant inValue, _A_ENUMS_MANIFEST_DATA_TYPE inType) {
 
 	AManifestData oData;
 	oData.Type = inType;
 	oData.Data = inValue;
 
 	pData.insert(inKey,oData);
+
+	return this->mSave();
 }
 
 

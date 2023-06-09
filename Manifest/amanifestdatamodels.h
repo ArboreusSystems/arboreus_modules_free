@@ -62,7 +62,7 @@ class AEnumsManifestReplyType: public QObject {
 
 			Error = 0,
 			Ok = 1,
-			NoKey = 2
+			NoKey = 2,
 		};
 		Q_ENUM(ReplyType)
 };
@@ -119,14 +119,35 @@ class AManifestFile {
 
 		QString Dir = "NoDefinedDir";
 		QString Name = "NoDefinedName";
+		QMap<_A_ENUMS_MANIFEST_DATA_TYPE,QString> Aliases = {};
 
-		explicit AManifestFile(void) {}
+		explicit AManifestFile(void) {
+
+			this->mSetAliasPrivate("Private");
+			this->mSetAliasPublic("Public");
+		}
+
 		virtual ~AManifestFile(void) {}
 
 		QString mPath(void) {
 
 			QString oPath = this->Dir + "/" + this->Name;
 			return oPath;
+		}
+
+		void mSetAlias(_A_ENUMS_MANIFEST_DATA_TYPE inType,QString inAlias) {
+
+			Aliases.insert(inType,inAlias);
+		}
+
+		void mSetAliasPrivate(QString inAlias) {
+
+			this->mSetAlias(_A_ENUMS_MANIFEST_DATA_TYPE::Private,inAlias);
+		}
+
+		void mSetAliasPublic(QString inAlias) {
+
+			this->mSetAlias(_A_ENUMS_MANIFEST_DATA_TYPE::Public,inAlias);
 		}
 };
 
