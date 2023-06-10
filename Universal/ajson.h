@@ -47,10 +47,15 @@ class AJson : public QObject {
 		explicit AJson(QObject* parent = nullptr);
 		virtual ~AJson(void);
 
+		static bool mToBase64FileFromObject(QString inPath,QJsonObject inObject);
+		static bool mToBase64FileFromMap(QString inPath,QVariantMap inMap);
+		static bool mToBase64FileFromHash(QString inPath,QVariantHash inHash);
+		static bool mToBase64FileFromDocument(QString inPath,QJsonDocument inDocument);
+		static AJsonFileReply mFromBase64File(QString inPath);
 		static bool mToFileFromObject(QString inPath,QJsonObject inObject);
-		static bool mToFileFromDocument(QString inPath,QJsonDocument inDocument);
 		static bool mToFileFromMap(QString inPath,QVariantMap inMap);
 		static bool mToFileFromHash(QString inPath,QVariantHash inHash);
+		static bool mToFileFromDocument(QString inPath,QJsonDocument inDocument);
 		static AJsonFileReply mFromFile(QString inPath);
 		static bool mEncodeFromString(QString inValue,QString inPath,QString inString);
 		static bool mEncodeFromObject(QString inValue,QString inPath,QJsonObject inObject);

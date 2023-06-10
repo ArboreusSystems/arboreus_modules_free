@@ -42,12 +42,78 @@ AJson::~AJson(void) {}
 
 // -----------
 /*!
-	\fn AJsonFileReply AJson::mFromFile(QString inPath)
+	\fn
 
-	Read JSON from file.
+	Doc.
 */
 
-AJsonFileReply AJson::mFromFile(QString inPath) {
+bool AJson::mToBase64FileFromObject(QString inPath, QJsonObject inObject) {
+
+	return mToBase64FileFromDocument(
+		inPath,QJsonDocument(inObject)
+	);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+bool AJson::mToBase64FileFromMap(QString inPath, QVariantMap inMap) {
+
+	return mToBase64FileFromDocument(
+		inPath,QJsonDocument(QJsonObject::fromVariantMap(inMap))
+	);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+bool AJson::mToBase64FileFromHash(QString inPath, QVariantHash inHash) {
+
+	return mToBase64FileFromDocument(
+		inPath,QJsonDocument(QJsonObject::fromVariantHash(inHash))
+	);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+bool AJson::mToBase64FileFromDocument(QString inPath, QJsonDocument inDocument) {
+
+	QFile oFile(inPath);
+	if (!oFile.open(QFile::WriteOnly)) {
+		return false;
+	}
+	if (oFile.write(inDocument.toJson().toBase64()) >= 0) {
+		oFile.close();
+		return true;
+	}
+	return false;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AJsonFileReply AJson::mFromBase64File(QString inPath) {
 
 	AJsonFileReply oReply = {};
 
@@ -61,7 +127,7 @@ AJsonFileReply AJson::mFromFile(QString inPath) {
 
 	QJsonParseError oJSONParseError;
 	QJsonDocument oJSONDocument = QJsonDocument::fromJson(
-		oJSONFile.readAll(),&oJSONParseError
+		QByteArray::fromBase64(oJSONFile.readAll()),&oJSONParseError
 	);
 	if (oJSONDocument.isNull()) {
 		return oReply;
@@ -119,7 +185,6 @@ bool AJson::mToFileFromHash(QString inPath, QVariantHash inHash) {
 }
 
 
-
 // -----------
 /*!
 	\fn bool AJson::mToFileFromDocument(QString inPath, QJsonDocument inDocument)
@@ -138,6 +203,40 @@ bool AJson::mToFileFromDocument(QString inPath, QJsonDocument inDocument) {
 		return true;
 	}
 	return false;
+}
+
+
+// -----------
+/*!
+	\fn AJsonFileReply AJson::mFromFile(QString inPath)
+
+	Read JSON from file.
+*/
+
+AJsonFileReply AJson::mFromFile(QString inPath) {
+
+	AJsonFileReply oReply = {};
+
+	QFile oJSONFile(inPath);
+	if (!oJSONFile.exists()) {
+		return oReply;
+	}
+	if (!oJSONFile.open(QIODevice::ReadOnly|QIODevice::Text)) {
+		return oReply;
+	}
+
+	QJsonParseError oJSONParseError;
+	QJsonDocument oJSONDocument = QJsonDocument::fromJson(
+		oJSONFile.readAll(),&oJSONParseError
+	);
+	if (oJSONDocument.isNull()) {
+		return oReply;
+	}
+	oJSONFile.close();
+
+	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
+	oReply.Json = oJSONDocument.object();
+	return oReply;
 }
 
 
