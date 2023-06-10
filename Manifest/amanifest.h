@@ -24,9 +24,8 @@
 // Application includes
 #include <aloggerglobal.h>
 #include <amanifestdatamodels.h>
-#include <afile.h>
-#include <adir.h>
 #include <ajson.h>
+#include <adir.h>
 
 // Constants and definitions
 
@@ -44,20 +43,26 @@ class AManifest : public QObject {
 		virtual ~AManifest(void);
 
 		void mInitWithFile(AManifestFile inFile);
-		AManifestReply mLoadPublic(void);
-		AManifestReply mLoadPrivate(QString inValue);
-		AManifestReply mSave(void);
-		AManifestReply mWriteByKeyPublic(QString inKey, QVariant inValue);
-		AManifestReply mWriteByKeyPrivate(QString inKey, QVariant inValue);
-		AManifestReply mWriteByKey(QString inKey, QVariant inValue, _A_ENUMS_MANIFEST_DATA_TYPE inType);
-		AManifestReply mReadByKey(QString inKey);
 		bool mIsKey(QString inKey);
+		AManifestData mGetDataByKey(QString inKey);
+		QVariant mGetValueByKey(QString inKey);
+		AManifestReply mAddDataSystem(QString inKey,QVariant inDataValue);
+		AManifestReply mAddDataPublic(QString inKey,QVariant inDataValue);
+		AManifestReply mAddDataPrivate(QString inValue,QString inKey,QVariant inDataValue);
+		AManifestReply mRemoveFromSystem(QString inKey);
+		AManifestReply mRemoveFromPublic(QString inKey);
+		AManifestReply mRemoveFromPrivate(QString inValue,QString inKey);
 
 	private:
 
 		AManifestFile pFile;
 		QMap<QString,AManifestData> pData = {};
 
+		void mAddData(QString inKey,AManifestData inData);
+		QVariantMap mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE inType);
+		AManifestReply mSaveSystem(void);
+		AManifestReply mSavePublic(void);
+		AManifestReply mSavePrivate(QString inValue);
 };
 
 } // namespace ARB

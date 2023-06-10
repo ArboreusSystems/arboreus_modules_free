@@ -56,6 +56,17 @@ AManifest::~AManifest(void) {
 void AManifest::mInitWithFile(AManifestFile inFile) {
 
 	pFile = inFile;
+
+	this->mAddDataSystem(
+		pFile.Aliases.value(_A_ENUMS_MANIFEST_DATA_TYPE::Private),
+		pFile.mPathPrivate()
+	);
+
+	this->mAddDataSystem(
+		pFile.Aliases.value(_A_ENUMS_MANIFEST_DATA_TYPE::Public),
+		pFile.mPathPublic()
+	);
+
 	_A_DEBUG << "Manifest initiated with file:" << pFile.mPath();
 }
 
@@ -67,157 +78,299 @@ void AManifest::mInitWithFile(AManifestFile inFile) {
 	Doc.
 */
 
-AManifestReply AManifest::mLoadPublic(void) {
-
-	AManifestReply oOutput;
-	return oOutput;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-AManifestReply AManifest::mLoadPrivate(QString inValue) {
-
-	AManifestReply oOutput;
-	return oOutput;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-AManifestReply AManifest::mSave(void) {
-
-	AManifestReply oOutput;
-
-	if (!ADir::mEnsure(pFile.Dir)) {
-		_A_CRITICAL << "Not ensured dir for manifest file" << pFile.mPath();
-		return oOutput;
-	}
-
-	QVariantMap oManifest;
-	QVariantList oManifestPublic;
-	QVariantList oManifestPrivate;
-
-	foreach (QString iKey, pData.keys()) {
-		AManifestData iData = pData.value(iKey);
-		QVariantMap iRow;
-		iRow.insert("key",iKey);
-		iRow.insert("value",iData.Data);
-		if (iData.Type == _A_ENUMS_MANIFEST_DATA_TYPE::Private) {
-			oManifestPrivate.append(iRow);
-		} else {
-			oManifestPublic.append(iRow);
-		}
-	}
-
-	oManifest.insert(
-		pFile.Aliases.value(_A_ENUMS_MANIFEST_DATA_TYPE::Public),
-		oManifestPublic
-	);
-	oManifest.insert(
-		pFile.Aliases.value(_A_ENUMS_MANIFEST_DATA_TYPE::Private),
-		oManifestPrivate
-	);
-
-	if (!AJson::mToFileFromMap(pFile.mPath(),oManifest)) {
-		_A_CRITICAL << "Manifest JSON file not saved:" << pFile.mPath();
-		return oOutput;
-	} else {
-		oOutput.Type = _A_ENUMS_MANIFEST_REPLY_TYPE::Ok;
-		_A_DEBUG << "Did write manifest:" << pFile.mPath();
-	}
-
-	return oOutput;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-AManifestReply AManifest::mWriteByKeyPublic(QString inKey, QVariant inValue) {
-
-	return this->mWriteByKey(inKey,inValue,_A_ENUMS_MANIFEST_DATA_TYPE::Public);
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-AManifestReply AManifest::mWriteByKeyPrivate(QString inKey, QVariant inValue) {
-
-	return this->mWriteByKey(inKey,inValue,_A_ENUMS_MANIFEST_DATA_TYPE::Private);
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-AManifestReply AManifest::mWriteByKey(QString inKey, QVariant inValue, _A_ENUMS_MANIFEST_DATA_TYPE inType) {
-
-	AManifestData oData;
-	oData.Type = inType;
-	oData.Data = inValue;
-
-	pData.insert(inKey,oData);
-
-	return this->mSave();
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-AManifestReply AManifest::mReadByKey(QString inKey) {
-
-	AManifestReply oOutput;
-
-	if (this->mIsKey(inKey)) {
-		oOutput.Type = _A_ENUMS_MANIFEST_REPLY_TYPE::Ok;
-		oOutput.Data = pData.value(inKey).Data;
-	} else {
-		oOutput.Type = _A_ENUMS_MANIFEST_REPLY_TYPE::NoKey;
-		oOutput.Data = inKey;
-	}
-
-	return oOutput;
-}
-
-
-// -----------
-/*!
-	\fn
-
-	Doc.
-*/
-
-bool AManifest::mIsKey(QString inKey) {
+bool AManifest::mIsKey(QString inKey) 	{
 
 	return pData.contains(inKey);
 }
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestData AManifest::mGetDataByKey(QString inKey) 	{
+
+	return pData.value(inKey);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QVariant AManifest::mGetValueByKey(QString inKey) 	{
+
+	return pData.value(inKey).Data;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mAddDataSystem(QString inKey, QVariant inValue) {
+
+	AManifestData oData;
+	oData.Type = _A_ENUMS_MANIFEST_DATA_TYPE::System;
+	oData.Data = inValue;
+
+	this->mAddData(inKey,oData);
+
+	return this->mSaveSystem();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mAddDataPublic(QString inKey, QVariant inValue) {
+
+	AManifestData oData;
+	oData.Type = _A_ENUMS_MANIFEST_DATA_TYPE::Public;
+	oData.Data = inValue;
+
+	this->mAddData(inKey,oData);
+
+	return this->mSavePublic();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mAddDataPrivate(QString inValue,QString inKey,QVariant inDataValue) {
+
+	AManifestData oData;
+	oData.Type = _A_ENUMS_MANIFEST_DATA_TYPE::Private;
+	oData.Data = inDataValue;
+
+	this->mAddData(inKey,oData);
+
+	return this->mSavePrivate(inValue);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mRemoveFromSystem(QString inKey) 	{
+
+	AManifestReply oOutput;
+
+	QVariantMap oData = this->mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE::System);
+	if (!oData.contains(inKey)) {
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::NoKey;
+		return oOutput;
+	}
+
+	pData.remove(inKey);
+	oOutput = this->mSaveSystem();
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mRemoveFromPublic(QString inKey) {
+
+	AManifestReply oOutput;
+
+	QVariantMap oData = this->mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE::Public);
+	if (!oData.contains(inKey)) {
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::NoKey;
+		return oOutput;
+	}
+
+	pData.remove(inKey);
+	oOutput = this->mSavePublic();
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mRemoveFromPrivate(QString inValue,QString inKey) {
+
+	AManifestReply oOutput;
+
+	QVariantMap oData = this->mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE::Private);
+	if (!oData.contains(inKey)) {
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::NoKey;
+		return oOutput;
+	}
+
+	pData.remove(inKey);
+	oOutput = this->mSavePrivate(inValue);
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AManifest::mAddData(QString inKey, AManifestData inData) {
+
+	pData.insert(inKey,inData);
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QVariantMap AManifest::mSelectData(AEnumsManifestDataType::DataType inType) {
+
+	QVariantMap oData;
+
+	foreach (QString iKey, pData.keys()) {
+		AManifestData iData = pData.value(iKey);
+		if (iData.Type == inType) {
+			oData.insert(iKey,iData.Data);
+		}
+	}
+
+	return oData;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mSaveSystem(void) {
+
+	AManifestReply oOutput;
+
+	QVariantMap oData = this->mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE::System);
+
+	if (!ADir::mEnsure(pFile.Dir)) {
+		_A_CRITICAL << "Dir for manifest not ensured:" << pFile.Dir;
+	}
+
+	if (pFile.EncodeBase64) {
+		if (AJson::mToBase64FileFromMap(pFile.mPath(),oData)) {
+			oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
+			_A_DEBUG << "Base64 manifest written:" << pFile.mPath();
+		} else {
+			_A_CRITICAL << "Base64 manifest not written:" << pFile.mPath();
+		}
+	} else {
+		if (AJson::mToFileFromMap(pFile.mPath(),oData)) {
+			oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
+			_A_DEBUG << "Manifest written:" << pFile.mPath();
+		} else {
+			_A_CRITICAL << "Manifest not written:" << pFile.mPath();
+		}
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mSavePublic(void) {
+
+	AManifestReply oOutput;
+
+	QVariantMap oData = this->mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE::Public);
+
+	if (!ADir::mEnsure(pFile.Dir)) {
+		_A_CRITICAL << "Dir for public manifest not ensured:" << pFile.Dir;
+	}
+
+	if (pFile.EncodeBase64) {
+		if (AJson::mToBase64FileFromMap(pFile.mPathPublic(),oData)) {
+			oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
+			_A_DEBUG << "Base64 public manifest written:" << pFile.mPathPublic();
+		} else {
+			_A_CRITICAL << "Base64 public manifest not written:" << pFile.mPathPublic();
+		}
+	} else {
+		if (AJson::mToFileFromMap(pFile.mPathPublic(),oData)) {
+			oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
+			_A_DEBUG << "Public manifest written:" << pFile.mPathPublic();
+		} else {
+			_A_CRITICAL << "Public manifest not written:" << pFile.mPathPublic();
+		}
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mSavePrivate(QString inValue) {
+
+	AManifestReply oOutput;
+
+	QVariantMap oData = this->mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE::Private);
+
+	if (!ADir::mEnsure(pFile.Dir)) {
+		_A_CRITICAL << "Dir for private manifest not ensured:" << pFile.Dir;
+	}
+
+	if (AJson::mEncodeFromMap(inValue,pFile.mPathPrivate(),oData)) {
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
+		_A_DEBUG << "Private manifest written:" << pFile.mPathPrivate();
+	} else {
+		_A_CRITICAL << "Private manifest not written:" << pFile.mPathPublic();
+	}
+
+	return oOutput;
+}
