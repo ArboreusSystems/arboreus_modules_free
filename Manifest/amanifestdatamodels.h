@@ -64,6 +64,7 @@ class AEnumsManifestReplyStatus: public QObject {
 			Error = 0,
 			Ok = 1,
 			NoKey = 2,
+			NoFile = 3
 		};
 		Q_ENUM(ReplyStatus)
 };
@@ -164,6 +165,11 @@ class AManifestFile {
 		void mSetAliasPublic(QString inAlias) {
 
 			this->mSetAlias(_A_ENUMS_MANIFEST_DATA_TYPE::Public,inAlias);
+		}
+
+		QString mGetAlias(_A_ENUMS_MANIFEST_DATA_TYPE inType) {
+
+			return Aliases.value(inType);
 		}
 };
 

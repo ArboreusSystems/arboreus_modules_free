@@ -26,6 +26,7 @@
 #include <amanifestdatamodels.h>
 #include <ajson.h>
 #include <adir.h>
+#include <afile.h>
 
 // Constants and definitions
 
@@ -52,6 +53,9 @@ class AManifest : public QObject {
 		AManifestReply mRemoveFromSystem(QString inKey);
 		AManifestReply mRemoveFromPublic(QString inKey);
 		AManifestReply mRemoveFromPrivate(QString inValue,QString inKey);
+		AManifestReply mLoadSystem(void);
+		AManifestReply mLoadPublic(void);
+		AManifestReply mLoadPrivate(QString inValue);
 
 	private:
 
@@ -60,6 +64,7 @@ class AManifest : public QObject {
 
 		void mAddData(QString inKey,AManifestData inData);
 		QVariantMap mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE inType);
+		void mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE inType,QJsonObject inManifest);
 		AManifestReply mSaveSystem(void);
 		AManifestReply mSavePublic(void);
 		AManifestReply mSavePrivate(QString inValue);

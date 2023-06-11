@@ -246,6 +246,106 @@ AManifestReply AManifest::mRemoveFromPrivate(QString inValue,QString inKey) {
 	Doc.
 */
 
+AManifestReply AManifest::mLoadSystem(void) {
+
+	AManifestReply oOutput;
+	QString oPath = pFile.mPathPublic();
+
+	if (!AFile::mExist(oPath)) {
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::NoFile;
+		oOutput.Data = oPath;
+		_A_CRITICAL << "No manifest file:" << oPath;
+		return oOutput;
+	}
+
+	AJsonFileReply oJSONManifestReply;
+	if (pFile.EncodeBase64) {
+		oJSONManifestReply = AJson::mFromBase64File(oPath);
+	} else {
+		oJSONManifestReply = AJson::mFromFile(oPath);
+	}
+
+	if (oJSONManifestReply.Status == _A_ENUM_REPLY_STATUS::Ok) {
+		this->mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE::System,oJSONManifestReply.Json);
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mLoadPublic(void) {
+
+	AManifestReply oOutput;
+	QString oPath = pFile.mPathPublic();
+
+	if (!AFile::mExist(oPath)) {
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::NoFile;
+		oOutput.Data = oPath;
+		_A_CRITICAL << "No public manifest file:" << oPath;
+		return oOutput;
+	}
+
+	AJsonFileReply oJSONManifestReply;
+	if (pFile.EncodeBase64) {
+		oJSONManifestReply = AJson::mFromBase64File(oPath);
+	} else {
+		oJSONManifestReply = AJson::mFromFile(oPath);
+	}
+
+	if (oJSONManifestReply.Status == _A_ENUM_REPLY_STATUS::Ok) {
+		this->mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE::Public,oJSONManifestReply.Json);
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AManifestReply AManifest::mLoadPrivate(QString inValue) {
+
+	AManifestReply oOutput;
+	QString oPath = pFile.mPathPrivate();
+
+	if (!AFile::mExist(oPath)) {
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::NoFile;
+		oOutput.Data = oPath;
+		_A_CRITICAL << "No private manifest file:" << oPath;
+		return oOutput;
+	}
+
+	AJsonFileReply oJSONManifestReply = AJson::mDecodeFromFile(inValue,oPath);
+
+	if (oJSONManifestReply.Status == _A_ENUM_REPLY_STATUS::Ok) {
+		this->mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE::System,oJSONManifestReply.Json);
+		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void AManifest::mAddData(QString inKey, AManifestData inData) {
 
 	pData.insert(inKey,inData);
@@ -271,6 +371,25 @@ QVariantMap AManifest::mSelectData(AEnumsManifestDataType::DataType inType) {
 	}
 
 	return oData;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AManifest::mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE inType, QJsonObject inManifest) {
+
+	QVariantMap oManifestData = inManifest.toVariantMap();
+	foreach (QString iKey, oManifestData.keys()) {
+		AManifestData iData;
+		iData.Type = inType;
+		iData.Data = oManifestData.value(iKey);
+		pData.insert(iKey,iData);
+	}
 }
 
 
