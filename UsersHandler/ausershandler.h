@@ -52,6 +52,10 @@ class AUsersHandler : public AThreadTemplate<AUsersHandlerService> {
 		Q_DISABLE_COPY(AUsersHandler)
 
 		virtual void mInit(void);
+		QString mGetPathDataApplication(void);
+		QString mGetPathDataConfig(void);
+		QString mGetPathDataCache(void);
+		QString mGetPathDataDocuments(void);
 
 	public slots:
 

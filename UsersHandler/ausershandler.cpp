@@ -85,6 +85,58 @@ void AUsersHandler::mInit(void) {
 	Doc.
 */
 
+QString AUsersHandler::mGetPathDataApplication(void) {
+
+	return pPathDataApplication;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AUsersHandler::mGetPathDataConfig(void) {
+
+	return pPathDataConfig;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AUsersHandler::mGetPathDataCache(void) {
+
+	return pPathDataCache;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString AUsersHandler::mGetPathDataDocuments(void) {
+
+	return pPathDataDocuments;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void AUsersHandler::slInitiated(void) {
 
 //	this->mSetCurrent("11111");
