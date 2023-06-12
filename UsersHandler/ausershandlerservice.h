@@ -24,7 +24,7 @@
 // Application includes
 #include <aloggerglobal.h>
 #include <athreadservicetemplate.h>
-#include <adbkeyvalue.h>
+//#include <adbkeyvalue.h>
 
 // Constants and definitions
 
@@ -51,7 +51,7 @@ class AUsersHandlerService : public AThreadServiceTemplate {
 
 	private:
 
-		ADBKeyValue* pDB = nullptr;
+//		ADBKeyValue* pDB = nullptr;
 };
 
 } // namespace ARB

@@ -21,16 +21,18 @@
 #include <ausershandlerpch.h>
 
 // Application includes
+#include <ausershandlermodelfile.h>
+#include <ausershandlermodeluser.h>
 
 // Constants and defintions
-#define _A_ENUMS_USERS_HANDLER_REPLY_STATUS ARB::AUsersHandlerEnums::ReplyStatus
+#define _A_ENUMS_USERS_HANDLER_REPLY_STATUS ARB::AEnumsUsersHandlerReplyStatus::ReplyStatus
 
 
 // Namespace
 namespace ARB {
 
 // Class definitions
-class AUsersHandlerEnums : public QObject {
+class AEnumsUsersHandlerReplyStatus : public QObject {
 
 	Q_OBJECT
 

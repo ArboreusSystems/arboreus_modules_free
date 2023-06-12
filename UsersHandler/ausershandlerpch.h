@@ -22,6 +22,7 @@
 #include <QString>
 #include <QVariant>
 #include <QVariantMap>
+#include <QByteArray>
 
 // Application includes
 
