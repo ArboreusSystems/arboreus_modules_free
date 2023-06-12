@@ -38,13 +38,15 @@ class AFile : public QObject {
 
 	public:
 
-		explicit AFile(QObject *parent = nullptr);
+		explicit AFile(QObject* parent = nullptr);
 		virtual ~AFile(void);
 
 		static bool mRemove(QString inPath);
 		static bool mExist(QString inPath);
 		static bool mEncode(QString inValue,QString inPath,QByteArray inDatumn);
 		static AFileReply mDecode(QString inValue,QString inPath);
+		static bool mEncodeBase64(QString inPath,QByteArray inDatumn);
+		static AFileReply mDecodeBase64(QString inPath);
 };
 
 } // namespace ARB

@@ -85,9 +85,6 @@ bool AFile::mExist(QString inPath) {
 
 bool AFile::mEncode(QString inValue, QString inPath, QByteArray inDatumn) {
 
-	QFile oFile(inPath);
-	if (!oFile.open(QFile::WriteOnly)) return false;
-
 	ACryptographyAES oCryptography(
 		_A_ENUMS_CRYPTOGRAPHY_AES_TYPE::AES_256,
 		_A_ENUMS_CRYPTOGRAPHY_AES_MODE::ECB
@@ -99,7 +96,11 @@ bool AFile::mEncode(QString inValue, QString inPath, QByteArray inDatumn) {
 		ACryptography::mVector(inValue)
 	);
 
-	if (!oFile.open(QFile::WriteOnly)) return false;
+	QFile oFile(inPath);
+	if (!oFile.open(QFile::WriteOnly)) {
+		_A_CRITICAL << "Error in opening file:" << inPath;
+		return false;
+	}
 
 	if (oFile.write(oEncodedDatumn) >= 0) {
 		oFile.close();
@@ -128,7 +129,10 @@ AFileReply AFile::mDecode(QString inValue, QString inPath) {
 		return oReply;
 	}
 
-	if (!oFile.open(QFile::ReadOnly)) return oReply;
+	if (!oFile.open(QFile::ReadOnly)) {
+		_A_CRITICAL << "Error in opening file:" << inPath;
+		return oReply;
+	}
 
 	ACryptographyAES oCryptography(
 		_A_ENUMS_CRYPTOGRAPHY_AES_TYPE::AES_256,
@@ -149,5 +153,57 @@ AFileReply AFile::mDecode(QString inValue, QString inPath) {
 
 	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
 	oReply.Datumn = oDatum.Datumn;
+	return oReply;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+bool AFile::mEncodeBase64(QString inPath, QByteArray inDatumn) {
+
+	QFile oFile(inPath);
+	if (!oFile.open(QFile::WriteOnly)) {
+		_A_CRITICAL << "Error in opening file:" << inPath;
+		return false;
+	}
+
+	if (oFile.write(inDatumn.toBase64()) >= 0) {
+		oFile.close();
+		return true;
+	}
+
+	return false;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+AFileReply AFile::mDecodeBase64(QString inPath) {
+
+	AFileReply oReply = {};
+
+	QFile oFile(inPath);
+	if (!oFile.exists()) {
+		oReply.Status = _A_ENUM_REPLY_STATUS::NotExisted;
+		return oReply;
+	}
+
+	if (!oFile.open(QFile::ReadOnly)) {
+		_A_CRITICAL << "Error in opening file:" << inPath;
+		return oReply;
+	}
+
+	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
+	oReply.Datumn = QByteArray::fromBase64(oFile.readAll());
 	return oReply;
 }
