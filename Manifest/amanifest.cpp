@@ -78,6 +78,63 @@ void AManifest::mInitWithFile(AManifestFile inFile) {
 	Doc.
 */
 
+void AManifest::mInitWithData(QString inValue, QVariantList inData, AManifestFile inFile) {
+
+	pFile = inFile;
+
+	this->mAddDataSystem(
+		pFile.Aliases.value(_A_ENUMS_MANIFEST_DATA_TYPE::Private),
+		pFile.mPathPrivate()
+	);
+
+	this->mAddDataSystem(
+		pFile.Aliases.value(_A_ENUMS_MANIFEST_DATA_TYPE::Public),
+		pFile.mPathPublic()
+	);
+
+	QVariantMap oDataProperties;
+
+	foreach (QVariant iProperties, inData) {
+		oDataProperties = qvariant_cast<QVariantMap>(iProperties);
+		switch (static_cast<_A_ENUMS_MANIFEST_DATA_TYPE>(qvariant_cast<int>(oDataProperties.value("type")))) {
+			case _A_ENUMS_MANIFEST_DATA_TYPE::System:
+				_A_DEBUG << 1;
+				this->mAddDataSystem(
+					qvariant_cast<QString>(oDataProperties.value("key")),
+					oDataProperties.value("data")
+				);
+				break;
+			case _A_ENUMS_MANIFEST_DATA_TYPE::Public:
+				_A_DEBUG << 2;
+				this->mAddDataPublic(
+					qvariant_cast<QString>(oDataProperties.value("key")),
+					oDataProperties.value("data")
+				);
+				break;
+			case _A_ENUMS_MANIFEST_DATA_TYPE::Private:
+				_A_DEBUG << 3;
+				this->mAddDataPrivate(
+					inValue,
+					qvariant_cast<QString>(oDataProperties.value("key")),
+					oDataProperties.value("data")
+				);
+				break;
+			default:
+				break;
+			}
+	}
+
+	_A_DEBUG << "Manifest initiated with data in file:" << pFile.mPath();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 bool AManifest::mIsKey(QString inKey) 	{
 
 	return pData.contains(inKey);
@@ -346,6 +403,34 @@ AManifestReply AManifest::mLoadPrivate(QString inValue) {
 	Doc.
 */
 
+void AManifest::mUnloadPublic(void) {
+
+	this->mUnloadData(_A_ENUMS_MANIFEST_DATA_TYPE::Public);
+	pIsLoadedPublic = false;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AManifest::mUnloadPrivate(void) {
+
+	this->mUnloadData(_A_ENUMS_MANIFEST_DATA_TYPE::Private);
+	pIsLoadedPrivate = false;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void AManifest::mAddData(QString inKey, AManifestData inData) {
 
 	pData.insert(inKey,inData);
@@ -371,6 +456,24 @@ QVariantMap AManifest::mSelectData(AEnumsManifestDataType::DataType inType) {
 	}
 
 	return oData;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AManifest::mUnloadData(_A_ENUMS_MANIFEST_DATA_TYPE inType) {
+
+	foreach (QString iKey, pData.keys()) {
+		AManifestData iData = pData.value(iKey);
+		if (iData.Type == inType) {
+			pData.remove(iKey);
+		}
+	}
 }
 
 

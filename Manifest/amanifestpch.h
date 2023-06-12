@@ -23,6 +23,8 @@
 #include <QVariant>
 #include <QVariantMap>
 #include <QMap>
+#include <QVariantList>
+#include <QList>
 
 // Application includes
 

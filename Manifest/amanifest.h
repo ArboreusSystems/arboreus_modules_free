@@ -40,10 +40,14 @@ class AManifest : public QObject {
 
 	public:
 
+		bool pIsLoadedPublic = false;
+		bool pIsLoadedPrivate = false;
+
 		explicit AManifest(QObject* parent = nullptr);
 		virtual ~AManifest(void);
 
 		void mInitWithFile(AManifestFile inFile);
+		void mInitWithData(QString inValue,QVariantList inData,AManifestFile inFile);
 		bool mIsKey(QString inKey);
 		AManifestData mGetDataByKey(QString inKey);
 		QVariant mGetValueByKey(QString inKey);
@@ -56,6 +60,8 @@ class AManifest : public QObject {
 		AManifestReply mLoadSystem(void);
 		AManifestReply mLoadPublic(void);
 		AManifestReply mLoadPrivate(QString inValue);
+		void mUnloadPublic(void);
+		void mUnloadPrivate(void);
 
 	private:
 
@@ -64,6 +70,7 @@ class AManifest : public QObject {
 
 		void mAddData(QString inKey,AManifestData inData);
 		QVariantMap mSelectData(_A_ENUMS_MANIFEST_DATA_TYPE inType);
+		void mUnloadData(_A_ENUMS_MANIFEST_DATA_TYPE inType);
 		void mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE inType,QJsonObject inManifest);
 		AManifestReply mSaveSystem(void);
 		AManifestReply mSavePublic(void);
