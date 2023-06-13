@@ -8,6 +8,7 @@ HEADERS += \
 	$$PWD/auihandlerconfig.h \
 	$$PWD/auihandlerdatamodels.h \
 	$$PWD/auihandlerdefinitions.h \
+	$$PWD/auihandlermetatypes.h \
 	$$PWD/auihandlerpch.h \
 	$$PWD/auisignals.h
 
@@ -16,4 +17,5 @@ SOURCES += \
 	$$PWD/afonts.cpp \
 	$$PWD/auiconfig.cpp \
 	$$PWD/auihandler.cpp \
+	$$PWD/auihandlermetatypes.cpp \
 	$$PWD/auisignals.cpp

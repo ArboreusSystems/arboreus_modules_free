@@ -25,6 +25,7 @@
 #include <QString>
 #include <QList>
 #include <QByteArray>
+#include <QQmlEngine>
 #include <string>
 #include <stdio.h>
 

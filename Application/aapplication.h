@@ -28,6 +28,7 @@
 #include <aapplicationconfig.h>
 #include <aapplicationservice.h>
 #include <aapplicationheartbeat.h>
+#include <aapplicationmetatypes.h>
 
 // Constants and definitions
 

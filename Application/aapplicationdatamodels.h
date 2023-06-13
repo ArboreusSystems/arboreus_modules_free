@@ -24,14 +24,14 @@
 #include <aapplicationdelegatedatamodels.h>
 
 // Constants and defintions
-#define _A_ENUM_REPLY_STATUS ARB::AEnumsStatus::Status
+#define _A_ENUMS_APPLICATION_REPLY_STATUS ARB::AEnumsApplicationStatus::Status
 #define _A_APPLICATION_EMPTY_REGISTRY QString("")
 
 
 // Namespace
 namespace ARB {
 
-class AEnumsStatus: public QObject {
+class AEnumsApplicationStatus: public QObject {
 
 	Q_OBJECT
 
@@ -47,7 +47,5 @@ class AEnumsStatus: public QObject {
 };
 
 } // namespace ARB
-
-Q_DECLARE_METATYPE(_A_ENUM_REPLY_STATUS)
 
 #endif // AAPPLICATIONDATAMODELS_H

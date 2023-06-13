@@ -24,6 +24,7 @@
 // Application includes
 #include <aloggerglobal.h>
 #include <adbdatamodels.h>
+#include <adbmetatypes.h>
 
 // Constants and definitions
 

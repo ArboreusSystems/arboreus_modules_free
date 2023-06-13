@@ -23,6 +23,8 @@
 
 // Application includes
 #include <auiconfig.h>
+#include <auihandlerdatamodels.h>
+#include <auihandlermetatypes.h>
 #include <auihandlerdefinitions.h>
 #include <afonts.h>
 #include <acolors.h>

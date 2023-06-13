@@ -24,6 +24,7 @@
 // Application includes
 #include <acryptographydatamodels.h>
 #include <acryptographyaesglobal.h>
+#include <acryptographymetatypes.h>
 
 // Constants and definitions
 

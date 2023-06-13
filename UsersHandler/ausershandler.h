@@ -29,6 +29,7 @@
 #include <ausershandlerobjects.h>
 #include <ausershandlerconfig.h>
 #include <ausershandlerdatamodels.h>
+#include <ausershandlermetatypes.h>
 
 // Constants and definitions
 

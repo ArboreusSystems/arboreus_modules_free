@@ -8,6 +8,7 @@ HEADERS += \
 	$$PWD/ausershandler.h \
 	$$PWD/ausershandlerconfig.h \
 	$$PWD/ausershandlerdatamodels.h \
+	$$PWD/ausershandlermetatypes.h \
 	$$PWD/ausershandlerobjects.h \
 	$$PWD/ausershandlerpch.h \
 	$$PWD/ausershandlerservice.h \
@@ -16,6 +17,7 @@ HEADERS += \
 
 SOURCES += \
 	$$PWD/ausershandler.cpp \
+	$$PWD/ausershandlermetatypes.cpp \
 	$$PWD/ausershandlerobjects.cpp \
 	$$PWD/ausershandlerservice.cpp \
 	$$PWD/ausershandleruserdata.cpp

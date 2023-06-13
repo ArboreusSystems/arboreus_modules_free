@@ -322,7 +322,7 @@ AManifestReply AManifest::mLoadSystem(void) {
 		oJSONManifestReply = AJson::mFromFile(oPath);
 	}
 
-	if (oJSONManifestReply.Status == _A_ENUM_REPLY_STATUS::Ok) {
+	if (oJSONManifestReply.Status == _A_ENUMS_APPLICATION_REPLY_STATUS::Ok) {
 		this->mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE::System,oJSONManifestReply.Json);
 		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
 	}
@@ -357,7 +357,7 @@ AManifestReply AManifest::mLoadPublic(void) {
 		oJSONManifestReply = AJson::mFromFile(oPath);
 	}
 
-	if (oJSONManifestReply.Status == _A_ENUM_REPLY_STATUS::Ok) {
+	if (oJSONManifestReply.Status == _A_ENUMS_APPLICATION_REPLY_STATUS::Ok) {
 		this->mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE::Public,oJSONManifestReply.Json);
 		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
 	}
@@ -387,7 +387,7 @@ AManifestReply AManifest::mLoadPrivate(QString inValue) {
 
 	AJsonFileReply oJSONManifestReply = AJson::mDecodeFromFile(inValue,oPath);
 
-	if (oJSONManifestReply.Status == _A_ENUM_REPLY_STATUS::Ok) {
+	if (oJSONManifestReply.Status == _A_ENUMS_APPLICATION_REPLY_STATUS::Ok) {
 		this->mLoadData(_A_ENUMS_MANIFEST_DATA_TYPE::System,oJSONManifestReply.Json);
 		oOutput.Status = _A_ENUMS_MANIFEST_REPLY_STATUS::Ok;
 	}

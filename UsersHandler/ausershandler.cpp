@@ -139,8 +139,6 @@ QString AUsersHandler::mGetPathDataDocuments(void) {
 
 void AUsersHandler::slInitiated(void) {
 
-//	this->mSetCurrent("11111");
-
 	_A_DEBUG << "AUsersHandler initiated";
 	emit this->sgInitiated();
 }
@@ -174,6 +172,9 @@ AUsersHandlerReply AUsersHandler::mCreateHandler(AUsersHandlerUserData inUserDat
     AUsersHandlerReply oOutput;
 	return oOutput;
 }
+
+
+
 
 
 // -----------

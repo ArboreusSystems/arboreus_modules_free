@@ -23,6 +23,7 @@
 
 // Application includes
 #include <auniversaldatamodels.h>
+#include <auniversalmetatypes.h>
 #include <acryptography.h>
 #include <acryptographyaes.h>
 

@@ -38,14 +38,15 @@ class AEnumsDBKeyValueReplyStatus: public QObject {
 
 		enum class ReplyStatus: int {
 
-			Error,Ok,NotExisted,NotDefined
+			Error = 0,
+			Ok = 1,
+			NotExisted = 2,
+			NotDefined = 3
 		};
 		Q_ENUM(ReplyStatus)
 };
 
 } // namespace ARB
-
-Q_DECLARE_METATYPE(_A_ENUMS_DB_KEY_VALUE_REPLY_STATUS)
 
 
 // Namespace

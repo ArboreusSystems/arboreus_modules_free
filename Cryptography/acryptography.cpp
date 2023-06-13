@@ -135,10 +135,10 @@ ACryptographySignReply ACryptography::mSignRemove(QByteArray inDatumn) {
 	QByteArray oDatumn = inDatumn.remove(0,16);
 
 	if (oSign == QCryptographicHash::hash(oDatumn,QCryptographicHash::Md5)) {
-		oOutput.Status = _A_ENUM_REPLY_STATUS::Ok;
+		oOutput.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Ok;
 		oOutput.Datumn = oDatumn;
 	} else {
-		oOutput.Status = _A_ENUM_REPLY_STATUS::WrongValue;
+		oOutput.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::WrongValue;
 	}
 
 	return oOutput;

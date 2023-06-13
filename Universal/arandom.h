@@ -23,6 +23,7 @@
 
 // Application includes
 #include <arandomdatamodels.h>
+#include <auniversalmetatypes.h>
 
 // Constants and definitions
 

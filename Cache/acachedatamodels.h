@@ -45,4 +45,6 @@ class ACacheReply {
 
 } // namespace ARB
 
+Q_DECLARE_METATYPE(ARB::ACacheReply)
+
 #endif // ACACHEDATAMODELS_H

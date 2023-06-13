@@ -38,7 +38,11 @@ class AEnumsCryptographyAESType: public QObject {
 
 	public:
 
-		enum class AESType: int {AES_128,AES_192,AES_256};
+		enum class AESType: int {
+			AES_128 = 0,
+			AES_192 = 1,
+			AES_256 = 2
+		};
 		Q_ENUM(AESType)
 };
 
@@ -48,7 +52,12 @@ class AEnumsCryptographyAESMode: public QObject {
 
 	public:
 
-		enum class AESMode: int {ECB,CBC,CFB,OFB};
+		enum class AESMode: int {
+			ECB = 0,
+			CBC = 1,
+			CFB = 2,
+			OFB = 3
+		};
 		Q_ENUM(AESMode)
 };
 
@@ -58,15 +67,15 @@ class AEnumsCryptographyAESPadding: public QObject {
 
 	public:
 
-		enum class AESPadding: int {ZERO,PKCS7,ISO};
+		enum class AESPadding: int {
+			ZERO = 0,
+			PKCS7 = 1,
+			ISO = 2
+		};
 		Q_ENUM(AESPadding)
 };
 
 } // namespace ARB
-
-Q_DECLARE_METATYPE(_A_ENUMS_CRYPTOGRAPHY_AES_TYPE)
-Q_DECLARE_METATYPE(_A_ENUMS_CRYPTOGRAPHY_AES_MODE)
-Q_DECLARE_METATYPE(_A_ENUMS_CRYPTOGRAPHY_AES_PADDING)
 
 
 // Namespace
@@ -76,7 +85,7 @@ class ACryptographySignReply {
 
 	public:
 
-		_A_ENUM_REPLY_STATUS Status = _A_ENUM_REPLY_STATUS::Error;
+		_A_ENUMS_APPLICATION_REPLY_STATUS Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Error;
 		QByteArray Datumn = {};
 
 		explicit ACryptographySignReply(void) {}

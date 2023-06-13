@@ -11,6 +11,7 @@ HEADERS += \
 	$$PWD/aapplicationconfig.h \
 	$$PWD/aapplicationdatamodels.h \
 	$$PWD/aapplicationglobalconfig.h \
+	$$PWD/aapplicationmetatypes.h \
 	$$PWD/aapplicationpch.h \
 	$$PWD/aapplicationservice.h \
 	$$PWD/aconstants.h \
@@ -19,6 +20,7 @@ HEADERS += \
 SOURCES += \
 	$$PWD/Heartbeat/aapplicationheartbeat.cpp \
 	$$PWD/aapplication.cpp \
+	$$PWD/aapplicationmetatypes.cpp \
 	$$PWD/aapplicationservice.cpp \
 	$$PWD/aconstants.cpp
 

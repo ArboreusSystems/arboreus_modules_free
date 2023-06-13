@@ -26,6 +26,7 @@
 #include <aloggerservice.h>
 #include <aloggerglobal.h>
 #include <aloggerconfig.h>
+#include <aloggermetatypes.h>
 #include <adir.h>
 
 // Constants and definitions

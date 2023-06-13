@@ -25,6 +25,7 @@
 #include <aloggerglobal.h>
 #include <adbsqlitecipher.h>
 #include <adbkeyvaluedatamodels.h>
+#include <adbkeyvaluemetatypes.h>
 
 // Constants and definitions
 

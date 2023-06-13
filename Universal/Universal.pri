@@ -9,6 +9,7 @@ HEADERS += \
 	$$PWD/asequencestring.h \
 	$$PWD/auniversaldatamodels.h \
 	$$PWD/auniversaldefinitions.h \
+	$$PWD/auniversalmetatypes.h \
 	$$PWD/auniversalpch.h
 
 SOURCES += \
@@ -16,4 +17,5 @@ SOURCES += \
 	$$PWD/afile.cpp \
 	$$PWD/ajson.cpp \
 	$$PWD/arandom.cpp \
-	$$PWD/asequencestring.cpp
+	$$PWD/asequencestring.cpp \
+	$$PWD/auniversalmetatypes.cpp

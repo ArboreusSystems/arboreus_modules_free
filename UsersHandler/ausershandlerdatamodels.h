@@ -50,7 +50,7 @@ class AEnumsUsersHandlerReplyStatus : public QObject {
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(_A_ENUMS_USERS_HANDLER_REPLY_STATUS)
+//Q_DECLARE_METATYPE(_A_ENUMS_USERS_HANDLER_REPLY_STATUS)
 
 
 // Namespace

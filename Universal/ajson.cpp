@@ -134,7 +134,7 @@ AJsonFileReply AJson::mFromBase64File(QString inPath) {
 	}
 	oJSONFile.close();
 
-	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
+	oReply.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Ok;
 	oReply.Json = oJSONDocument.object();
 	return oReply;
 }
@@ -234,7 +234,7 @@ AJsonFileReply AJson::mFromFile(QString inPath) {
 	}
 	oJSONFile.close();
 
-	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
+	oReply.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Ok;
 	oReply.Json = oJSONDocument.object();
 	return oReply;
 }
@@ -370,7 +370,7 @@ AJsonFileReply AJson::mDecodeFromFile(QString inValue,QString inPath) {
 	}
 	oJSONFile.close();
 
-	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
+	oReply.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Ok;
 	oReply.Json = oJSONDocument.object();
 
 	return oReply;
@@ -387,7 +387,7 @@ AJsonFileReply AJson::mDecodeFromFile(QString inValue,QString inPath) {
 bool AJson::mChangeValue(QString inOldValue,QString inNewValue,QString inPath) {
 
 	AJsonFileReply oJSONReply = AJson::mDecodeFromFile(inOldValue,inPath);
-	if (oJSONReply.Status != AEnumsStatus::Status::Ok) {
+	if (oJSONReply.Status != _A_ENUMS_APPLICATION_REPLY_STATUS::Ok) {
 		return false;
 	}
 	return AJson::mEncodeFromObject(inNewValue,inPath,oJSONReply.Json);
@@ -404,7 +404,7 @@ bool AJson::mChangeValue(QString inOldValue,QString inNewValue,QString inPath) {
 bool AJson::mRemoveValue(QString inValue,QString inPath) {
 
 	AJsonFileReply oJSONReply = AJson::mDecodeFromFile(inValue,inPath);
-	if (oJSONReply.Status != _A_ENUM_REPLY_STATUS::Ok) {
+	if (oJSONReply.Status != _A_ENUMS_APPLICATION_REPLY_STATUS::Ok) {
 		return false;
 	}
 	return AJson::mToFileFromObject(inPath,oJSONReply.Json);

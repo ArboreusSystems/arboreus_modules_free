@@ -25,6 +25,7 @@
 #include <auniversaldatamodels.h>
 #include <arandom.h>
 #include <aloggerglobal.h>
+#include <auniversalmetatypes.h>
 
 // Constants and definitions
 

@@ -26,6 +26,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlError>
+#include <QQmlEngine>
 
 // Application includes
 

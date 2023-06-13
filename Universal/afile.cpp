@@ -125,7 +125,7 @@ AFileReply AFile::mDecode(QString inValue, QString inPath) {
 
 	QFile oFile(inPath);
 	if (!oFile.exists()) {
-		oReply.Status = _A_ENUM_REPLY_STATUS::NotExisted;
+		oReply.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::NotExisted;
 		return oReply;
 	}
 
@@ -146,12 +146,12 @@ AFileReply AFile::mDecode(QString inValue, QString inPath) {
 		ACryptography::mVector(inValue)
 	);
 	ACryptographySignReply oDatum = ACryptography::mSignRemove(oDatumnSigned);
-	if (oDatum.Status == _A_ENUM_REPLY_STATUS::WrongValue) {
+	if (oDatum.Status == _A_ENUMS_APPLICATION_REPLY_STATUS::WrongValue) {
 		oReply.Status = oDatum.Status;
 		return oReply;
 	}
 
-	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
+	oReply.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Ok;
 	oReply.Datumn = oDatum.Datumn;
 	return oReply;
 }
@@ -194,7 +194,7 @@ AFileReply AFile::mDecodeBase64(QString inPath) {
 
 	QFile oFile(inPath);
 	if (!oFile.exists()) {
-		oReply.Status = _A_ENUM_REPLY_STATUS::NotExisted;
+		oReply.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::NotExisted;
 		return oReply;
 	}
 
@@ -203,7 +203,7 @@ AFileReply AFile::mDecodeBase64(QString inPath) {
 		return oReply;
 	}
 
-	oReply.Status = _A_ENUM_REPLY_STATUS::Ok;
+	oReply.Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Ok;
 	oReply.Datumn = QByteArray::fromBase64(oFile.readAll());
 	return oReply;
 }

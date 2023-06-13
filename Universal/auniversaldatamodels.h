@@ -47,8 +47,6 @@ class AEnumsDictionaryType: public QObject {
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(_A_ENUMS_DICTIONARY_TYPE)
-
 
 // Namespace
 namespace ARB {
@@ -57,26 +55,44 @@ class AJsonFileReply {
 
 	public:
 
-		_A_ENUM_REPLY_STATUS Status = _A_ENUM_REPLY_STATUS::Error;
+		_A_ENUMS_APPLICATION_REPLY_STATUS Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Error;
 		QJsonObject Json;
 };
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::AJsonFileReply)
+
+
+// Namespace
+namespace ARB {
 
 class AJsonFieldReply {
 
 	public:
 
-		_A_ENUM_REPLY_STATUS Status = _A_ENUM_REPLY_STATUS::Error;
+		_A_ENUMS_APPLICATION_REPLY_STATUS Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Error;
 		QVariant Value;
 };
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::AJsonFieldReply)
+
+
+// Namespace
+namespace ARB {
 
 class AFileReply {
 
 	public:
 
-		_A_ENUM_REPLY_STATUS Status = _A_ENUM_REPLY_STATUS::Error;
+		_A_ENUMS_APPLICATION_REPLY_STATUS Status = _A_ENUMS_APPLICATION_REPLY_STATUS::Error;
 		QByteArray Datumn = 0;
 };
 
 } // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::AFileReply)
 
 #endif // AUNIVERSALDATAMODELS_H

@@ -35,6 +35,7 @@
 #include <QDateTime>
 #include <QRandomGenerator>
 #include <QVector>
+#include <QQmlEngine>
 
 #include <algorithm>
 #include <chrono>

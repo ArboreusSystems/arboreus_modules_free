@@ -27,6 +27,7 @@
 #include <QList>
 #include <QVariant>
 #include <QVariantMap>
+#include <QQmlEngine>
 
 // Application includes
 

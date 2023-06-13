@@ -23,6 +23,7 @@
 #include <QVariant>
 #include <QVariantMap>
 #include <QByteArray>
+#include <QQmlEngine>
 
 // Application includes
 

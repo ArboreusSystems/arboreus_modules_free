@@ -37,14 +37,14 @@ class AEnumsLoggerLogbookType: public QObject {
 
 		enum class Type: int {
 
-			DB, File
+			Undefined = 0,
+			DB = 1,
+			File = 2
 		};
 		Q_ENUM(Type)
 };
 
 } // namespace ARB
-
-Q_DECLARE_METATYPE(_A_ENUMS_LOGGER_LOGBOOK_TYPE)
 
 
 // Namespace

@@ -47,8 +47,6 @@ class AEnumsManifestDataType: public QObject {
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(_A_ENUMS_MANIFEST_DATA_TYPE)
-
 
 // Namespace
 namespace ARB {
@@ -70,8 +68,6 @@ class AEnumsManifestReplyStatus: public QObject {
 };
 
 } // namespace ARB
-
-Q_DECLARE_METATYPE(_A_ENUMS_MANIFEST_REPLY_STATUS)
 
 
 // Namespace

@@ -22,9 +22,13 @@
 #include <auniversalpch.h>
 
 // Application includes
+#include <auniversalmetatypes.h>
 
+
+//Namespace
 namespace ARB {
 
+// Class definition
 class ADir : public QObject {
 
 	Q_OBJECT

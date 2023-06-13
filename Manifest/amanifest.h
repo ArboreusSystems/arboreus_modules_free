@@ -24,6 +24,7 @@
 // Application includes
 #include <aloggerglobal.h>
 #include <amanifestdatamodels.h>
+#include <amanifestmetatypes.h>
 #include <ajson.h>
 #include <adir.h>
 #include <afile.h>

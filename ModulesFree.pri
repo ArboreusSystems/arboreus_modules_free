@@ -125,3 +125,11 @@ exists($$A_PRI_MODULES_FREE_JS_COMPONENTS) {
 } else {
 	error(No Free Module JS Components config file $$A_PRI_MODULES_FREE_JS_COMPONENTS)
 }
+
+A_DIR_MODULES_FREE_MANIFEST = $$PWD/Manifest
+A_PRI_MODULES_FREE_MANIFEST = $$A_DIR_MODULES_FREE_MANIFEST/Manifest.pri
+exists($$A_PRI_MODULES_FREE_MANIFEST) {
+	include($$A_PRI_MODULES_FREE_MANIFEST)
+} else {
+	error(No Free Module Manifest config file $$A_PRI_MODULES_FREE_MANIFEST)
+}

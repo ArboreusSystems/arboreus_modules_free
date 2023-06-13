@@ -9,6 +9,7 @@ HEADERS += \
 	$$PWD/aloggerdbagent.h \
 	$$PWD/aloggerfileagent.h \
 	$$PWD/aloggerglobal.h \
+	$$PWD/aloggermetatypes.h \
 	$$PWD/aloggerpch.h \
 	$$PWD/aloggerservice.h
 
@@ -17,6 +18,7 @@ SOURCES += \
 	$$PWD/aloggeragent.cpp \
 	$$PWD/aloggerdbagent.cpp \
 	$$PWD/aloggerfileagent.cpp \
+	$$PWD/aloggermetatypes.cpp \
 	$$PWD/aloggerservice.cpp
 
 RESOURCES +=
