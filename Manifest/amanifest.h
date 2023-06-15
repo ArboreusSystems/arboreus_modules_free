@@ -50,6 +50,7 @@ class AManifest : public QObject {
 		void mInitWithFile(AManifestFile inFile);
 		void mInitWithData(QString inValue,QVariantList inData,AManifestFile inFile);
 		bool mIsKey(QString inKey);
+		QMap<QString,AManifestData> mGetAll(void);
 		AManifestData mGetDataByKey(QString inKey);
 		QVariant mGetValueByKey(QString inKey);
 		AManifestReply mAddDataSystem(QString inKey,QVariant inDataValue);

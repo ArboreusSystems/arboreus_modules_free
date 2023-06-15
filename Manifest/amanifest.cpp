@@ -148,6 +148,19 @@ bool AManifest::mIsKey(QString inKey) 	{
 	Doc.
 */
 
+QMap<QString, AManifestData> AManifest::mGetAll(void) {
+
+	return pData;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 AManifestData AManifest::mGetDataByKey(QString inKey) 	{
 
 	return pData.value(inKey);
