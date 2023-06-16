@@ -40,7 +40,8 @@ class AEnumsDataReplyType: public QObject {
 
 			Error = 0,
 			Ok = 1,
-			NotValid = 2
+			NotValid = 2,
+			WrongRule = 3
 		};
 		Q_ENUM(ReplyType)
 };
@@ -61,13 +62,13 @@ class AEnumsDataType: public QObject {
 
 			Undefined,
 
-			Integer, PositiveInteger, NegativeInteger,RangedInteger,
-			Float, PositiveFloat, NegativeFloat,RangedFloat,
+			Integer, PositiveInteger, NegativeInteger, RangedInteger,
+			Float, PositiveFloat, NegativeFloat, RangedFloat,
 
-			String,StringWithoutSymbols,StringOfSize,
-			Md5,NumericString,StringByDictionary,
+			String, StringWithoutSymbols, StringOfSize,
+			Md5, NumericString, StringByDictionary,
 
-			Email,IP,DNS,URL
+			Email, IP, DNS, URL
 		};
 		Q_ENUM(DataType)
 };
