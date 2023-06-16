@@ -19,6 +19,7 @@
 
 // System includes
 #include <QObject>
+#include <QQmlEngine>
 
 // Application includes
 
