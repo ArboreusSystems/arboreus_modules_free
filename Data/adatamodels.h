@@ -25,6 +25,7 @@
 // Constants and defintions
 #define _A_ENUMS_DATA_REPLY_TYPE ARB::AEnumsDataReplyType::ReplyType
 #define _A_ENUMS_DATA_TYPE ARB::AEnumsDataType::DataType
+#define _A_ENUMS_DATA_DICTIONARY_TYPE ARB::AEnumsDataDictionaryType::DictionaryType
 
 
 // Namespace
@@ -71,6 +72,29 @@ class AEnumsDataType: public QObject {
 			Email, IP, DNS, URL
 		};
 		Q_ENUM(DataType)
+};
+
+} // namespace ARB
+
+
+// Namespace
+namespace ARB {
+
+class AEnumsDataDictionaryType: public QObject {
+
+	Q_OBJECT
+
+	public:
+
+		enum class DictionaryType: int {
+
+			Undefined,
+			Numeric,
+			AlphaLowerCase,
+			AlphaUpperCase,
+			Exclusion
+		};
+		Q_ENUM(DictionaryType)
 };
 
 } // namespace ARB

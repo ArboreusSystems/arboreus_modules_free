@@ -39,3 +39,81 @@ ADataDictionary::ADataDictionary(QObject* parent) : QObject(parent) {}
 
 ADataDictionary::~ADataDictionary(void) {}
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString ADataDictionary::mCreate(QList<_A_ENUMS_DATA_DICTIONARY_TYPE> inParameters) {
+
+	QString oOutput = "";
+
+	QList<_A_ENUMS_DATA_DICTIONARY_TYPE>::iterator oIteratorParameters;
+	for (
+		oIteratorParameters = inParameters.begin();
+		oIteratorParameters != inParameters.end();
+		++oIteratorParameters
+	) {
+		switch (*oIteratorParameters) {
+			case _A_ENUMS_DATA_DICTIONARY_TYPE::Numeric:
+				oOutput.append(ADataDictionary::mGetNumeric());
+				break;
+			case _A_ENUMS_DATA_DICTIONARY_TYPE::AlphaLowerCase:
+				oOutput.append(ADataDictionary::mGetAlphaLowerCase());
+				break;
+			case _A_ENUMS_DATA_DICTIONARY_TYPE::AlphaUpperCase:
+				oOutput.append(ADataDictionary::mGetAlphaUpperCase());
+				break;
+			default:
+				break;
+		}
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString ADataDictionary::mGetNumeric(void) {
+
+	QString oOutput = "0123456789";
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString ADataDictionary::mGetAlphaLowerCase(void) {
+
+	QString oOutput = "abcdefghijklmnopqrstuvwxyz";
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString ADataDictionary::mGetAlphaUpperCase(void) {
+
+	QString oOutput = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	return oOutput;
+}
+

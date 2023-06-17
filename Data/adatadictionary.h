@@ -22,6 +22,7 @@
 #include <adatapch.h>
 
 // Application includes
+#include <adatamodels.h>
 
 // Constants and definitions
 
@@ -31,12 +32,15 @@ namespace ARB {
 // Class definitions
 class ADataDictionary : public QObject {
 
-	Q_OBJECT
-
 	public:
 
 		explicit ADataDictionary(QObject* parent = nullptr);
 		virtual ~ADataDictionary(void);
+
+		static QString mCreate(QList<_A_ENUMS_DATA_DICTIONARY_TYPE> inParameters);
+		static QString mGetNumeric(void);
+		static QString mGetAlphaLowerCase(void);
+		static QString mGetAlphaUpperCase(void);
 };
 
 } // namespace ARB

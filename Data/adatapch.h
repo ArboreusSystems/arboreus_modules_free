@@ -20,6 +20,9 @@
 // System includes
 #include <QObject>
 #include <QQmlEngine>
+#include <QString>
+#include <QList>
+#include <QRegularExpression>
 
 // Application includes
 
