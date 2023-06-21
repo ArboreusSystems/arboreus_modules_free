@@ -154,8 +154,6 @@ void ALogger::mInit(void) {
 		_A_CRITICAL << "Failed to ensure path for Logger DB:" << oProperties.PathLoggerDB;
 		_A_CRITICAL << "Failed to ensure path for Logger File:" << oProperties.PathLoggerFile;
 	}
-
-	_A_DEBUG << "ALogger initiated";
 }
 
 
@@ -182,5 +180,7 @@ void ALogger::mWriteToLogbook(ALoggerMessageModel inMessageModel) {
 void ALogger::slInitiated(void) {
 
 	emit sgInitiated();
+
+	_A_DEBUG << "ALogger initiated";
 }
 
