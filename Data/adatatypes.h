@@ -40,6 +40,10 @@ class ADataTypes : public QObject {
 		explicit ADataTypes(QObject* parent = nullptr);
 		virtual ~ADataTypes(void);
 
+		ADataReplyValidateBoolean mValidateBoolean(QVariant inValue);
+		ADataReplyValidateBoolean mValidateTrueBoolean(QVariant inValue);
+		ADataReplyValidateBoolean mValidateFalseBoolean(QVariant inValue);
+
 		ADataReplyValidateInteger mValidateInteger(QVariant inValue);
 		ADataReplyValidateInteger mValidatePositiveInteger(QVariant inValue);
 		ADataReplyValidateInteger mValidateNegativeInteger(QVariant inValue);

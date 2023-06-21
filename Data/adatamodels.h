@@ -63,12 +63,13 @@ class AEnumsDataType: public QObject {
 
 			Undefined,
 
+			Boolean, TrueBoolean, FalseBoolean,
+
 			Integer, PositiveInteger, NegativeInteger, RangedInteger,
 			Double, PositiveDouble, NegativeDouble, RangedDouble,
 
-			String, StringWithoutSymbols, StringOfSize,
+			String, StringWithoutSymbols, StringOfSize, CustomString,
 			Md5, NumericString, StringByDictionary,
-
 			Email, IP, DNS, URL
 		};
 		Q_ENUM(DataType)
@@ -98,6 +99,34 @@ class AEnumsDataDictionaryType: public QObject {
 };
 
 } // namespace ARB
+
+
+// Namespace
+namespace ARB {
+
+class ADataReplyValidateBoolean {
+
+	public:
+
+		bool IsValid = false;
+		bool Value = false;
+
+		explicit ADataReplyValidateBoolean() {}
+		virtual ~ADataReplyValidateBoolean(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("IsValid",IsValid);
+			oOutput.insert("Value",Value);
+
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADataReplyValidateBoolean)
 
 
 // Namespace
@@ -154,5 +183,33 @@ class ADataReplyValidateDouble {
 } // namespace ARB
 
 Q_DECLARE_METATYPE(ARB::ADataReplyValidateDouble)
+
+
+// Namespace
+namespace ARB {
+
+class ADataReplyValidateString {
+
+	public:
+
+		bool IsValid = false;
+		QString Value = "NoDefinedValue";
+
+		explicit ADataReplyValidateString() {}
+		virtual ~ADataReplyValidateString(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("IsValid",IsValid);
+			oOutput.insert("Value",Value);
+
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADataReplyValidateString)
 
 #endif // ADATAMODELS_H

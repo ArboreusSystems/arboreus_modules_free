@@ -53,6 +53,66 @@ ADataTypes::~ADataTypes(void) {
 	Doc.
 */
 
+ADataReplyValidateBoolean ADataTypes::mValidateBoolean(QVariant inValue) {
+
+	ADataReplyValidateBoolean oOutput;
+
+	if (inValue.userType() == QMetaType::Bool) {
+		 oOutput.IsValid = true;
+		 oOutput.Value = qvariant_cast<bool>(inValue);
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataReplyValidateBoolean ADataTypes::mValidateTrueBoolean(QVariant inValue) {
+
+	ADataReplyValidateBoolean oOutput;
+
+	ADataReplyValidateBoolean oCheckboolean = this->mValidateBoolean(inValue);
+	if (oCheckboolean.IsValid) {
+		if (oCheckboolean.Value) oOutput = oCheckboolean;
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataReplyValidateBoolean ADataTypes::mValidateFalseBoolean(QVariant inValue) {
+
+	ADataReplyValidateBoolean oOutput;
+
+	ADataReplyValidateBoolean oCheckboolean = this->mValidateBoolean(inValue);
+	if (oCheckboolean.IsValid) {
+		if (!oCheckboolean.Value) oOutput = oCheckboolean;
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 ADataReplyValidateInteger ADataTypes::mValidateInteger(QVariant inValue) {
 
 	ADataReplyValidateInteger oOutput;
@@ -239,6 +299,15 @@ QVariantMap ADataTypes::mValidate(_A_ENUMS_DATA_TYPE inType, QVariant inValue, Q
 	QVariantMap oOutput;
 
 	switch (inType) {
+		case _A_ENUMS_DATA_TYPE::Boolean:
+			oOutput = this->mValidateBoolean(inValue).mToVariantMap();
+			break;
+		case _A_ENUMS_DATA_TYPE::TrueBoolean:
+			oOutput = this->mValidateTrueBoolean(inValue).mToVariantMap();
+			break;
+		case _A_ENUMS_DATA_TYPE::FalseBoolean:
+			oOutput = this->mValidateFalseBoolean(inValue).mToVariantMap();
+			break;
 		case _A_ENUMS_DATA_TYPE::Integer:
 			oOutput = this->mValidateInteger(inValue).mToVariantMap();
 			break;
