@@ -7,12 +7,12 @@ HEADERS += \
 	$$PWD/adatametatypes.h \
 	$$PWD/adatamodels.h \
 	$$PWD/adatapch.h \
-	$$PWD/adatastructure.h \
-	$$PWD/adatatype.h
+	$$PWD/adatastructures.h \
+	$$PWD/adatatypes.h
 
 SOURCES += \
 	$$PWD/adata.cpp \
 	$$PWD/adatadictionary.cpp \
 	$$PWD/adatametatypes.cpp \
-	$$PWD/adatastructure.cpp \
-	$$PWD/adatatype.cpp
+	$$PWD/adatastructures.cpp \
+	$$PWD/adatatypes.cpp

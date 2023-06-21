@@ -14,7 +14,7 @@
 // ----------------------------------------------------------
 
 // Class header
-#include "adatastructure.h"
+#include "adatastructures.h"
 
 // Namespace
 using namespace ARB;
@@ -27,7 +27,10 @@ using namespace ARB;
     Doc.
 */
 
-ADataStructure::ADataStructure(QObject* parent) : QObject(parent) {}
+ADataStructures::ADataStructures(QObject* parent) : QObject(parent) {
+
+	_A_DEBUG << "ADataStructures created";
+}
 
 
 // -----------
@@ -37,5 +40,8 @@ ADataStructure::ADataStructure(QObject* parent) : QObject(parent) {}
 	Doc.
 */
 
-ADataStructure::~ADataStructure(void) {}
+ADataStructures::~ADataStructures(void) {
+
+	_A_DEBUG << "ADataStructures deleted";
+}
 

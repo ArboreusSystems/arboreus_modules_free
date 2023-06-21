@@ -23,6 +23,8 @@
 
 // Application includes
 #include <aloggerglobal.h>
+#include <adatatypes.h>
+#include <adatastructures.h>
 
 // Constants and definitions
 
@@ -36,8 +38,14 @@ class AData : public QObject {
 
 	public:
 
+		ADataTypes* pTypes = nullptr;
+		ADataStructures* pStructures = nullptr;
+
 		explicit AData(QObject* parent = nullptr);
 		virtual ~AData(void);
+		Q_DISABLE_COPY(AData)
+
+		void mInit(void);
 
 	public slots:
 
@@ -45,6 +53,7 @@ class AData : public QObject {
 
 	signals:
 
+		void sgInitiated(void);
 };
 
 } // namespace ARB

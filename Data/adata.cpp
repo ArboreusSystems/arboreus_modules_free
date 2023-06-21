@@ -45,3 +45,21 @@ AData::~AData(void) {
 	_A_DEBUG << "AData deleted";
 }
 
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AData::mInit(void) {
+
+	pTypes = new ADataTypes(this);
+	pStructures = new ADataStructures(this);
+
+	_A_DEBUG << "AData initiated";
+
+	emit this->sgInitiated();
+}
+

@@ -13,8 +13,8 @@
 */
 // ----------------------------------------------------------
 
-#ifndef ADATASTRUCTURE_H
-#define ADATASTRUCTURE_H
+#ifndef ADATASTRUCTURES_H
+#define ADATASTRUCTURES_H
 
 // System includes
 
@@ -22,6 +22,7 @@
 #include <adatapch.h>
 
 // Application includes
+#include <aloggerglobal.h>
 
 // Constants and definitions
 
@@ -29,13 +30,19 @@
 namespace ARB {
 
 // Class definitions
-class ADataStructure : public QObject {
+class ADataStructures : public QObject {
 
-		explicit ADataStructure(QObject* parent = nullptr);
-		virtual ~ADataStructure(void);
+		Q_OBJECT
+
+	public:
+
+		explicit ADataStructures(QObject* parent = nullptr);
+		virtual ~ADataStructures(void);
+
+	public slots:
 
 };
 
 } // namespace ARB
 
-#endif // ADATASTRUCTURE_H
+#endif // ADATASTRUCTURES_H

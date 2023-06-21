@@ -99,4 +99,32 @@ class AEnumsDataDictionaryType: public QObject {
 
 } // namespace ARB
 
+
+// Namespace
+namespace ARB {
+
+class ADataReplyValidateInteger {
+
+	public:
+
+		bool IsValid = false;
+		int Value = 0;
+
+		explicit ADataReplyValidateInteger() {}
+		virtual ~ADataReplyValidateInteger(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("IsValid",IsValid);
+			oOutput.insert("Value",Value);
+
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADataReplyValidateInteger)
+
 #endif // ADATAMODELS_H
