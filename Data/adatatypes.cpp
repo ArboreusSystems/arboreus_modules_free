@@ -144,9 +144,9 @@ ADataReplyValidateInteger ADataTypes::mValidateRangedInteger(QVariant inValue, i
 	Doc.
 */
 
-ADataReplyValidateFloat ADataTypes::mValidateDouble(QVariant inValue) {
+ADataReplyValidateDouble ADataTypes::mValidateDouble(QVariant inValue) {
 
-	ADataReplyValidateFloat oOutput;
+	ADataReplyValidateDouble oOutput;
 
 	if (inValue.userType() == QMetaType::Double) {
 		 oOutput.IsValid = true;
@@ -164,11 +164,11 @@ ADataReplyValidateFloat ADataTypes::mValidateDouble(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateFloat ADataTypes::mValidatePositiveDouble(QVariant inValue) {
+ADataReplyValidateDouble ADataTypes::mValidatePositiveDouble(QVariant inValue) {
 
-	ADataReplyValidateFloat oOutput;
+	ADataReplyValidateDouble oOutput;
 
-	ADataReplyValidateFloat oCheckFloat = this->mValidateDouble(inValue);
+	ADataReplyValidateDouble oCheckFloat = this->mValidateDouble(inValue);
 	if (oCheckFloat.IsValid) {
 		if (oCheckFloat.Value >= 0) oOutput = oCheckFloat;
 	}
@@ -184,11 +184,11 @@ ADataReplyValidateFloat ADataTypes::mValidatePositiveDouble(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateFloat ADataTypes::mValidateNegativeDouble(QVariant inValue) {
+ADataReplyValidateDouble ADataTypes::mValidateNegativeDouble(QVariant inValue) {
 
-	ADataReplyValidateFloat oOutput;
+	ADataReplyValidateDouble oOutput;
 
-	ADataReplyValidateFloat oCheckFloat = this->mValidateDouble(inValue);
+	ADataReplyValidateDouble oCheckFloat = this->mValidateDouble(inValue);
 	if (oCheckFloat.IsValid) {
 		if (oCheckFloat.Value < 0) oOutput = oCheckFloat;
 	}
@@ -204,9 +204,9 @@ ADataReplyValidateFloat ADataTypes::mValidateNegativeDouble(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateFloat ADataTypes::mValidateRangedDouble(QVariant inValue, double inRange1, double inRange2) {
+ADataReplyValidateDouble ADataTypes::mValidateRangedDouble(QVariant inValue, double inRange1, double inRange2) {
 
-	ADataReplyValidateFloat oOutput;
+	ADataReplyValidateDouble oOutput;
 
 	double oMax = 0;
 	double oMin = 0;
@@ -218,7 +218,7 @@ ADataReplyValidateFloat ADataTypes::mValidateRangedDouble(QVariant inValue, doub
 		oMin = inRange1;
 	}
 
-	ADataReplyValidateFloat oCheckFloat = this->mValidateDouble(inValue);
+	ADataReplyValidateDouble oCheckFloat = this->mValidateDouble(inValue);
 	if (oCheckFloat.IsValid) {
 		if (oCheckFloat.Value <= oMax && oCheckFloat.Value >= oMin) oOutput = oCheckFloat;
 	}

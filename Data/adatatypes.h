@@ -45,10 +45,10 @@ class ADataTypes : public QObject {
 		ADataReplyValidateInteger mValidateNegativeInteger(QVariant inValue);
 		ADataReplyValidateInteger mValidateRangedInteger(QVariant inValue,int inRange1, int inRange2);
 
-		ADataReplyValidateFloat mValidateDouble(QVariant inValue);
-		ADataReplyValidateFloat mValidatePositiveDouble(QVariant inValue);
-		ADataReplyValidateFloat mValidateNegativeDouble(QVariant inValue);
-		ADataReplyValidateFloat mValidateRangedDouble(QVariant inValue,double inRange1, double inRange2);
+		ADataReplyValidateDouble mValidateDouble(QVariant inValue);
+		ADataReplyValidateDouble mValidatePositiveDouble(QVariant inValue);
+		ADataReplyValidateDouble mValidateNegativeDouble(QVariant inValue);
+		ADataReplyValidateDouble mValidateRangedDouble(QVariant inValue,double inRange1, double inRange2);
 
 	public slots:
 

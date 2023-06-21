@@ -131,15 +131,15 @@ Q_DECLARE_METATYPE(ARB::ADataReplyValidateInteger)
 // Namespace
 namespace ARB {
 
-class ADataReplyValidateFloat {
+class ADataReplyValidateDouble {
 
 	public:
 
 		bool IsValid = false;
 		double Value = 0.0;
 
-		explicit ADataReplyValidateFloat() {}
-		virtual ~ADataReplyValidateFloat(void) {}
+		explicit ADataReplyValidateDouble() {}
+		virtual ~ADataReplyValidateDouble(void) {}
 
 		QVariantMap mToVariantMap(void) {
 
@@ -153,6 +153,6 @@ class ADataReplyValidateFloat {
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(ARB::ADataReplyValidateFloat)
+Q_DECLARE_METATYPE(ARB::ADataReplyValidateDouble)
 
 #endif // ADATAMODELS_H
