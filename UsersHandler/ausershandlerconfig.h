@@ -33,8 +33,10 @@ class AUsersHandlerConfig {
 	public:
 
 		virtual QString AUsersHandlerConfig_ModuleName(void) = 0;
-		virtual QVariantMap AUsersHandlerConfig_DataModel(void) = 0;
-		virtual QVariantMap AUsersHandlerConfig_DataModelObject(void) = 0;
+//		virtual QVariantMap AUsersHandlerConfig_DataModel(void) = 0;
+//		virtual QVariantMap AUsersHandlerConfig_DataModelObject(void) = 0;
+		virtual QVariantMap AUsersHandlerConfig_UserModel(void) = 0;
+		virtual QVariantList AUsersHandlerConfig_IDSchema(void) = 0;
 };
 
 } // namespace ARB

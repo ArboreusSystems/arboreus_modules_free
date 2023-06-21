@@ -45,6 +45,11 @@ class ADataTypes : public QObject {
 		ADataReplyValidateInteger mValidateNegativeInteger(QVariant inValue);
 		ADataReplyValidateInteger mValidateRangedInteger(QVariant inValue,int inRange1, int inRange2);
 
+		ADataReplyValidateFloat mValidateDouble(QVariant inValue);
+		ADataReplyValidateFloat mValidatePositiveDouble(QVariant inValue);
+		ADataReplyValidateFloat mValidateNegativeDouble(QVariant inValue);
+		ADataReplyValidateFloat mValidateRangedDouble(QVariant inValue,double inRange1, double inRange2);
+
 	public slots:
 
 		QVariantMap mValidate(_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties = {});

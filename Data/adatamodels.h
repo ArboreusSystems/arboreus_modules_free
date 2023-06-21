@@ -64,7 +64,7 @@ class AEnumsDataType: public QObject {
 			Undefined,
 
 			Integer, PositiveInteger, NegativeInteger, RangedInteger,
-			Float, PositiveFloat, NegativeFloat, RangedFloat,
+			Double, PositiveDouble, NegativeDouble, RangedDouble,
 
 			String, StringWithoutSymbols, StringOfSize,
 			Md5, NumericString, StringByDictionary,
@@ -126,5 +126,33 @@ class ADataReplyValidateInteger {
 } // namespace ARB
 
 Q_DECLARE_METATYPE(ARB::ADataReplyValidateInteger)
+
+
+// Namespace
+namespace ARB {
+
+class ADataReplyValidateFloat {
+
+	public:
+
+		bool IsValid = false;
+		double Value = 0.0;
+
+		explicit ADataReplyValidateFloat() {}
+		virtual ~ADataReplyValidateFloat(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("IsValid",IsValid);
+			oOutput.insert("Value",Value);
+
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADataReplyValidateFloat)
 
 #endif // ADATAMODELS_H

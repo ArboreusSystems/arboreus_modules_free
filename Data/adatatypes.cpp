@@ -118,8 +118,6 @@ ADataReplyValidateInteger ADataTypes::mValidateRangedInteger(QVariant inValue, i
 
 	ADataReplyValidateInteger oOutput;
 
-	_A_DEBUG << "inValue =" << inValue << "inRange1 =" << inRange1 << "inRange2 =" << inRange2;
-
 	int oMax = 0;
 	int oMin = 0;
 	if (inRange1 > inRange2) {
@@ -133,6 +131,96 @@ ADataReplyValidateInteger ADataTypes::mValidateRangedInteger(QVariant inValue, i
 	ADataReplyValidateInteger oCheckInteger = this->mValidateInteger(inValue);
 	if (oCheckInteger.IsValid) {
 		if (oCheckInteger.Value <= oMax && oCheckInteger.Value >= oMin) oOutput = oCheckInteger;
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataReplyValidateFloat ADataTypes::mValidateDouble(QVariant inValue) {
+
+	ADataReplyValidateFloat oOutput;
+
+	if (inValue.userType() == QMetaType::Double) {
+		 oOutput.IsValid = true;
+		 oOutput.Value = qvariant_cast<double>(inValue);
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataReplyValidateFloat ADataTypes::mValidatePositiveDouble(QVariant inValue) {
+
+	ADataReplyValidateFloat oOutput;
+
+	ADataReplyValidateFloat oCheckFloat = this->mValidateDouble(inValue);
+	if (oCheckFloat.IsValid) {
+		if (oCheckFloat.Value >= 0) oOutput = oCheckFloat;
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataReplyValidateFloat ADataTypes::mValidateNegativeDouble(QVariant inValue) {
+
+	ADataReplyValidateFloat oOutput;
+
+	ADataReplyValidateFloat oCheckFloat = this->mValidateDouble(inValue);
+	if (oCheckFloat.IsValid) {
+		if (oCheckFloat.Value < 0) oOutput = oCheckFloat;
+	}
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataReplyValidateFloat ADataTypes::mValidateRangedDouble(QVariant inValue, double inRange1, double inRange2) {
+
+	ADataReplyValidateFloat oOutput;
+
+	double oMax = 0;
+	double oMin = 0;
+	if (inRange1 > inRange2) {
+		oMax = inRange1;
+		oMin = inRange2;
+	} else {
+		oMax = inRange2;
+		oMin = inRange1;
+	}
+
+	ADataReplyValidateFloat oCheckFloat = this->mValidateDouble(inValue);
+	if (oCheckFloat.IsValid) {
+		if (oCheckFloat.Value <= oMax && oCheckFloat.Value >= oMin) oOutput = oCheckFloat;
 	}
 
 	return oOutput;
@@ -165,6 +253,22 @@ QVariantMap ADataTypes::mValidate(_A_ENUMS_DATA_TYPE inType, QVariant inValue, Q
 				inValue,
 				qvariant_cast<int>(inProperties.value("Range1")),
 				qvariant_cast<int>(inProperties.value("Range2"))
+			).mToVariantMap();
+			break;
+		case _A_ENUMS_DATA_TYPE::Double:
+			oOutput = this->mValidateDouble(inValue).mToVariantMap();
+			break;
+		case _A_ENUMS_DATA_TYPE::PositiveDouble:
+			oOutput = this->mValidatePositiveDouble(inValue).mToVariantMap();
+			break;
+		case _A_ENUMS_DATA_TYPE::NegativeDouble:
+			oOutput = this->mValidateNegativeDouble(inValue).mToVariantMap();
+			break;
+		case _A_ENUMS_DATA_TYPE::RangedDouble:
+			oOutput = this->mValidateRangedDouble(
+				inValue,
+				qvariant_cast<double>(inProperties.value("Range1")),
+				qvariant_cast<double>(inProperties.value("Range2"))
 			).mToVariantMap();
 			break;
 		default:
