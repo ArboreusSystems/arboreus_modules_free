@@ -54,6 +54,15 @@ class ADataTypes : public QObject {
 		ADataReplyValidateDouble mValidateNegativeDouble(QVariant inValue);
 		ADataReplyValidateDouble mValidateRangedDouble(QVariant inValue,double inRange1, double inRange2);
 
+		ADataReplyValidateString mValidateString(QVariant inValue);
+		ADataReplyValidateString mValidateStringWithoutSymbols(QVariant inValue,QList<QString> inSymbols);
+		ADataReplyValidateString mValidateStringOfSize(QVariant inValue, ADataStringSizeProperties inProperties);
+		ADataReplyValidateString mValidateStringByRegex(QVariant inValue, QString inRegex);
+		ADataReplyValidateString mValidateStringMd(QVariant inValue);
+		ADataReplyValidateString mValidateStringEmail(QVariant inValue);
+		ADataReplyValidateString mValidateStringIPv4(QVariant inValue);
+		ADataReplyValidateString mValidateStringIPv6(QVariant inValue);
+
 	public slots:
 
 		QVariantMap mValidate(_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties = {});

@@ -54,5 +54,8 @@ void ADataMetatypes::mInit(void) {
 
 	qmlRegisterType<ARB::AEnumsDataType>("Arboreus", 1, 0, "AEnumsDataType");
 	qRegisterMetaType<ARB::AEnumsDataType::DataType>("ARB::AEnumsDataType::DataType");
+
+	qmlRegisterType<ARB::AEnumsDataStringSizeType>("Arboreus", 1, 0, "AEnumsDataStringSizeType");
+	qRegisterMetaType<ARB::AEnumsDataStringSizeType::StringSizeType>("ARB::AEnumsDataType::StringSizeType");
 }
 

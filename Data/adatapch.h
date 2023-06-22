@@ -21,6 +21,7 @@
 #include <QObject>
 #include <QQmlEngine>
 #include <QString>
+#include <QStringList>
 #include <QList>
 #include <QRegularExpression>
 
