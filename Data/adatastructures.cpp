@@ -22,6 +22,21 @@ using namespace ARB;
 
 // -----------
 /*!
+	\fn
+
+	Doc.
+*/
+
+ADataStructures::ADataStructures(ADataTypes* inTypes, QObject* parent) : QObject(parent) {
+
+	if (inTypes) pTypes = inTypes;
+
+	_A_DEBUG << "ADataStructures created with types";
+}
+
+
+// -----------
+/*!
     \fn
 
     Doc.
@@ -43,5 +58,53 @@ ADataStructures::ADataStructures(QObject* parent) : QObject(parent) {
 ADataStructures::~ADataStructures(void) {
 
 	_A_DEBUG << "ADataStructures deleted";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataStructureReply ADataStructures::mValidateFromMap(QVariantMap inStructure, QVariantMap inModel) {
+
+	ADataStructureReply oOutput;
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QVariantMap ADataStructures::mValidate(
+	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
+	QVariant inStructure,
+	QVariantMap inProperties
+) {
+
+	ADataStructureReply oOutput;
+
+	switch (inType) {
+		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromMap: {
+
+			if (inStructure.userType() == QMetaType::QVariantMap) {
+				oOutput = this->mValidateFromMap(
+					qvariant_cast<QVariantMap>(inStructure),
+					inProperties
+				);
+			}
+		}; break;
+		default:
+			break;
+	}
+
+	return oOutput.mToVariantMap();
 }
 

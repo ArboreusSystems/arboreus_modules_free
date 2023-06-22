@@ -567,7 +567,7 @@ QVariantMap ADataTypes::mValidate(_A_ENUMS_DATA_TYPE inType, QVariant inValue, Q
 		case _A_ENUMS_DATA_TYPE::StringOfSize: {
 
 				ADataStringSizeProperties oStringSizeProperties;
-				oStringSizeProperties.Type = qvariant_cast<_A_ENUMS_DATA_STRING_SIZE_TYPE>(inProperties.value("Type"));
+				oStringSizeProperties.Type = qvariant_cast<_A_ENUMS_DATA_STRING_SIZE_TYPE>(inProperties.value("SizeType"));
 				oStringSizeProperties.Range1 = qvariant_cast<int>(inProperties.value("Range1"));
 				oStringSizeProperties.Range2 = qvariant_cast<int>(inProperties.value("Range2"));
 

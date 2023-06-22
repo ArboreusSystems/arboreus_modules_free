@@ -27,6 +27,7 @@
 #define _A_ENUMS_DATA_TYPE ARB::AEnumsDataType::DataType
 #define _A_ENUMS_DATA_DICTIONARY_TYPE ARB::AEnumsDataDictionaryType::DictionaryType
 #define _A_ENUMS_DATA_STRING_SIZE_TYPE ARB::AEnumsDataStringSizeType::StringSizeType
+#define _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE ARB::AEnumsDataStructureValidationType::ValidationType
 
 
 // Namespace
@@ -121,6 +122,28 @@ class AEnumsDataStringSizeType: public QObject {
 			InRange
 		};
 		Q_ENUM(StringSizeType)
+};
+
+} // namespace ARB
+
+
+// Namespace
+namespace ARB {
+
+class AEnumsDataStructureValidationType: public QObject {
+
+	Q_OBJECT
+
+	public:
+
+		enum class ValidationType: int {
+
+			Undefined,
+			FromMap,
+			FromList,
+			FromListOfTypes
+		};
+		Q_ENUM(ValidationType)
 };
 
 } // namespace ARB
@@ -257,5 +280,33 @@ class ADataStringSizeProperties {
 } // namespace ARB
 
 Q_DECLARE_METATYPE(ARB::ADataStringSizeProperties)
+
+
+// Namespace
+namespace ARB {
+
+class ADataStructureReply {
+
+	public:
+
+		_A_ENUMS_DATA_REPLY_TYPE Status = _A_ENUMS_DATA_REPLY_TYPE::Error;
+		QVariant Value = "UndefinedError";
+
+		explicit ADataStructureReply() {}
+		virtual ~ADataStructureReply(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("Status",static_cast<int>(Status));
+			oOutput.insert("Value",Value);
+
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADataStructureReply)
 
 #endif // ADATAMODELS_H

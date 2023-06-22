@@ -56,7 +56,7 @@ AData::~AData(void) {
 void AData::mInit(void) {
 
 	pTypes = new ADataTypes(this);
-	pStructures = new ADataStructures(this);
+	pStructures = new ADataStructures(pTypes,this);
 
 	_A_DEBUG << "AData initiated";
 

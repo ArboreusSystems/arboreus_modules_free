@@ -23,6 +23,7 @@
 
 // Application includes
 #include <aloggerglobal.h>
+#include <adatatypes.h>
 
 // Constants and definitions
 
@@ -36,11 +37,23 @@ class ADataStructures : public QObject {
 
 	public:
 
+		explicit ADataStructures(ADataTypes* inTypes, QObject* parent = nullptr);
 		explicit ADataStructures(QObject* parent = nullptr);
 		virtual ~ADataStructures(void);
 
+		ADataStructureReply mValidateFromMap(QVariantMap inStructure, QVariantMap inModel);
+
 	public slots:
 
+		QVariantMap mValidate(
+			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
+			QVariant inStructure,
+			QVariantMap inProperties = {}
+		);
+
+	private:
+
+		ADataTypes* pTypes = nullptr;
 };
 
 } // namespace ARB
