@@ -72,6 +72,56 @@ ADataStructureReply ADataStructures::mValidateFromMap(QVariantMap inStructure, Q
 
 	ADataStructureReply oOutput;
 
+	QList<QString> oKeysStructure = inStructure.keys();
+	if (oKeysStructure.length() == 0) {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NoStructure;
+		return oOutput;
+	}
+
+	QList<QString> oKeysModel = inModel.keys();
+	if (oKeysModel.length() == 0) {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NoModel;
+		return oOutput;
+	}
+
+	if (oKeysModel.length() != oKeysStructure.length()) {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::WrongStructure;
+		return oOutput;
+	}
+
+	QListIterator<QString> iKeysModel(oKeysModel);
+	while (iKeysModel.hasNext()) {
+
+		QString iNextKey = iKeysModel.next();
+
+		if (!oKeysStructure.contains(iNextKey)) {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NoKey;
+			oOutput.Value = iNextKey;
+			return oOutput;
+		}
+
+		QVariant iNextValue = inStructure.value(iNextKey);
+		QVariantMap iNextModel = qvariant_cast<QVariantMap>(inModel.value(iNextKey));
+
+		QVariantMap iNextValueValidateMap = pTypes->mValidate(
+			qvariant_cast<_A_ENUMS_DATA_TYPE>(iNextModel.value("Type")),
+			iNextValue,
+			qvariant_cast<QVariantMap>(iNextModel.value("Properties"))
+		);
+		if (!(qvariant_cast<bool>(iNextValueValidateMap.value("IsValid")))) {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+			oOutput.Value = iNextKey;
+			return oOutput;
+		}
+	}
+
+	_A_DEBUG << inStructure;
+
+	_A_DEBUG << 3;
+
+	oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
+	oOutput.Value = inStructure;
+
 	return oOutput;
 }
 
@@ -91,19 +141,36 @@ QVariantMap ADataStructures::mValidate(
 
 	ADataStructureReply oOutput;
 
+	_A_DEBUG << 1;
+
 	switch (inType) {
 		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromMap: {
+
+			_A_DEBUG << 2;
+			_A_DEBUG << "userType" << inStructure.userType();
+			_A_DEBUG << "type" << inStructure.type();
+			_A_DEBUG << "typeName" << inStructure.typeName();
 
 			if (inStructure.userType() == QMetaType::QVariantMap) {
 				oOutput = this->mValidateFromMap(
 					qvariant_cast<QVariantMap>(inStructure),
 					inProperties
 				);
+			} else {
+				_A_DEBUG << 6;
 			}
+
+			oOutput = this->mValidateFromMap(
+					qvariant_cast<QVariantMap>(inStructure),
+					inProperties
+				);
 		}; break;
 		default:
+			_A_DEBUG << 5;
 			break;
 	}
+
+	_A_DEBUG << 4;
 
 	return oOutput.mToVariantMap();
 }

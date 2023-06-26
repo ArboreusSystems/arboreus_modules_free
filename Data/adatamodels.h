@@ -42,9 +42,13 @@ class AEnumsDataReplyType: public QObject {
 		enum class ReplyType: int {
 
 			Error = 0,
-			Ok = 1,
-			NotValid = 2,
-			WrongRule = 3
+			Ok,
+			NotValid,
+			WrongStructure,
+			WrongRule,
+			NoStructure,
+			NoModel,
+			NoKey
 		};
 		Q_ENUM(ReplyType)
 };
