@@ -34,11 +34,13 @@ ANetwork::ANetwork(QObject* parent) : AThreadTemplate<ANetworkService>(new ANetw
 
 	QObject::connect(
 		this,&ANetwork::sgInit,
-		this->mService(),&ANetworkService::slInit
+		this->mService(),&ANetworkService::slInit,
+		Qt::QueuedConnection
 	);
 	QObject::connect(
 		this->mService(),&ANetworkService::sgInitiated,
-		this,&ANetwork::slInitiated
+		this,&ANetwork::slInitiated,
+		Qt::QueuedConnection
 	);
 
 	_A_DEBUG << "ANetwork created";

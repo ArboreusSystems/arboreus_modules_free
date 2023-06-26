@@ -34,11 +34,13 @@ AApplication::AApplication(QObject* parent) : AThreadTemplate<AApplicationServic
 
 	QObject::connect(
 		this,&AApplication::sgInit,
-		this->mService(),&AApplicationService::slInit
+		this->mService(),&AApplicationService::slInit,
+		Qt::QueuedConnection
 	);
 	QObject::connect(
 		this->mService(),&AApplicationService::sgInitiated,
-		this,&AApplication::sgInitiated
+		this,&AApplication::sgInitiated,
+		Qt::QueuedConnection
 	);
 
 	_A_DEBUG << "AApplication created";

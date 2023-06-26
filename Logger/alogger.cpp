@@ -91,11 +91,13 @@ ALogger::ALogger(QObject* parent) : AThreadTemplate<ALoggerService>(new ALoggerS
 
 	QObject::connect(
 		this,&ALogger::sgInit,
-		this->mService(),&ALoggerService::slInit
+		this->mService(),&ALoggerService::slInit,
+		Qt::QueuedConnection
 	);
 	QObject::connect(
 		this->mService(),&ALoggerService::sgInitiated,
-		this,&ALogger::sgInitiated
+		this,&ALogger::sgInitiated,
+		Qt::QueuedConnection
 	);
 	QObject::connect(
 		this,&ALogger::sgWriteToLogbook,

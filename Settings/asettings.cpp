@@ -36,11 +36,13 @@ ASettings::ASettings(QObject* parent) : AThreadTemplate<ASettingsService>(new AS
 
 	QObject::connect(
 		this,&ASettings::sgInit,
-		this->mService(),&ASettingsService::slInit
+		this->mService(),&ASettingsService::slInit,
+		Qt::QueuedConnection
 	);
 	QObject::connect(
 		this->mService(),&ASettingsService::sgInitiated,
-		this,&ASettings::slInitiated
+		this,&ASettings::slInitiated,
+		Qt::QueuedConnection
 	);
 	QObject::connect(
 		this,&ASettings::sgUpdate,
