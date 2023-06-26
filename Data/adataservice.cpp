@@ -55,6 +55,9 @@ ADataService::~ADataService(void) {
 
 void ADataService::slInit(void) {
 
+	pValues = new ADataValues(pStructures,this);
+	pStructures = new ADataStructures(pValues,this);
+
 	_A_DEBUG << "ADataService initiated";
 	emit sgInitiated();
 }

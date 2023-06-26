@@ -23,10 +23,10 @@
 
 // Application includes
 #include <athreadtemplate.h>
+#include <athreadobjectcontrollertemplate.h>
 #include <aloggerglobal.h>
 #include <adataservice.h>
-#include <adatatypes.h>
-#include <adatastructures.h>
+#include <adatavalidatevalueagent.h>
 
 // Constants and definitions
 
@@ -43,18 +43,28 @@ class AData : public AThreadTemplate<ADataService> {
 
 	public:
 
-		ADataTypes* pTypes = nullptr;
-		ADataStructures* pStructures = nullptr;
-
 		explicit AData(QObject* parent = nullptr);
 		virtual ~AData(void);
 		Q_DISABLE_COPY(AData)
 
 		void mInit(void);
+		ADataReplyValidateValue mValidateValueHandler(
+			_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties
+		);
 
 	public slots:
 
 		void slInitiated(void);
+
+		QVariantMap mValidateValue(
+			_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties = {}
+		);
+		QVariantMap mValidateStructure(
+			QVariantMap inModel,QVariant inStructure, QVariantMap inProperties = {}
+		);
+		QVariantMap mValidateList(
+			QVariantMap inModel,QVariantList inList, QVariantMap inProperties = {}
+		);
 
 	signals:
 

@@ -25,6 +25,9 @@
 // Application includes
 #include <athreadservicetemplate.h>
 #include <aloggerglobal.h>
+#include <adatamodels.h>
+#include <adatavalues.h>
+#include <adatastructures.h>
 
 // Constants and definitions
 
@@ -37,6 +40,9 @@ class ADataService : public AThreadServiceTemplate {
 	Q_OBJECT
 
 	public:
+
+		ADataValues* pValues = nullptr;
+		ADataStructures* pStructures = nullptr;
 
 		explicit ADataService(QObject* parent = nullptr);
 		virtual ~ADataService(void);

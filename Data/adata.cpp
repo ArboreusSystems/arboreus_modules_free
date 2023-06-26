@@ -71,10 +71,44 @@ void AData::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 
-	pTypes = new ADataTypes(pStructures,this);
-	pStructures = new ADataStructures(pTypes,this);
-
 	emit this->sgInit();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataReplyValidateValue AData::mValidateValueHandler(
+	_A_ENUMS_DATA_TYPE inType, QVariant inValue, QVariantMap inProperties
+) {
+
+	AThreadObjectControllerTemplate oController;
+	QEventLoop oEventLoop;
+
+	ADataValidateValueAgent oAgent;
+	oAgent.mInit(this->mService(),inType,inValue);
+	QObject::connect(
+		&oAgent,&ADataValidateValueAgent::sgFinished,
+		&oEventLoop,&QEventLoop::quit
+	);
+	QObject::connect(
+		&oController,&AThreadObjectControllerTemplate::sgRun,
+		&oAgent,&ADataValidateValueAgent::slRun
+	);
+	oAgent.moveToThread(this);
+
+	emit oController.sgRun();
+	oEventLoop.exec();
+
+	QObject::disconnect(&oAgent,nullptr,nullptr,nullptr);
+	QObject::disconnect(&oController,nullptr,nullptr,nullptr);
+	QObject::disconnect(&oEventLoop,nullptr,nullptr,nullptr);
+
+	return oAgent.mReply();
 }
 
 
@@ -89,5 +123,53 @@ void AData::slInitiated(void) {
 
 	emit sgInitiated();
 	_A_DEBUG << "AData initiated";
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QVariantMap AData::mValidateValue(
+	_A_ENUMS_DATA_TYPE inType, QVariant inValue,QVariantMap inProperties
+) {
+
+	ADataReplyValidateValue oReply = this->mValidateValueHandler(inType,inValue,inProperties);
+	return oReply.mToVariantMap();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QVariantMap AData::mValidateStructure(
+	QVariantMap inModel, QVariant inStructure, QVariantMap inProperties
+) {
+
+	QVariantMap oOutput;
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QVariantMap AData::mValidateList(
+	QVariantMap inModel, QVariantList inList, QVariantMap inProperties
+) {
+
+	QVariantMap oOutput;
+	return oOutput;
 }
 

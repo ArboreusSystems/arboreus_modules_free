@@ -156,6 +156,75 @@ class AEnumsDataStructureValidationType: public QObject {
 // Namespace
 namespace ARB {
 
+class ADataReplyValidateValue {
+
+	public:
+
+		_A_ENUMS_DATA_TYPE Type = _A_ENUMS_DATA_TYPE::Undefined;
+		bool IsValid = false;
+		int Integer = 0;
+		double Double = 0.0;
+		bool Boolean = false;
+		QString String = "NoDefinedString";
+
+		explicit ADataReplyValidateValue() {}
+		virtual ~ADataReplyValidateValue(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("IsValid",IsValid);
+			oOutput.insert("Type",static_cast<int>(Type));
+
+			QVariant oValue = 0;
+			if (
+				this->Type == _A_ENUMS_DATA_TYPE::Integer ||
+				this->Type == _A_ENUMS_DATA_TYPE::NegativeInteger ||
+				this->Type == _A_ENUMS_DATA_TYPE::PositiveInteger ||
+				this->Type == _A_ENUMS_DATA_TYPE::RangedInteger
+			) {
+				oValue = this->Integer;
+			} else if (
+				this->Type == _A_ENUMS_DATA_TYPE::Boolean ||
+				this->Type == _A_ENUMS_DATA_TYPE::FalseBoolean ||
+				this->Type == _A_ENUMS_DATA_TYPE::TrueBoolean
+			) {
+				oValue = this->Boolean;
+			} else if (
+				this->Type == _A_ENUMS_DATA_TYPE::Double ||
+				this->Type == _A_ENUMS_DATA_TYPE::NegativeDouble ||
+				this->Type == _A_ENUMS_DATA_TYPE::PositiveDouble ||
+				this->Type == _A_ENUMS_DATA_TYPE::RangedDouble
+			) {
+				oValue = this->Double;
+			} else if (
+				this->Type == _A_ENUMS_DATA_TYPE::String ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringByRegex ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringEmail ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringIPv4 ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringIPv6 ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringMd ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringOfSize ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringWithoutSymbols
+			) {
+				oValue = this->String;
+			} else {
+				oValue = 0;
+			}
+			oOutput.insert("Value",oValue);
+
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADataReplyValidateValue)
+
+
+// Namespace
+namespace ARB {
+
 class ADataReplyValidateBoolean {
 
 	public:

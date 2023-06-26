@@ -24,6 +24,7 @@
 #include <QStringList>
 #include <QList>
 #include <QRegularExpression>
+#include <QEventLoop>
 
 // Application includes
 

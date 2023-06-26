@@ -23,21 +23,24 @@
 
 // Application includes
 #include <aloggerglobal.h>
-#include <adatatypes.h>
+#include <adatamodels.h>
 
 // Constants and definitions
 
 // Namespace
 namespace ARB {
 
+// Classes
+class ADataValues;
+
 // Class definitions
 class ADataStructures : public QObject {
 
-		Q_OBJECT
+	Q_OBJECT
 
 	public:
 
-		explicit ADataStructures(ADataTypes* inTypes, QObject* parent = nullptr);
+		explicit ADataStructures(ADataValues* inTypes, QObject* parent = nullptr);
 		explicit ADataStructures(QObject* parent = nullptr);
 		virtual ~ADataStructures(void);
 
@@ -53,7 +56,7 @@ class ADataStructures : public QObject {
 
 	private:
 
-		ADataTypes* pTypes = nullptr;
+		ADataValues* pTypes = nullptr;
 };
 
 } // namespace ARB
