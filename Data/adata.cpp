@@ -16,6 +16,9 @@
 // Class header
 #include "adata.h"
 
+// Forwarded classes
+#include <abackend.h>
+
 // Namespace
 using namespace ARB;
 
@@ -27,7 +30,18 @@ using namespace ARB;
     Doc.
 */
 
-AData::AData(QObject* parent) : QObject(parent) {
+AData::AData(QObject* parent) : AThreadTemplate<ADataService>(new ADataService, parent) {
+
+	QObject::connect(
+		this,&AData::sgInit,
+		this->mService(),&ADataService::slInit,
+		Qt::QueuedConnection
+	);
+	QObject::connect(
+		this->mService(),&ADataService::sgInitiated,
+		this,&AData::slInitiated,
+		Qt::QueuedConnection
+	);
 
 	_A_DEBUG << "AData created";
 }
@@ -55,11 +69,25 @@ AData::~AData(void) {
 
 void AData::mInit(void) {
 
-	pTypes = new ADataTypes(this);
+	pBackend = &ABackend::mInstance();
+
+	pTypes = new ADataTypes(pStructures,this);
 	pStructures = new ADataStructures(pTypes,this);
 
-	_A_DEBUG << "AData initiated";
+	emit this->sgInit();
+}
 
-	emit this->sgInitiated();
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+void AData::slInitiated(void) {
+
+	emit sgInitiated();
+	_A_DEBUG << "AData initiated";
 }
 

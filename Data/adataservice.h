@@ -1,6 +1,6 @@
 // ----------------------------------------------------------
 /*!
-    \headerfile AData
+    \headerfile ADataService
     \title
     \brief Template file wizard/classes/cpp/file.h
 
@@ -8,64 +8,48 @@
     \li @notice Template file classes/file.h
     \li @copyright Arboreus (http://arboreus.systems)
     \li @author Alexandr Kirilov (http://alexandr.kirilov.me)
-    \li @created 16/06/2023 at 19:48:12
+    \li @created 26/06/2023 at 11:21:53
     \endlist
 */
 // ----------------------------------------------------------
 
-#ifndef ADATA_H
-#define ADATA_H
+#ifndef ADATASERVICE_H
+#define ADATASERVICE_H
 
 // System includes
+#include <QObject>
 
 // Precompiled includes
 #include <adatapch.h>
 
 // Application includes
-#include <athreadtemplate.h>
+#include <athreadservicetemplate.h>
 #include <aloggerglobal.h>
-#include <adataservice.h>
-#include <adatatypes.h>
-#include <adatastructures.h>
 
 // Constants and definitions
 
 // Namespace
 namespace ARB {
 
-// Classes
-class ABackend;
-
 // Class definitions
-class AData : public AThreadTemplate<ADataService> {
+class ADataService : public AThreadServiceTemplate {
 
 	Q_OBJECT
 
 	public:
 
-		ADataTypes* pTypes = nullptr;
-		ADataStructures* pStructures = nullptr;
-
-		explicit AData(QObject* parent = nullptr);
-		virtual ~AData(void);
-		Q_DISABLE_COPY(AData)
-
-		void mInit(void);
+		explicit ADataService(QObject* parent = nullptr);
+		virtual ~ADataService(void);
 
 	public slots:
 
-		void slInitiated(void);
+		void slInit(void);
 
 	signals:
 
-		void sgInit(void);
 		void sgInitiated(void);
-
-	private:
-
-		ABackend* pBackend = nullptr;
 };
 
 } // namespace ARB
 
-#endif // ADATA_H
+#endif // ADATASERVICE_H
