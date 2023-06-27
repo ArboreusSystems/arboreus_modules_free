@@ -90,7 +90,7 @@ ADataReplyValidateValue AData::mValidateValueHandler(
 	QEventLoop oEventLoop;
 
 	ADataValidateValueAgent oAgent;
-	oAgent.mInit(this->mService(),inType,inValue);
+	oAgent.mInit(this->mService(),inType,inValue,inProperties);
 	QObject::connect(
 		&oAgent,&ADataValidateValueAgent::sgFinished,
 		&oEventLoop,&QEventLoop::quit
@@ -98,6 +98,47 @@ ADataReplyValidateValue AData::mValidateValueHandler(
 	QObject::connect(
 		&oController,&AThreadObjectControllerTemplate::sgRun,
 		&oAgent,&ADataValidateValueAgent::slRun
+	);
+	oAgent.moveToThread(this);
+
+	emit oController.sgRun();
+	oEventLoop.exec();
+
+	QObject::disconnect(&oAgent,nullptr,nullptr,nullptr);
+	QObject::disconnect(&oController,nullptr,nullptr,nullptr);
+	QObject::disconnect(&oEventLoop,nullptr,nullptr,nullptr);
+
+	return oAgent.mReply();
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+ADataReplyValidateStructure AData::mValidateStructureHandler(
+	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
+	QVariantMap inModel,QVariant inStructure
+) {
+
+	AThreadObjectControllerTemplate oController;
+	QEventLoop oEventLoop;
+
+	ADataValidateStructureAgent oAgent;
+	oAgent.mInit(
+		this->mService(),inType,inModel,
+		qvariant_cast<QVariantMap>(inStructure)
+	);
+	QObject::connect(
+		&oAgent,&ADataValidateStructureAgent::sgFinished,
+		&oEventLoop,&QEventLoop::quit
+	);
+	QObject::connect(
+		&oController,&AThreadObjectControllerTemplate::sgRun,
+		&oAgent,&ADataValidateStructureAgent::slRun
 	);
 	oAgent.moveToThread(this);
 
@@ -137,7 +178,9 @@ QVariantMap AData::mValidateValue(
 	_A_ENUMS_DATA_TYPE inType, QVariant inValue,QVariantMap inProperties
 ) {
 
-	ADataReplyValidateValue oReply = this->mValidateValueHandler(inType,inValue,inProperties);
+	ADataReplyValidateValue oReply = this->mValidateValueHandler(
+		inType,inValue,inProperties
+	);
 	return oReply.mToVariantMap();
 }
 
@@ -150,11 +193,14 @@ QVariantMap AData::mValidateValue(
 */
 
 QVariantMap AData::mValidateStructure(
-	QVariantMap inModel, QVariant inStructure, QVariantMap inProperties
+	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
+	QVariantMap inModel,QVariant inStructure
 ) {
 
-	QVariantMap oOutput;
-	return oOutput;
+	ADataReplyValidateStructure oReply = this->mValidateStructureHandler(
+		inType,inModel,inStructure
+	);
+	return oReply.mToVariantMap();
 }
 
 

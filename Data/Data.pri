@@ -3,6 +3,7 @@ INCLUDEPATH += \
 	$$PWD/Agents
 
 HEADERS += \
+	$$PWD/Agents/adatavalidatestructureagent.h \
 	$$PWD/Agents/adatavalidatevalueagent.h \
 	$$PWD/adata.h \
 	$$PWD/adatadictionary.h \
@@ -14,6 +15,7 @@ HEADERS += \
 	$$PWD/adatavalues.h
 
 SOURCES += \
+	$$PWD/Agents/adatavalidatestructureagent.cpp \
 	$$PWD/Agents/adatavalidatevalueagent.cpp \
 	$$PWD/adata.cpp \
 	$$PWD/adatadictionary.cpp \

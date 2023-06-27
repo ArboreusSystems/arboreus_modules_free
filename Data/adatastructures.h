@@ -36,19 +36,14 @@ class ADataValues;
 // Class definitions
 class ADataStructures : public QObject {
 
-	Q_OBJECT
-
 	public:
 
 		explicit ADataStructures(ADataValues* inTypes, QObject* parent = nullptr);
 		explicit ADataStructures(QObject* parent = nullptr);
 		virtual ~ADataStructures(void);
 
-		ADataStructureReply mValidateFromMap(QVariantMap inStructure, QVariantMap inModel);
-
-	public slots:
-
-		QVariantMap mValidate(
+		ADataReplyValidateStructure mValidateFromMap(QVariantMap inStructure, QVariantMap inModel);
+		ADataReplyValidateStructure mValidate(
 			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 			QVariant inStructure,
 			QVariantMap inProperties = {}

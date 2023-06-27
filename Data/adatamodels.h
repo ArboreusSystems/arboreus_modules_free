@@ -144,8 +144,7 @@ class AEnumsDataStructureValidationType: public QObject {
 
 			Undefined,
 			FromMap,
-			FromList,
-			FromListOfTypes
+			FromList
 		};
 		Q_ENUM(ValidationType)
 };
@@ -225,118 +224,6 @@ Q_DECLARE_METATYPE(ARB::ADataReplyValidateValue)
 // Namespace
 namespace ARB {
 
-class ADataReplyValidateBoolean {
-
-	public:
-
-		bool IsValid = false;
-		bool Value = false;
-
-		explicit ADataReplyValidateBoolean() {}
-		virtual ~ADataReplyValidateBoolean(void) {}
-
-		QVariantMap mToVariantMap(void) {
-
-			QVariantMap oOutput;
-			oOutput.insert("IsValid",IsValid);
-			oOutput.insert("Value",Value);
-
-			return oOutput;
-		}
-};
-
-} // namespace ARB
-
-Q_DECLARE_METATYPE(ARB::ADataReplyValidateBoolean)
-
-
-// Namespace
-namespace ARB {
-
-class ADataReplyValidateInteger {
-
-	public:
-
-		bool IsValid = false;
-		int Value = 0;
-
-		explicit ADataReplyValidateInteger() {}
-		virtual ~ADataReplyValidateInteger(void) {}
-
-		QVariantMap mToVariantMap(void) {
-
-			QVariantMap oOutput;
-			oOutput.insert("IsValid",IsValid);
-			oOutput.insert("Value",Value);
-
-			return oOutput;
-		}
-};
-
-} // namespace ARB
-
-Q_DECLARE_METATYPE(ARB::ADataReplyValidateInteger)
-
-
-// Namespace
-namespace ARB {
-
-class ADataReplyValidateDouble {
-
-	public:
-
-		bool IsValid = false;
-		double Value = 0.0;
-
-		explicit ADataReplyValidateDouble() {}
-		virtual ~ADataReplyValidateDouble(void) {}
-
-		QVariantMap mToVariantMap(void) {
-
-			QVariantMap oOutput;
-			oOutput.insert("IsValid",IsValid);
-			oOutput.insert("Value",Value);
-
-			return oOutput;
-		}
-};
-
-} // namespace ARB
-
-Q_DECLARE_METATYPE(ARB::ADataReplyValidateDouble)
-
-
-// Namespace
-namespace ARB {
-
-class ADataReplyValidateString {
-
-	public:
-
-		bool IsValid = false;
-		QString Value = "NoDefinedValue";
-
-		explicit ADataReplyValidateString() {}
-		virtual ~ADataReplyValidateString(void) {}
-
-		QVariantMap mToVariantMap(void) {
-
-			QVariantMap oOutput;
-			oOutput.insert("IsValid",IsValid);
-			oOutput.insert("Value",Value);
-
-			return oOutput;
-		}
-};
-
-} // namespace ARB
-
-Q_DECLARE_METATYPE(ARB::ADataReplyValidateString)
-
-
-// Namespace
-namespace ARB {
-
 class ADataStringSizeProperties {
 
 	public:
@@ -381,5 +268,33 @@ class ADataStructureReply {
 } // namespace ARB
 
 Q_DECLARE_METATYPE(ARB::ADataStructureReply)
+
+
+// Namespace
+namespace ARB {
+
+class ADataReplyValidateStructure {
+
+	public:
+
+		_A_ENUMS_DATA_REPLY_TYPE Status = _A_ENUMS_DATA_REPLY_TYPE::Error;
+		QVariant Data = "NoDefinedData";
+
+		explicit ADataReplyValidateStructure() {}
+		virtual ~ADataReplyValidateStructure(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			oOutput.insert("Status",static_cast<int>(Status));
+			oOutput.insert("Data",Data);
+
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADataReplyValidateStructure)
 
 #endif // ADATAMODELS_H

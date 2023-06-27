@@ -27,6 +27,7 @@
 #include <aloggerglobal.h>
 #include <adataservice.h>
 #include <adatavalidatevalueagent.h>
+#include <adatavalidatestructureagent.h>
 
 // Constants and definitions
 
@@ -51,6 +52,10 @@ class AData : public AThreadTemplate<ADataService> {
 		ADataReplyValidateValue mValidateValueHandler(
 			_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties
 		);
+		ADataReplyValidateStructure mValidateStructureHandler(
+			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
+			QVariantMap inModel,QVariant inStructure
+		);
 
 	public slots:
 
@@ -60,7 +65,8 @@ class AData : public AThreadTemplate<ADataService> {
 			_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties = {}
 		);
 		QVariantMap mValidateStructure(
-			QVariantMap inModel,QVariant inStructure, QVariantMap inProperties = {}
+			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
+			QVariantMap inModel,QVariant inStructure
 		);
 		QVariantMap mValidateList(
 			QVariantMap inModel,QVariantList inList, QVariantMap inProperties = {}

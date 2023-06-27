@@ -71,9 +71,9 @@ ADataStructures::~ADataStructures(void) {
 	Doc.
 */
 
-ADataStructureReply ADataStructures::mValidateFromMap(QVariantMap inStructure, QVariantMap inModel) {
+ADataReplyValidateStructure ADataStructures::mValidateFromMap(QVariantMap inStructure, QVariantMap inModel) {
 
-	ADataStructureReply oOutput;
+	ADataReplyValidateStructure oOutput;
 
 	QList<QString> oKeysStructure = inStructure.keys();
 	if (oKeysStructure.length() == 0) {
@@ -99,7 +99,7 @@ ADataStructureReply ADataStructures::mValidateFromMap(QVariantMap inStructure, Q
 
 		if (!oKeysStructure.contains(iNextKey)) {
 			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NoKey;
-			oOutput.Value = iNextKey;
+			oOutput.Data = iNextKey;
 			return oOutput;
 		}
 
@@ -113,13 +113,13 @@ ADataStructureReply ADataStructures::mValidateFromMap(QVariantMap inStructure, Q
 		);
 		if (!iNextValueValidateMap.IsValid) {
 			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
-			oOutput.Value = iNextKey;
+			oOutput.Data = iNextKey;
 			return oOutput;
 		}
 	}
 
 	oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
-	oOutput.Value = inStructure;
+	oOutput.Data = inStructure;
 
 	return oOutput;
 }
@@ -132,15 +132,13 @@ ADataStructureReply ADataStructures::mValidateFromMap(QVariantMap inStructure, Q
 	Doc.
 */
 
-QVariantMap ADataStructures::mValidate(
+ADataReplyValidateStructure ADataStructures::mValidate(
 	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 	QVariant inStructure,
-	QVariantMap inProperties
+	QVariantMap inModel
 ) {
 
-	ADataStructureReply oOutput;
-
-	_A_DEBUG << 1;
+	ADataReplyValidateStructure oOutput;
 
 	switch (inType) {
 		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromMap: {
@@ -148,20 +146,15 @@ QVariantMap ADataStructures::mValidate(
 			if (inStructure.userType() == QMetaType::QVariantMap) {
 				oOutput = this->mValidateFromMap(
 					qvariant_cast<QVariantMap>(inStructure),
-					inProperties
+					inModel
 				);
-			} else {
-				_A_DEBUG << 6;
 			}
 
 		}; break;
 		default:
-			_A_DEBUG << 5;
 			break;
 	}
 
-	_A_DEBUG << 4;
-
-	return oOutput.mToVariantMap();
+	return oOutput;
 }
 
