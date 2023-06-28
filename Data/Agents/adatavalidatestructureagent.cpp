@@ -55,7 +55,7 @@ ADataValidateStructureAgent::~ADataValidateStructureAgent(void) {
 
 void ADataValidateStructureAgent::mInit(
 	ADataService* inService,_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
-	QVariantMap inModel,QVariantMap inStructure
+	QVariant inModel,QVariant inStructure
 ) {
 
 	pService = inService;

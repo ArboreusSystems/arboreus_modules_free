@@ -132,27 +132,62 @@ ADataReplyValidateStructure ADataStructures::mValidateFromMap(QVariantMap inStru
 	Doc.
 */
 
+ADataReplyValidateStructure ADataStructures::mValidateFromList(QVariantList inStructure, QList<QVariantMap> inModel) {
+
+	ADataReplyValidateStructure oOutput;
+
+	int oSizeModel = inModel.size();
+	if (oSizeModel) {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NoModel;
+		return oOutput;
+	}
+
+	int oSizeStructure = inStructure.size();
+	if (oSizeStructure <= 0) {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NoStructure;
+		return oOutput;
+	}
+
+	if (oSizeModel != oSizeStructure) {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::WrongStructure;
+		return oOutput;
+	}
+
+	_A_DEBUG << 1;
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 ADataReplyValidateStructure ADataStructures::mValidate(
 	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 	QVariant inStructure,
-	QVariantMap inModel
+	QVariant inModel
 ) {
 
 	ADataReplyValidateStructure oOutput;
 
 	switch (inType) {
 		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromMap: {
-
-			if (inStructure.userType() == QMetaType::QVariantMap) {
 				oOutput = this->mValidateFromMap(
 					qvariant_cast<QVariantMap>(inStructure),
-					inModel
+					qvariant_cast<QVariantMap>(inModel)
 				);
-			}
-
 		}; break;
-		default:
-			break;
+		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromList: {
+				oOutput = this->mValidateFromList(
+					qvariant_cast<QVariantList>(inStructure),
+					qvariant_cast<QList<QVariantMap>>(inModel)
+				);
+		}; break;
+		default: break;
 	}
 
 	return oOutput;

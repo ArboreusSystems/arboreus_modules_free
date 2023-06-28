@@ -121,17 +121,14 @@ ADataReplyValidateValue AData::mValidateValueHandler(
 
 ADataReplyValidateStructure AData::mValidateStructureHandler(
 	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
-	QVariantMap inModel,QVariant inStructure
+	QVariant inModel,QVariant inStructure
 ) {
 
 	AThreadObjectControllerTemplate oController;
 	QEventLoop oEventLoop;
 
 	ADataValidateStructureAgent oAgent;
-	oAgent.mInit(
-		this->mService(),inType,inModel,
-		qvariant_cast<QVariantMap>(inStructure)
-	);
+	oAgent.mInit(this->mService(),inType,inModel,inStructure);
 	QObject::connect(
 		&oAgent,&ADataValidateStructureAgent::sgFinished,
 		&oEventLoop,&QEventLoop::quit
@@ -194,7 +191,7 @@ QVariantMap AData::mValidateValue(
 
 QVariantMap AData::mValidateStructure(
 	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
-	QVariantMap inModel,QVariant inStructure
+	QVariant inModel,QVariant inStructure
 ) {
 
 	ADataReplyValidateStructure oReply = this->mValidateStructureHandler(

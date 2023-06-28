@@ -43,10 +43,10 @@ class ADataStructures : public QObject {
 		virtual ~ADataStructures(void);
 
 		ADataReplyValidateStructure mValidateFromMap(QVariantMap inStructure, QVariantMap inModel);
+		ADataReplyValidateStructure mValidateFromList(QVariantList inStructure, QList<QVariantMap> inModel);
 		ADataReplyValidateStructure mValidate(
 			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
-			QVariant inStructure,
-			QVariantMap inProperties = {}
+			QVariant inStructure, QVariant inProperties
 		);
 
 	private:

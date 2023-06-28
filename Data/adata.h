@@ -54,7 +54,7 @@ class AData : public AThreadTemplate<ADataService> {
 		);
 		ADataReplyValidateStructure mValidateStructureHandler(
 			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
-			QVariantMap inModel,QVariant inStructure
+			QVariant inModel,QVariant inStructure
 		);
 
 	public slots:
@@ -66,10 +66,10 @@ class AData : public AThreadTemplate<ADataService> {
 		);
 		QVariantMap mValidateStructure(
 			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
-			QVariantMap inModel,QVariant inStructure
+			QVariant inModel,QVariant inStructure
 		);
 		QVariantMap mValidateList(
-			QVariantMap inModel,QVariantList inList, QVariantMap inProperties = {}
+			QVariantMap inModel,QVariantList inList,QVariantMap inProperties = {}
 		);
 
 	signals:

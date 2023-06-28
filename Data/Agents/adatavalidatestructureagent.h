@@ -43,7 +43,7 @@ class ADataValidateStructureAgent : public AThreadAgentTemplate {
 
 		void mInit(
 			ADataService* inService,_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
-			QVariantMap inModel,QVariantMap inStructure
+			QVariant inModel,QVariant inStructure
 		);
 		ADataReplyValidateStructure mReply(void);
 
@@ -55,8 +55,8 @@ class ADataValidateStructureAgent : public AThreadAgentTemplate {
 
 		ADataService* pService = nullptr;
 		_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE pType = _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::Undefined;
-		QVariantMap pModel = {};
-		QVariantMap pStructure = {};
+		QVariant pModel = {};
+		QVariant pStructure = {};
 		ADataReplyValidateStructure pReply;
 };
 
