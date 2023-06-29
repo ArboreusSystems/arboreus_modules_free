@@ -132,12 +132,12 @@ ADataReplyValidateStructure ADataStructures::mValidateFromMap(QVariantMap inStru
 	Doc.
 */
 
-ADataReplyValidateStructure ADataStructures::mValidateFromList(QVariantList inStructure, QList<QVariantMap> inModel) {
+ADataReplyValidateStructure ADataStructures::mValidateFromList(QVariantList inStructure, QVariantList inModel) {
 
 	ADataReplyValidateStructure oOutput;
 
 	int oSizeModel = inModel.size();
-	if (oSizeModel) {
+	if (oSizeModel <= 0) {
 		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NoModel;
 		return oOutput;
 	}
@@ -153,7 +153,26 @@ ADataReplyValidateStructure ADataStructures::mValidateFromList(QVariantList inSt
 		return oOutput;
 	}
 
-	_A_DEBUG << 1;
+	for (int i = 0; i < oSizeModel; ++i) {
+		QVariant iValue = inStructure[i];
+		QVariantMap iType = qvariant_cast<QVariantMap>(inModel[i]);
+		ADataReplyValidateValue iCheckValue = this->pTypes->mValidate(
+			qvariant_cast<_A_ENUMS_DATA_TYPE>(iType.value("Type")),
+			iValue,
+			qvariant_cast<QVariantMap>(iType.value("Properties",QVariantMap()))
+		);
+		if (!iCheckValue.IsValid) {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+			QVariantMap iData;
+			iData.insert("Index",i);
+			iData.insert("Value",iValue);
+			oOutput.Data = iData;
+			return oOutput;
+		}
+	}
+
+	oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
+	oOutput.Data = inStructure;
 
 	return oOutput;
 }
@@ -176,16 +195,16 @@ ADataReplyValidateStructure ADataStructures::mValidate(
 
 	switch (inType) {
 		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromMap: {
-				oOutput = this->mValidateFromMap(
-					qvariant_cast<QVariantMap>(inStructure),
-					qvariant_cast<QVariantMap>(inModel)
-				);
+			oOutput = this->mValidateFromMap(
+				qvariant_cast<QVariantMap>(inStructure),
+				qvariant_cast<QVariantMap>(inModel)
+			);
 		}; break;
 		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromList: {
-				oOutput = this->mValidateFromList(
-					qvariant_cast<QVariantList>(inStructure),
-					qvariant_cast<QList<QVariantMap>>(inModel)
-				);
+			oOutput = this->mValidateFromList(
+				qvariant_cast<QVariantList>(inStructure),
+				qvariant_cast<QVariantList>(inModel)
+			);
 		}; break;
 		default: break;
 	}
