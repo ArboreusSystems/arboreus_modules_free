@@ -75,7 +75,9 @@ class AEnumsDataType: public QObject {
 			Double, PositiveDouble, NegativeDouble, RangedDouble,
 
 			String, StringWithoutSymbols, StringOfSize,	StringByRegex,
-			StringMd, StringEmail, StringIPv4, StringIPv6
+			StringMd, StringEmail, StringIPv4, StringIPv6,
+
+			Stucture
 		};
 		Q_ENUM(DataType)
 };
@@ -143,8 +145,8 @@ class AEnumsDataStructureValidationType: public QObject {
 		enum class ValidationType: int {
 
 			Undefined,
-			FromMap,
-			FromList
+			Map,
+			List
 		};
 		Q_ENUM(ValidationType)
 };

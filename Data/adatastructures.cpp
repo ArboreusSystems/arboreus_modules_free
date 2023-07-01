@@ -105,16 +105,30 @@ ADataReplyValidateStructure ADataStructures::mValidateFromMap(QVariantMap inStru
 
 		QVariant iNextValue = inStructure.value(iNextKey);
 		QVariantMap iNextModel = qvariant_cast<QVariantMap>(inModel.value(iNextKey));
+		_A_ENUMS_DATA_TYPE iType = qvariant_cast<_A_ENUMS_DATA_TYPE>(iNextModel.value("Type"));
+		QVariantMap iProperties = qvariant_cast<QVariantMap>(iNextModel.value("Properties"));
 
-		ADataReplyValidateValue iNextValueValidateMap = pTypes->mValidate(
-			qvariant_cast<_A_ENUMS_DATA_TYPE>(iNextModel.value("Type")),
-			iNextValue,
-			qvariant_cast<QVariantMap>(iNextModel.value("Properties"))
-		);
-		if (!iNextValueValidateMap.IsValid) {
-			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
-			oOutput.Data = iNextKey;
-			return oOutput;
+		if (iType == _A_ENUMS_DATA_TYPE::Stucture) {
+
+			ADataReplyValidateStructure iCheckStructure = this->mValidate(
+				qvariant_cast<_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE>(iProperties.value("Type")),
+				iNextValue,
+				iProperties.value("Model")
+			);
+			if (iCheckStructure.Status != _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+				oOutput.Status = iCheckStructure.Status;
+				oOutput.Data = iNextKey + "/" + qvariant_cast<QString>(iCheckStructure.Data);
+				return oOutput;
+			}
+
+		} else {
+
+			ADataReplyValidateValue iNextValueValidateMap = pTypes->mValidate(iType,iNextValue,iProperties);
+			if (!iNextValueValidateMap.IsValid) {
+				oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+				oOutput.Data = iNextKey;
+				return oOutput;
+			}
 		}
 	}
 
@@ -191,16 +205,19 @@ ADataReplyValidateStructure ADataStructures::mValidate(
 	QVariant inModel
 ) {
 
+	_A_DEBUG << inStructure;
+	_A_DEBUG << inModel;
+
 	ADataReplyValidateStructure oOutput;
 
 	switch (inType) {
-		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromMap: {
+		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::Map: {
 			oOutput = this->mValidateFromMap(
 				qvariant_cast<QVariantMap>(inStructure),
 				qvariant_cast<QVariantMap>(inModel)
 			);
 		}; break;
-		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::FromList: {
+		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::List: {
 			oOutput = this->mValidateFromList(
 				qvariant_cast<QVariantList>(inStructure),
 				qvariant_cast<QVariantList>(inModel)
