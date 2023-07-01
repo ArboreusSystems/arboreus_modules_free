@@ -205,9 +205,6 @@ ADataReplyValidateStructure ADataStructures::mValidate(
 	QVariant inModel
 ) {
 
-	_A_DEBUG << inStructure;
-	_A_DEBUG << inModel;
-
 	ADataReplyValidateStructure oOutput;
 
 	switch (inType) {

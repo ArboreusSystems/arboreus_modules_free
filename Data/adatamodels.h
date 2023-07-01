@@ -299,4 +299,26 @@ class ADataReplyValidateStructure {
 
 Q_DECLARE_METATYPE(ARB::ADataReplyValidateStructure)
 
+
+// Namespace
+namespace ARB {
+
+class ADataReplyValidateList {
+
+	public:
+
+		explicit ADataReplyValidateList() {}
+		virtual ~ADataReplyValidateList(void) {}
+
+		QVariantMap mToVariantMap(void) {
+
+			QVariantMap oOutput;
+			return oOutput;
+		}
+};
+
+} // namespace ARB
+
+Q_DECLARE_METATYPE(ARB::ADataReplyValidateList)
+
 #endif // ADATAMODELS_H

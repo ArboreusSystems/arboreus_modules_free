@@ -157,6 +157,23 @@ ADataReplyValidateStructure AData::mValidateStructureHandler(
 	Doc.
 */
 
+ADataReplyValidateList AData::mValidateListHandler(void) {
+
+	ADataReplyValidateList oOutput;
+
+	// TODO: Add list validation functionlity
+
+	return oOutput;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
 void AData::slInitiated(void) {
 
 	emit sgInitiated();
@@ -212,7 +229,11 @@ QVariantMap AData::mValidateList(
 	QVariantMap inModel, QVariantList inList, QVariantMap inProperties
 ) {
 
-	QVariantMap oOutput;
-	return oOutput;
+	Q_UNUSED(inModel)
+	Q_UNUSED(inList)
+	Q_UNUSED(inProperties)
+
+	ADataReplyValidateList oReply = this->mValidateListHandler();
+	return oReply.mToVariantMap();
 }
 

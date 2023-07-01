@@ -56,6 +56,7 @@ class AData : public AThreadTemplate<ADataService> {
 			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 			QVariant inModel,QVariant inStructure
 		);
+		ADataReplyValidateList mValidateListHandler(void);
 
 	public slots:
 
