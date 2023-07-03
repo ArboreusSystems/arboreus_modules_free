@@ -74,7 +74,7 @@ void ADataValidateStructureAgent::mInit(
 	Doc.
 */
 
-ADataReplyValidateStructure ADataValidateStructureAgent::mReply(void) {
+ADataReplyValidate ADataValidateStructureAgent::mReply(void) {
 
 	return pReply;
 }

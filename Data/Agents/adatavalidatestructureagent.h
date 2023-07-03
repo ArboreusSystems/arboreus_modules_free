@@ -45,7 +45,7 @@ class ADataValidateStructureAgent : public AThreadAgentTemplate {
 			ADataService* inService,_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 			QVariant inModel,QVariant inStructure
 		);
-		ADataReplyValidateStructure mReply(void);
+		ADataReplyValidate mReply(void);
 
 	public slots:
 
@@ -57,7 +57,7 @@ class ADataValidateStructureAgent : public AThreadAgentTemplate {
 		_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE pType = _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::Undefined;
 		QVariant pModel = {};
 		QVariant pStructure = {};
-		ADataReplyValidateStructure pReply;
+		ADataReplyValidate pReply;
 };
 
 } // namespace ARB

@@ -46,7 +46,7 @@ class ADataValidateValueAgent : public AThreadAgentTemplate {
 			ADataService* inService,_A_ENUMS_DATA_TYPE inType,
 			QVariant inValue,QVariantMap inProperties = {}
 		);
-		ADataReplyValidateValue mReply(void);
+		ADataReplyValidate mReply(void);
 
 	public slots:
 
@@ -58,7 +58,7 @@ class ADataValidateValueAgent : public AThreadAgentTemplate {
 		_A_ENUMS_DATA_TYPE pType = _A_ENUMS_DATA_TYPE::Undefined;
 		QVariantMap pProperties = {};
 		QVariant pValue = 0;
-		ADataReplyValidateValue pReply;
+		ADataReplyValidate pReply;
 };
 
 } // namespace ARB

@@ -1,3 +1,7 @@
+!contains(QT, core) {
+	QT += core
+}
+
 INCLUDEPATH += \
 	$$PWD \
 	$$PWD/Agents

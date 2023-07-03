@@ -74,7 +74,7 @@ void ADataValidateValueAgent::mInit(
 	Doc.
 */
 
-ADataReplyValidateValue ADataValidateValueAgent::mReply(void) {
+ADataReplyValidate ADataValidateValueAgent::mReply(void) {
 
 	return pReply;
 }

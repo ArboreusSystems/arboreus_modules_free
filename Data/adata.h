@@ -49,14 +49,14 @@ class AData : public AThreadTemplate<ADataService> {
 		Q_DISABLE_COPY(AData)
 
 		void mInit(void);
-		ADataReplyValidateValue mValidateValueHandler(
+		ADataReplyValidate mValidateValueHandler(
 			_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties
 		);
-		ADataReplyValidateStructure mValidateStructureHandler(
+		ADataReplyValidate mValidateStructureHandler(
 			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 			QVariant inModel,QVariant inStructure
 		);
-		ADataReplyValidateList mValidateListHandler(void);
+		ADataReplyValidate mValidateListHandler(void);
 
 	public slots:
 

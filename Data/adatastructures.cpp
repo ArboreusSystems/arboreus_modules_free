@@ -71,9 +71,9 @@ ADataStructures::~ADataStructures(void) {
 	Doc.
 */
 
-ADataReplyValidateStructure ADataStructures::mValidateFromMap(QVariantMap inStructure, QVariantMap inModel) {
+ADataReplyValidate ADataStructures::mValidateFromMap(QVariantMap inStructure, QVariantMap inModel) {
 
-	ADataReplyValidateStructure oOutput;
+	ADataReplyValidate oOutput;
 
 	QList<QString> oKeysStructure = inStructure.keys();
 	if (oKeysStructure.length() == 0) {
@@ -99,7 +99,7 @@ ADataReplyValidateStructure ADataStructures::mValidateFromMap(QVariantMap inStru
 
 		if (!oKeysStructure.contains(iNextKey)) {
 			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NoKey;
-			oOutput.Data = iNextKey;
+			oOutput.Message = iNextKey;
 			return oOutput;
 		}
 
@@ -108,32 +108,33 @@ ADataReplyValidateStructure ADataStructures::mValidateFromMap(QVariantMap inStru
 		_A_ENUMS_DATA_TYPE iType = qvariant_cast<_A_ENUMS_DATA_TYPE>(iNextModel.value("Type"));
 		QVariantMap iProperties = qvariant_cast<QVariantMap>(iNextModel.value("Properties"));
 
-		if (iType == _A_ENUMS_DATA_TYPE::Stucture) {
+		if (iType == _A_ENUMS_DATA_TYPE::Structure) {
 
-			ADataReplyValidateStructure iCheckStructure = this->mValidate(
+			ADataReplyValidate iCheckStructure = this->mValidate(
 				qvariant_cast<_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE>(iProperties.value("Type")),
 				iNextValue,
 				iProperties.value("Model")
 			);
 			if (iCheckStructure.Status != _A_ENUMS_DATA_REPLY_TYPE::Ok) {
 				oOutput.Status = iCheckStructure.Status;
-				oOutput.Data = iNextKey + "/" + qvariant_cast<QString>(iCheckStructure.Data);
+				oOutput.Message = iNextKey + "/" + qvariant_cast<QString>(iCheckStructure.Message);
 				return oOutput;
 			}
 
 		} else {
 
-			ADataReplyValidateValue iNextValueValidateMap = pTypes->mValidate(iType,iNextValue,iProperties);
-			if (!iNextValueValidateMap.IsValid) {
-				oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
-				oOutput.Data = iNextKey;
+			ADataReplyValidate iNextValueValidateMap = pTypes->mValidate(iType,iNextValue,iProperties);
+			if (iNextValueValidateMap.Status != _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+				oOutput.Status = iNextValueValidateMap.Status;
+				oOutput.Message = iNextKey;
 				return oOutput;
 			}
 		}
 	}
 
 	oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
-	oOutput.Data = inStructure;
+	oOutput.Type = _A_ENUMS_DATA_TYPE::Structure;
+	oOutput.Structure = inStructure;
 
 	return oOutput;
 }
@@ -146,9 +147,9 @@ ADataReplyValidateStructure ADataStructures::mValidateFromMap(QVariantMap inStru
 	Doc.
 */
 
-ADataReplyValidateStructure ADataStructures::mValidateFromList(QVariantList inStructure, QVariantList inModel) {
+ADataReplyValidate ADataStructures::mValidateFromList(QVariantList inStructure, QVariantList inModel) {
 
-	ADataReplyValidateStructure oOutput;
+	ADataReplyValidate oOutput;
 
 	int oSizeModel = inModel.size();
 	if (oSizeModel <= 0) {
@@ -168,25 +169,41 @@ ADataReplyValidateStructure ADataStructures::mValidateFromList(QVariantList inSt
 	}
 
 	for (int i = 0; i < oSizeModel; ++i) {
+
 		QVariant iValue = inStructure[i];
-		QVariantMap iType = qvariant_cast<QVariantMap>(inModel[i]);
-		ADataReplyValidateValue iCheckValue = this->pTypes->mValidate(
-			qvariant_cast<_A_ENUMS_DATA_TYPE>(iType.value("Type")),
-			iValue,
-			qvariant_cast<QVariantMap>(iType.value("Properties",QVariantMap()))
-		);
-		if (!iCheckValue.IsValid) {
-			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
-			QVariantMap iData;
-			iData.insert("Index",i);
-			iData.insert("Value",iValue);
-			oOutput.Data = iData;
-			return oOutput;
+		QVariantMap iTypeRule = qvariant_cast<QVariantMap>(inModel[i]);
+		_A_ENUMS_DATA_TYPE iType = qvariant_cast<_A_ENUMS_DATA_TYPE>(iTypeRule.value("Type"));
+		QVariantMap iProperties = qvariant_cast<QVariantMap>(iTypeRule.value("Properties",QVariantMap()));
+
+		if (iType == _A_ENUMS_DATA_TYPE::Structure) {
+
+			ADataReplyValidate iCheckStructure = this->mValidate(
+				qvariant_cast<_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE>(iProperties.value("Type")),
+				iValue,
+				qvariant_cast<QVariantList>(iProperties.value("Model"))
+			);
+			if (iCheckStructure.Status != _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+				oOutput.Status = iCheckStructure.Status;
+				oOutput.Message = QString::number(i) + "/" + qvariant_cast<QString>(iCheckStructure.Message);
+				return oOutput;
+			}
+
+		} else {
+
+			ADataReplyValidate iCheckValue = this->pTypes->mValidate(
+				iType,iValue,iProperties
+			);
+			if (iCheckValue.Status != _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+				oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+				oOutput.Message.setNum(i);
+				return oOutput;
+			}
 		}
 	}
 
 	oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
-	oOutput.Data = inStructure;
+	oOutput.Type = _A_ENUMS_DATA_TYPE::Structure;
+	oOutput.Structure = inStructure;
 
 	return oOutput;
 }
@@ -199,13 +216,13 @@ ADataReplyValidateStructure ADataStructures::mValidateFromList(QVariantList inSt
 	Doc.
 */
 
-ADataReplyValidateStructure ADataStructures::mValidate(
+ADataReplyValidate ADataStructures::mValidate(
 	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 	QVariant inStructure,
 	QVariant inModel
 ) {
 
-	ADataReplyValidateStructure oOutput;
+	ADataReplyValidate oOutput;
 
 	switch (inType) {
 		case _A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE::Map: {

@@ -21,6 +21,7 @@
 #include <adatapch.h>
 
 // Application includes
+#include <aloggerglobal.h>
 
 // Constants and defintions
 #define _A_ENUMS_DATA_REPLY_TYPE ARB::AEnumsDataReplyType::ReplyType
@@ -77,7 +78,7 @@ class AEnumsDataType: public QObject {
 			String, StringWithoutSymbols, StringOfSize,	StringByRegex,
 			StringMd, StringEmail, StringIPv4, StringIPv6,
 
-			Stucture
+			Structure
 		};
 		Q_ENUM(DataType)
 };
@@ -157,75 +158,6 @@ class AEnumsDataStructureValidationType: public QObject {
 // Namespace
 namespace ARB {
 
-class ADataReplyValidateValue {
-
-	public:
-
-		_A_ENUMS_DATA_TYPE Type = _A_ENUMS_DATA_TYPE::Undefined;
-		bool IsValid = false;
-		int Integer = 0;
-		double Double = 0.0;
-		bool Boolean = false;
-		QString String = "NoDefinedString";
-
-		explicit ADataReplyValidateValue() {}
-		virtual ~ADataReplyValidateValue(void) {}
-
-		QVariantMap mToVariantMap(void) {
-
-			QVariantMap oOutput;
-			oOutput.insert("IsValid",IsValid);
-			oOutput.insert("Type",static_cast<int>(Type));
-
-			QVariant oValue = 0;
-			if (
-				this->Type == _A_ENUMS_DATA_TYPE::Integer ||
-				this->Type == _A_ENUMS_DATA_TYPE::NegativeInteger ||
-				this->Type == _A_ENUMS_DATA_TYPE::PositiveInteger ||
-				this->Type == _A_ENUMS_DATA_TYPE::RangedInteger
-			) {
-				oValue = this->Integer;
-			} else if (
-				this->Type == _A_ENUMS_DATA_TYPE::Boolean ||
-				this->Type == _A_ENUMS_DATA_TYPE::FalseBoolean ||
-				this->Type == _A_ENUMS_DATA_TYPE::TrueBoolean
-			) {
-				oValue = this->Boolean;
-			} else if (
-				this->Type == _A_ENUMS_DATA_TYPE::Double ||
-				this->Type == _A_ENUMS_DATA_TYPE::NegativeDouble ||
-				this->Type == _A_ENUMS_DATA_TYPE::PositiveDouble ||
-				this->Type == _A_ENUMS_DATA_TYPE::RangedDouble
-			) {
-				oValue = this->Double;
-			} else if (
-				this->Type == _A_ENUMS_DATA_TYPE::String ||
-				this->Type == _A_ENUMS_DATA_TYPE::StringByRegex ||
-				this->Type == _A_ENUMS_DATA_TYPE::StringEmail ||
-				this->Type == _A_ENUMS_DATA_TYPE::StringIPv4 ||
-				this->Type == _A_ENUMS_DATA_TYPE::StringIPv6 ||
-				this->Type == _A_ENUMS_DATA_TYPE::StringMd ||
-				this->Type == _A_ENUMS_DATA_TYPE::StringOfSize ||
-				this->Type == _A_ENUMS_DATA_TYPE::StringWithoutSymbols
-			) {
-				oValue = this->String;
-			} else {
-				oValue = 0;
-			}
-			oOutput.insert("Value",oValue);
-
-			return oOutput;
-		}
-};
-
-} // namespace ARB
-
-Q_DECLARE_METATYPE(ARB::ADataReplyValidateValue)
-
-
-// Namespace
-namespace ARB {
-
 class ADataStringSizeProperties {
 
 	public:
@@ -247,21 +179,68 @@ Q_DECLARE_METATYPE(ARB::ADataStringSizeProperties)
 // Namespace
 namespace ARB {
 
-class ADataStructureReply {
+class ADataReplyValidate {
 
 	public:
 
 		_A_ENUMS_DATA_REPLY_TYPE Status = _A_ENUMS_DATA_REPLY_TYPE::Error;
-		QVariant Value = "UndefinedError";
+		_A_ENUMS_DATA_TYPE Type = _A_ENUMS_DATA_TYPE::Undefined;
+		QString Message = "NoDefinedMessage";
+		int Integer = 0;
+		double Double = 0.0;
+		bool Boolean = false;
+		QString String = "NoDefinedString";
+		QVariant Structure = {};
 
-		explicit ADataStructureReply() {}
-		virtual ~ADataStructureReply(void) {}
+		explicit ADataReplyValidate() {}
+		virtual ~ADataReplyValidate(void) {}
 
 		QVariantMap mToVariantMap(void) {
 
 			QVariantMap oOutput;
 			oOutput.insert("Status",static_cast<int>(Status));
-			oOutput.insert("Value",Value);
+			oOutput.insert("Type",static_cast<int>(Type));
+			oOutput.insert("Message",Message);
+
+			QVariant oData = 0;
+			if (
+				this->Type == _A_ENUMS_DATA_TYPE::Integer ||
+				this->Type == _A_ENUMS_DATA_TYPE::NegativeInteger ||
+				this->Type == _A_ENUMS_DATA_TYPE::PositiveInteger ||
+				this->Type == _A_ENUMS_DATA_TYPE::RangedInteger
+			) {
+				oData = this->Integer;
+			} else if (
+				this->Type == _A_ENUMS_DATA_TYPE::Boolean ||
+				this->Type == _A_ENUMS_DATA_TYPE::FalseBoolean ||
+				this->Type == _A_ENUMS_DATA_TYPE::TrueBoolean
+			) {
+				oData = this->Boolean;
+			} else if (
+				this->Type == _A_ENUMS_DATA_TYPE::Double ||
+				this->Type == _A_ENUMS_DATA_TYPE::NegativeDouble ||
+				this->Type == _A_ENUMS_DATA_TYPE::PositiveDouble ||
+				this->Type == _A_ENUMS_DATA_TYPE::RangedDouble
+			) {
+				oData = this->Double;
+			} else if (
+				this->Type == _A_ENUMS_DATA_TYPE::String ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringByRegex ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringEmail ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringIPv4 ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringIPv6 ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringMd ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringOfSize ||
+				this->Type == _A_ENUMS_DATA_TYPE::StringWithoutSymbols
+			) {
+				oData = this->String;
+			} else if (
+				this->Type == _A_ENUMS_DATA_TYPE::Structure
+			) {
+				oData = this->Structure;
+			}
+			oOutput.insert("Data",oData);
+
 
 			return oOutput;
 		}
@@ -269,56 +248,6 @@ class ADataStructureReply {
 
 } // namespace ARB
 
-Q_DECLARE_METATYPE(ARB::ADataStructureReply)
-
-
-// Namespace
-namespace ARB {
-
-class ADataReplyValidateStructure {
-
-	public:
-
-		_A_ENUMS_DATA_REPLY_TYPE Status = _A_ENUMS_DATA_REPLY_TYPE::Error;
-		QVariant Data = "NoDefinedData";
-
-		explicit ADataReplyValidateStructure() {}
-		virtual ~ADataReplyValidateStructure(void) {}
-
-		QVariantMap mToVariantMap(void) {
-
-			QVariantMap oOutput;
-			oOutput.insert("Status",static_cast<int>(Status));
-			oOutput.insert("Data",Data);
-
-			return oOutput;
-		}
-};
-
-} // namespace ARB
-
-Q_DECLARE_METATYPE(ARB::ADataReplyValidateStructure)
-
-
-// Namespace
-namespace ARB {
-
-class ADataReplyValidateList {
-
-	public:
-
-		explicit ADataReplyValidateList() {}
-		virtual ~ADataReplyValidateList(void) {}
-
-		QVariantMap mToVariantMap(void) {
-
-			QVariantMap oOutput;
-			return oOutput;
-		}
-};
-
-} // namespace ARB
-
-Q_DECLARE_METATYPE(ARB::ADataReplyValidateList)
+Q_DECLARE_METATYPE(ARB::ADataReplyValidate)
 
 #endif // ADATAMODELS_H

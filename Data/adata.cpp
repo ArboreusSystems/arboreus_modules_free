@@ -82,7 +82,7 @@ void AData::mInit(void) {
 	Doc.
 */
 
-ADataReplyValidateValue AData::mValidateValueHandler(
+ADataReplyValidate AData::mValidateValueHandler(
 	_A_ENUMS_DATA_TYPE inType, QVariant inValue, QVariantMap inProperties
 ) {
 
@@ -119,7 +119,7 @@ ADataReplyValidateValue AData::mValidateValueHandler(
 	Doc.
 */
 
-ADataReplyValidateStructure AData::mValidateStructureHandler(
+ADataReplyValidate AData::mValidateStructureHandler(
 	_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 	QVariant inModel,QVariant inStructure
 ) {
@@ -157,9 +157,9 @@ ADataReplyValidateStructure AData::mValidateStructureHandler(
 	Doc.
 */
 
-ADataReplyValidateList AData::mValidateListHandler(void) {
+ADataReplyValidate AData::mValidateListHandler(void) {
 
-	ADataReplyValidateList oOutput;
+	ADataReplyValidate oOutput;
 
 	// TODO: Add list validation functionlity
 
@@ -192,7 +192,7 @@ QVariantMap AData::mValidateValue(
 	_A_ENUMS_DATA_TYPE inType, QVariant inValue,QVariantMap inProperties
 ) {
 
-	ADataReplyValidateValue oReply = this->mValidateValueHandler(
+	ADataReplyValidate oReply = this->mValidateValueHandler(
 		inType,inValue,inProperties
 	);
 	return oReply.mToVariantMap();
@@ -211,9 +211,10 @@ QVariantMap AData::mValidateStructure(
 	QVariant inModel,QVariant inStructure
 ) {
 
-	ADataReplyValidateStructure oReply = this->mValidateStructureHandler(
+	ADataReplyValidate oReply = this->mValidateStructureHandler(
 		inType,inModel,inStructure
 	);
+
 	return oReply.mToVariantMap();
 }
 
@@ -233,7 +234,7 @@ QVariantMap AData::mValidateList(
 	Q_UNUSED(inList)
 	Q_UNUSED(inProperties)
 
-	ADataReplyValidateList oReply = this->mValidateListHandler();
+	ADataReplyValidate oReply = this->mValidateListHandler();
 	return oReply.mToVariantMap();
 }
 

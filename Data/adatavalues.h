@@ -42,30 +42,30 @@ class ADataValues : public QObject {
 		explicit ADataValues(QObject* parent = nullptr);
 		virtual ~ADataValues(void);
 
-		ADataReplyValidateValue mValidateBoolean(QVariant inValue);
-		ADataReplyValidateValue mValidateTrueBoolean(QVariant inValue);
-		ADataReplyValidateValue mValidateFalseBoolean(QVariant inValue);
+		ADataReplyValidate mValidateBoolean(QVariant inValue);
+		ADataReplyValidate mValidateTrueBoolean(QVariant inValue);
+		ADataReplyValidate mValidateFalseBoolean(QVariant inValue);
 
-		ADataReplyValidateValue mValidateInteger(QVariant inValue);
-		ADataReplyValidateValue mValidatePositiveInteger(QVariant inValue);
-		ADataReplyValidateValue mValidateNegativeInteger(QVariant inValue);
-		ADataReplyValidateValue mValidateRangedInteger(QVariant inValue,int inRange1, int inRange2);
+		ADataReplyValidate mValidateInteger(QVariant inValue);
+		ADataReplyValidate mValidatePositiveInteger(QVariant inValue);
+		ADataReplyValidate mValidateNegativeInteger(QVariant inValue);
+		ADataReplyValidate mValidateRangedInteger(QVariant inValue,int inRange1, int inRange2);
 
-		ADataReplyValidateValue mValidateDouble(QVariant inValue);
-		ADataReplyValidateValue mValidatePositiveDouble(QVariant inValue);
-		ADataReplyValidateValue mValidateNegativeDouble(QVariant inValue);
-		ADataReplyValidateValue mValidateRangedDouble(QVariant inValue,double inRange1, double inRange2);
+		ADataReplyValidate mValidateDouble(QVariant inValue);
+		ADataReplyValidate mValidatePositiveDouble(QVariant inValue);
+		ADataReplyValidate mValidateNegativeDouble(QVariant inValue);
+		ADataReplyValidate mValidateRangedDouble(QVariant inValue,double inRange1, double inRange2);
 
-		ADataReplyValidateValue mValidateString(QVariant inValue);
-		ADataReplyValidateValue mValidateStringWithoutSymbols(QVariant inValue,QList<QString> inSymbols);
-		ADataReplyValidateValue mValidateStringOfSize(QVariant inValue, ADataStringSizeProperties inProperties);
-		ADataReplyValidateValue mValidateStringByRegex(QVariant inValue, QString inRegex);
-		ADataReplyValidateValue mValidateStringMd(QVariant inValue);
-		ADataReplyValidateValue mValidateStringEmail(QVariant inValue);
-		ADataReplyValidateValue mValidateStringIPv4(QVariant inValue);
-		ADataReplyValidateValue mValidateStringIPv6(QVariant inValue);
+		ADataReplyValidate mValidateString(QVariant inValue);
+		ADataReplyValidate mValidateStringWithoutSymbols(QVariant inValue,QList<QString> inSymbols);
+		ADataReplyValidate mValidateStringOfSize(QVariant inValue, ADataStringSizeProperties inProperties);
+		ADataReplyValidate mValidateStringByRegex(QVariant inValue, QString inRegex);
+		ADataReplyValidate mValidateStringMd(QVariant inValue);
+		ADataReplyValidate mValidateStringEmail(QVariant inValue);
+		ADataReplyValidate mValidateStringIPv4(QVariant inValue);
+		ADataReplyValidate mValidateStringIPv6(QVariant inValue);
 
-		ADataReplyValidateValue mValidate(_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties = {});
+		ADataReplyValidate mValidate(_A_ENUMS_DATA_TYPE inType,QVariant inValue,QVariantMap inProperties = {});
 
 	private:
 

@@ -42,9 +42,9 @@ class ADataStructures : public QObject {
 		explicit ADataStructures(QObject* parent = nullptr);
 		virtual ~ADataStructures(void);
 
-		ADataReplyValidateStructure mValidateFromMap(QVariantMap inStructure, QVariantMap inModel);
-		ADataReplyValidateStructure mValidateFromList(QVariantList inStructure, QVariantList inModel);
-		ADataReplyValidateStructure mValidate(
+		ADataReplyValidate mValidateFromMap(QVariantMap inStructure, QVariantMap inModel);
+		ADataReplyValidate mValidateFromList(QVariantList inStructure, QVariantList inModel);
+		ADataReplyValidate mValidate(
 			_A_ENUMS_DATA_STRUCTURE_VALIDATION_TYPE inType,
 			QVariant inStructure, QVariant inProperties
 		);

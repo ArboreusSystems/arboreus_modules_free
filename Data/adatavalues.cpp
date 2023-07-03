@@ -70,14 +70,16 @@ ADataValues::~ADataValues(void) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateBoolean(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateBoolean(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
+	ADataReplyValidate oOutput;
 
 	if (inValue.userType() == QMetaType::Bool) {
-		 oOutput.IsValid = true;
+		 oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
 		 oOutput.Type = _A_ENUMS_DATA_TYPE::Boolean;
 		 oOutput.Boolean = qvariant_cast<bool>(inValue);
+	} else {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 	}
 
 	return oOutput;
@@ -91,13 +93,13 @@ ADataReplyValidateValue ADataValues::mValidateBoolean(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateTrueBoolean(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateTrueBoolean(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
-
-	ADataReplyValidateValue oCheckboolean = this->mValidateBoolean(inValue);
-	if (oCheckboolean.IsValid) {
-		if (oCheckboolean.Boolean) oOutput = oCheckboolean;
+	ADataReplyValidate oOutput = this->mValidateBoolean(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		if (!oOutput.Boolean) {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+		}
 	}
 
 	return oOutput;
@@ -111,13 +113,13 @@ ADataReplyValidateValue ADataValues::mValidateTrueBoolean(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateFalseBoolean(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateFalseBoolean(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
-
-	ADataReplyValidateValue oCheckboolean = this->mValidateBoolean(inValue);
-	if (oCheckboolean.IsValid) {
-		if (!oCheckboolean.Boolean) oOutput = oCheckboolean;
+	ADataReplyValidate oOutput = this->mValidateBoolean(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		if (oOutput.Boolean) {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+		}
 	}
 
 	return oOutput;
@@ -131,14 +133,16 @@ ADataReplyValidateValue ADataValues::mValidateFalseBoolean(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateInteger(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateInteger(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
+	ADataReplyValidate oOutput;
 
 	if (inValue.userType() == QMetaType::Int) {
-		 oOutput.IsValid = true;
+		 oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
 		 oOutput.Type = _A_ENUMS_DATA_TYPE::Integer;
 		 oOutput.Integer = qvariant_cast<int>(inValue);
+	} else {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 	}
 
 	return oOutput;
@@ -153,15 +157,14 @@ ADataReplyValidateValue ADataValues::mValidateInteger(QVariant inValue) {
 */
 
 
-ADataReplyValidateValue ADataValues::mValidatePositiveInteger(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidatePositiveInteger(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
-
-	ADataReplyValidateValue oCheckInteger = this->mValidateInteger(inValue);
-	if (oCheckInteger.IsValid) {
-		if (oCheckInteger.Integer >= 0) {
-			oOutput = oCheckInteger;
+	ADataReplyValidate oOutput = this->mValidateInteger(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		if (oOutput.Integer >= 0) {
 			oOutput.Type = _A_ENUMS_DATA_TYPE::PositiveInteger;
+		} else {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 		}
 	}
 
@@ -176,15 +179,14 @@ ADataReplyValidateValue ADataValues::mValidatePositiveInteger(QVariant inValue) 
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateNegativeInteger(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateNegativeInteger(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
-
-	ADataReplyValidateValue oCheckInteger = this->mValidateInteger(inValue);
-	if (oCheckInteger.IsValid) {
-		if (oCheckInteger.Integer < 0) {
-			oOutput = oCheckInteger;
+	ADataReplyValidate oOutput = this->mValidateInteger(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		if (oOutput.Integer < 0) {
 			oOutput.Type = _A_ENUMS_DATA_TYPE::NegativeInteger;
+		} else {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 		}
 	}
 
@@ -199,9 +201,7 @@ ADataReplyValidateValue ADataValues::mValidateNegativeInteger(QVariant inValue) 
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateRangedInteger(QVariant inValue, int inRange1, int inRange2) {
-
-	ADataReplyValidateValue oOutput;
+ADataReplyValidate ADataValues::mValidateRangedInteger(QVariant inValue, int inRange1, int inRange2) {
 
 	int oMax = 0;
 	int oMin = 0;
@@ -213,11 +213,12 @@ ADataReplyValidateValue ADataValues::mValidateRangedInteger(QVariant inValue, in
 		oMin = inRange1;
 	}
 
-	ADataReplyValidateValue oCheckInteger = this->mValidateInteger(inValue);
-	if (oCheckInteger.IsValid) {
-		if (oCheckInteger.Integer <= oMax && oCheckInteger.Integer >= oMin) {
-			oOutput = oCheckInteger;
+	ADataReplyValidate oOutput = this->mValidateInteger(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		if (oOutput.Integer <= oMax && oOutput.Integer >= oMin) {
 			oOutput.Type = _A_ENUMS_DATA_TYPE::RangedInteger;
+		} else {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 		}
 	}
 
@@ -232,14 +233,16 @@ ADataReplyValidateValue ADataValues::mValidateRangedInteger(QVariant inValue, in
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateDouble(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateDouble(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
+	ADataReplyValidate oOutput;
 
 	if (inValue.userType() == QMetaType::Double) {
-		 oOutput.IsValid = true;
+		 oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
 		 oOutput.Type = _A_ENUMS_DATA_TYPE::Double;
 		 oOutput.Double = qvariant_cast<double>(inValue);
+	} else {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 	}
 
 	return oOutput;
@@ -253,15 +256,14 @@ ADataReplyValidateValue ADataValues::mValidateDouble(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidatePositiveDouble(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidatePositiveDouble(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
-
-	ADataReplyValidateValue oCheckFloat = this->mValidateDouble(inValue);
-	if (oCheckFloat.IsValid) {
-		if (oCheckFloat.Double >= 0) {
-			oOutput = oCheckFloat;
+	ADataReplyValidate oOutput = this->mValidateDouble(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		if (oOutput.Double >= 0) {
 			oOutput.Type = _A_ENUMS_DATA_TYPE::PositiveDouble;
+		} else {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 		}
 	}
 
@@ -276,15 +278,14 @@ ADataReplyValidateValue ADataValues::mValidatePositiveDouble(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateNegativeDouble(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateNegativeDouble(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
-
-	ADataReplyValidateValue oCheckFloat = this->mValidateDouble(inValue);
-	if (oCheckFloat.IsValid) {
-		if (oCheckFloat.Double < 0) {
-			oOutput = oCheckFloat;
+	ADataReplyValidate oOutput = this->mValidateDouble(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		if (oOutput.Double < 0) {
 			oOutput.Type = _A_ENUMS_DATA_TYPE::NegativeDouble;
+		} else {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 		}
 	}
 
@@ -299,9 +300,7 @@ ADataReplyValidateValue ADataValues::mValidateNegativeDouble(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateRangedDouble(QVariant inValue, double inRange1, double inRange2) {
-
-	ADataReplyValidateValue oOutput;
+ADataReplyValidate ADataValues::mValidateRangedDouble(QVariant inValue, double inRange1, double inRange2) {
 
 	double oMax = 0;
 	double oMin = 0;
@@ -313,11 +312,12 @@ ADataReplyValidateValue ADataValues::mValidateRangedDouble(QVariant inValue, dou
 		oMin = inRange1;
 	}
 
-	ADataReplyValidateValue oCheckFloat = this->mValidateDouble(inValue);
-	if (oCheckFloat.IsValid) {
-		if (oCheckFloat.Double <= oMax && oCheckFloat.Double >= oMin) {
-			oOutput = oCheckFloat;
+	ADataReplyValidate oOutput = this->mValidateDouble(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		if (oOutput.Double <= oMax && oOutput.Double >= oMin) {
 			oOutput.Type = _A_ENUMS_DATA_TYPE::RangedDouble;
+		} else {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 		}
 	}
 
@@ -332,14 +332,16 @@ ADataReplyValidateValue ADataValues::mValidateRangedDouble(QVariant inValue, dou
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateString(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateString(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
+	ADataReplyValidate oOutput;
 
 	if (inValue.userType() == QMetaType::QString) {
-		 oOutput.IsValid = true;
+		 oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::Ok;
 		 oOutput.Type = _A_ENUMS_DATA_TYPE::String;
 		 oOutput.String = qvariant_cast<QString>(inValue);
+	} else {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 	}
 
 	return oOutput;
@@ -353,20 +355,24 @@ ADataReplyValidateValue ADataValues::mValidateString(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateStringWithoutSymbols(QVariant inValue, QList<QString> inSymbols) {
+ADataReplyValidate ADataValues::mValidateStringWithoutSymbols(QVariant inValue, QList<QString> inSymbols) {
 
-	ADataReplyValidateValue oOutput;
+	ADataReplyValidate oOutput;
 	bool oContains = false;
 
-	ADataReplyValidateValue oCheckString = this->mValidateString(inValue);
-	if (oCheckString.IsValid) {
+	ADataReplyValidate oCheckString = this->mValidateString(inValue);
+	if (oCheckString.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
 		QList<QString>::iterator iSymbol;
 		for (iSymbol = inSymbols.begin(); iSymbol != inSymbols.end(); ++iSymbol) {
 			if (oCheckString.String.contains(*iSymbol)) oContains = true;
 		}
+	} else {
+		oOutput = oCheckString;
+		return oOutput;
 	}
 
 	if (!oContains) oOutput = oCheckString;
+
 	return oOutput;
 }
 
@@ -378,9 +384,9 @@ ADataReplyValidateValue ADataValues::mValidateStringWithoutSymbols(QVariant inVa
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateStringOfSize(QVariant inValue, ADataStringSizeProperties inProperties) {
+ADataReplyValidate ADataValues::mValidateStringOfSize(QVariant inValue, ADataStringSizeProperties inProperties) {
 
-	ADataReplyValidateValue oOutput;
+	ADataReplyValidate oOutput;
 
 	int oSize = 0;
 
@@ -394,28 +400,52 @@ ADataReplyValidateValue ADataValues::mValidateStringOfSize(QVariant inValue, ADa
 		oMin = inProperties.Range1;
 	}
 
-	ADataReplyValidateValue oCheckString = this->mValidateString(inValue);
-	if (oCheckString.IsValid) {
+	ADataReplyValidate oCheckString = this->mValidateString(inValue);
+	if (oCheckString.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
 		oSize = oCheckString.String.size();
 		oCheckString.Type = _A_ENUMS_DATA_TYPE::StringOfSize;
 		switch (inProperties.Type) {
 			case _A_ENUMS_DATA_STRING_SIZE_TYPE::Equal:
-				if (oSize == inProperties.Size) oOutput = oCheckString;
+				if (oSize == inProperties.Size) {
+					oOutput = oCheckString;
+				} else {
+					oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+				}
 				break;
 			case _A_ENUMS_DATA_STRING_SIZE_TYPE::Less:
-				if (oSize < inProperties.Size) oOutput = oCheckString;
+				if (oSize < inProperties.Size) {
+					oOutput = oCheckString;
+				} else {
+					oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+				}
 				break;
 			case _A_ENUMS_DATA_STRING_SIZE_TYPE::LessOrEqual:
-				if (oSize <= inProperties.Size) oOutput = oCheckString;
+				if (oSize <= inProperties.Size) {
+					oOutput = oCheckString;
+				} else {
+					oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+				}
 				break;
 			case _A_ENUMS_DATA_STRING_SIZE_TYPE::Greater:
-				if (oSize > inProperties.Size) oOutput = oCheckString;
+				if (oSize > inProperties.Size) {
+					oOutput = oCheckString;
+				} else {
+					oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+				}
 				break;
 			case _A_ENUMS_DATA_STRING_SIZE_TYPE::GreaterOrEqual:
-				if (oSize >= inProperties.Size) oOutput = oCheckString;
+				if (oSize >= inProperties.Size) {
+					oOutput = oCheckString;
+				} else {
+					oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+				}
 				break;
 			case _A_ENUMS_DATA_STRING_SIZE_TYPE::InRange:
-				if (oSize >= oMin && oSize <= oMax) oOutput = oCheckString;
+				if (oSize >= oMin && oSize <= oMax) {
+					oOutput = oCheckString;
+				} else {
+					oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+				}
 				break;
 			default:
 				break;
@@ -433,18 +463,17 @@ ADataReplyValidateValue ADataValues::mValidateStringOfSize(QVariant inValue, ADa
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateStringByRegex(QVariant inValue, QString inRegex) {
+ADataReplyValidate ADataValues::mValidateStringByRegex(QVariant inValue, QString inRegex) {
 
-	ADataReplyValidateValue oOutput;
-
-	ADataReplyValidateValue oCheckString = this->mValidateString(inValue);
-	if (oCheckString.IsValid) {
+	ADataReplyValidate oOutput = this->mValidateString(inValue);
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
 
 		QRegularExpression oExpression(inRegex);
-		QRegularExpressionMatch oMatch = oExpression.match(oCheckString.String);
+		QRegularExpressionMatch oMatch = oExpression.match(oOutput.String);
 		if(oMatch.hasMatch()) {
-			oOutput = oCheckString;
 			oOutput.Type = _A_ENUMS_DATA_TYPE::StringByRegex;
+		} else {
+			oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
 		}
 	}
 
@@ -459,7 +488,7 @@ ADataReplyValidateValue ADataValues::mValidateStringByRegex(QVariant inValue, QS
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateStringMd(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateStringMd(QVariant inValue) {
 
 	return this->mValidateStringByRegex(
 		inValue,
@@ -475,7 +504,7 @@ ADataReplyValidateValue ADataValues::mValidateStringMd(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateStringEmail(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateStringEmail(QVariant inValue) {
 
 	return this->mValidateStringByRegex(
 		inValue,
@@ -491,24 +520,28 @@ ADataReplyValidateValue ADataValues::mValidateStringEmail(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateStringIPv4(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateStringIPv4(QVariant inValue) {
 
-	ADataReplyValidateValue oOutput;
 	int oIsValid = 0;
 
-	ADataReplyValidateValue oCheckString = this->mValidateStringByRegex(
+	ADataReplyValidate oOutput = this->mValidateStringByRegex(
 		inValue,
 		"^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}$"
 	);
-	if (oCheckString.IsValid) {
-		QStringList oList = oCheckString.String.split(".");
+	if (oOutput.Status == _A_ENUMS_DATA_REPLY_TYPE::Ok) {
+		QStringList oList = oOutput.String.split(".");
 		for (int i = 0; i < oList.size(); ++i) {
 			int iNumber = oList[i].toInt();
 			if (iNumber >= 0 && iNumber <= 255) ++oIsValid;
 		}
+	} else {
+		return oOutput;
 	}
 
-	if (oIsValid == 4) oOutput = oCheckString;
+	if (oIsValid != 4) {
+		oOutput.Status = _A_ENUMS_DATA_REPLY_TYPE::NotValid;
+		return oOutput;
+	}
 
 	return oOutput;
 }
@@ -521,7 +554,7 @@ ADataReplyValidateValue ADataValues::mValidateStringIPv4(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidateStringIPv6(QVariant inValue) {
+ADataReplyValidate ADataValues::mValidateStringIPv6(QVariant inValue) {
 
 	return this->mValidateStringByRegex(
 		inValue,
@@ -550,9 +583,9 @@ ADataReplyValidateValue ADataValues::mValidateStringIPv6(QVariant inValue) {
 	Doc.
 */
 
-ADataReplyValidateValue ADataValues::mValidate(_A_ENUMS_DATA_TYPE inType, QVariant inValue, QVariantMap inProperties) {
+ADataReplyValidate ADataValues::mValidate(_A_ENUMS_DATA_TYPE inType, QVariant inValue, QVariantMap inProperties) {
 
-	ADataReplyValidateValue oOutput;
+	ADataReplyValidate oOutput;
 
 	switch (inType) {
 		case _A_ENUMS_DATA_TYPE::Boolean:
