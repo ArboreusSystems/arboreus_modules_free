@@ -19,7 +19,7 @@
 // System includes
 
 // Precompiled includes
-#include <ausershandlerpch.h>
+#include <adbkeyvaluepch.h>
 
 // Application includes
 #include <aloggerglobal.h>
@@ -39,19 +39,21 @@ class ADBKeyValue : public QObject {
 
 	public:
 
+		ADBKeyValueProperties* pProperties = nullptr;
+
 		explicit ADBKeyValue(QObject* parent = nullptr);
 		virtual ~ADBKeyValue(void);
 
-		bool mInit(ADBKeyValueProperties inProperties);
+		bool mInit(void);
 		bool mIsKey(QString inKey);
 		ADBKeyValueReply mRead(QString inKey);
 		ADBKeyValueReply mReadAll(void);
 		ADBKeyValueReply mWrite(QString inKey,QVariant inValue);
+		QString mGetDBName(void);
 
 	private:
 
 		ADBSqliteCipher* pDB = nullptr;
-		ADBKeyValueProperties* pProperties = nullptr;
 };
 
 } // namespace ARB

@@ -53,30 +53,30 @@ ADBKeyValue::~ADBKeyValue(void) {
 	Doc.
 */
 
-bool ADBKeyValue::mInit(ADBKeyValueProperties inProperties) {
+bool ADBKeyValue::mInit(void) {
 
-	pProperties = new ADBKeyValueProperties(this);
-	inProperties.mCopy(pProperties);
+	if (pProperties) {
 
-	ADBSqliteCipherProperties oDBproperties;
-	oDBproperties.Name = pProperties->Name;
-	oDBproperties.Path = pProperties->Path;
+		ADBSqliteCipherProperties oDBproperties;
+		oDBproperties.Name = pProperties->Name;
+		oDBproperties.Path = pProperties->Path;
 
-	if (pProperties->Encrypted) oDBproperties.Value = pProperties->Value;
+		if (pProperties->Encrypted) oDBproperties.Value = pProperties->Value;
 
-	pDB = new ADBSqliteCipher(this);
-	pDB->mStart(&oDBproperties);
+		pDB = new ADBSqliteCipher(this);
+		pDB->mStart(&oDBproperties);
 
-	QString oSQL = \
-		"CREATE TABLE IF NOT EXISTS " + pProperties->NameTable + " " +
-		"(key STRING (25) PRIMARY KEY UNIQUE NOT NULL,value BLOB);";
+		QString oSQL = \
+			"CREATE TABLE IF NOT EXISTS " + pProperties->NameTable + " " +
+			"(key STRING (25) PRIMARY KEY UNIQUE NOT NULL,value BLOB);";
 
-	ADBSqliteReply oCreatingReply = pDB->mStringExecute(oSQL);
-	if (!oCreatingReply.Status) {
-		_A_CRITICAL << "Creating DBKeyValue failed for:" << pProperties->Path;
-	} else {
-		_A_DEBUG << "DBKeyValue storage created:" << pProperties->Path;
-		return true;
+		ADBSqliteReply oCreatingReply = pDB->mStringExecute(oSQL);
+		if (!oCreatingReply.Status) {
+			_A_CRITICAL << "Creating DBKeyValue failed for:" << pProperties->Path;
+		} else {
+			_A_DEBUG << "DBKeyValue storage created:" << pProperties->Path;
+			return true;
+		}
 	}
 
 	return false;
@@ -198,5 +198,18 @@ ADBKeyValueReply ADBKeyValue::mWrite(QString inKey, QVariant inValue) {
 	}
 
 	return oReply;
+}
+
+
+// -----------
+/*!
+	\fn
+
+	Doc.
+*/
+
+QString ADBKeyValue::mGetDBName(void) {
+
+	return pDB->mGetDBName();
 }
 
