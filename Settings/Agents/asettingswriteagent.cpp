@@ -76,9 +76,8 @@ ASettingsWriteAgent::~ASettingsWriteAgent(void) {
 void ASettingsWriteAgent::slRun(void) {
 
 	ADBKeyValueReply oReply = pDBKeyValue->mWrite(pKey,pValue);
-	if (oReply.Status == _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok) {
-		pReply.Status = true;
-	}
+	pReply.Status = oReply.Status;
+	pReply.Data = oReply.Data;
 
 	emit this->sgFinished();
 }

@@ -21,6 +21,7 @@
 #include <asettingspch.h>
 
 // Application includes
+#include <adbkeyvaluedatamodels.h>
 
 // Constants and defintions
 
@@ -48,7 +49,7 @@ class ASettingsReply {
 
 	public:
 
-		bool Status = false;
+		_A_ENUMS_DB_KEY_VALUE_REPLY_STATUS Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Error;
 		QVariant Data = 0;
 
 		ASettingsReply(void) {}
@@ -57,7 +58,7 @@ class ASettingsReply {
 		QVariantMap mToVariantMap(void) {
 
 			QVariantMap oOutput;
-			oOutput.insert("Status",Status);
+			oOutput.insert("Status",static_cast<int>(Status));
 			oOutput.insert("Data",Data);
 			return oOutput;
 		}

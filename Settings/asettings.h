@@ -24,10 +24,10 @@
 // Application includes
 #include <athreadtemplate.h>
 #include <asettingsservice.h>
-#include <asettingsagent.h>
 #include <asettingsconfig.h>
 #include <athreadobjectcontrollertemplate.h>
 #include <asettingswriteagent.h>
+#include <asettingsreadagent.h>
 
 // Constants and definitions
 #define A_SETTING_VALUE_NO_KEY "NoKey"
@@ -55,14 +55,6 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 		ASettingsReply mReadHandler(QString inKey);
 		ASettingsReply mWriteHandler(QString inKey, QVariant inValue);
 
-	signals:
-
-		void sgInit(ASettingsProperties inProperties);
-		void sgInitiated(void);
-		void sgGetFromDB(QString inKey);
-		void sgDidWrite(QString inKey,QVariant inValue);
-//		void sgUpdate(QString inKey,QVariant inValue);
-
 	public slots:
 
 		QVariantMap mRead(QString inKey);
@@ -70,14 +62,23 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 		bool mIsKey(QString inKey);
 
 		void slInitiated(void);
-//		void slUpdated(QString inKey,QVariant inValue);
+
+	signals:
+
+		void sgInit(ASettingsProperties inProperties);
+		void sgInitiated(void);
+		void sgDidWrite(QString inKey,QVariant inValue);
 
 	private:
 
 		ABackend* pBackend = nullptr;
 		QVariantMap pCache = {};
 
-		ASettingsReply mGetFromDB(QString inSettingsID);
+		ASettingsReply mReadFromDB(QString inSettingsID);
+
+	private slots:
+
+		void slDidWrite(QString inKey,QVariant inValue);
 };
 
 } // namespace ARB

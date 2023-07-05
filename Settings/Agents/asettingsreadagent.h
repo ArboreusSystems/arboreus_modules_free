@@ -33,14 +33,24 @@
 namespace ARB {
 
 // Class definitions
-class ASettingsReadAgent : public QObject {
+class ASettingsReadAgent : public AThreadAgentTemplate {
 
 	Q_OBJECT
 
 	public:
 
+		ASettingsReply pReply;
+		QString pKey = "NoDefinedKey";
+
+		explicit ASettingsReadAgent(
+			ADBKeyValue* inDBKeyValue,
+			QString inKey,
+			QObject* parent = nullptr
+		);
 		explicit ASettingsReadAgent(QObject *parent = nullptr);
 		virtual ~ASettingsReadAgent(void);
+
+		void slRun(void);
 
 	private:
 

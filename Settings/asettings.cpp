@@ -44,14 +44,10 @@ ASettings::ASettings(QObject* parent) : AThreadTemplate<ASettingsService>(new AS
 		this,&ASettings::slInitiated,
 		Qt::QueuedConnection
 	);
-//	QObject::connect(
-//		this,&ASettings::sgUpdate,
-//		this->mService(),&ASettingsService::slUpdate
-//	);
-//	QObject::connect(
-//		this->mService(),&ASettingsService::sgUpdated,
-//		this,&ASettings::slUpdated
-//	);
+	QObject::connect(
+		this,&ASettings::sgDidWrite,
+		this,&ASettings::slDidWrite
+	);
 
 	_A_DEBUG << "ASettings created";
 }
@@ -111,14 +107,11 @@ ASettingsReply ASettings::mReadHandler(QString inKey) {
 	oOutput.Data = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
 
 	if (oOutput.Data != QString(A_SETTING_VALUE_NO_KEY)) {
-		oOutput.Status = true;
+		oOutput.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok;
 		return oOutput;
 	}
 
-	oOutput = this->mGetFromDB(inKey);
-	if (oOutput.Status) {
-		pCache.insert(inKey,oOutput.Data);
-	}
+	oOutput = this->mReadFromDB(inKey);
 	return oOutput;
 }
 
@@ -137,7 +130,7 @@ ASettingsReply ASettings::mWriteHandler(QString inKey, QVariant inValue) {
 
 	ASettingsWriteAgent oAgent(this->mService()->pDBKeyValue,inKey,inValue);
 	QObject::connect(
-		&oAgent,&ASettingsAgent::sgFinished,
+		&oAgent,&ASettingsWriteAgent::sgFinished,
 		&oEventLoop,&QEventLoop::quit
 	);
 	QObject::connect(
@@ -149,7 +142,7 @@ ASettingsReply ASettings::mWriteHandler(QString inKey, QVariant inValue) {
 	emit oController.sgRun();
 	oEventLoop.exec();
 
-	if (oAgent.pReply.Status) {
+	if (oAgent.pReply.Status == _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok) {
 		emit this->sgDidWrite(oAgent.pKey,oAgent.pValue);
 	}
 
@@ -205,10 +198,17 @@ QVariantMap ASettings::mWrite(QString inKey, QVariant inValue) {
 	Doc.
 */
 
-//void ASettings::slUpdated(QString inKey, QVariant inValue) {
+bool ASettings::mIsKey(QString inKey) {
 
-//	emit sgUpdated(inKey,inValue);
-//}
+	QVariant oValue = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
+	if (oValue != QString(A_SETTING_VALUE_NO_KEY)) return true;
+
+	ASettingsReply oOutput = this->mReadFromDB(inKey);
+	if (oOutput.Status == _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok) {
+		return true;
+	}
+	return false;
+}
 
 
 // -----------
@@ -218,24 +218,28 @@ QVariantMap ASettings::mWrite(QString inKey, QVariant inValue) {
 	Doc.
 */
 
-ASettingsReply ASettings::mGetFromDB(QString inKey) {
+ASettingsReply ASettings::mReadFromDB(QString inKey) {
 
 	AThreadObjectControllerTemplate oController;
 	QEventLoop oEventLoop;
 
-	ASettingsAgent oAgent(this->mService(),inKey);
+	ASettingsReadAgent oAgent(this->mService()->pDBKeyValue,inKey);
 	QObject::connect(
-		&oAgent,&ASettingsAgent::sgFinished,
+		&oAgent,&ASettingsReadAgent::sgFinished,
 		&oEventLoop,&QEventLoop::quit
 	);
 	QObject::connect(
 		&oController,&AThreadObjectControllerTemplate::sgRun,
-		&oAgent,&ASettingsAgent::slRun
+		&oAgent,&ASettingsReadAgent::slRun
 	);
 	oAgent.moveToThread(this);
 
 	emit oController.sgRun();
 	oEventLoop.exec();
+
+	if (oAgent.pReply.Status == _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok) {
+		pCache.insert(inKey,oAgent.pReply.Data);
+	}
 
 	return oAgent.pReply;
 }
@@ -248,11 +252,8 @@ ASettingsReply ASettings::mGetFromDB(QString inKey) {
 	Doc.
 */
 
-bool ASettings::mIsKey(QString inKey) {
+void ASettings::slDidWrite(QString inKey, QVariant inValue) {
 
-	QVariant oValue = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
-	if (oValue != QString(A_SETTING_VALUE_NO_KEY)) return true;
-
-	ASettingsReply oOutput = this->mGetFromDB(inKey);
-	return oOutput.Status;
+	pCache.insert(inKey,inValue);
 }
+
