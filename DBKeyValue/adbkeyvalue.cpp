@@ -131,8 +131,9 @@ ADBKeyValueReply ADBKeyValue::mRead(QString inKey) {
 		if (oReply.Output.length() == 0) {
 			oOutput.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::NotExisted;
 		} else {
+			QVariantList oDataFromDB = qvariant_cast<QVariantList>(oReply.Output[0]);
+			oOutput.Data = oDataFromDB[0];
 			oOutput.Status = _A_ENUMS_DB_KEY_VALUE_REPLY_STATUS::Ok;
-			oOutput.Data = qvariant_cast<QVariant>(oReply.Output[0]);
 		}
 	}
 
