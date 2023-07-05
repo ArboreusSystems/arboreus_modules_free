@@ -25,9 +25,9 @@
 #include <athreadservicetemplate.h>
 #include <aloggerglobal.h>
 #include <asettingsdatamodels.h>
-#include <adbsqlitecipher.h>
 #include <asettingsconfig.h>
 #include <aapplicationconfig.h>
+#include <adbkeyvalue.h>
 
 // Constants and definitions
 #define _A_SETTINGS_DB_NAME "settings"
@@ -42,7 +42,8 @@ class ASettingsService : public AThreadServiceTemplate {
 
 	public:
 
-		ADBSqliteCipher* pDB = nullptr;
+//		ADBSqliteCipher* pDB = nullptr;
+		ADBKeyValue* pDBKeyValue = nullptr;
 
 		explicit ASettingsService(QObject* parent = nullptr);
 		virtual ~ASettingsService(void);
@@ -52,12 +53,12 @@ class ASettingsService : public AThreadServiceTemplate {
 	public slots:
 
 		void slInit(ARB::ASettingsProperties inProperties);
-		void slUpdate(QString inKey,QVariant inValue);
+//		void slUpdate(QString inKey,QVariant inValue);
 
 	signals:
 
 		void sgInitiated(void);
-		void sgUpdated(QString inKey,QVariant inValue);
+//		void sgUpdated(QString inKey,QVariant inValue);
 
 	private:
 

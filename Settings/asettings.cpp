@@ -44,14 +44,14 @@ ASettings::ASettings(QObject* parent) : AThreadTemplate<ASettingsService>(new AS
 		this,&ASettings::slInitiated,
 		Qt::QueuedConnection
 	);
-	QObject::connect(
-		this,&ASettings::sgUpdate,
-		this->mService(),&ASettingsService::slUpdate
-	);
-	QObject::connect(
-		this->mService(),&ASettingsService::sgUpdated,
-		this,&ASettings::slUpdated
-	);
+//	QObject::connect(
+//		this,&ASettings::sgUpdate,
+//		this->mService(),&ASettingsService::slUpdate
+//	);
+//	QObject::connect(
+//		this->mService(),&ASettingsService::sgUpdated,
+//		this,&ASettings::slUpdated
+//	);
 
 	_A_DEBUG << "ASettings created";
 }
@@ -85,7 +85,9 @@ void ASettings::mInit(void) {
 
 	ASettingsProperties oProperties;
 	oProperties.Config = pBackend->pGlobalConfigObject;
-	oProperties.Path = pBackend->pProperties->mGetPathDataApplication() + "/Settings";
+	oProperties.Path = \
+		pBackend->pProperties->mGetPathDataApplication() +
+		"/" + pConfig->ASettingsConfig_ModuleName();
 
 	if (ADir::mEnsure(oProperties.Path)) {
 		_A_DEBUG << "Ensured path for settings:" << oProperties.Path;
@@ -103,7 +105,7 @@ void ASettings::mInit(void) {
 	Doc.
 */
 
-ASettingsReply ASettings::mGet(QString inKey) {
+ASettingsReply ASettings::mReadHandler(QString inKey) {
 
 	ASettingsReply oOutput;
 	oOutput.Data = pCache.value(inKey,QString(A_SETTING_VALUE_NO_KEY));
@@ -128,9 +130,30 @@ ASettingsReply ASettings::mGet(QString inKey) {
 	Doc.
 */
 
-void ASettings::mUpdate(QString inKey, QVariant inValue) {
+ASettingsReply ASettings::mWriteHandler(QString inKey, QVariant inValue) {
 
-	emit sgUpdate(inKey,inValue);
+	AThreadObjectControllerTemplate oController;
+	QEventLoop oEventLoop;
+
+	ASettingsWriteAgent oAgent(this->mService()->pDBKeyValue,inKey,inValue);
+	QObject::connect(
+		&oAgent,&ASettingsAgent::sgFinished,
+		&oEventLoop,&QEventLoop::quit
+	);
+	QObject::connect(
+		&oController,&AThreadObjectControllerTemplate::sgRun,
+		&oAgent,&ASettingsWriteAgent::slRun
+	);
+	oAgent.moveToThread(this);
+
+	emit oController.sgRun();
+	oEventLoop.exec();
+
+	if (oAgent.pReply.Status) {
+		emit this->sgDidWrite(oAgent.pKey,oAgent.pValue);
+	}
+
+	return oAgent.pReply;
 }
 
 
@@ -156,9 +179,9 @@ void ASettings::slInitiated(void) {
 	Doc.
 */
 
-QVariantMap ASettings::mGetByKey(QString inKey) {
+QVariantMap ASettings::mRead(QString inKey) {
 
-	return this->mGet(inKey).mToVariantMap();
+	return this->mReadHandler(inKey).mToVariantMap();
 }
 
 
@@ -169,9 +192,9 @@ QVariantMap ASettings::mGetByKey(QString inKey) {
 	Doc.
 */
 
-void ASettings::mUpdateByKey(QString inKey, QVariant inValue) {
+QVariantMap ASettings::mWrite(QString inKey, QVariant inValue) {
 
-	this->mUpdate(inKey,inValue);
+	return this->mWriteHandler(inKey,inValue).mToVariantMap();
 }
 
 
@@ -182,10 +205,10 @@ void ASettings::mUpdateByKey(QString inKey, QVariant inValue) {
 	Doc.
 */
 
-void ASettings::slUpdated(QString inKey, QVariant inValue) {
+//void ASettings::slUpdated(QString inKey, QVariant inValue) {
 
-	emit sgUpdated(inKey,inValue);
-}
+//	emit sgUpdated(inKey,inValue);
+//}
 
 
 // -----------

@@ -75,16 +75,16 @@ ASettingsAgent::~ASettingsAgent(void) {
 
 void ASettingsAgent::slRun(void) {
 
-	ADBSqliteReply oDbReply = pService->pDB->mStringExecute(
-		"SELECT value FROM settings WHERE key='" + pKey + "';"
-	);
-	if (oDbReply.Status) {
-		if (oDbReply.Output.length() != 0) {
-			pReply.Status = true;
-			QVariantList oReplyData = qvariant_cast<QVariantList>(oDbReply.Output[0]);
-			pReply.Data = oReplyData[0];
-		}
-	}
+//	ADBSqliteReply oDbReply = pService->pDB->mStringExecute(
+//		"SELECT value FROM settings WHERE key='" + pKey + "';"
+//	);
+//	if (oDbReply.Status) {
+//		if (oDbReply.Output.length() != 0) {
+//			pReply.Status = true;
+//			QVariantList oReplyData = qvariant_cast<QVariantList>(oDbReply.Output[0]);
+//			pReply.Data = oReplyData[0];
+//		}
+//	}
 
 	emit sgFinished();
 }

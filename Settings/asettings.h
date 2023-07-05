@@ -27,6 +27,7 @@
 #include <asettingsagent.h>
 #include <asettingsconfig.h>
 #include <athreadobjectcontrollertemplate.h>
+#include <asettingswriteagent.h>
 
 // Constants and definitions
 #define A_SETTING_VALUE_NO_KEY "NoKey"
@@ -51,25 +52,25 @@ class ASettings : public AThreadTemplate<ASettingsService> {
 		Q_DISABLE_COPY(ASettings)
 
 		void mInit(void);
-		ASettingsReply mGet(QString inKey);
-		void mUpdate(QString inKey, QVariant inValue);
+		ASettingsReply mReadHandler(QString inKey);
+		ASettingsReply mWriteHandler(QString inKey, QVariant inValue);
 
 	signals:
 
 		void sgInit(ASettingsProperties inProperties);
 		void sgInitiated(void);
 		void sgGetFromDB(QString inKey);
-		void sgUpdated(QString inKey,QVariant inValue);
-		void sgUpdate(QString inKey,QVariant inValue);
+		void sgDidWrite(QString inKey,QVariant inValue);
+//		void sgUpdate(QString inKey,QVariant inValue);
 
 	public slots:
 
-		QVariantMap mGetByKey(QString inKey);
-		void mUpdateByKey(QString inKey,QVariant inValue);
+		QVariantMap mRead(QString inKey);
+		QVariantMap mWrite(QString inKey,QVariant inValue);
 		bool mIsKey(QString inKey);
 
 		void slInitiated(void);
-		void slUpdated(QString inKey,QVariant inValue);
+//		void slUpdated(QString inKey,QVariant inValue);
 
 	private:
 

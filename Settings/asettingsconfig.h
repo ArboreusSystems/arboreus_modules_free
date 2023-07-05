@@ -32,6 +32,8 @@ class ASettingsConfig {
 	public:
 
 		virtual bool ASettingsConfig_Encrypted(void) = 0;
+		virtual QString ASettingsConfig_TableName(void) = 0;
+		virtual QString ASettingsConfig_ModuleName(void) = 0;
 };
 
 } // namespace ARB
