@@ -42,7 +42,6 @@ class ASettingsService : public AThreadServiceTemplate {
 
 	public:
 
-//		ADBSqliteCipher* pDB = nullptr;
 		ADBKeyValue* pDBKeyValue = nullptr;
 
 		explicit ASettingsService(QObject* parent = nullptr);
@@ -53,12 +52,10 @@ class ASettingsService : public AThreadServiceTemplate {
 	public slots:
 
 		void slInit(ARB::ASettingsProperties inProperties);
-//		void slUpdate(QString inKey,QVariant inValue);
 
 	signals:
 
 		void sgInitiated(void);
-//		void sgUpdated(QString inKey,QVariant inValue);
 
 	private:
 
