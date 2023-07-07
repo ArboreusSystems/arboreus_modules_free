@@ -77,7 +77,7 @@ void ASettings::mInit(void) {
 
 	pBackend = &ABackend::mInstance();
 	pConfig = qobject_cast<ASettingsConfig*>(pBackend->pGlobalConfigObject);
-	this->start(QThread::Priority::LowestPriority);
+	this->start(pConfig->ASettingsConfig_ThreadPriority());
 
 	ASettingsProperties oProperties;
 	oProperties.Config = pBackend->pGlobalConfigObject;
