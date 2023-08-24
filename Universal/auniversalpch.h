@@ -35,7 +35,10 @@
 #include <QDateTime>
 #include <QRandomGenerator>
 #include <QVector>
+
+#if !defined(A_CONSOLE_APPLICATION)
 #include <QQmlEngine>
+#endif
 
 #include <algorithm>
 #include <chrono>

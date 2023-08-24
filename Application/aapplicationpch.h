@@ -18,13 +18,16 @@
 #if defined __cplusplus
 
 // System includes
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
 #include <QObject>
 #include <QString>
 #include <QByteArray>
 #include <QTimer>
 #include <QThread>
+
+#if !defined(A_CONSOLE_APPLICATION)
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#endif
 
 // Application includes
 

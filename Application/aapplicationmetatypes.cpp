@@ -49,7 +49,10 @@ AApplicationMetatypes::~AApplicationMetatypes(void) {}
 
 void AApplicationMetatypes::mInit(void) {
 
-	qmlRegisterType<ARB::AEnumsApplicationStatus>("Arboreus", 1, 0, "AEnumsApplicationStatus");
 	qRegisterMetaType<ARB::AEnumsApplicationStatus::Status>("ARB::AEnumsApplicationStatus::Status");
+
+#if !defined(A_CONSOLE_APPLICATION)
+	qmlRegisterType<ARB::AEnumsApplicationStatus>("Arboreus", 1, 0, "AEnumsApplicationStatus");
+#endif
 }
 

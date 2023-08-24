@@ -49,6 +49,9 @@ ALoggerMetatypes::~ALoggerMetatypes(void) {}
 
 void ALoggerMetatypes::mInit(void) {
 
-	qmlRegisterType<ARB::AEnumsLoggerLogbookType>("Arboreus", 1, 0, "AEnumsLoggerLogbookType");
 	qRegisterMetaType<ARB::AEnumsLoggerLogbookType::Type>("ARB::AEnumsLoggerLogbookType::Type");
+
+#if !defined(A_CONSOLE_APPLICATION)
+	qmlRegisterType<ARB::AEnumsLoggerLogbookType>("Arboreus", 1, 0, "AEnumsLoggerLogbookType");
+#endif
 }

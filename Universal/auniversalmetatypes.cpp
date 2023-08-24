@@ -48,6 +48,9 @@ AUniversalMetatypes::~AUniversalMetatypes(void) {}
 
 void AUniversalMetatypes::mInit(void) {
 
-	qmlRegisterType<ARB::AEnumsDictionaryType>("Arboreus", 1, 0, "AEnumsDictionaryType");
 	qRegisterMetaType<ARB::AEnumsDictionaryType::DictionaryType>("ARB::AEnumsDictionaryType::DictionaryType");
+
+#if !defined(A_CONSOLE_APPLICATION)
+	qmlRegisterType<ARB::AEnumsDictionaryType>("Arboreus", 1, 0, "AEnumsDictionaryType");
+#endif
 }

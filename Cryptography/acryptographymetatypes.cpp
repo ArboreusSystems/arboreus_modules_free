@@ -49,24 +49,13 @@ ACryptographyMetatypes::~ACryptographyMetatypes(void) {}
 
 void ACryptographyMetatypes::mInit(void) {
 
-	qmlRegisterType<ARB::AEnumsCryptographyAESType>(
-		"Arboreus", 1, 0, "AEnumsCryptographyAESType"
-	);
-	qRegisterMetaType<ARB::AEnumsCryptographyAESType::AESType>(
-		"ARB::AEnumsCryptographyAESType::AESType"
-	);
+	qRegisterMetaType<ARB::AEnumsCryptographyAESType::AESType>("ARB::AEnumsCryptographyAESType::AESType");
+	qRegisterMetaType<ARB::AEnumsCryptographyAESMode::AESMode>("ARB::AEnumsCryptographyAESMode::AESMode");
+	qRegisterMetaType<ARB::AEnumsCryptographyAESPadding::AESPadding>("ARB::AEnumsCryptographyAESPadding::AESPadding");
 
-	qmlRegisterType<ARB::AEnumsCryptographyAESMode>(
-		"Arboreus", 1, 0, "AEnumsCryptographyAESMode"
-	);
-	qRegisterMetaType<ARB::AEnumsCryptographyAESMode::AESMode>(
-		"ARB::AEnumsCryptographyAESMode::AESMode"
-	);
-
-	qmlRegisterType<ARB::AEnumsCryptographyAESPadding>(
-		"Arboreus", 1, 0, "AEnumsCryptographyAESPadding"
-	);
-	qRegisterMetaType<ARB::AEnumsCryptographyAESPadding::AESPadding>(
-		"ARB::AEnumsCryptographyAESPadding::AESPadding"
-	);
+#if !defined(A_CONSOLE_APPLICATION)
+	qmlRegisterType<ARB::AEnumsCryptographyAESType>("Arboreus", 1, 0, "AEnumsCryptographyAESType");
+	qmlRegisterType<ARB::AEnumsCryptographyAESMode>("Arboreus", 1, 0, "AEnumsCryptographyAESMode");
+	qmlRegisterType<ARB::AEnumsCryptographyAESPadding>("Arboreus", 1, 0, "AEnumsCryptographyAESPadding");
+#endif
 }

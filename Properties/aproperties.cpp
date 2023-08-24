@@ -122,6 +122,7 @@ void AProperties::mInitPaths(void) {
 
 void AProperties::mInitIsDesktop(void) {
 
+#if !defined(A_CONSOLE_APPLICATION)
 	if (
 		qGuiApp->platformName() == QString("android") ||
 		qGuiApp->platformName() == QString("ios")
@@ -130,6 +131,9 @@ void AProperties::mInitIsDesktop(void) {
 	} else {
 		pIsDesktop = true;
 	}
+#else
+	pIsDesktop = true;
+#endif
 }
 
 

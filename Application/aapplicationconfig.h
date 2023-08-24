@@ -57,14 +57,19 @@ class AApplicationConfig {
 
 		virtual void AApplicationConfig_Lifecycle_WillLaunchBackend(void) = 0;
 		virtual void AApplicationConfig_Lifecycle_DidLaunchBackend(void) = 0;
+
+#if !defined(A_CONSOLE_APPLICATION)
 		virtual void AApplicationConfig_Lifecycle_WillLaunchUI(void) = 0;
 		virtual void AApplicationConfig_Lifecycle_DidLaunchUI(void) = 0;
+#endif
+
 		virtual void AApplicationConfig_Lifecycle_WillQuit(void) = 0;
 
 
 		// ------------------------
 		// Delegate
 
+#if !defined(A_CONSOLE_APPLICATION)
 #if defined(Q_OS_IOS)
 		virtual void AApplicationConfig_Delegate_DidBecomeActive(void) = 0;
 		virtual void AApplicationConfig_Delegate_WillResignActive(void) = 0;
@@ -76,6 +81,7 @@ class AApplicationConfig {
 		virtual void AApplicationConfig_Delegate_DidUpdateUserActivity(void) = 0;
 		virtual void AApplicationConfig_Delegate_DidEnterBackground(void) = 0;
 		virtual void AApplicationConfig_Delegate_WillEnterForeground(void) = 0;
+#endif
 #endif
 
 

@@ -49,6 +49,9 @@ ADBMetatypes::~ADBMetatypes(void) {}
 
 void ADBMetatypes::mInit(void) {
 
-	qmlRegisterType<ARB::AEnumsDBFieldType>("Arboreus", 1, 0, "AEnumsDBFieldType");
 	qRegisterMetaType<ARB::AEnumsDBFieldType::Type>("ARB::AEnumsDBFieldType::Type");
+
+#if !defined(A_CONSOLE_APPLICATION)
+	qmlRegisterType<ARB::AEnumsDBFieldType>("Arboreus", 1, 0, "AEnumsDBFieldType");
+#endif
 }

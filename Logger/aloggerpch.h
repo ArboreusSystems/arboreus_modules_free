@@ -25,9 +25,12 @@
 #include <QString>
 #include <QList>
 #include <QByteArray>
-#include <QQmlEngine>
 #include <string>
 #include <stdio.h>
+
+#if !defined(A_CONSOLE_APPLICATION)
+#include <QQmlEngine>
+#endif
 
 // Qt 5 System includes
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
