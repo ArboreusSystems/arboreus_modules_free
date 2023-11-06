@@ -48,6 +48,7 @@ class AUsersHandlerModelUser : public QObject {
 
 		void mInitWithManifest(QString inPath) {
 
+			Q_UNUSED(inPath)
 			_A_DEBUG << "AUsersHandlerModelUser initiated with manifest";
 		}
 };
