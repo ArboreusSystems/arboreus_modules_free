@@ -153,6 +153,8 @@ void AUsersHandler::slInitiated(void) {
 
 AUsersHandlerReply AUsersHandler::mSetCurrentHandler(QString inID) {
 
+	Q_UNUSED(inID)
+
     AUsersHandlerReply oOutput;
     return oOutput;
 }
@@ -166,6 +168,8 @@ AUsersHandlerReply AUsersHandler::mSetCurrentHandler(QString inID) {
 */
 
 AUsersHandlerReply AUsersHandler::mCreateHandler(AUsersHandlerUserData inUserData) {
+
+	Q_UNUSED(inUserData)
 
 	_A_DEBUG << "Create user: 2";
 
