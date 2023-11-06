@@ -43,13 +43,13 @@ class AEnumsDataReplyType: public QObject {
 		enum class ReplyType: int {
 
 			Error = 0,
-			Ok,
-			NotValid,
-			WrongStructure,
-			WrongRule,
-			NoStructure,
-			NoModel,
-			NoKey
+			Ok = 1,
+			NotValid = 2,
+			WrongStructure = 3,
+			WrongRule = 4,
+			NoStructure = 5,
+			NoModel = 5,
+			NoKey = 6
 		};
 		Q_ENUM(ReplyType)
 };
@@ -68,17 +68,31 @@ class AEnumsDataType: public QObject {
 
 		enum class DataType: int {
 
-			Undefined,
+			Undefined = 0,
 
-			Boolean, TrueBoolean, FalseBoolean,
+			Boolean = 1000,
+			TrueBoolean = 1001,
+			FalseBoolean = 1002,
 
-			Integer, PositiveInteger, NegativeInteger, RangedInteger,
-			Double, PositiveDouble, NegativeDouble, RangedDouble,
+			Integer = 2000,
+			PositiveInteger = 2001,
+			NegativeInteger = 2002,
+			RangedInteger = 2003,
+			Double = 2004,
+			PositiveDouble = 2005,
+			NegativeDouble = 2006,
+			RangedDouble = 2007,
 
-			String, StringWithoutSymbols, StringOfSize,	StringByRegex,
-			StringMd, StringEmail, StringIPv4, StringIPv6,
+			String = 3000,
+			StringWithoutSymbols = 3001,
+			StringOfSize = 3002,
+			StringByRegex = 3003,
+			StringMd = 3004,
+			StringEmail = 3005,
+			StringIPv4 = 3006,
+			StringIPv6 = 3007,
 
-			Structure
+			Structure = 4000
 		};
 		Q_ENUM(DataType)
 };
